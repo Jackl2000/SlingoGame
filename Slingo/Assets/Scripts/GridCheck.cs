@@ -16,10 +16,10 @@ public class GridCheck : MonoBehaviour
         int horIndex = 0;
         foreach(GridNumbers number in grid.numberPositions.Values)
         {
-            horIndex++;
             if(number.h == h)
             {
-                if(!number.hasBeenHit)
+                horIndex++;
+                if (!number.hasBeenHit)
                 {
                     break;
                 }
@@ -33,23 +33,55 @@ public class GridCheck : MonoBehaviour
         int vertIndex = 0;
         foreach (GridNumbers number in grid.numberPositions.Values)
         {
-            vertIndex++;
             if (number.v == v)
             {
+                vertIndex++;
                 if (!number.hasBeenHit)
                 {
                     break;
                 }
             }
-            if (horIndex == 5)
+            if (vertIndex == 5)
             {
-                Debug.Log("Slingo on horizontal " + h);
+                Debug.Log("Slingo on vertical " + v);
             }
         }
 
         if(diagonal)
         {
+            int leftIndex = 0;
+            foreach (GridNumbers number in grid.numberPositions.Values)
+            {
+                if(number.h == number.v)
+                {
+                    leftIndex++;
+                    if(!number.hasBeenHit)
+                    {
+                        break;
+                    }
+                    if(leftIndex == 5)
+                    {
+                        Debug.Log("Slingo on left diagonal");
+                    }
+                }
+            }
 
+            int rightIndex = 0;
+            foreach (GridNumbers number in grid.numberPositions.Values)
+            {
+                if ((number.h == 5 && number.v == 1) || (number.h == 4 && number.v == 2) || (number.h == 3 && number.v == 3) || (number.h == 2 && number.v == 4) || (number.h == 1 && number.v == 5))
+                {
+                    rightIndex++;
+                    if (!number.hasBeenHit)
+                    {
+                        break;
+                    }
+                    if (rightIndex == 5)
+                    {
+                        Debug.Log("Slingo on right diagonal");
+                    }
+                }
+            }
         }
     }
 }

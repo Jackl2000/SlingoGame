@@ -20,11 +20,6 @@ public class GridGeneration : MonoBehaviour
             int index = Convert.ToInt32(columns[i].name[columns[i].name.Length - 1].ToString());
             GenerateColumn(columns[i], index, i + 1);
         }
-
-        foreach (GridNumbers number in numberPositions.Values)
-        {
-            number.Hit();
-        }
     }
 
 
@@ -85,7 +80,7 @@ public class GridGeneration : MonoBehaviour
                 }
                 else return random;
             default:
-                Debug.Log("Not right");
+                Debug.Log("Something went wrong");
                 return 0;
         }
     }
