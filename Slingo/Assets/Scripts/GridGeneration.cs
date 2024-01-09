@@ -6,11 +6,32 @@ using UnityEngine;
 
 public class GridGeneration : MonoBehaviour
 {
-    public List<int> numbersInGrid = new List<int>();
     private List<GameObject> columns = new List<GameObject>();
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
     // Start is called before the first frame update
     void Start()
+    {
+        GetColumns();
+    }
+
+    public void ReGenerateGrid()
+    {
+        foreach (GridNumbers number in numberPositions.Values)
+        {
+            if(number.hasBeenHit)
+            {
+                number.ResetData();
+            }
+            
+        }
+        GetComponent<GridCheck>().ResetGrid();
+        columns.Clear();
+        numberPositions.Clear();
+
+        GetColumns();
+    }
+
+    private void GetColumns()
     {
         GameObject[] columArray = GameObject.FindGameObjectsWithTag("Column");
         columns.AddRange(columArray);
@@ -34,7 +55,6 @@ public class GridGeneration : MonoBehaviour
         {
             fields[i].text = GenerateNumber(range ,usedNumbers).ToString();
             usedNumbers.Add(Convert.ToInt32(fields[i].text));
-            numbersInGrid.Add(Convert.ToInt32(field[i].text));
             numberPositions.Add(Convert.ToInt32(field[i].text), new GridNumbers(i + 1, columnCount, fields[i].gameObject));
         }
     }

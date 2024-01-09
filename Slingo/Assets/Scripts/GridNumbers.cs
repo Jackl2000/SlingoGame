@@ -19,7 +19,6 @@ public class GridNumbers
         diagonal = CheckForDiagonal();
     }
 
-
     private bool CheckForDiagonal()
     {
         if ((h == v) || (h == 5 && v == 1) || (h == 4 && v == 2) || (h == 2 && v == 4) || h == 1 && v == 5)
@@ -34,6 +33,13 @@ public class GridNumbers
     {
         gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
         hasBeenHit = true;
+        gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal);
+    }
+
+    public void ResetData()
+    {
+        gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
+        hasBeenHit = false;
         gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal);
     }
 }
