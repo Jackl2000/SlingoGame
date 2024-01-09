@@ -2446,7 +2446,7 @@ GameObject:
   - component: {fileID: 5978125027105381712}
   - component: {fileID: 4450436310026526878}
   m_Layer: 5
-  m_Name: SpinsBorder (1)
+  m_Name: SpinsBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2523,7 +2523,7 @@ GameObject:
   - component: {fileID: 3016001572748793407}
   - component: {fileID: 8477973678467015395}
   m_Layer: 5
-  m_Name: RetryButton (1)
+  m_Name: RetryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

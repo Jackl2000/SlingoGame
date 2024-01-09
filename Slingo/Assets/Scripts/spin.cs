@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -30,11 +31,11 @@ public class spin : MonoBehaviour
 
         foreach (var slotText in slotTextList)
         {
-            rnd = Random.Range(min, max);
+            rnd = UnityEngine.Random.Range(min, max);
             min += 15;
             max += 15;
             
-            int wildPick = Random.Range(0, 10);
+            int wildPick = UnityEngine.Random.Range(0, 10);
 
             if (wildPick == 0)
             {
@@ -75,6 +76,14 @@ public class spin : MonoBehaviour
         if (wildPicked < wCount)
         {
             wildPicked++;
+            foreach (int gridNumber in gridGenScript.numberPositions.Keys)
+            {
+                if(gridNumber == Convert.ToInt32(gridButton.gameObject.GetComponent<TextMeshProUGUI>().text))
+                {
+                    gridGenScript.numberPositions[gridNumber].Hit();
+                }
+            }
+                
             gridButton.gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
             Debug.Log("Wildpick clicked");
             
