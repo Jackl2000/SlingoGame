@@ -21,10 +21,10 @@ public class GridGeneration : MonoBehaviour
             GenerateColumn(columns[i], index, i + 1);
         }
 
-        //foreach(GridNumbers number in numberPositions.Values)
-        //{
-        //    number.Hit();
-        //}
+        foreach (GridNumbers number in numberPositions.Values)
+        {
+            number.Hit();
+        }
     }
 
 
