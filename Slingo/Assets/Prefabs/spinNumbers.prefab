@@ -199,7 +199,6 @@ MonoBehaviour:
   - {fileID: 4041199315846973410}
   gridGenScript: {fileID: 0}
   spinNumbers: 
-  slotNumber: 0
 --- !u!1 &3071093898105896382
 GameObject:
   m_ObjectHideFlags: 0

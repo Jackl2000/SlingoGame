@@ -8,16 +8,13 @@ public class spin : MonoBehaviour
     public List<TMP_Text> slotTextList;
     public GridGeneration gridGenScript;
     public List<int> spinNumbers;
-
-    [HideInInspector]
-    public int slotNumber;
     
     int rnd;
     int min = 1;
     int max = 15;
 
 
-
+    
     public void Spin()
     {
         if (spinNumbers.Count >= 5)
@@ -30,11 +27,20 @@ public class spin : MonoBehaviour
             rnd = Random.Range(min, max);
             min += 15;
             max += 15;
+            
+            int wildPick = Random.Range(0, 5);
 
-            slotNumber = rnd;
-            slotText.text = rnd.ToString();
-            spinNumbers.Add(rnd);
-
+            if (wildPick == 0)
+            {
+                spinNumbers.Add(0);
+                slotText.text = "W";
+                WildPick();
+            }
+            else
+            {
+                slotText.text = rnd.ToString();
+                spinNumbers.Add(rnd);
+            }
             
         }
 
@@ -53,5 +59,12 @@ public class spin : MonoBehaviour
         min = 1;
         max = 15;
     }
+
+    public void WildPick()
+    {
+
+    }
+
+
 
 }
