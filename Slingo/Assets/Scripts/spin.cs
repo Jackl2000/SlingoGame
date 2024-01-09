@@ -6,6 +6,8 @@ using UnityEngine;
 public class spin : MonoBehaviour
 {
     public List<TMP_Text> slotTextList;
+    public GridGeneration gridGenScript;
+    public List<int> spinNumbers;
 
     [HideInInspector]
     public int slotNumber;
@@ -14,8 +16,15 @@ public class spin : MonoBehaviour
     int min = 1;
     int max = 15;
 
+
+
     public void Spin()
     {
+        if (spinNumbers.Count >= 5)
+        {
+            spinNumbers.Clear();
+        }
+
         foreach (var slotText in slotTextList)
         {
             rnd = Random.Range(min, max);
@@ -24,6 +33,21 @@ public class spin : MonoBehaviour
 
             slotNumber = rnd;
             slotText.text = rnd.ToString();
+            spinNumbers.Add(rnd);
+
+            
+        }
+
+        foreach (int spin in spinNumbers)
+        {
+            foreach (int gridNumber in gridGenScript.numberPositions.Keys)
+            {
+                if (spin == gridNumber)
+                {
+                    gridGenScript.numberPositions[gridNumber].Hit();
+                    Debug.Log("spin: " + spin + "Grid: " + gridNumber);
+                }
+            }
         }
 
         min = 1;
