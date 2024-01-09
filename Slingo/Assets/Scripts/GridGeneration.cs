@@ -7,26 +7,32 @@ using UnityEngine;
 public class GridGeneration : MonoBehaviour
 {
     public List<int> numbersInGrid = new List<int>();
-    List<GameObject> columns = new List<GameObject>();
+    private List<GameObject> columns = new List<GameObject>();
+    public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
     // Start is called before the first frame update
     void Start()
     {
         GameObject[] columArray = GameObject.FindGameObjectsWithTag("Column");
         columns.AddRange(columArray);
+        columns.Reverse();
         for (int i = 0; i < columns.Count; i++)
         {
             int index = Convert.ToInt32(columns[i].name[columns[i].name.Length - 1].ToString());
-            GenerateColumn(columns[i], index);
-        }   
+            GenerateColumn(columns[i], index, i + 1);
+        }
+
+        //foreach(GridNumbers number in numberPositions.Values)
+        //{
+        //    number.Hit();
+        //}
     }
 
 
-    private void GenerateColumn(GameObject column, int range)
+    private void GenerateColumn(GameObject column, int range, int columnCount)
     {
         List<TextMeshProUGUI> fields = new List<TextMeshProUGUI>();
         TextMeshProUGUI[] field = column.GetComponentsInChildren<TextMeshProUGUI>();
         fields.AddRange(field);
-
         List<int> usedNumbers = new List<int>();
 
         for (int i = 0; i < fields.Count; i++)
@@ -34,7 +40,7 @@ public class GridGeneration : MonoBehaviour
             fields[i].text = GenerateNumber(range ,usedNumbers).ToString();
             usedNumbers.Add(Convert.ToInt32(fields[i].text));
             numbersInGrid.Add(Convert.ToInt32(field[i].text));
-
+            numberPositions.Add(Convert.ToInt32(field[i].text), new GridNumbers(i + 1, columnCount, fields[i].gameObject));
         }
     }
 
