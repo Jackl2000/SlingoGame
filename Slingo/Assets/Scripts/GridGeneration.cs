@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GridGeneration : MonoBehaviour
 {
+    public List<int> numbersInGrid = new List<int>();
     List<GameObject> columns = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class GridGeneration : MonoBehaviour
         {
             fields[i].text = GenerateNumber(range ,usedNumbers).ToString();
             usedNumbers.Add(Convert.ToInt32(fields[i].text));
+            numbersInGrid.Add(Convert.ToInt32(field[i].text));
 
         }
     }
