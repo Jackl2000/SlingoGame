@@ -7,10 +7,6 @@ public class GridCheck : MonoBehaviour
 {
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
-    private int hSlingo = 0;
-    private int vSlingo = 0;
-    private bool hComplete = false;
-    private bool vComplete = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,73 +31,50 @@ public class GridCheck : MonoBehaviour
         {
             gridSlingoList[item] = false;
         }
-
-        hSlingo = 0;
-        vSlingo = 0;
-        hComplete = false; 
-        vComplete = false;
     }
 
     public void CheckGrid(int h, int v, bool diagonal)
     {
-        if(!hComplete)
+        int horIndex = 0;
+        foreach (GridNumbers number in grid.numberPositions.Values)
         {
-            int horIndex = 0;
-            foreach (GridNumbers number in grid.numberPositions.Values)
+            if (number.h == h)
             {
-                if (number.h == h)
+                horIndex++;
+                if (!number.hasBeenHit)
                 {
-                    horIndex++;
-                    if (!number.hasBeenHit)
-                    {
-                        break;
-                    }
-                }
-                if (horIndex == 5 && !gridSlingoList["h" + h])
-                {
-                    Debug.Log("Slingo on horizontal " + h);
-                    gridSlingoList["h" + h] = true;
-
-                    hSlingo++;
-                    if (hSlingo == 5)
-                    {
-                        hComplete = true;
-                    }
                     break;
                 }
             }
+            if (horIndex == 5 && !gridSlingoList["h" + h])
+            {
+                Debug.Log("Slingo on horizontal " + h);
+                gridSlingoList["h" + h] = true;
+                break;
+            }
         }
 
-        if(!vComplete)
+        int vertIndex = 0;
+        foreach (GridNumbers number in grid.numberPositions.Values)
         {
-            int vertIndex = 0;
-            foreach (GridNumbers number in grid.numberPositions.Values)
+            if (number.v == v)
             {
-                if (number.v == v)
+                vertIndex++;
+                if (!number.hasBeenHit)
                 {
-                    vertIndex++;
-                    if (!number.hasBeenHit)
-                    {
-                        break;
-                    }
-                }
-                if (vertIndex == 5 && !gridSlingoList["v" + v])
-                {
-                    Debug.Log("Slingo on vertical " + v);
-                    gridSlingoList["v" + v] = true;
-
-                    vSlingo++;
-                    if (vSlingo == 5)
-                    {
-                        vComplete = true;
-                    }
                     break;
                 }
+            }
+            if (vertIndex == 5 && !gridSlingoList["v" + v])
+            {
+                Debug.Log("Slingo on vertical " + v);
+                gridSlingoList["v" + v] = true;
+                break;
             }
         }
 
 
-        if(diagonal)
+        if (diagonal)
         {
             if(!gridSlingoList["dl"])
             {
