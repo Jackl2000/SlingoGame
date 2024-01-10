@@ -191,13 +191,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d533eb12cec6e2e419e5409581ae8aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridGenScript: {fileID: 0}
+  spinLeftText: {fileID: 0}
+  spinButton: {fileID: 0}
   slotTextList:
   - {fileID: 2709709669536763349}
   - {fileID: 1586213434313509171}
   - {fileID: 2565464943933602352}
   - {fileID: 1578282006750293595}
   - {fileID: 4041199315846973410}
-  gridGenScript: {fileID: 0}
   spinNumbers: 
 --- !u!1 &3071093898105896382
 GameObject:

@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82157b31e2fdb964582b2a4f456e297f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 0.01
 --- !u!1 &1804303330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1078,18 @@ PrefabInstance:
     - target: {fileID: 6890017235038804983, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261002643103006723, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261002643103006723, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261002643103006723, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 7537455854846287495, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
