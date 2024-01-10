@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ public class GridCheck : MonoBehaviour
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
     private TextMeshProUGUI[] slingoText;
     private int slingoCount = 0;
+    private List<float> rewards = new List<float>();
     // Start is called before the first frame update
     void Start()
     {
@@ -27,12 +29,34 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("v5", false);
         gridSlingoList.Add("dl", false);
         gridSlingoList.Add("dr", false);
+        AddingRewards(1);
 
         slingoText = slingoPanel.GetComponentsInChildren<TextMeshProUGUI>();
     }
 
+    private void AddingRewards(float multiplyere)
+    {
+        rewards.Add(0 * multiplyere);
+        rewards.Add(0.1f * multiplyere);
+        rewards.Add(0.5f * multiplyere);
+        rewards.Add(1 * multiplyere);
+        rewards.Add(3 * multiplyere);
+        rewards.Add(5 * multiplyere);
+        rewards.Add(20 * multiplyere);
+        rewards.Add(50 * multiplyere);
+        rewards.Add(150 * multiplyere);
+        rewards.Add(300 * multiplyere);
+        rewards.Add(500 * multiplyere);
+        rewards.Add(1000 * multiplyere);
+    }
+
     public void ResetGrid()
     {
+        //Adding to balance
+        float reward = rewards[slingoCount - 1];
+        string balance = (grid.currentBalance + reward).ToString("n2");
+        grid.currentBalance = float.Parse(balance);
+
         foreach(string item in gridSlingoList.Keys.ToList())
         {
             gridSlingoList[item] = false;

@@ -9,6 +9,8 @@ public class GridGeneration : MonoBehaviour
     private List<GameObject> columns = new List<GameObject>();
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
     [SerializeField] private GameObject spinsCounter;
+    [SerializeField] private TextMeshProUGUI BalanceText;
+    public float currentBalance = 999;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,8 @@ public class GridGeneration : MonoBehaviour
         numberPositions.Clear();
         spinsCounter.GetComponentInChildren<TextMeshProUGUI>().text = 10.ToString();
 
+        currentBalance--;
+        BalanceText.text = "Balance: " + currentBalance;
         GetColumns();
     }
 
@@ -101,7 +105,6 @@ public class GridGeneration : MonoBehaviour
                 }
                 else return random;
             default:
-                Debug.Log("Something went wrong");
                 return 0;
         }
     }
