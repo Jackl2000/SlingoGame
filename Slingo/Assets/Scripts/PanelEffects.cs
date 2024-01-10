@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class PanelEffects : MonoBehaviour
 {
+    [Header("Fade settigs")]
+    public float fadeSpeed = .01f;
+
     Image panel;
     float defualtAlpha;
 
@@ -20,18 +23,17 @@ public class PanelEffects : MonoBehaviour
         panel.color = new Color(1,1,1,0);
         for (int i = 0; i < 5; i++)
         {
-            switch (panel.color.a.ToString())
+            for (float alpha = 0.4f; alpha > 0.1f; alpha -= .01f)
             {
-                case "0":
-                    panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, 1);
-                    //Play sound
-                    yield return new WaitForSeconds(0.5f);
-                    break;
-                case "1":
-                    panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, 0);
-                    //Play sound
-                    yield return new WaitForSeconds(0.5f);
-                    break;
+                //fade out
+                panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, alpha);
+                yield return new WaitForSeconds(fadeSpeed);
+            }
+            for (float alpha = 0; alpha < defualtAlpha; alpha += .01f)
+            {
+                //fade in
+                panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, alpha);
+                yield return new WaitForSeconds(fadeSpeed);
             }
         }
         panel.color = new Color(1, 1, 1, defualtAlpha);

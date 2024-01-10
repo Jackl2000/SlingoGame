@@ -52,7 +52,14 @@ public class spin : MonoBehaviour
             {
                 spinNumbers.Add(0);
                 slotText.text = "W";
-                this.GetComponent<PanelEffects>().FlashingEffect();
+                
+                PanelEffects[] blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
+
+                for (int i = 0; i < blinkEffect.Length; i++)
+                {
+                    blinkEffect[i].FlashingEffect();
+                }
+
                 wCount++;
             }
             else
