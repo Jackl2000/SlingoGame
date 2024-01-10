@@ -40,6 +40,5 @@ public class GridNumbers
     {
         gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
         hasBeenHit = false;
-        gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal);
     }
 }
