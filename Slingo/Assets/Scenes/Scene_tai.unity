@@ -128,6 +128,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4246437951287541951, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
   m_PrefabInstance: {fileID: 3380248985477666084}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &412245257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8294825953586362885, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+  m_PrefabInstance: {fileID: 3380248985477666084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &458890514 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6939613818461031031, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
@@ -156,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82157b31e2fdb964582b2a4f456e297f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 0.05
 --- !u!1 &1500255988
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +631,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1272026834107032972, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_Color.a
+      value: 0.34901962
+      objectReference: {fileID: 0}
     - target: {fileID: 1458205632472944407, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: spinsCounter
       value: 
@@ -869,6 +879,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4374248674525639591, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: slingoPanel
+      value: 
+      objectReference: {fileID: 412245257}
     - target: {fileID: 4424352891198733182, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_Pivot.x
       value: 0
