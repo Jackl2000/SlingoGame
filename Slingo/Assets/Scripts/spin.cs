@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -51,6 +52,7 @@ public class spin : MonoBehaviour
             {
                 spinNumbers.Add(0);
                 slotText.text = "W";
+                this.GetComponent<PanelEffects>().FlashingEffect();
                 wCount++;
             }
             else
@@ -86,7 +88,6 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        
         if (wildPicked < wCount)
         {
             wildPicked++;
@@ -97,12 +98,7 @@ public class spin : MonoBehaviour
                     gridGenScript.numberPositions[gridNumber].Hit();
                 }
             }
-                
-            gridButton.gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
-            Debug.Log("Wildpick clicked");
-            
         }
-
     }
 
     private void Update()
