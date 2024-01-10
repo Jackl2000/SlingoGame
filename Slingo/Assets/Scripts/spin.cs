@@ -8,17 +8,26 @@ using UnityEngine.UI;
 
 public class spin : MonoBehaviour
 {
-    public List<TMP_Text> slotTextList;
+    [Header("References")]
     public GridGeneration gridGenScript;
-    public List<int> spinNumbers;
+
+    [Space(5)]
+    [Header("Spin settings")]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
-    
+
+    [Space(10)]
+    public List<TMP_Text> slotTextList;
+    public List<int> spinNumbers;
+
+
+    #region private variables
     int rnd;
     int min = 1;
     int max = 15;
     int wCount = 0;
     int wildPicked = 0;
+    #endregion
 
     public void Spin()
     {
