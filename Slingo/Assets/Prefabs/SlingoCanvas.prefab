@@ -4334,7 +4334,7 @@ GameObject:
   - component: {fileID: 5978125027105381712}
   - component: {fileID: 4450436310026526878}
   m_Layer: 5
-  m_Name: SpinsBorder
+  m_Name: RemainingSpinsBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

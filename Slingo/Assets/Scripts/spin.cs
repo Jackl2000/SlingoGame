@@ -85,7 +85,6 @@ public class spin : MonoBehaviour
             {
                 if (spin == gridNumber)
                 {
-                    Debug.Log("spin: " + spin + "Grid: " + gridNumber);
                     gridGenScript.numberPositions[gridNumber].Hit();
                 }
             }
