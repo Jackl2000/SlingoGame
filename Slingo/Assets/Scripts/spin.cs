@@ -11,6 +11,7 @@ public class spin : MonoBehaviour
     public List<TMP_Text> slotTextList;
     public GridGeneration gridGenScript;
     public List<int> spinNumbers;
+    public TextMeshProUGUI spinLeftText;
     public Button spinButton;
     
     int rnd;
@@ -34,7 +35,7 @@ public class spin : MonoBehaviour
             rnd = UnityEngine.Random.Range(min, max);
             min += 15;
             max += 15;
-            
+
             int wildPick = UnityEngine.Random.Range(0, 10);
 
             if (wildPick == 0)
@@ -48,10 +49,14 @@ public class spin : MonoBehaviour
                 slotText.text = rnd.ToString();
                 spinNumbers.Add(rnd);
             }
-            
+
         }
 
         CheckMatchingNumb();
+
+        int spinLeft = Convert.ToInt32(spinLeftText.text);
+        spinLeft--;
+        spinLeftText.text = spinLeft.ToString();
     }
 
     void CheckMatchingNumb()
