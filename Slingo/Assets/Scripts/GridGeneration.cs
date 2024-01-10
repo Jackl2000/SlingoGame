@@ -8,6 +8,7 @@ public class GridGeneration : MonoBehaviour
 {
     private List<GameObject> columns = new List<GameObject>();
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
+    [SerializeField] private GameObject spinsCounter;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +23,11 @@ public class GridGeneration : MonoBehaviour
             {
                 number.ResetData();
             }
-            
         }
         GetComponent<GridCheck>().ResetGrid();
         columns.Clear();
         numberPositions.Clear();
+        spinsCounter.GetComponentInChildren<TextMeshProUGUI>().text = 10.ToString();
 
         GetColumns();
     }
