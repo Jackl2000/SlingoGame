@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class GridCheck : MonoBehaviour
 {
+    [SerializeField] private GameObject slingoPanel;
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
+    private TextMeshProUGUI[] slingoText;
+    private int slingoCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +27,8 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("v5", false);
         gridSlingoList.Add("dl", false);
         gridSlingoList.Add("dr", false);
+
+        slingoText = slingoPanel.GetComponentsInChildren<TextMeshProUGUI>();
     }
 
     public void ResetGrid()
@@ -30,6 +36,16 @@ public class GridCheck : MonoBehaviour
         foreach(string item in gridSlingoList.Keys.ToList())
         {
             gridSlingoList[item] = false;
+        }
+        slingoCount = 0;
+
+        foreach(TextMeshProUGUI item in slingoText)
+        {
+            if (item.color != Color.white)
+            {
+                item.color = Color.white;
+            }
+            else break;
         }
     }
 
@@ -48,8 +64,9 @@ public class GridCheck : MonoBehaviour
             }
             if (horIndex == 5 && !gridSlingoList["h" + h])
             {
-                Debug.Log("Slingo on horizontal " + h);
                 gridSlingoList["h" + h] = true;
+                slingoCount++;
+                SlingoUI();
                 break;
             }
         }
@@ -67,8 +84,9 @@ public class GridCheck : MonoBehaviour
             }
             if (vertIndex == 5 && !gridSlingoList["v" + v])
             {
-                Debug.Log("Slingo on vertical " + v);
                 gridSlingoList["v" + v] = true;
+                slingoCount++;
+                SlingoUI();
                 break;
             }
         }
@@ -90,8 +108,9 @@ public class GridCheck : MonoBehaviour
                         }
                         if (leftIndex == 5)
                         {
-                            Debug.Log("Slingo on left diagonal");
                             gridSlingoList["dl"] = true;
+                            slingoCount++;
+                            SlingoUI();
                             break;
                         }
                     }
@@ -112,12 +131,25 @@ public class GridCheck : MonoBehaviour
                         }
                         if (rightIndex == 5 && !gridSlingoList["dr"])
                         {
-                            Debug.Log("Slingo on right diagonal");
                             gridSlingoList["dr"] = true;
+                            slingoCount++;
+                            SlingoUI();
                             break;
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void SlingoUI()
+    {
+        foreach (TextMeshProUGUI item in slingoText)
+        {
+            if(item.gameObject.name == "Slingo" + slingoCount.ToString())
+            {
+                item.color = Color.green;
+                break;
             }
         }
     }
