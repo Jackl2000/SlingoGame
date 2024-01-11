@@ -9,12 +9,14 @@ using UnityEngine.UI;
 
 public class GridCheck : MonoBehaviour
 {
-    [SerializeField] private GameObject slingoPanel;
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
     private Image[] slingoBorders;
-    private int slingoCount = 0;
-    private Dictionary<int, float> rewards = new Dictionary<int, float>();
+    [HideInInspector] public int slingoCount = 0;
+    [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
+    private TextMeshProUGUI[] slingoText;
+    [SerializeField] private GameObject slingoPanel;
+    
     // Start is called before the first frame update
     void Start()
     {

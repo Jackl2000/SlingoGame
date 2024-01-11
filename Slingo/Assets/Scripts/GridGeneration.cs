@@ -9,7 +9,7 @@ public class GridGeneration : MonoBehaviour
 {
     private List<GameObject> columns = new List<GameObject>();
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
-    [SerializeField] private GameObject spinsCounter;
+    [SerializeField] private TextMeshProUGUI spinsCounter;
     [SerializeField] private TextMeshProUGUI BalanceText;
     [HideInInspector] public float currentBalance = 999;
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class GridGeneration : MonoBehaviour
         GetComponent<GridCheck>().ResetGrid();
         columns.Clear();
         numberPositions.Clear();
-        spinsCounter.GetComponentInChildren<TextMeshProUGUI>().text = 10.ToString();
+        spinsCounter.text = "10";
 
         currentBalance--;
         BalanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(currentBalance);
