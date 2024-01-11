@@ -178,9 +178,9 @@ public class spin : MonoBehaviour
     {
         if (spinLeft == 0)
         {
-            spinLeftText.text = PriceCaculator().ToString() + " ";
+            spinLeftText.text = PriceCaculator().ToString() + " kr";
         }
-        balanceText.text = playerData.balance.ToString();
+        balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
 
 
         if (wildPicked == wCount)
