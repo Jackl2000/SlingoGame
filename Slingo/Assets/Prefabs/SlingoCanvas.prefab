@@ -8993,6 +8993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff141709efcf4c04f883acde39447f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetText: {fileID: 2696960939849559270}
   slingoCount: 0
   slingoPanel: {fileID: 8294825953586362885}
 --- !u!1 &7981804993614614953
