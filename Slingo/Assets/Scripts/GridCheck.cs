@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +12,6 @@ public class GridCheck : MonoBehaviour
     private Image[] slingoBorders;
     [HideInInspector] public int slingoCount = 0;
     [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
-    private TextMeshProUGUI[] slingoText;
     [SerializeField] private GameObject slingoPanel;
     
     // Start is called before the first frame update
