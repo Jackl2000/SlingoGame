@@ -30,13 +30,12 @@ public class spin : MonoBehaviour
 
 
     #region private variables
-    [HideInInspector]
-    public int wCount = 0;
+    [HideInInspector] public int wCount = 0;
+    [HideInInspector] public int spinLeft = 10;
     int rnd;
     int min = 1;
     int max = 15;
     int wildPicked = 0;
-    int spinLeft = 10;
 
     PanelEffects[] blinkEffect;
     #endregion
@@ -179,7 +178,7 @@ public class spin : MonoBehaviour
     {
         if (spinLeft == 0)
         {
-            spinLeftText.text = PriceCaculator().ToString();
+            spinLeftText.text = PriceCaculator().ToString() + " ";
         }
         balanceText.text = playerData.balance.ToString();
 
