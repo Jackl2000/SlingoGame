@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GridCheck : MonoBehaviour
 {
+    public TextMeshProUGUI resetText;
+
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
     private Image[] slingoBorders;
@@ -179,6 +181,10 @@ public class GridCheck : MonoBehaviour
                     break;
                 }
             }
+        }
+        if (slingoCount >= 3)
+        {
+            resetText.text = "Collect";
         }
     }
 }
