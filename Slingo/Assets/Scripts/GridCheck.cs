@@ -5,15 +5,16 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GridCheck : MonoBehaviour
 {
     [SerializeField] private GameObject slingoPanel;
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
-    private TextMeshProUGUI[] slingoText;
+    private Image[] slingoBorders;
     private int slingoCount = 0;
-    private List<float> rewards = new List<float>();
+    private Dictionary<int, float> rewards = new Dictionary<int, float>();
     // Start is called before the first frame update
     void Start()
     {
@@ -32,33 +33,31 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("dr", false);
         AddingRewards(1);
 
-        slingoText = slingoPanel.GetComponentsInChildren<TextMeshProUGUI>();
+        slingoBorders = slingoPanel.GetComponentsInChildren<Image>().Skip(1).ToArray();
     }
 
     private void AddingRewards(float multiplyere)
     {
-        rewards.Add(0);
-        rewards.Add(0 * multiplyere);
-        rewards.Add(0.1f * multiplyere);
-        rewards.Add(0.5f * multiplyere);
-        rewards.Add(1 * multiplyere);
-        rewards.Add(3 * multiplyere);
-        rewards.Add(5 * multiplyere);
-        rewards.Add(20 * multiplyere);
-        rewards.Add(50 * multiplyere);
-        rewards.Add(150 * multiplyere);
-        rewards.Add(300 * multiplyere);
-        rewards.Add(500 * multiplyere);
-        rewards.Add(1000 * multiplyere);
+        rewards.Add(3, 10 * multiplyere);
+        rewards.Add(4, 20 * multiplyere);
+        rewards.Add(5, 40 * multiplyere);
+        rewards.Add(6, 100 * multiplyere);
+        rewards.Add(7, 250 * multiplyere);
+        rewards.Add(8, 750 * multiplyere);
+        rewards.Add(9, 2250 * multiplyere);
+        rewards.Add(10, 5000 * multiplyere);
+        rewards.Add(12, 10000 * multiplyere);
     }
 
     public void ResetGrid()
     {
         //Adding to balance
-        //if (slingoCount != 0) slingoCount--;
-        float reward = rewards[slingoCount];
-        float balance = grid.currentBalance + reward;
-        grid.currentBalance = balance;
+        if(rewards.ContainsKey(slingoCount))
+        {
+            float reward = rewards[slingoCount];
+            float balance = grid.currentBalance + reward;
+            grid.currentBalance = balance;
+        }
 
         foreach(string item in gridSlingoList.Keys.ToList())
         {
@@ -66,11 +65,11 @@ public class GridCheck : MonoBehaviour
         }
         slingoCount = 0;
 
-        foreach(TextMeshProUGUI item in slingoText)
+        foreach(Image item in slingoBorders)
         {
-            if (item.color != Color.white)
+            if (item.color != Color.black)
             {
-                item.color = Color.white;
+                item.color = Color.black;
             }
             else break;
         }
@@ -93,7 +92,7 @@ public class GridCheck : MonoBehaviour
             {
                 gridSlingoList["h" + h] = true;
                 slingoCount++;
-                SlingoUI();
+                CheckForReward();
                 break;
             }
         }
@@ -113,7 +112,7 @@ public class GridCheck : MonoBehaviour
             {
                 gridSlingoList["v" + v] = true;
                 slingoCount++;
-                SlingoUI();
+                CheckForReward();
                 break;
             }
         }
@@ -137,7 +136,7 @@ public class GridCheck : MonoBehaviour
                         {
                             gridSlingoList["dl"] = true;
                             slingoCount++;
-                            SlingoUI();
+                            CheckForReward();
                             break;
                         }
                     }
@@ -160,7 +159,7 @@ public class GridCheck : MonoBehaviour
                         {
                             gridSlingoList["dr"] = true;
                             slingoCount++;
-                            SlingoUI();
+                            CheckForReward();
                             break;
                         }
                     }
@@ -169,14 +168,17 @@ public class GridCheck : MonoBehaviour
         }
     }
 
-    private void SlingoUI()
+    private void CheckForReward()
     {
-        foreach (TextMeshProUGUI item in slingoText)
+        if(rewards.ContainsKey(slingoCount))
         {
-            if(item.gameObject.name == "Slingo" + slingoCount.ToString())
+            foreach (Image item in slingoBorders)
             {
-                item.color = Color.green;
-                break;
+                if (item.color != Color.green)
+                {
+                    item.color = Color.green;
+                    break;
+                }
             }
         }
     }
