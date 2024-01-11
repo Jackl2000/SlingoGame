@@ -23,6 +23,7 @@ public class PanelEffects : MonoBehaviour
 
     public IEnumerator FlashBlinking()
     {
+        Color startColor = GetComponent<Image>().color;
         panel.color = new Color(1, 1, 1, 0);
         for (int i = 0; i < 5; i++)
         {
@@ -39,8 +40,7 @@ public class PanelEffects : MonoBehaviour
                 yield return new WaitForSeconds(fadeSpeed);
             }
         }
-        panel.color = new Color(1, 1, 1, defualtAlpha);
-
+        panel.color = startColor;
     }
 
     public void StopBlinking()

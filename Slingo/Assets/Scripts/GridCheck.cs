@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +15,6 @@ public class GridCheck : MonoBehaviour
     private Image[] slingoBorders;
     [HideInInspector] public int slingoCount = 0;
     [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
-    private TextMeshProUGUI[] slingoText;
     [SerializeField] private GameObject slingoPanel;
     
     // Start is called before the first frame update
@@ -58,9 +56,10 @@ public class GridCheck : MonoBehaviour
         //Adding to balance
         if(rewards.ContainsKey(slingoCount))
         {
+            
             float reward = rewards[slingoCount];
-            float balance = grid.currentBalance + reward;
-            grid.currentBalance = balance;
+            float balance = GetComponentInChildren<spin>().playerData.balance + reward;
+            GetComponentInChildren<spin>().playerData.balance = balance;
         }
 
         foreach(string item in gridSlingoList.Keys.ToList())

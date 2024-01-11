@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class GridGeneration : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class GridGeneration : MonoBehaviour
         numberPositions.Clear();
         spinsCounter.text = "10";
 
-        currentBalance--;
+        GetComponentInChildren<spin>().playerData.balance--;
         BalanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(currentBalance);
         GetColumns();
     }
