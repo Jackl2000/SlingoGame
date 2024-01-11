@@ -11,7 +11,7 @@ public class GridGeneration : MonoBehaviour
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
     [SerializeField] private GameObject spinsCounter;
     [SerializeField] private TextMeshProUGUI BalanceText;
-    [SerializeField] public float currentBalance = 999;
+    [HideInInspector] public float currentBalance = 999;
     // Start is called before the first frame update
     void Start()
     {

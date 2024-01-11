@@ -37,6 +37,7 @@ public class GridCheck : MonoBehaviour
 
     private void AddingRewards(float multiplyere)
     {
+        rewards.Add(0);
         rewards.Add(0 * multiplyere);
         rewards.Add(0.1f * multiplyere);
         rewards.Add(0.5f * multiplyere);
@@ -54,7 +55,7 @@ public class GridCheck : MonoBehaviour
     public void ResetGrid()
     {
         //Adding to balance
-        if (slingoCount != 0) slingoCount--;
+        //if (slingoCount != 0) slingoCount--;
         float reward = rewards[slingoCount];
         float balance = grid.currentBalance + reward;
         grid.currentBalance = balance;

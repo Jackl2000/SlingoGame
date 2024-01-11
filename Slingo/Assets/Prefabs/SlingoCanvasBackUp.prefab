@@ -9052,7 +9052,7 @@ GameObject:
   - component: {fileID: 1458205632472944407}
   - component: {fileID: 4374248674525639591}
   m_Layer: 5
-  m_Name: SlingoCanvas
+  m_Name: SlingoCanvasBackUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
