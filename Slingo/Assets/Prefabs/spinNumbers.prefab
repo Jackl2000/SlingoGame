@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 2690788711737446465}
   - component: {fileID: 8408157759478407677}
   - component: {fileID: 916806091216044102}
+  - component: {fileID: 3720750492306660044}
   m_Layer: 5
   m_Name: spinNumbers
   m_TagString: Untagged
@@ -100,7 +101,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2242105793532506782}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -201,6 +202,19 @@ MonoBehaviour:
   - {fileID: 1578282006750293595}
   - {fileID: 4041199315846973410}
   spinNumbers: 
+--- !u!114 &3720750492306660044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242105793532506782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82157b31e2fdb964582b2a4f456e297f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 0.01
 --- !u!1 &3071093898105896382
 GameObject:
   m_ObjectHideFlags: 0

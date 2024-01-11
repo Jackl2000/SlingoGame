@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class GridCheck : MonoBehaviour
@@ -53,9 +54,10 @@ public class GridCheck : MonoBehaviour
     public void ResetGrid()
     {
         //Adding to balance
-        float reward = rewards[slingoCount - 1];
-        string balance = (grid.currentBalance + reward).ToString("n2");
-        grid.currentBalance = float.Parse(balance);
+        if (slingoCount != 0) slingoCount--;
+        float reward = rewards[slingoCount];
+        float balance = grid.currentBalance + reward;
+        grid.currentBalance = balance;
 
         foreach(string item in gridSlingoList.Keys.ToList())
         {

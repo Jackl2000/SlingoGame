@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class GridGeneration : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class GridGeneration : MonoBehaviour
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
     [SerializeField] private GameObject spinsCounter;
     [SerializeField] private TextMeshProUGUI BalanceText;
-    public float currentBalance = 999;
+    [SerializeField] public float currentBalance = 999;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,7 @@ public class GridGeneration : MonoBehaviour
         spinsCounter.GetComponentInChildren<TextMeshProUGUI>().text = 10.ToString();
 
         currentBalance--;
-        BalanceText.text = "Balance: " + currentBalance;
+        BalanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(currentBalance);
         GetColumns();
     }
 
