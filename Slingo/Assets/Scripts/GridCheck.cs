@@ -8,12 +8,15 @@ using UnityEngine;
 
 public class GridCheck : MonoBehaviour
 {
-    [SerializeField] private GameObject slingoPanel;
     private GridGeneration grid;
+
+    [HideInInspector]public List<float> rewards = new List<float>();
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
     private TextMeshProUGUI[] slingoText;
-    private int slingoCount = 0;
-    private List<float> rewards = new List<float>();
+ 
+    [SerializeField] private GameObject slingoPanel;
+    [HideInInspector]public int slingoCount = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
