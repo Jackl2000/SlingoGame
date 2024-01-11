@@ -23,11 +23,14 @@ public class spin : MonoBehaviour
 
 
     #region private variables
+    [HideInInspector]
+    public int wCount = 0;
     int rnd;
     int min = 1;
     int max = 15;
-    int wCount = 0;
     int wildPicked = 0;
+
+    PanelEffects[] blinkEffect;
     #endregion
 
     public void Spin()
@@ -53,7 +56,7 @@ public class spin : MonoBehaviour
                 spinNumbers.Add(0);
                 slotText.text = "W";
                 
-                PanelEffects[] blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
+                blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
 
                 for (int i = 0; i < blinkEffect.Length; i++)
                 {

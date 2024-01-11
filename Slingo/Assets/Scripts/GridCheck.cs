@@ -53,7 +53,7 @@ public class GridCheck : MonoBehaviour
     public void ResetGrid()
     {
         //Adding to balance
-        float reward = rewards[slingoCount - 1];
+        float reward = rewards[slingoCount];
         string balance = (grid.currentBalance + reward).ToString("n2");
         grid.currentBalance = float.Parse(balance);
 
