@@ -13,20 +13,13 @@ public class CollectReward : MonoBehaviour
 
     public void Collect()
     {
-        playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
-        spin.spinLeft = 10;
-        spin.spinPrice = 0;
-        gridCheck.resetText.text = "Retry";
+        if (gridCheck.slingoCount >= 3)
+        {
+            playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
+            spin.spinLeft = 10;
+            spin.spinPrice = 0;
+            gridCheck.resetText.text = "Retry";
+        }
     }
 
-    bool isJackpot = false;
-    public void Jackpot()
-    {
-        jackpotGO.SetActive(isJackpot);
-    }
-
-    private void Update()
-    {
-        
-    }
 }
