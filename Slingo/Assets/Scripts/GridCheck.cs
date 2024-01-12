@@ -57,7 +57,6 @@ public class GridCheck : MonoBehaviour
         //Adding to balance
         if(rewards.ContainsKey(slingoCount))
         {
-            
             float reward = rewards[slingoCount];
             float balance = GetComponentInChildren<spin>().playerData.balance + reward;
             GetComponentInChildren<spin>().playerData.balance = balance;
