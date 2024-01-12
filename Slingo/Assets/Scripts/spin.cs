@@ -25,7 +25,7 @@ public class spin : MonoBehaviour
     public float spinPrice;
 
     [Space(10)]
-    public List<TMP_Text> slotTextList;
+    public List<GameObject> slotsList;
     public List<int> spinNumbers;
 
 
@@ -42,6 +42,11 @@ public class spin : MonoBehaviour
 
     public void Spin()
     {
+        foreach(GameObject go in slotsList)
+        {
+            go.GetComponentInChildren<Image>(true).enabled = false;
+        }
+
         min = 1;
         max = 16;
         
@@ -53,7 +58,7 @@ public class spin : MonoBehaviour
             spinNumbers.Clear();
         }
 
-        foreach (var slotText in slotTextList)
+        foreach (var slotText in slotsList)
         {
             rnd = UnityEngine.Random.Range(min, max);
             min += 15;
@@ -64,8 +69,9 @@ public class spin : MonoBehaviour
             if (wildPick == 0)
             {
                 spinNumbers.Add(0);
-                slotText.text = "W";
-                
+                slotText.GetComponentInChildren<Image>(true).enabled = true;
+                slotText.GetComponentInChildren<TextMeshProUGUI>(true).text = "";
+
                 blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
 
                 for (int i = 0; i < blinkEffect.Length; i++)
@@ -77,7 +83,7 @@ public class spin : MonoBehaviour
             }
             else
             {
-                slotText.text = rnd.ToString();
+                slotText.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
                 spinNumbers.Add(rnd);
             }
         }
@@ -151,7 +157,8 @@ public class spin : MonoBehaviour
             {
                 if (spin == gridNumber)
                 {
-                    gridGeneration.numberPositions[gridNumber].Hit();
+                    gridGeneration.numberPositions[gridNumber].Hit(false);
+                    break;
                 }
             }
         }
@@ -164,9 +171,12 @@ public class spin : MonoBehaviour
             wildPicked++;
             foreach (int gridNumber in gridGeneration.numberPositions.Keys)
             {
-                if(gridNumber == Convert.ToInt32(gridButton.gameObject.GetComponent<TextMeshProUGUI>().text))
+                if (gridButton.gameObject.GetComponent<TextMeshProUGUI>().text != "")
                 {
-                    gridGeneration.numberPositions[gridNumber].Hit();
+                    if (gridNumber == Convert.ToInt32(gridButton.gameObject.GetComponent<TextMeshProUGUI>().text))
+                    {
+                        gridGeneration.numberPositions[gridNumber].Hit(true);
+                    }
                 }
             }
         }
