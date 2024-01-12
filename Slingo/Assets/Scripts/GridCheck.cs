@@ -15,8 +15,9 @@ public class GridCheck : MonoBehaviour
     private Image[] slingoBorders;
     [HideInInspector] public int slingoCount = 0;
     [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
+
     [SerializeField] private GameObject slingoPanel;
-    
+    public GameObject jackpotMessage;    
     // Start is called before the first frame update
     void Start()
     {
@@ -187,6 +188,10 @@ public class GridCheck : MonoBehaviour
         if (slingoCount >= 3)
         {
             resetText.text = "Collect";
+        }
+        if (slingoCount == 12)
+        {
+            jackpotMessage.SetActive(true);
         }
     }
 }

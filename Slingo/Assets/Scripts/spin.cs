@@ -47,6 +47,7 @@ public class spin : MonoBehaviour
         
         playerData.balance -= PriceCaculator();
 
+        
         if (spinNumbers.Count >= 5)
         {
             spinNumbers.Clear();
@@ -91,8 +92,6 @@ public class spin : MonoBehaviour
         }
 
     }
-
-
 
     float PriceCaculator()
     {
@@ -156,7 +155,6 @@ public class spin : MonoBehaviour
                 }
             }
         }
-        
     }
 
     public void WildPick(Button gridButton)
