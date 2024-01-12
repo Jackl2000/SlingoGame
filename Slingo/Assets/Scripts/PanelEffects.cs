@@ -11,7 +11,7 @@ public class PanelEffects : MonoBehaviour
     public spin spinScript;
     public GridGeneration gridGeneration;
 
-    private Image panel;
+    public List<Image> borders = new List<Image>();
 
     [Space(10)]
     [Header("Blink settigs")]
@@ -19,21 +19,18 @@ public class PanelEffects : MonoBehaviour
     public Color startColor = Color.white;
     public Color endColor = Color.black;
 
-
-    private void Awake()
-    {
-        panel = this.gameObject.GetComponent<Image>();
-        startColor = panel.color;
-        
-    }
-
     public void FlashingEffect()
     {
         foreach (GridNumbers number in gridGeneration.numberPositions.Values)
         {
             if (spinScript.wCount > 0)
             {
-                panel.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
+                foreach(Image border in borders)
+                {
+                    border.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
+                }
+
+
                 if (!number.hasBeenHit)
                 {
                     number.gameObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
