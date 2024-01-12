@@ -16,6 +16,8 @@ public class GridCheck : MonoBehaviour
     [HideInInspector] public int slingoCount = 0;
     [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
     [SerializeField] private GameObject slingoPanel;
+    [SerializeField] private Sprite[] starImages;
+    [SerializeField] private Sprite[] slingoBorderImages;
     
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,7 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("dr", false);
         AddingRewards(1);
 
-        slingoBorders = slingoPanel.GetComponentsInChildren<Image>().Skip(1).ToArray();
+        slingoBorders = slingoPanel.GetComponentsInChildren<Image>();
     }
 
     private void AddingRewards(float multiplyere)
@@ -85,17 +87,18 @@ public class GridCheck : MonoBehaviour
             if (number.h == h)
             {
                 horIndex++;
-                if (!number.hasBeenHit)
+                if(!number.hasBeenHit)
                 {
                     break;
                 }
-            }
-            if (horIndex == 5 && !gridSlingoList["h" + h])
-            {
-                gridSlingoList["h" + h] = true;
-                slingoCount++;
-                CheckForReward();
-                break;
+
+                if (horIndex == 5 && !gridSlingoList["h" + h])
+                {
+                    gridSlingoList["h" + h] = true;
+                    slingoCount++;
+                    CheckForReward();
+                    break;
+                }
             }
         }
 
@@ -109,13 +112,14 @@ public class GridCheck : MonoBehaviour
                 {
                     break;
                 }
-            }
-            if (vertIndex == 5 && !gridSlingoList["v" + v])
-            {
-                gridSlingoList["v" + v] = true;
-                slingoCount++;
-                CheckForReward();
-                break;
+
+                if (vertIndex == 5 && !gridSlingoList["v" + v])
+                {
+                    gridSlingoList["v" + v] = true;
+                    slingoCount++;
+                    CheckForReward();
+                    break;
+                }
             }
         }
 
@@ -172,17 +176,18 @@ public class GridCheck : MonoBehaviour
 
     private void CheckForReward()
     {
-        if(rewards.ContainsKey(slingoCount))
+        if (rewards.ContainsKey(slingoCount))
         {
             foreach (Image item in slingoBorders)
             {
-                if (item.color != Color.green)
+                if (item.sprite != slingoBorderImages[1])
                 {
-                    item.color = Color.green;
+                    item.sprite = slingoBorderImages[1];
                     break;
                 }
             }
         }
+        
         if (slingoCount >= 3)
         {
             resetText.text = "Collect";

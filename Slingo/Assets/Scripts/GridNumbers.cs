@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GridNumbers
 {
@@ -10,12 +11,14 @@ public class GridNumbers
     public bool hasBeenHit { get; private set; } = false;
     private GameObject gameObject;
     private bool diagonal;
+    private Image childImage;
 
     public GridNumbers(int horizontal, int vertical, GameObject gameObject)
     {
         h = horizontal;
         v = vertical;
         this.gameObject = gameObject;
+        childImage = gameObject.GetComponentInChildren<Image>();
         diagonal = CheckForDiagonal();
     }
 
@@ -29,16 +32,29 @@ public class GridNumbers
     }
 
 
-    public void Hit()
+    public void Hit(bool joker)
     {
-        gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
+        if (hasBeenHit) return;
         hasBeenHit = true;
         gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal);
+        gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
+        if(!joker)
+        {
+            childImage.GetComponentInChildren<Image>().enabled = true;
+            childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+        }
+        else
+        {
+            childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
+        }
+
     }
 
     public void ResetData()
     {
-        gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
+        childImage.GetComponentInChildren<Image>().enabled = false;
+        childImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
+        childImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
         hasBeenHit = false;
     }
 }

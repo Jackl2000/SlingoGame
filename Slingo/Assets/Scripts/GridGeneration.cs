@@ -29,7 +29,7 @@ public class GridGeneration : MonoBehaviour
         GetComponent<GridCheck>().ResetGrid();
         columns.Clear();
         numberPositions.Clear();
-        spinsCounter.text = "10";
+        spinsCounter.text = "8";
 
         GetComponentInChildren<spin>().playerData.balance--;
         BalanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(currentBalance);
@@ -60,8 +60,10 @@ public class GridGeneration : MonoBehaviour
         {
             fields[i].text = GenerateNumber(range ,usedNumbers).ToString();
             usedNumbers.Add(Convert.ToInt32(fields[i].text));
-            numberPositions.Add(Convert.ToInt32(field[i].text), new GridNumbers(i + 1, columnCount, fields[i].gameObject));
+            numberPositions.Add(Convert.ToInt32(field[i].text), new GridNumbers(columnCount, i + 1, fields[i].gameObject));
         }
+
+        
     }
 
     private int GenerateNumber(int range, List<int> usedNumbers)
