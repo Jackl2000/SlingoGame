@@ -59,7 +59,7 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
 
-            int wildPick = UnityEngine.Random.Range(0, 10);
+            int wildPick = UnityEngine.Random.Range(0, 18);
 
             if (wildPick == 0)
             {

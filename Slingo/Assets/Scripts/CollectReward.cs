@@ -19,6 +19,10 @@ public class CollectReward : MonoBehaviour
             spin.spinLeft = 10;
             spin.spinPrice = 0;
             gridCheck.resetText.text = "Retry";
+            foreach (var slotText in spin.slotTextList)
+            {
+                slotText.text = "?";
+            }
         }
     }
 

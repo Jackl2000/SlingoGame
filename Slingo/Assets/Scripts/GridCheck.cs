@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class GridCheck : MonoBehaviour
 {
@@ -38,6 +40,8 @@ public class GridCheck : MonoBehaviour
 
         slingoBorders = slingoPanel.GetComponentsInChildren<Image>().Skip(1).ToArray();
     }
+
+
 
     private void AddingRewards(float multiplyere)
     {
@@ -194,3 +198,4 @@ public class GridCheck : MonoBehaviour
         }
     }
 }
+

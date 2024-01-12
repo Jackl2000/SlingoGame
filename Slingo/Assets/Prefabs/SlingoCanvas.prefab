@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8142355438904654905}
   m_Layer: 5
   m_Name: Number3
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 8905399229120654224}
   m_Layer: 5
   m_Name: Number1
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -903,7 +903,7 @@ GameObject:
   - component: {fileID: 8177660413455737436}
   m_Layer: 5
   m_Name: Number4
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -1409,7 +1409,7 @@ GameObject:
   - component: {fileID: 4724034900623171867}
   m_Layer: 5
   m_Name: Number2
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1574,13 +1574,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4724034900623171867}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PanelEffects, Assembly-CSharp
+        m_MethodName: StopBlinking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1775,7 +1787,7 @@ GameObject:
   - component: {fileID: 6499902976302793851}
   m_Layer: 5
   m_Name: Number2
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1940,7 +1952,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -2287,6 +2299,83 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 96229aaebdcb2184597efc782318c76e, type: 3}
   m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2521883590472927312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4638934373859718793}
+  - component: {fileID: 8997818899587788638}
+  - component: {fileID: 1832626036718080945}
+  m_Layer: 5
+  m_Name: InnerBorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4638934373859718793
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521883590472927312}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4758762800164220262}
+  - {fileID: 2517662872098379485}
+  m_Father: {fileID: 4536569092929044600}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8997818899587788638
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521883590472927312}
+  m_CullTransparentMesh: 1
+--- !u!114 &1832626036718080945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521883590472927312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2875,7 +2964,7 @@ GameObject:
   - component: {fileID: 1418254704089078238}
   m_Layer: 5
   m_Name: Number6
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3040,13 +3129,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1418254704089078238}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PanelEffects, Assembly-CSharp
+        m_MethodName: StopBlinking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3063,8 +3164,6 @@ GameObject:
   - component: {fileID: 1900597969380334740}
   - component: {fileID: 8777956950414892378}
   - component: {fileID: 1272026834107032972}
-  - component: {fileID: 4055942201498400139}
-  - component: {fileID: 527621969584549633}
   m_Layer: 5
   m_Name: SpinNumbersBorder
   m_TagString: Untagged
@@ -3131,50 +3230,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4055942201498400139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3165239912866940755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d533eb12cec6e2e419e5409581ae8aaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridGeneration: {fileID: 1458205632472944407}
-  gridCheck: {fileID: 4374248674525639591}
-  playerData: {fileID: 0}
-  price: {fileID: 0}
-  balanceText: {fileID: 4166002204279154401}
-  spinLeftText: {fileID: 7484134286775104099}
-  spinButton: {fileID: 5276959930472451008}
-  spinPrice: 0
-  slotTextList:
-  - {fileID: 1254935496118056984}
-  - {fileID: 2518606273771912446}
-  - {fileID: 1687411145505902589}
-  - {fileID: 2384533571574881174}
-  - {fileID: 929297215700562479}
-  spinNumbers: 
-  wCount: 0
-  spinLeft: 10
---- !u!114 &527621969584549633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3165239912866940755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82157b31e2fdb964582b2a4f456e297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeSpeed: 0.01
-  spinScript: {fileID: 4055942201498400139}
-  defualtAlpha: 0
 --- !u!1 &3236865641390240657
 GameObject:
   m_ObjectHideFlags: 0
@@ -3457,7 +3512,7 @@ GameObject:
   - component: {fileID: 8572405935065839230}
   m_Layer: 5
   m_Name: Number4
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3622,7 +3677,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -3648,7 +3703,7 @@ GameObject:
   - component: {fileID: 4468221546408400976}
   m_Layer: 5
   m_Name: Number4
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3813,7 +3868,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -3825,6 +3880,82 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &3325146050790531802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4536569092929044600}
+  - component: {fileID: 7456235147318529819}
+  - component: {fileID: 205667401820087242}
+  m_Layer: 5
+  m_Name: JackpotBorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &4536569092929044600
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325146050790531802}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4638934373859718793}
+  m_Father: {fileID: 4424352891198733182}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -175, y: 425.0001}
+  m_SizeDelta: {x: -450, y: -1650.0002}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7456235147318529819
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325146050790531802}
+  m_CullTransparentMesh: 1
+--- !u!114 &205667401820087242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325146050790531802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3355742240337690611
 GameObject:
   m_ObjectHideFlags: 0
@@ -4050,7 +4181,7 @@ GameObject:
   - component: {fileID: 2349540980003061367}
   m_Layer: 5
   m_Name: Number3
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4215,7 +4346,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -4241,7 +4372,7 @@ GameObject:
   - component: {fileID: 1277055204604308364}
   m_Layer: 5
   m_Name: Number1
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4406,7 +4537,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -4566,7 +4697,7 @@ GameObject:
   - component: {fileID: 7489225351173650988}
   m_Layer: 5
   m_Name: Number1
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4731,7 +4862,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -4781,6 +4912,297 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -125}
   m_SizeDelta: {x: 250, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4433085739837038607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4758762800164220262}
+  - component: {fileID: 6083628997682917517}
+  - component: {fileID: 6815972537643761344}
+  - component: {fileID: 3378385170887754144}
+  m_Layer: 5
+  m_Name: CollectButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4758762800164220262
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433085739837038607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 366925352222064362}
+  m_Father: {fileID: 4638934373859718793}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -5, y: -200}
+  m_SizeDelta: {x: 250, y: 55}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6083628997682917517
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433085739837038607}
+  m_CullTransparentMesh: 1
+--- !u!114 &6815972537643761344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433085739837038607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3378385170887754144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433085739837038607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 6815972537643761344}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5384392196509907161}
+        m_TargetAssemblyTypeName: CollectReward, Assembly-CSharp
+        m_MethodName: Collect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3325146050790531802}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1458205632472944407}
+        m_TargetAssemblyTypeName: GridGeneration, Assembly-CSharp
+        m_MethodName: ReGenerateGrid
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &4490405578974375393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366925352222064362}
+  - component: {fileID: 6422479137647908959}
+  - component: {fileID: 4708294820474793823}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &366925352222064362
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490405578974375393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4758762800164220262}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6422479137647908959
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490405578974375393}
+  m_CullTransparentMesh: 1
+--- !u!114 &4708294820474793823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490405578974375393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Collect
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4509156442935069427
 GameObject:
   m_ObjectHideFlags: 0
@@ -4818,7 +5240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: -180, y: 209}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6267425118422256974
@@ -4903,9 +5325,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6822114918202503662}
-        m_TargetAssemblyTypeName: CollectReward, Assembly-CSharp
-        m_MethodName: Collect
+      - m_Target: {fileID: 1458205632472944407}
+        m_TargetAssemblyTypeName: GridGeneration, Assembly-CSharp
+        m_MethodName: ReGenerateGrid
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4915,9 +5337,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1458205632472944407}
-        m_TargetAssemblyTypeName: GridGeneration, Assembly-CSharp
-        m_MethodName: ReGenerateGrid
+      - m_Target: {fileID: 5384392196509907161}
+        m_TargetAssemblyTypeName: CollectReward, Assembly-CSharp
+        m_MethodName: Collect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4941,7 +5363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridCheck: {fileID: 4374248674525639591}
   playerData: {fileID: 0}
-  spin: {fileID: 4055942201498400139}
+  spin: {fileID: 0}
   jackpotGO: {fileID: 0}
 --- !u!1 &4527746366605829906
 GameObject:
@@ -4957,7 +5379,7 @@ GameObject:
   - component: {fileID: 3513827782664614112}
   m_Layer: 5
   m_Name: Number1
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5122,7 +5544,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -5134,6 +5556,152 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PanelEffects, Assembly-CSharp
+        m_MethodName: StopBlinking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &4616764820922219993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2517662872098379485}
+  - component: {fileID: 5982599592025350509}
+  - component: {fileID: 1877753886187440471}
+  m_Layer: 5
+  m_Name: JackpotMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2517662872098379485
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616764820922219993}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4638934373859718793}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -20, y: 36}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5982599592025350509
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616764820922219993}
+  m_CullTransparentMesh: 1
+--- !u!114 &1877753886187440471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616764820922219993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: You have won JACKPOT
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 80
+  m_fontSizeBase: 80
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: -188.59964, y: -175.64224, z: -231.79037, w: -167.00436}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4698689202146169515
 GameObject:
   m_ObjectHideFlags: 0
@@ -5305,7 +5873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 415, y: -645}
+  m_AnchoredPosition: {x: 414, y: -643}
   m_SizeDelta: {x: 250, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &298169882363137323
@@ -5390,7 +5958,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: Spin
         m_Mode: 1
@@ -5416,7 +5984,7 @@ GameObject:
   - component: {fileID: 7827517921353460879}
   m_Layer: 5
   m_Name: Number6
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5581,7 +6149,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -5727,6 +6295,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &5026089280836659667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5023511367310780633}
+  - component: {fileID: 5384392196509907161}
+  - component: {fileID: 3555030584407229288}
+  m_Layer: 5
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5023511367310780633
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5026089280836659667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4424352891198733182}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5384392196509907161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5026089280836659667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a7ace4474c74648aca643cd8e953aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridCheck: {fileID: 4374248674525639591}
+  playerData: {fileID: 0}
+  spin: {fileID: 4925278202150419827}
+  jackpotGO: {fileID: 3325146050790531802}
+--- !u!114 &3555030584407229288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5026089280836659667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82157b31e2fdb964582b2a4f456e297f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinScript: {fileID: 4925278202150419827}
+  gridGeneration: {fileID: 1458205632472944407}
+  borders:
+  - {fileID: 1272026834107032972}
+  blinkSpeed: 1.75
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &5104058079126732403
 GameObject:
   m_ObjectHideFlags: 0
@@ -5741,7 +6381,7 @@ GameObject:
   - component: {fileID: 1246752170562999625}
   m_Layer: 5
   m_Name: Number1
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5906,7 +6546,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -6496,7 +7136,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 874, y: 75}
+  m_AnchoredPosition: {x: 346, y: 224}
   m_SizeDelta: {x: 450, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4605861614954047731
@@ -6685,7 +7325,7 @@ GameObject:
   - component: {fileID: 6653921495107062307}
   m_Layer: 5
   m_Name: Number6
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6850,7 +7490,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -6951,7 +7591,7 @@ GameObject:
   - component: {fileID: 2207208541890444512}
   m_Layer: 5
   m_Name: Number6
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7116,7 +7756,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -7341,7 +7981,7 @@ GameObject:
   - component: {fileID: 5365766241186724190}
   m_Layer: 5
   m_Name: Number4
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7506,7 +8146,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -8082,7 +8722,7 @@ GameObject:
   - component: {fileID: 408658028233847577}
   m_Layer: 5
   m_Name: Number2
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8247,7 +8887,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -8273,7 +8913,7 @@ GameObject:
   - component: {fileID: 7601405112589694617}
   m_Layer: 5
   m_Name: Number2
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8438,7 +9078,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -9030,7 +9670,7 @@ GameObject:
   - component: {fileID: 4632813965219604211}
   m_Layer: 5
   m_Name: Number3
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9195,7 +9835,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -9259,7 +9899,7 @@ GameObject:
   - component: {fileID: 2495155282923028038}
   m_Layer: 5
   m_Name: Number3
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9424,13 +10064,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2495155282923028038}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PanelEffects, Assembly-CSharp
+        m_MethodName: StopBlinking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9450,7 +10102,7 @@ GameObject:
   - component: {fileID: 3639701413056743316}
   m_Layer: 5
   m_Name: Number4
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9615,13 +10267,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3639701413056743316}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PanelEffects, Assembly-CSharp
+        m_MethodName: StopBlinking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9752,7 +10416,7 @@ GameObject:
   - component: {fileID: 3092431652397639460}
   m_Layer: 5
   m_Name: Number6
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9917,7 +10581,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -10077,7 +10741,7 @@ GameObject:
   - component: {fileID: 5201911044746740314}
   m_Layer: 5
   m_Name: Number3
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10242,7 +10906,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -10268,6 +10932,7 @@ GameObject:
   - component: {fileID: 4541405285958639682}
   - component: {fileID: 1458205632472944407}
   - component: {fileID: 4374248674525639591}
+  - component: {fileID: 4925278202150419827}
   m_Layer: 5
   m_Name: SlingoCanvas
   m_TagString: Untagged
@@ -10287,11 +10952,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5023511367310780633}
   - {fileID: 5876085290941502907}
   - {fileID: 407026564267384868}
   - {fileID: 1754546222674672649}
   - {fileID: 7071386700314157629}
   - {fileID: 6691623015287928656}
+  - {fileID: 4536569092929044600}
   - {fileID: 2551705464461879110}
   - {fileID: 6100013951218883426}
   m_Father: {fileID: 0}
@@ -10394,6 +11061,36 @@ MonoBehaviour:
   resetText: {fileID: 2696960939849559270}
   slingoCount: 0
   slingoPanel: {fileID: 8294825953586362885}
+  jackpotMessage: {fileID: 3325146050790531802}
+--- !u!114 &4925278202150419827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7929506682988506404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d533eb12cec6e2e419e5409581ae8aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridGeneration: {fileID: 1458205632472944407}
+  gridCheck: {fileID: 4374248674525639591}
+  playerData: {fileID: 0}
+  price: {fileID: 2696960939849559270}
+  balanceText: {fileID: 4166002204279154401}
+  spinLeftText: {fileID: 7484134286775104099}
+  spinButton: {fileID: 5276959930472451008}
+  spinPrice: 0
+  slotTextList:
+  - {fileID: 1254935496118056984}
+  - {fileID: 2518606273771912446}
+  - {fileID: 1687411145505902589}
+  - {fileID: 2384533571574881174}
+  - {fileID: 929297215700562479}
+  spinNumbers: 
+  wCount: 0
+  spinLeft: 10
 --- !u!1 &7981804993614614953
 GameObject:
   m_ObjectHideFlags: 0
@@ -10408,7 +11105,7 @@ GameObject:
   - component: {fileID: 4483581371928134710}
   m_Layer: 5
   m_Name: Number2
-  m_TagString: Untagged
+  m_TagString: GridNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10573,7 +11270,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
+      - m_Target: {fileID: 4925278202150419827}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: WildPick
         m_Mode: 2
@@ -10886,7 +11583,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 72
-  m_fontSizeBase: 75
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
