@@ -9,6 +9,7 @@ public class CollectReward : MonoBehaviour
     public GridCheck gridCheck;
     public PlayerData playerData;
     public spin spin;
+    public GameObject jackpotGO;
 
     public void Collect()
     {
@@ -18,4 +19,14 @@ public class CollectReward : MonoBehaviour
         gridCheck.resetText.text = "Retry";
     }
 
+    bool isJackpot = false;
+    public void Jackpot()
+    {
+        jackpotGO.SetActive(isJackpot);
+    }
+
+    private void Update()
+    {
+        
+    }
 }
