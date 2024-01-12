@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CollectReward : MonoBehaviour
 {
@@ -19,6 +20,14 @@ public class CollectReward : MonoBehaviour
             spin.spinLeft = 10;
             spin.spinPrice = 0;
             gridCheck.resetText.text = "Retry";
+            foreach (GameObject go in spin.slotsList)
+            {
+                go.GetComponentInChildren<Image>(true).enabled = false;
+            }
+            foreach (var slotText in spin.slotsList)
+            {
+                slotText.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+            }
         }
     }
 
