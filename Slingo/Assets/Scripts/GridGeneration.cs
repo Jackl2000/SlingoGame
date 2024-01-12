@@ -6,11 +6,14 @@ using UnityEngine;
 
 public class GridGeneration : MonoBehaviour
 {
-    private List<GameObject> columns = new List<GameObject>();
+    
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
+    //[HideInInspector] public float currentBalance = 999;
+
     [SerializeField] private TextMeshProUGUI spinsCounter;
     [SerializeField] private TextMeshProUGUI BalanceText;
-    [HideInInspector] public float currentBalance = 999;
+    private List<GameObject> columns = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +33,10 @@ public class GridGeneration : MonoBehaviour
         columns.Clear();
         numberPositions.Clear();
         spinsCounter.text = "8";
+        
 
         GetComponentInChildren<spin>().playerData.balance--;
-        BalanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(currentBalance);
+        //BalanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(currentBalance);
         GetColumns();
     }
 
@@ -62,8 +66,6 @@ public class GridGeneration : MonoBehaviour
             usedNumbers.Add(Convert.ToInt32(fields[i].text));
             numberPositions.Add(Convert.ToInt32(field[i].text), new GridNumbers(columnCount, i + 1, fields[i].gameObject));
         }
-
-        
     }
 
     private int GenerateNumber(int range, List<int> usedNumbers)

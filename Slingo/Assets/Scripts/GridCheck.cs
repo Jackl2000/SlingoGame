@@ -18,6 +18,7 @@ public class GridCheck : MonoBehaviour
     [SerializeField] private GameObject slingoPanel;
     [SerializeField] private Sprite[] starImages;
     [SerializeField] private Sprite[] slingoBorderImages;
+    [SerializeField] private Sprite[] jackpotSlingoBorderImages;
     public GameObject jackpotMessage;
 
     // Start is called before the first frame update
@@ -38,7 +39,7 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("dr", false);
         AddingRewards(1);
 
-        slingoBorders = slingoPanel.GetComponentsInChildren<Image>();
+        slingoBorders = slingoPanel.GetComponentsInChildren<Image>().SkipLast(1).ToArray();
     }
 
     private void AddingRewards(float multiplyere)
@@ -57,12 +58,12 @@ public class GridCheck : MonoBehaviour
     public void ResetGrid()
     {
         //Adding to balance
-        if(rewards.ContainsKey(slingoCount))
-        {
-            float reward = rewards[slingoCount];
-            float balance = GetComponentInChildren<spin>().playerData.balance + reward;
-            GetComponentInChildren<spin>().playerData.balance = balance;
-        }
+        //if(rewards.ContainsKey(slingoCount))
+        //{
+        //    float reward = rewards[slingoCount];
+        //    float balance = GetComponentInChildren<spin>().playerData.balance + reward;
+        //    GetComponentInChildren<spin>().playerData.balance = balance;
+        //}
 
         foreach(string item in gridSlingoList.Keys.ToList())
         {
@@ -70,11 +71,16 @@ public class GridCheck : MonoBehaviour
         }
         slingoCount = 0;
 
+
         foreach(Image item in slingoBorders)
         {
-            if (item.color != Color.black)
+            if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Length - 1])
             {
-                item.color = Color.black;
+                item.sprite = slingoBorderImages[0];
+            }
+            else if(item == slingoBorders[slingoBorders.Length - 1])
+            {
+                item.sprite = jackpotSlingoBorderImages[0];
             }
             else break;
         }
@@ -179,9 +185,14 @@ public class GridCheck : MonoBehaviour
     {
         if (rewards.ContainsKey(slingoCount))
         {
+            if(slingoCount == 12)
+            {
+                slingoBorders[slingoBorders.Length - 1].sprite = jackpotSlingoBorderImages[1];
+            }
+
             foreach (Image item in slingoBorders)
             {
-                if (item.sprite != slingoBorderImages[1])
+                if (item.sprite != slingoBorderImages[1] && item != slingoBorders[slingoBorders.Length - 1])
                 {
                     item.sprite = slingoBorderImages[1];
                     break;

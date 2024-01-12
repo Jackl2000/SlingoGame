@@ -69,8 +69,8 @@ public class spin : MonoBehaviour
             if (wildPick == 0)
             {
                 spinNumbers.Add(0);
-                slotText.GetComponentInChildren<Image>(true).enabled = true;
-                slotText.GetComponentInChildren<TextMeshProUGUI>(true).text = "";
+                slotText.GetComponentInChildren<Image>().enabled = true;
+                slotText.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
                 blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
 
