@@ -18,7 +18,8 @@ public class GridCheck : MonoBehaviour
     [SerializeField] private GameObject slingoPanel;
     [SerializeField] private Sprite[] starImages;
     [SerializeField] private Sprite[] slingoBorderImages;
-    
+    public GameObject jackpotMessage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -191,6 +192,10 @@ public class GridCheck : MonoBehaviour
         if (slingoCount >= 3)
         {
             resetText.text = "Collect";
+        }
+        if (slingoCount == 12)
+        {
+            jackpotMessage.SetActive(true);
         }
     }
 }

@@ -9,7 +9,7 @@ public class GridNumbers
     public int h { get; private set; }
     public int v { get; private set; }
     public bool hasBeenHit { get; private set; } = false;
-    private GameObject gameObject;
+    public GameObject gameObject;
     private bool diagonal;
     private Image childImage;
 

@@ -1,56 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PanelEffects : MonoBehaviour
 {
-    [Header("Fade settigs")]
-    public float fadeSpeed = .01f;
-
+    [Header("References")]
     public spin spinScript;
-    Image panel;
-    [HideInInspector]
-    public float defualtAlpha;
+    public GridGeneration gridGeneration;
 
+    public List<Image> borders = new List<Image>();
 
-    private void Awake()
-    {
-        panel = this.gameObject.GetComponent<Image>();
-        defualtAlpha = panel.color.a;
-        Debug.Log("default alpha: " + defualtAlpha);
-    }
-
-    public IEnumerator FlashBlinking()
-    {
-        Color startColor = GetComponent<Image>().color;
-        panel.color = new Color(1, 1, 1, 0);
-        for (int i = 0; i < 5; i++)
-        {
-            for (float alpha = 0.4f; alpha > 0.1f; alpha -= .01f)
-            {
-                //fade out
-                panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, alpha);
-                yield return new WaitForSeconds(fadeSpeed);
-            }
-            for (float alpha = 0; alpha < defualtAlpha; alpha += .01f)
-            {
-                //fade in
-                panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, alpha);
-                yield return new WaitForSeconds(fadeSpeed);
-            }
-        }
-        panel.color = startColor;
-    }
-
-    public void StopBlinking()
-    {
-        StopCoroutine(FlashBlinking());
-    }
+    [Space(10)]
+    [Header("Blink settigs")]
+    public float blinkSpeed = 1.85f;
+    public Color startColor = Color.white;
+    public Color endColor = Color.black;
 
     public void FlashingEffect()
     {
-        StartCoroutine(FlashBlinking());
+        foreach (GridNumbers number in gridGeneration.numberPositions.Values)
+        {
+            if (spinScript.wCount > 0)
+            {
+                foreach(Image border in borders)
+                {
+                    border.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
+                }
+
+
+                if (!number.hasBeenHit)
+                {
+                    number.gameObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
+                }
+            }
+            if (spinScript.wCount <= 0)
+            {
+                if (!number.hasBeenHit)
+                {
+                    number.gameObject.GetComponent<TextMeshProUGUI>().color = startColor;
+                }
+            }
+        }
+        
     }
 
+    private void Update()
+    {
+        FlashingEffect();
+    }
 }
