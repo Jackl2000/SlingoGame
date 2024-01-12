@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/JackScene.unity
+    guid: fcebe35d30015a646bc36fe2f199f95d
   m_configObjects: {}
