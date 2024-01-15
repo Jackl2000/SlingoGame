@@ -23,6 +23,7 @@ public class spin : MonoBehaviour
     public Button spinButton;
     [Space(5)]
     public float spinPrice;
+    [SerializeField]private float spinWaitTime;
 
     [Space(10)]
     public List<GameObject> slotsList;
@@ -31,82 +32,27 @@ public class spin : MonoBehaviour
 
     #region private variables
     [HideInInspector] public int wCount = 0;
-    [HideInInspector] public int spinLeft = 10;
+    [HideInInspector] public int spinLeft = 8;
     int rnd;
     int min = 1;
     int max = 15;
+    int wildPick;
     int wildPicked = 0;
 
     PanelEffects[] blinkEffect;
     #endregion
 
-    public void Spin()
-    {
-        foreach(GameObject go in slotsList)
-        {
-            go.GetComponentInChildren<Image>(true).enabled = false;
-        }
-
-        min = 1;
-        max = 16;
-        
-        playerData.balance -= PriceCaculator();
-
-        
-        if (spinNumbers.Count >= 5)
-        {
-            spinNumbers.Clear();
-        }
-
-        foreach (var slotText in slotsList)
-        {
-            rnd = UnityEngine.Random.Range(min, max);
-            min += 15;
-            max += 15;
-
-            int wildPick = UnityEngine.Random.Range(0, 18);
-
-            if (wildPick == 0)
-            {
-                spinNumbers.Add(0);
-                slotText.GetComponentInChildren<Image>().enabled = true;
-                slotText.GetComponentInChildren<TextMeshProUGUI>().text = "";
-
-                blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
-
-                for (int i = 0; i < blinkEffect.Length; i++)
-                {
-                    blinkEffect[i].FlashingEffect();
-                }
-
-                wCount++;
-            }
-            else
-            {
-                slotText.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
-                spinNumbers.Add(rnd);
-            }
-        }
-
-        CheckMatchingNumb();
-
-        if (spinLeft >= 1)
-        {
-            spinLeft = Convert.ToInt32(spinLeftText.text);
-            spinLeft--;
-            spinLeftText.text = spinLeft.ToString();
-        }
-
-    }
+    private IEnumerator spinCoroutine;
 
     float PriceCaculator()
     {
-        if (spinLeft == 0)
+        if (spinLeft <= 0)
         {
-            spinLeftText.text = spinPrice.ToString();
-
             switch (gridCheck.slingoCount)
             {
+                case 0:
+                    spinPrice = 0.05f;
+                    break;
                 case 1:
                     spinPrice = 0.05f;
                     break;
@@ -141,6 +87,8 @@ public class spin : MonoBehaviour
                     spinPrice = 215;
                     break;
             }
+
+            spinLeftText.text = spinPrice.ToString();
         }
         else
         {
@@ -182,15 +130,113 @@ public class spin : MonoBehaviour
         }
     }
 
+    public void Spin()
+    {
+        foreach(GameObject go in slotsList)
+        {
+            go.GetComponentInChildren<Image>(true).enabled = false;
+        }
+
+        min = 1;
+        max = 16;
+        
+        playerData.balance -= PriceCaculator();
+        
+        if (spinNumbers.Count >= 5)
+        {
+            spinNumbers.Clear();
+        }
+
+        foreach (var slotText in slotsList)
+        {
+            rnd = UnityEngine.Random.Range(min, max);
+            min += 15;
+            max += 15;
+
+            wildPick = UnityEngine.Random.Range(0, 75);
+
+            if (wildPick == 0)
+            {
+                spinNumbers.Add(0);
+                slotText.GetComponentInChildren<Image>().enabled = true;
+                slotText.GetComponentInChildren<TextMeshProUGUI>().text = "";
+
+                blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
+
+                for (int i = 0; i < blinkEffect.Length; i++)
+                {
+                    blinkEffect[i].FlashingEffect();
+                }
+                wCount++;
+                StopCoroutine(spinCoroutine);
+            }
+            else
+            {
+                slotText.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
+                spinNumbers.Add(rnd);
+            }
+        }
+
+        CheckMatchingNumb();
+
+        if (spinLeft >= 1)
+        {
+            spinLeft = Convert.ToInt32(spinLeftText.text);
+            spinLeft--;
+            spinLeftText.text = spinLeft.ToString();
+        }
+
+    }
+
+    IEnumerator AutoSpin()
+    {
+        for (int spinCount = 0; spinCount <= spinLeft;)
+        {
+            Spin();
+            
+            Debug.Log("Spin running" + "\n" +
+                        "Spin left:" + spinLeft);
+            yield return new WaitForSeconds(spinWaitTime);
+        }
+
+    }
+
+    public void StartSpin( )
+    {
+        if (spinLeft < 0)
+        {
+            Spin();
+        }
+        else
+        {
+            StartCoroutine(spinCoroutine);
+        }
+
+    }
+
+    private void Start()
+    {
+        spinCoroutine = AutoSpin();
+    }
+
     private void Update()
     {
+        if (spinLeft == 0)
+        {
+            StopCoroutine(spinCoroutine);
+            spinLeft = -1;
+            PriceCaculator();
+            Debug.Log("Spinleft is:" + spinLeft +
+                "\n" + "Spinning stopped");
+        }
+
         if (spinLeft == 0)
         {
             spinLeftText.text = PriceCaculator().ToString() + " kr";
         }
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
 
-
+        #region Enables to pick any number on plate if user got wildpicks
         if (wildPicked == wCount)
         {
             wCount = 0;
@@ -201,6 +247,8 @@ public class spin : MonoBehaviour
         {
             spinButton.enabled = false;
         }
+        #endregion
+
     }
 
 
