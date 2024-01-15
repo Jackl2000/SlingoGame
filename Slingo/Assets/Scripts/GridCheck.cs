@@ -12,20 +12,24 @@ public class GridCheck : MonoBehaviour
 {
     public TextMeshProUGUI resetText;
     public Image retryButtonImg;
+    public GameObject jackpotMessage;
 
-    private GridGeneration grid;
-    private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
-    private Image[] slingoBorders;
     [HideInInspector] public int slingoCount = 0;
+    [HideInInspector] public int starsCount = 0;
     [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
+
     [SerializeField] private GameObject slingoPanel;
     [SerializeField] private Sprite[] starImages;
     [SerializeField] private Sprite[] slingoBorderImages;
     [SerializeField] private Sprite[] jackpotSlingoBorderImages;
-    public GameObject jackpotMessage;
+
+    private GridGeneration grid;
+    private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
+    private Image[] slingoBorders;
+    private int rewardCount;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         grid = GetComponent<GridGeneration>();
         gridSlingoList.Add("h1", false);
@@ -63,20 +67,12 @@ public class GridCheck : MonoBehaviour
 
     public void ResetGrid()
     {
-        //Adding to balance
-        //if(rewards.ContainsKey(slingoCount))
-        //{
-        //    float reward = rewards[slingoCount];
-        //    float balance = GetComponentInChildren<spin>().playerData.balance + reward;
-        //    GetComponentInChildren<spin>().playerData.balance = balance;
-        //}
-
         foreach(string item in gridSlingoList.Keys.ToList())
         {
             gridSlingoList[item] = false;
         }
         slingoCount = 0;
-
+        starsCount = 0;
 
         foreach(Image item in slingoBorders)
         {
@@ -92,23 +88,31 @@ public class GridCheck : MonoBehaviour
         }
     }
 
-    public void CheckGrid(int h, int v, bool diagonal)
+    public void CheckGrid(int h, int v, bool diagonal, bool check)
     {
+        rewardCount = 0;
+
         int horIndex = 0;
         foreach (GridNumbers number in grid.numberPositions.Values)
         {
             if (number.h == h)
             {
                 horIndex++;
-                if(!number.hasBeenHit)
+                if (!number.hasBeenHit)
                 {
                     break;
                 }
 
                 if (horIndex == 5 && !gridSlingoList["h" + h])
                 {
+                    if(check)
+                    {
+                        rewardCount++;
+                        break;
+                    }
                     gridSlingoList["h" + h] = true;
                     slingoCount++;
+                    
                     CheckForReward();
                     break;
                 }
@@ -128,6 +132,11 @@ public class GridCheck : MonoBehaviour
 
                 if (vertIndex == 5 && !gridSlingoList["v" + v])
                 {
+                    if (check)
+                    {
+                        rewardCount++;
+                        break;
+                    }
                     gridSlingoList["v" + v] = true;
                     slingoCount++;
                     CheckForReward();
@@ -153,6 +162,11 @@ public class GridCheck : MonoBehaviour
                         }
                         if (leftIndex == 5)
                         {
+                            if (check)
+                            {
+                                rewardCount++;
+                                break;
+                            }
                             gridSlingoList["dl"] = true;
                             slingoCount++;
                             CheckForReward();
@@ -176,6 +190,11 @@ public class GridCheck : MonoBehaviour
                         }
                         if (rightIndex == 5 && !gridSlingoList["dr"])
                         {
+                            if (check)
+                            {
+                                rewardCount++;
+                                break;
+                            }
                             gridSlingoList["dr"] = true;
                             slingoCount++;
                             CheckForReward();
@@ -205,7 +224,6 @@ public class GridCheck : MonoBehaviour
                 }
             }
         }
-        
         if (slingoCount >= 3)
         {
             //retry button image to black
@@ -217,6 +235,25 @@ public class GridCheck : MonoBehaviour
         {
             jackpotMessage.SetActive(true);
         }
+    }
+
+    public int CheckForMaxReward()
+    {
+        int maxReward = 0;
+        foreach (GridNumbers item in grid.numberPositions.Values)
+        {
+            if(!item.hasBeenHit)
+            {
+                item.hasBeenHit = true;
+                CheckGrid(item.h, item.v, item.diagonal, true);
+                item.hasBeenHit = false;
+                if (rewardCount > maxReward)
+                {
+                    maxReward = rewardCount;
+                }
+            }
+        }
+        return maxReward;
     }
 }
 

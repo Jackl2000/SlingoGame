@@ -23,7 +23,7 @@ public class CollectReward : MonoBehaviour
         if (gridCheck.slingoCount >= 3)
         {
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
-            spin.spinLeft = 10;
+            spin.spinLeft = 8;
             spin.spinPrice = 0;
             gridCheck.resetText.text = "Retry";
             foreach (GameObject go in spin.slotsList)

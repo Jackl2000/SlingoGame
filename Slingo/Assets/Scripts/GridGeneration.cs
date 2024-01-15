@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GridGeneration : MonoBehaviour
 {
@@ -35,9 +37,8 @@ public class GridGeneration : MonoBehaviour
 
     private void GetColumns()
     {
-        GameObject[] columArray = GameObject.FindGameObjectsWithTag("Column");
+        GameObject[] columArray = GameObject.FindGameObjectsWithTag("Column").OrderBy(go => go.GetComponent<GridLayoutGroup>().cellSize.x).ToArray();
         columns.AddRange(columArray);
-        columns.Reverse();
         for (int i = 0; i < columns.Count; i++)
         {
             int index = Convert.ToInt32(columns[i].name[columns[i].name.Length - 1].ToString());

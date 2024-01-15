@@ -29,7 +29,6 @@ public class spin : MonoBehaviour
     public List<GameObject> slotsList;
     public List<int> spinNumbers;
 
-
     #region private variables
     [HideInInspector] public int wCount = 0;
     [HideInInspector] public int spinLeft = 8;
@@ -38,63 +37,119 @@ public class spin : MonoBehaviour
     int max = 15;
     int wildPick;
     int wildPicked = 0;
+    private int possibleRewardAmplifiere;
 
     PanelEffects[] blinkEffect;
+    private IEnumerator spinCoroutine;
     #endregion
 
-    private IEnumerator spinCoroutine;
-
-    float PriceCaculator()
+    private void Start()
     {
+        //TestCalculation();
+        spinCoroutine = AutoSpin();
+    }
+
+    public void Spin()
+    {
+        foreach(GameObject go in slotsList)
+        {
+            go.GetComponentInChildren<Image>(true).enabled = false;
+        }
+
+        min = 1;
+        max = 16;
+
+        if (spinNumbers.Count >= 5)
+        {
+            spinNumbers.Clear();
+        }
+
+        foreach (var slotText in slotsList)
+        {
+            rnd = UnityEngine.Random.Range(min, max);
+            min += 15;
+            max += 15;
+
+            int wildPick = UnityEngine.Random.Range(0, 18);
+
+            if (wildPick == 0)
+            {
+                spinNumbers.Add(0);
+                slotText.GetComponentInChildren<Image>().enabled = true;
+                slotText.GetComponentInChildren<TextMeshProUGUI>().text = "";
+
+                blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
+
+                for (int i = 0; i < blinkEffect.Length; i++)
+                {
+                    blinkEffect[i].FlashingEffect();
+                }
+                StopCoroutine(spinCoroutine);
+                wCount++;
+            }
+            else
+            {
+                slotText.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
+                spinNumbers.Add(rnd);
+            }
+        }
+
+        CheckMatchingNumb();
+
         if (spinLeft <= 0)
         {
-            switch (gridCheck.slingoCount)
-            {
-                case 0:
-                    spinPrice = 0.05f;
-                    break;
-                case 1:
-                    spinPrice = 0.05f;
-                    break;
-                case 2:
-                    spinPrice = .08f;
-                    break; 
-                case 3:
-                    spinPrice = .15f;
-                    break;
-                case 4:
-                    spinPrice = .25f;
-                    break;
-                case 5:
-                    spinPrice = 1.25f;
-                    break;
-                case 6:
-                    spinPrice = 2.4f;
-                    break;
-                case 7:
-                    spinPrice = 11;
-                    break;
-                case 8:
-                    spinPrice = 38;
-                    break;
-                case 9:
-                    spinPrice = 112;
-                    break;
-                case 10:
-                    spinPrice = 160;
-                    break;
-                case 11:
-                    spinPrice = 215;
-                    break;
-            }
+            playerData.balance -= PriceCaculator();
+        }
 
-            spinLeftText.text = spinPrice.ToString();
-        }
-        else
+        if (spinLeft >= 1)
         {
-            spinPrice = 0;
+            spinLeft--;
+            spinLeftText.text = spinLeft.ToString();
+            if(spinLeft <= 0)
+            {
+                playerData.balance -= PriceCaculator();
+            }
         }
-        return spinPrice;
+
+
+    }
+
+    private float PriceCaculator()
+    {
+        possibleRewardAmplifiere = gridCheck.CheckForMaxReward();
+
+        float starMultipliere = 0.015f + (gridCheck.starsCount * (0.05f + (gridCheck.slingoCount / 10)));
+
+        float slingoReward = gridCheck.slingoCount * starMultipliere;
+
+        if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
+        {
+            slingoReward = gridCheck.rewards[gridCheck.slingoCount + 1] / Mathf.Clamp(5 /gridCheck.slingoCount, 2, 5 / gridCheck.slingoCount) + starMultipliere;
+        }
+
+        float maxSlingoAmplifiere = possibleRewardAmplifiere / 2;
+        float price = slingoReward * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
+
+        spinLeftText.text = UIManager.Instance.DisplayMoney(Mathf.Clamp(price, 0.015f, price));
+        return Mathf.Clamp(price, 0.015f, price);
+    }
+
+    private void TestCalculation()
+    {
+        for (int i = 0; i < 11; i++)
+        {
+            for (float j = 10; j < 25; j++)
+            {
+                float multipliere = 0.015f + (j * (0.05f + (i / 10)));
+                float slingoRewards = i * multipliere;
+                if (gridCheck.rewards.ContainsKey(i + 1))
+                {
+                    slingoRewards = gridCheck.rewards[i + 1] / Mathf.Clamp(5 / i, 2, 5 / i) + multipliere;
+                }
+                float price = Mathf.Clamp(slingoRewards * multipliere, 0.015f, slingoRewards * multipliere);
+                Debug.Log("SlingoCount: " + i + " Starscount: " + j + " Multipliere: " + multipliere + " final value: " + UIManager.Instance.DisplayMoney(price));
+            }
+        }
     }
 
     void CheckMatchingNumb()
@@ -127,65 +182,11 @@ public class spin : MonoBehaviour
                     }
                 }
             }
-        }
-    }
-
-    public void Spin()
-    {
-        foreach(GameObject go in slotsList)
-        {
-            go.GetComponentInChildren<Image>(true).enabled = false;
-        }
-
-        min = 1;
-        max = 16;
-        
-        playerData.balance -= PriceCaculator();
-        
-        if (spinNumbers.Count >= 5)
-        {
-            spinNumbers.Clear();
-        }
-
-        foreach (var slotText in slotsList)
-        {
-            rnd = UnityEngine.Random.Range(min, max);
-            min += 15;
-            max += 15;
-
-            wildPick = UnityEngine.Random.Range(0, 75);
-
-            if (wildPick == 0)
+            if (spinLeft <= 0)
             {
-                spinNumbers.Add(0);
-                slotText.GetComponentInChildren<Image>().enabled = true;
-                slotText.GetComponentInChildren<TextMeshProUGUI>().text = "";
-
-                blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
-
-                for (int i = 0; i < blinkEffect.Length; i++)
-                {
-                    blinkEffect[i].FlashingEffect();
-                }
-                wCount++;
-                StopCoroutine(spinCoroutine);
-            }
-            else
-            {
-                slotText.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
-                spinNumbers.Add(rnd);
+                PriceCaculator();
             }
         }
-
-        CheckMatchingNumb();
-
-        if (spinLeft >= 1)
-        {
-            spinLeft = Convert.ToInt32(spinLeftText.text);
-            spinLeft--;
-            spinLeftText.text = spinLeft.ToString();
-        }
-
     }
 
     IEnumerator AutoSpin()
@@ -214,27 +215,20 @@ public class spin : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        spinCoroutine = AutoSpin();
-    }
-
     private void Update()
     {
+        balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
+
         if (spinLeft == 0)
         {
             StopCoroutine(spinCoroutine);
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
-            PriceCaculator();
+            //PriceCaculator();
             Debug.Log("Spinleft is:" + spinLeft +
                 "\n" + "Spinning stopped");
         }
 
-        if (spinLeft == 0)
-        {
-            spinLeftText.text = PriceCaculator().ToString() + " kr";
-        }
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
 
         #region Enables to pick any number on plate if user got wildpicks
@@ -251,6 +245,4 @@ public class spin : MonoBehaviour
         #endregion
 
     }
-
-
 }

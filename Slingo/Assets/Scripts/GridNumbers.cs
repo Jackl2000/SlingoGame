@@ -8,9 +8,9 @@ public class GridNumbers
 {
     public int h { get; private set; }
     public int v { get; private set; }
-    public bool hasBeenHit { get; private set; } = false;
+    public bool hasBeenHit { get; set; } = false;
     public GameObject gameObject;
-    private bool diagonal;
+    public bool diagonal { get; private set; }
     private Image childImage;
 
     public GridNumbers(int horizontal, int vertical, GameObject gameObject)
@@ -36,7 +36,8 @@ public class GridNumbers
     {
         if (hasBeenHit) return;
         hasBeenHit = true;
-        gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal);
+        gameObject.GetComponentInParent<GridCheck>().starsCount++;
+        gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
         gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
         if(!joker)
         {
