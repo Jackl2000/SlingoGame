@@ -28,17 +28,22 @@ public class spin : MonoBehaviour
     public List<GameObject> slotsList;
     public List<int> spinNumbers;
 
-
     #region private variables
     [HideInInspector] public int wCount = 0;
-    [HideInInspector] public int spinLeft = 10;
+    [HideInInspector] public int spinLeft = 8;
     int rnd;
     int min = 1;
     int max = 15;
     int wildPicked = 0;
+    private bool doubleReward = false;
 
     PanelEffects[] blinkEffect;
     #endregion
+
+    private void Start()
+    {
+        //TestCalculation();
+    }
 
     public void Spin()
     {
@@ -49,10 +54,7 @@ public class spin : MonoBehaviour
 
         min = 1;
         max = 16;
-        
-        playerData.balance -= PriceCaculator();
 
-        
         if (spinNumbers.Count >= 5)
         {
             spinNumbers.Clear();
@@ -92,61 +94,87 @@ public class spin : MonoBehaviour
 
         if (spinLeft >= 1)
         {
-            spinLeft = Convert.ToInt32(spinLeftText.text);
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
         }
 
-    }
-
-    float PriceCaculator()
-    {
         if (spinLeft == 0)
         {
-            spinLeftText.text = spinPrice.ToString();
+            playerData.balance -= PriceCaculator();
+        }
+    }
 
-            switch (gridCheck.slingoCount)
+    private float PriceCaculator()
+    {
+        //doubleReward = PossibleReward();
+        switch (gridCheck.slingoCount)
+        {
+            case 0:
+                spinPrice = 0.015f;
+                break;
+            case 1:
+                spinPrice = 0.5f;
+                break;
+            case 2:
+                spinPrice = 2f;
+                break;
+            case 3:
+                spinPrice = 5f;
+                break;
+            case 4:
+                spinPrice = 12f;
+                break;
+            case 5:
+                spinPrice = 25f;
+                break;
+            case 6:
+                spinPrice = 50f;
+                break;
+            case 7:
+                spinPrice = 70;
+                break;
+            case 8:
+                spinPrice = 110;
+                break;
+            case 9:
+                spinPrice = 150;
+                break;
+            case 10:
+                spinPrice = 215;
+                break;
+        }
+        float multipliere = 0.015f + (gridCheck.starsCount * (0.05f + (gridCheck.slingoCount / 10))); 
+        float slingoRewards = gridCheck.slingoCount * multipliere;
+        if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
+        {
+            slingoRewards = gridCheck.rewards[gridCheck.slingoCount + 1] / Mathf.Clamp(5 /gridCheck.slingoCount, 2, 5 / gridCheck.slingoCount) + multipliere;
+        }
+        float price = slingoRewards * multipliere;
+        spinLeftText.text = UIManager.Instance.DisplayMoney(Mathf.Clamp(price, 0.015f, price));
+        return Mathf.Clamp(price, 0.015f, price);
+    }
+
+    private void TestCalculation()
+    {
+        for (int i = 0; i < 11; i++)
+        {
+            for (float j = 10; j < 25; j++)
             {
-                case 1:
-                    spinPrice = 0.05f;
-                    break;
-                case 2:
-                    spinPrice = .08f;
-                    break; 
-                case 3:
-                    spinPrice = .15f;
-                    break;
-                case 4:
-                    spinPrice = .25f;
-                    break;
-                case 5:
-                    spinPrice = 1.25f;
-                    break;
-                case 6:
-                    spinPrice = 2.4f;
-                    break;
-                case 7:
-                    spinPrice = 11;
-                    break;
-                case 8:
-                    spinPrice = 38;
-                    break;
-                case 9:
-                    spinPrice = 112;
-                    break;
-                case 10:
-                    spinPrice = 160;
-                    break;
-                case 11:
-                    spinPrice = 215;
-                    break;
+                float multipliere = 0.015f + (j * (0.05f + (i / 10)));
+                float slingoRewards = i * multipliere;
+                if (gridCheck.rewards.ContainsKey(i + 1))
+                {
+                    slingoRewards = gridCheck.rewards[i + 1] / Mathf.Clamp(5 / i, 2, 5 / i) + multipliere;
+                }
+                float price = Mathf.Clamp(slingoRewards * multipliere, 0.015f, slingoRewards * multipliere);
+                Debug.Log("SlingoCount: " + i + " Starscount: " + j + " Multipliere: " + multipliere + " final value: " + UIManager.Instance.DisplayMoney(price));
             }
         }
-        else
-        {
-            spinPrice = 0;
-        }
-        return spinPrice;
+    }
+
+    private bool PossibleReward()
+    {
+        return false;
     }
 
     void CheckMatchingNumb()
@@ -179,17 +207,16 @@ public class spin : MonoBehaviour
                     }
                 }
             }
+            if (spinLeft == 0)
+            {
+                PriceCaculator();
+            }
         }
     }
 
     private void Update()
     {
-        if (spinLeft == 0)
-        {
-            spinLeftText.text = PriceCaculator().ToString() + " kr";
-        }
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
-
 
         if (wildPicked == wCount)
         {
@@ -202,6 +229,4 @@ public class spin : MonoBehaviour
             spinButton.enabled = false;
         }
     }
-
-
 }

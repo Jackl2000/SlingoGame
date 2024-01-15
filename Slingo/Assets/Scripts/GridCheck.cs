@@ -16,6 +16,7 @@ public class GridCheck : MonoBehaviour
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
     private Image[] slingoBorders;
     [HideInInspector] public int slingoCount = 0;
+    [HideInInspector] public int starsCount = 0;
     [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
     [SerializeField] private GameObject slingoPanel;
     [SerializeField] private Sprite[] starImages;
@@ -24,7 +25,7 @@ public class GridCheck : MonoBehaviour
     public GameObject jackpotMessage;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         grid = GetComponent<GridGeneration>();
         gridSlingoList.Add("h1", false);
@@ -74,7 +75,7 @@ public class GridCheck : MonoBehaviour
             gridSlingoList[item] = false;
         }
         slingoCount = 0;
-
+        starsCount = 0;
 
         foreach(Image item in slingoBorders)
         {
@@ -98,13 +99,14 @@ public class GridCheck : MonoBehaviour
             if (number.h == h)
             {
                 horIndex++;
-                if(!number.hasBeenHit)
+                if (!number.hasBeenHit)
                 {
                     break;
                 }
 
                 if (horIndex == 5 && !gridSlingoList["h" + h])
                 {
+                    Debug.Log("Slingo h");
                     gridSlingoList["h" + h] = true;
                     slingoCount++;
                     CheckForReward();
@@ -126,6 +128,7 @@ public class GridCheck : MonoBehaviour
 
                 if (vertIndex == 5 && !gridSlingoList["v" + v])
                 {
+                    Debug.Log("Slingo v");
                     gridSlingoList["v" + v] = true;
                     slingoCount++;
                     CheckForReward();
@@ -151,6 +154,7 @@ public class GridCheck : MonoBehaviour
                         }
                         if (leftIndex == 5)
                         {
+                            Debug.Log("Slingo dl");
                             gridSlingoList["dl"] = true;
                             slingoCount++;
                             CheckForReward();
@@ -174,6 +178,7 @@ public class GridCheck : MonoBehaviour
                         }
                         if (rightIndex == 5 && !gridSlingoList["dr"])
                         {
+                            Debug.Log("Slingo dr");
                             gridSlingoList["dr"] = true;
                             slingoCount++;
                             CheckForReward();

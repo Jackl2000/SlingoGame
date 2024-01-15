@@ -36,6 +36,7 @@ public class GridNumbers
     {
         if (hasBeenHit) return;
         hasBeenHit = true;
+        gameObject.GetComponentInParent<GridCheck>().starsCount++;
         gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal);
         gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
         if(!joker)
