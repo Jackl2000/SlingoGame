@@ -193,7 +193,7 @@ public class spin : MonoBehaviour
         for (int spinCount = 0; spinCount <= spinLeft;)
         {
             Spin();
-            
+             
             Debug.Log("Spin running" + "\n" +
                         "Spin left:" + spinLeft);
             yield return new WaitForSeconds(spinWaitTime);
@@ -224,6 +224,7 @@ public class spin : MonoBehaviour
         if (spinLeft == 0)
         {
             StopCoroutine(spinCoroutine);
+            //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
             PriceCaculator();
             Debug.Log("Spinleft is:" + spinLeft +

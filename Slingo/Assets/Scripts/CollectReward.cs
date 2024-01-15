@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CollectReward : MonoBehaviour
@@ -9,8 +10,12 @@ public class CollectReward : MonoBehaviour
     [Header("References")]
     public GridCheck gridCheck;
     public PlayerData playerData;
-    public GameObject JackpotMessage;
     public spin spin;
+
+    [Header("Collect message settings")]
+    public GameObject collectBorderMessage;
+    public TextMeshProUGUI collectMessage;
+    public float timeInterval = 10f;
 
     public void Collect()
     {
@@ -31,5 +36,22 @@ public class CollectReward : MonoBehaviour
             }
         }
     }
+
+    void StartMessageCoroutine()
+    {
+        if (gridCheck.slingoCount >= 3 && gridCheck.slingoCount <= 9)
+        {
+            collectMessage.text = "Collect your reward on " + gridCheck.rewards[gridCheck.slingoCount] + "kr or continue";
+            collectBorderMessage.SetActive(true); ;
+        }
+    }
+
+    private void Start()
+    {
+        InvokeRepeating("StartMessageCoroutine", 1, timeInterval);
+    }
+
+
+
 
 }
