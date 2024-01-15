@@ -37,7 +37,7 @@ public class spin : MonoBehaviour
     int max = 15;
     int wildPick;
     int wildPicked = 0;
-    private bool doubleReward = false;
+    private int possibleRewardAmplifiere;
 
     PanelEffects[] blinkEffect;
     private IEnumerator spinCoroutine;
@@ -96,64 +96,40 @@ public class spin : MonoBehaviour
 
         CheckMatchingNumb();
 
+        if (spinLeft <= 0)
+        {
+            playerData.balance -= PriceCaculator();
+        }
+
         if (spinLeft >= 1)
         {
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
+            if(spinLeft <= 0)
+            {
+                playerData.balance -= PriceCaculator();
+            }
         }
 
-        if (spinLeft == 0)
-        {
-            playerData.balance -= PriceCaculator();
-        }
+
     }
 
     private float PriceCaculator()
     {
-        //doubleReward = PossibleReward();
-        switch (gridCheck.slingoCount)
-        {
-            case 0:
-                spinPrice = 0.015f;
-                break;
-            case 1:
-                spinPrice = 0.5f;
-                break;
-            case 2:
-                spinPrice = 2f;
-                break;
-            case 3:
-                spinPrice = 5f;
-                break;
-            case 4:
-                spinPrice = 12f;
-                break;
-            case 5:
-                spinPrice = 25f;
-                break;
-            case 6:
-                spinPrice = 50f;
-                break;
-            case 7:
-                spinPrice = 70;
-                break;
-            case 8:
-                spinPrice = 110;
-                break;
-            case 9:
-                spinPrice = 150;
-                break;
-            case 10:
-                spinPrice = 215;
-                break;
-        }
-        float multipliere = 0.015f + (gridCheck.starsCount * (0.05f + (gridCheck.slingoCount / 10))); 
-        float slingoRewards = gridCheck.slingoCount * multipliere;
+        possibleRewardAmplifiere = gridCheck.CheckForMaxReward();
+
+        float starMultipliere = 0.015f + (gridCheck.starsCount * (0.05f + (gridCheck.slingoCount / 10)));
+
+        float slingoReward = gridCheck.slingoCount * starMultipliere;
+
         if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
         {
-            slingoRewards = gridCheck.rewards[gridCheck.slingoCount + 1] / Mathf.Clamp(5 /gridCheck.slingoCount, 2, 5 / gridCheck.slingoCount) + multipliere;
+            slingoReward = gridCheck.rewards[gridCheck.slingoCount + 1] / Mathf.Clamp(5 /gridCheck.slingoCount, 2, 5 / gridCheck.slingoCount) + starMultipliere;
         }
-        float price = slingoRewards * multipliere;
+
+        float maxSlingoAmplifiere = possibleRewardAmplifiere / 2;
+        float price = slingoReward * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
+
         spinLeftText.text = UIManager.Instance.DisplayMoney(Mathf.Clamp(price, 0.015f, price));
         return Mathf.Clamp(price, 0.015f, price);
     }
@@ -174,11 +150,6 @@ public class spin : MonoBehaviour
                 Debug.Log("SlingoCount: " + i + " Starscount: " + j + " Multipliere: " + multipliere + " final value: " + UIManager.Instance.DisplayMoney(price));
             }
         }
-    }
-
-    private bool PossibleReward()
-    {
-        return false;
     }
 
     void CheckMatchingNumb()
@@ -211,7 +182,7 @@ public class spin : MonoBehaviour
                     }
                 }
             }
-            if (spinLeft == 0)
+            if (spinLeft <= 0)
             {
                 PriceCaculator();
             }
@@ -252,15 +223,11 @@ public class spin : MonoBehaviour
         {
             StopCoroutine(spinCoroutine);
             spinLeft = -1;
-            PriceCaculator();
+            //PriceCaculator();
             Debug.Log("Spinleft is:" + spinLeft +
                 "\n" + "Spinning stopped");
         }
 
-        if (spinLeft == 0)
-        {
-            spinLeftText.text = PriceCaculator().ToString() + " kr";
-        }
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
 
         #region Enables to pick any number on plate if user got wildpicks
