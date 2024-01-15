@@ -6,10 +6,7 @@ using UnityEngine;
 
 public class GridGeneration : MonoBehaviour
 {
-    
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
-    //[HideInInspector] public float currentBalance = 999;
-
     [SerializeField] private TextMeshProUGUI spinsCounter;
     [SerializeField] private TextMeshProUGUI BalanceText;
     private List<GameObject> columns = new List<GameObject>();
@@ -33,10 +30,6 @@ public class GridGeneration : MonoBehaviour
         columns.Clear();
         numberPositions.Clear();
         spinsCounter.text = "8";
-        
-
-        GetComponentInChildren<spin>().playerData.balance--;
-        //BalanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(currentBalance);
         GetColumns();
     }
 

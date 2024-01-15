@@ -16010,7 +16010,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinsCounter: {fileID: 7484134286775104099}
   BalanceText: {fileID: 4166002204279154401}
-  currentBalance: 999
 --- !u!114 &4374248674525639591
 MonoBehaviour:
   m_ObjectHideFlags: 0

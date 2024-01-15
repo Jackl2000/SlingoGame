@@ -14,6 +14,7 @@ public class CollectReward : MonoBehaviour
 
     public void Collect()
     {
+        playerData.balance--;
         if (gridCheck.slingoCount >= 3)
         {
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
