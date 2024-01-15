@@ -9,8 +9,8 @@ public class CollectReward : MonoBehaviour
     [Header("References")]
     public GridCheck gridCheck;
     public PlayerData playerData;
+    public GameObject JackpotMessage;
     public spin spin;
-    public GameObject jackpotGO;
 
     public void Collect()
     {
