@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class GridCheck : MonoBehaviour
 {
     public TextMeshProUGUI resetText;
+    public Image retryButtonImg;
 
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
@@ -57,6 +58,7 @@ public class GridCheck : MonoBehaviour
         rewards.Add(8, 750 * multiplyere);
         rewards.Add(9, 2250 * multiplyere);
         rewards.Add(10, 5000 * multiplyere);
+        rewards.Add(11, 5000 * multiplyere);
         rewards.Add(12, 10000 * multiplyere);
     }
 
@@ -211,7 +213,10 @@ public class GridCheck : MonoBehaviour
         
         if (slingoCount >= 3)
         {
-            resetText.text = "Collect";
+            //retry button image to black
+            retryButtonImg.color = Color.black;
+            resetText.text = "Collect " + rewards[slingoCount].ToString() + "kr";
+            resetText.gameObject.SetActive(true);
         }
         if (slingoCount == 12)
         {

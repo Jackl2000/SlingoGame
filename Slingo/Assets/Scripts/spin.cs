@@ -23,6 +23,7 @@ public class spin : MonoBehaviour
     public Button spinButton;
     [Space(5)]
     public float spinPrice;
+    [SerializeField]private float spinWaitTime;
 
     [Space(10)]
     public List<GameObject> slotsList;
@@ -34,15 +35,18 @@ public class spin : MonoBehaviour
     int rnd;
     int min = 1;
     int max = 15;
+    int wildPick;
     int wildPicked = 0;
     private bool doubleReward = false;
 
     PanelEffects[] blinkEffect;
+    private IEnumerator spinCoroutine;
     #endregion
 
     private void Start()
     {
         //TestCalculation();
+        spinCoroutine = AutoSpin();
     }
 
     public void Spin()
@@ -80,7 +84,7 @@ public class spin : MonoBehaviour
                 {
                     blinkEffect[i].FlashingEffect();
                 }
-
+                StopCoroutine(spinCoroutine);
                 wCount++;
             }
             else
@@ -214,10 +218,52 @@ public class spin : MonoBehaviour
         }
     }
 
+    IEnumerator AutoSpin()
+    {
+        for (int spinCount = 0; spinCount <= spinLeft;)
+        {
+            Spin();
+            
+            Debug.Log("Spin running" + "\n" +
+                        "Spin left:" + spinLeft);
+            yield return new WaitForSeconds(spinWaitTime);
+        }
+
+    }
+
+    public void StartSpin( )
+    {
+        if (spinLeft < 0)
+        {
+            Spin();
+        }
+        else
+        {
+            StartCoroutine(spinCoroutine);
+        }
+
+    }
+
     private void Update()
     {
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
 
+        if (spinLeft == 0)
+        {
+            StopCoroutine(spinCoroutine);
+            spinLeft = -1;
+            PriceCaculator();
+            Debug.Log("Spinleft is:" + spinLeft +
+                "\n" + "Spinning stopped");
+        }
+
+        if (spinLeft == 0)
+        {
+            spinLeftText.text = PriceCaculator().ToString() + " kr";
+        }
+        balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
+
+        #region Enables to pick any number on plate if user got wildpicks
         if (wildPicked == wCount)
         {
             wCount = 0;
@@ -228,5 +274,7 @@ public class spin : MonoBehaviour
         {
             spinButton.enabled = false;
         }
+        #endregion
+
     }
 }

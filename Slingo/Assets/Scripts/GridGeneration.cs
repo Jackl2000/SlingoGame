@@ -106,4 +106,22 @@ public class GridGeneration : MonoBehaviour
                 return 0;
         }
     }
+
+    /// <summary>
+    /// Cheatsheet, click "P" to fill plate immediately
+    /// </summary>
+    public void FillPlate()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            foreach (int gridNumber in numberPositions.Keys)
+            {
+                numberPositions[gridNumber].Hit(false);
+            }
+        }
+    }
+    private void Update()
+    {
+        FillPlate();
+    }
 }
