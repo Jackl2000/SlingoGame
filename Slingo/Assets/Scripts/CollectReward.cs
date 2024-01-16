@@ -26,6 +26,7 @@ public class CollectReward : MonoBehaviour
             spin.spinLeft = 8;
             gridCheck.retryButtonImg.color = Color.white;
             gridCheck.collectText.text = "";
+            gridCheck.collectText.gameObject.SetActive(false);
 
             foreach (GameObject go in spin.slotsList)
             {
