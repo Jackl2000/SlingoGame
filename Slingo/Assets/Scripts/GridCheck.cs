@@ -12,20 +12,22 @@ public class GridCheck : MonoBehaviour
 {
     public TextMeshProUGUI collectText;
     public Image retryButtonImg;
-    public GameObject jackpotMessage;
 
     [HideInInspector] public int slingoCount = 0;
     [HideInInspector] public int starsCount = 0;
     [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
 
+    [Space(5)]
     [SerializeField] private GameObject slingoPanel;
-    [SerializeField] private Sprite[] starImages;
     [SerializeField] private Sprite[] slingoBorderImages;
+    [SerializeField] private Sprite[] starImages;
+    [Space(5)]
+    public GameObject jackpotMessage;
     [SerializeField] private Sprite[] jackpotSlingoBorderImages;
 
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
-    public bool slingoIsHit = false;
+    [HideInInspector]public bool slingoIsHit = false;
     private Image[] slingoBorders;
     private int rewardCount;
 

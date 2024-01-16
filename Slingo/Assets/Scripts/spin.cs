@@ -13,30 +13,27 @@ public class spin : MonoBehaviour
     public GridGeneration gridGeneration;
     public GridCheck gridCheck;
     public PlayerData playerData;
-    public CollectReward collectReward;
+    [HideInInspector] private CollectReward collectReward;
 
-    public TextMeshProUGUI price;
+    [Space(5)]
     public TextMeshProUGUI balanceText;
 
     [Space(10)]
     [Header("Spin settings")]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
-    [Space(5)]
-    public float spinPrice;
-    [SerializeField]private float spinWaitTime;
+    [SerializeField] private float spinWaitTime;
 
     [Space(10)]
     public List<GameObject> slotsList;
     public List<int> spinNumbers;
 
-    #region private variables
+    #region others variables
     [HideInInspector] public int wCount = 0;
     [HideInInspector] public int spinLeft = 8;
     int rnd;
     int min = 1;
     int max = 15;
-    int wildPick;
     int wildPicked = 0;
     private int possibleRewardAmplifiere;
 
@@ -233,7 +230,8 @@ public class spin : MonoBehaviour
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
             //PriceCaculator();
-            Debug.Log("Spinleft is:" + spinLeft +
+
+            Debug.Log("Spinleft:" + spinLeft +
                 "\n" + "Spinning stopped");
         }
 

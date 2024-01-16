@@ -25,7 +25,6 @@ public class CollectReward : MonoBehaviour
         {
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
             spin.spinLeft = 8;
-            spin.spinPrice = 0;
 
             foreach (GameObject go in spin.slotsList)
             {
@@ -70,11 +69,6 @@ public class CollectReward : MonoBehaviour
                 CollectRewardPopMsg();
             }
         }
-        else
-        {
-            ResetTime();
-        }
-        Debug.Log("pop msg time: " + invokeTime);
     }
 
 
