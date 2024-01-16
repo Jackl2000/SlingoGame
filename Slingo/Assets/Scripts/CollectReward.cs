@@ -25,6 +25,7 @@ public class CollectReward : MonoBehaviour
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
             spin.spinLeft = 8;
             gridCheck.retryButtonImg.color = Color.white;
+            gridCheck.collectText.text = "";
 
             foreach (GameObject go in spin.slotsList)
             {

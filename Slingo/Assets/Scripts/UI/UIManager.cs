@@ -20,11 +20,6 @@ public class UIManager
 
     public string DisplayMoney(float money)
     {
-        return money.ToString("n2") + " KR";
-    }
-
-    public void UpdateSlingoRewards(float spinBet)
-    {
-
+        return money.ToString("n2") + " kr";
     }
 }
