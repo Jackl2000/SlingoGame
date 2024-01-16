@@ -10,21 +10,24 @@ using UnityEngine.UI;
 
 public class GridCheck : MonoBehaviour
 {
-    public TextMeshProUGUI resetText;
+    public TextMeshProUGUI collectText;
     public Image retryButtonImg;
-    public GameObject jackpotMessage;
 
     [HideInInspector] public int slingoCount = 0;
     [HideInInspector] public int starsCount = 0;
     [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
 
+    [Space(5)]
     [SerializeField] private GameObject slingoPanel;
-    [SerializeField] private Sprite[] starImages;
     [SerializeField] private Sprite[] slingoBorderImages;
+    [SerializeField] private Sprite[] starImages;
+    [Space(5)]
+    public GameObject jackpotMessage;
     [SerializeField] private Sprite[] jackpotSlingoBorderImages;
 
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
+    [HideInInspector]public bool slingoIsHit = false;
     private Image[] slingoBorders;
     private int rewardCount;
 
@@ -119,6 +122,7 @@ public class GridCheck : MonoBehaviour
                         break;
                     }
                     gridSlingoList["h" + h] = true;
+                    slingoIsHit = true;
                     slingoCount++;
                     
                     CheckForReward();
@@ -146,6 +150,7 @@ public class GridCheck : MonoBehaviour
                         break;
                     }
                     gridSlingoList["v" + v] = true;
+                    slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
                     break;
@@ -176,6 +181,7 @@ public class GridCheck : MonoBehaviour
                                 break;
                             }
                             gridSlingoList["dl"] = true;
+                            slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
                             break;
@@ -204,6 +210,7 @@ public class GridCheck : MonoBehaviour
                                 break;
                             }
                             gridSlingoList["dr"] = true;
+                            slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
                             break;
@@ -236,8 +243,8 @@ public class GridCheck : MonoBehaviour
         {
             //retry button image to black
             retryButtonImg.color = Color.black;
-            resetText.text = "Collect " + rewards[slingoCount].ToString() + "kr";
-            resetText.gameObject.SetActive(true);
+            collectText.text = "Collect " + rewards[slingoCount].ToString() + "kr";
+            collectText.gameObject.SetActive(true);
         }
         if (slingoCount == 12)
         {

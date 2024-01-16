@@ -13,38 +13,39 @@ public class spin : MonoBehaviour
     public GridGeneration gridGeneration;
     public GridCheck gridCheck;
     public PlayerData playerData;
+    [HideInInspector] private CollectReward collectReward;
 
-    public TextMeshProUGUI price;
+    [Space(5)]
     public TextMeshProUGUI balanceText;
 
     [Space(10)]
     [Header("Spin settings")]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
-    [Space(5)]
-    public float spinPrice;
-    [SerializeField]private float spinWaitTime;
+    [SerializeField] private float spinWaitTime;
 
     [Space(10)]
     public List<GameObject> slotsList;
     public List<int> spinNumbers;
 
+    #region others variables
     [HideInInspector] public float spinBets = 1;
-
-
-    #region private variables
     [HideInInspector] public int wCount = 0;
     [HideInInspector] public int spinLeft = 8;
     int rnd;
     int min = 1;
     int max = 15;
-    int wildPick;
     int wildPicked = 0;
     private int possibleRewardAmplifiere;
 
     PanelEffects[] blinkEffect;
     private IEnumerator spinCoroutine;
     #endregion
+
+    private void Awake()
+    {
+        collectReward = this.gameObject.GetComponentInParent<CollectReward>();
+    }
 
     private void Start()
     {
@@ -217,12 +218,13 @@ public class spin : MonoBehaviour
         if (spinLeft < 0)
         {
             Spin();
+            //reset time for collect reward pop message
+            collectReward.ResetTime();
         }
         else
         {
             StartCoroutine(spinCoroutine);
         }
-
     }
 
     private void Update()
@@ -230,9 +232,11 @@ public class spin : MonoBehaviour
         if (spinLeft == 0)
         {
             StopCoroutine(spinCoroutine);
+            //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
             //PriceCaculator();
-            Debug.Log("Spinleft is:" + spinLeft +
+
+            Debug.Log("Spinleft:" + spinLeft +
                 "\n" + "Spinning stopped");
         }
 
