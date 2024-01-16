@@ -22,4 +22,9 @@ public class UIManager
     {
         return money.ToString("n2") + " KR";
     }
+
+    public void UpdateSlingoRewards(float spinBet)
+    {
+
+    }
 }

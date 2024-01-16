@@ -12,15 +12,18 @@ public class CollectReward : MonoBehaviour
     public GameObject JackpotMessage;
     public spin spin;
 
+
+
     public void Collect()
     {
-        playerData.balance--;
         if (gridCheck.slingoCount >= 3)
         {
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
             spin.spinLeft = 8;
             spin.spinPrice = 0;
-            gridCheck.resetText.text = "Retry";
+            spin.wCount = 0;
+            gridCheck.resetText.text = "";
+            gridCheck.retryButtonImg.color = Color.white;
             foreach (GameObject go in spin.slotsList)
             {
                 go.GetComponentInChildren<Image>(true).enabled = false;

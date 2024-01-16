@@ -29,6 +29,9 @@ public class spin : MonoBehaviour
     public List<GameObject> slotsList;
     public List<int> spinNumbers;
 
+    [HideInInspector] public float spinBets = 1;
+
+
     #region private variables
     [HideInInspector] public int wCount = 0;
     [HideInInspector] public int spinLeft = 8;
@@ -107,27 +110,25 @@ public class spin : MonoBehaviour
             spinLeftText.text = spinLeft.ToString();
             if(spinLeft <= 0)
             {
-                playerData.balance -= PriceCaculator();
+                PriceCaculator();
             }
         }
-
-
     }
 
     private float PriceCaculator()
     {
         possibleRewardAmplifiere = gridCheck.CheckForMaxReward();
 
-        float starMultipliere = 0.015f + (gridCheck.starsCount * (0.05f + (gridCheck.slingoCount / 10)));
+        float starMultipliere = 0.015f + (gridCheck.starsCount * 0.05f);
 
-        float slingoReward = gridCheck.slingoCount * starMultipliere;
+        float slingoReward = gridCheck.rewards[3] / (3 - gridCheck.slingoCount) * starMultipliere;
 
         if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
         {
-            slingoReward = gridCheck.rewards[gridCheck.slingoCount + 1] / Mathf.Clamp(5 /gridCheck.slingoCount, 2, 5 / gridCheck.slingoCount) + starMultipliere;
+            slingoReward = gridCheck.rewards[gridCheck.slingoCount + 1] / Mathf.Clamp(5 /gridCheck.slingoCount, 2, 5 / gridCheck.slingoCount) * (starMultipliere + 1);
         }
 
-        float maxSlingoAmplifiere = possibleRewardAmplifiere / 2;
+        float maxSlingoAmplifiere = possibleRewardAmplifiere - 1.5f;
         float price = slingoReward * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
 
         spinLeftText.text = UIManager.Instance.DisplayMoney(Mathf.Clamp(price, 0.015f, price));
@@ -136,18 +137,22 @@ public class spin : MonoBehaviour
 
     private void TestCalculation()
     {
-        for (int i = 0; i < 11; i++)
+        for (int m = 0; m < 3; m++)
         {
-            for (float j = 10; j < 25; j++)
+            for (int i = 0; i < 11; i++)
             {
-                float multipliere = 0.015f + (j * (0.05f + (i / 10)));
-                float slingoRewards = i * multipliere;
-                if (gridCheck.rewards.ContainsKey(i + 1))
+                for (float j = 10; j < 25; j++)
                 {
-                    slingoRewards = gridCheck.rewards[i + 1] / Mathf.Clamp(5 / i, 2, 5 / i) + multipliere;
+                    float multipliere = 0.015f + (j * 0.05f);
+                    float slingoRewards = i * multipliere;
+                    if (gridCheck.rewards.ContainsKey(i + 1))
+                    {
+                        slingoRewards = gridCheck.rewards[i + 1] / Mathf.Clamp(5 / i, 2, 5 / i) * (multipliere + 0.5f);
+                    }
+                    float maxSlingoAmplifiere = m - 0.5f;
+                    float price = slingoRewards * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
+                    Debug.Log("SlingoCount: " + i + " Starscount: " + j + " Multipliere: " + multipliere + " Amplifiere: " + maxSlingoAmplifiere + " final value: " + UIManager.Instance.DisplayMoney(price));
                 }
-                float price = Mathf.Clamp(slingoRewards * multipliere, 0.015f, slingoRewards * multipliere);
-                Debug.Log("SlingoCount: " + i + " Starscount: " + j + " Multipliere: " + multipliere + " final value: " + UIManager.Instance.DisplayMoney(price));
             }
         }
     }
@@ -194,7 +199,6 @@ public class spin : MonoBehaviour
         for (int spinCount = 0; spinCount <= spinLeft;)
         {
             Spin();
-            
             Debug.Log("Spin running" + "\n" +
                         "Spin left:" + spinLeft);
             yield return new WaitForSeconds(spinWaitTime);
@@ -204,6 +208,12 @@ public class spin : MonoBehaviour
 
     public void StartSpin( )
     {
+        Debug.Log("Spinsleft: " + spinLeft);
+        if (spinLeft == 8)
+        {
+            playerData.balance -= spinBets;
+        }
+
         if (spinLeft < 0)
         {
             Spin();
@@ -217,8 +227,6 @@ public class spin : MonoBehaviour
 
     private void Update()
     {
-        balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
-
         if (spinLeft == 0)
         {
             StopCoroutine(spinCoroutine);

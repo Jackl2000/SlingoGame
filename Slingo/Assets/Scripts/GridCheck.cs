@@ -44,15 +44,14 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("v5", false);
         gridSlingoList.Add("dl", false);
         gridSlingoList.Add("dr", false);
-        AddingRewards(1);
+        UpdateRewards(1);
 
         slingoBorders = slingoPanel.GetComponentsInChildren<Image>().SkipLast(1).ToArray();
     }
 
-
-
-    private void AddingRewards(float multiplyere)
+    public void UpdateRewards(float multiplyere)
     {
+        rewards.Clear();
         rewards.Add(3, 10 * multiplyere);
         rewards.Add(4, 20 * multiplyere);
         rewards.Add(5, 40 * multiplyere);
@@ -61,8 +60,17 @@ public class GridCheck : MonoBehaviour
         rewards.Add(8, 750 * multiplyere);
         rewards.Add(9, 2250 * multiplyere);
         rewards.Add(10, 5000 * multiplyere);
-        rewards.Add(11, 5000 * multiplyere);
         rewards.Add(12, 10000 * multiplyere);
+
+        GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(go => go.transform.position.y).ToArray();
+
+        for (int i = 0; i < slingoRewards.Length; i++)
+        {
+            if (rewards.ContainsKey(i + 3) && i < 7)
+            {
+                slingoRewards[i].GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
+            }
+        }
     }
 
     public void ResetGrid()
@@ -73,7 +81,7 @@ public class GridCheck : MonoBehaviour
         }
         slingoCount = 0;
         starsCount = 0;
-
+        GetComponentInChildren<spin>().spinLeft = 8;
         foreach(Image item in slingoBorders)
         {
             if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Length - 1])
@@ -237,6 +245,10 @@ public class GridCheck : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks for max amount of slingos by one number
+    /// </summary>
+    /// <returns></returns>
     public int CheckForMaxReward()
     {
         int maxReward = 0;
