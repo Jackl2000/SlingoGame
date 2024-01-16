@@ -7905,10 +7905,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinScript: {fileID: 4055942201498400139}
   gridGeneration: {fileID: 1458205632472944407}
-  borders: []
   blinkSpeed: 1.85
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 0, g: 0, b: 0, a: 1}
+  isBlinking: 0
+  numbersPlateIsBlinking: 1
 --- !u!114 &4979634215744832892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11329,7 +11330,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9069633584784156971}
         m_TargetAssemblyTypeName: CollectReward, Assembly-CSharp
         m_MethodName: Collect
         m_Mode: 1
@@ -17443,6 +17444,7 @@ GameObject:
   - component: {fileID: 142089684151842046}
   - component: {fileID: 3942477364044290337}
   - component: {fileID: 410121002189023084}
+  - component: {fileID: 6602667333978625810}
   m_Layer: 5
   m_Name: CollectMessage
   m_TagString: Untagged
@@ -17508,6 +17510,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6602667333978625810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7082272302292472626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82157b31e2fdb964582b2a4f456e297f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinScript: {fileID: 0}
+  gridGeneration: {fileID: 0}
+  blinkSpeed: 1.85
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 0, g: 0, b: 0, a: 1}
+  isBlinking: 1
+  numbersPlateIsBlinking: 0
 --- !u!1 &7124076825481523999
 GameObject:
   m_ObjectHideFlags: 0
