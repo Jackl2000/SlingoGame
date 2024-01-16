@@ -49,7 +49,7 @@ public class spin : MonoBehaviour
 
     private void Start()
     {
-        //TestCalculation();
+        TestCalculation();
         spinCoroutine = AutoSpin();
     }
 
@@ -118,11 +118,24 @@ public class spin : MonoBehaviour
 
     private float PriceCaculator()
     {
+        if(gridCheck.slingoCount == 12)
+        {
+            return 0;
+        }
         possibleRewardAmplifiere = gridCheck.CheckForMaxReward();
 
         float starMultipliere = 0.015f + (gridCheck.starsCount * 0.05f);
 
+        if(gridCheck.slingoCount == 0)
+        {
+
+        }
+
         float slingoReward = gridCheck.rewards[3] / (3 - gridCheck.slingoCount) * starMultipliere;
+        if (gridCheck.slingoCount == 0)
+        {
+            slingoReward = 0.015f + (spinBets / 10);
+        }
 
         if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
         {
@@ -145,7 +158,11 @@ public class spin : MonoBehaviour
                 for (float j = 10; j < 25; j++)
                 {
                     float multipliere = 0.015f + (j * 0.05f);
-                    float slingoRewards = i * multipliere;
+                    float slingoRewards = gridCheck.rewards[3] / (3 - i) * multipliere;
+                    if (gridCheck.slingoCount == 0)
+                    {
+                        slingoRewards = 0.015f + (spinBets / 10);
+                    }
                     if (gridCheck.rewards.ContainsKey(i + 1))
                     {
                         slingoRewards = gridCheck.rewards[i + 1] / Mathf.Clamp(5 / i, 2, 5 / i) * (multipliere + 0.5f);
