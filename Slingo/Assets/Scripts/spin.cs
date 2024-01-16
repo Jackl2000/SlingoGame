@@ -13,6 +13,7 @@ public class spin : MonoBehaviour
     public GridGeneration gridGeneration;
     public GridCheck gridCheck;
     public PlayerData playerData;
+    public CollectReward collectReward;
 
     public TextMeshProUGUI price;
     public TextMeshProUGUI balanceText;
@@ -42,6 +43,11 @@ public class spin : MonoBehaviour
     PanelEffects[] blinkEffect;
     private IEnumerator spinCoroutine;
     #endregion
+
+    private void Awake()
+    {
+        collectReward = this.gameObject.GetComponentInParent<CollectReward>();
+    }
 
     private void Start()
     {
@@ -207,6 +213,8 @@ public class spin : MonoBehaviour
         if (spinLeft < 0)
         {
             Spin();
+            //reset time for collect reward pop message
+            collectReward.ResetTime();
         }
         else
         {

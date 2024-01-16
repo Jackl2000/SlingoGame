@@ -16,6 +16,7 @@ public class CollectReward : MonoBehaviour
     public GameObject collectBorderMessage;
     public TextMeshProUGUI collectMessage;
     public float timeInterval = 10f;
+    public float invokeTime = 5;
 
     public void Collect()
     {
@@ -25,7 +26,7 @@ public class CollectReward : MonoBehaviour
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
             spin.spinLeft = 8;
             spin.spinPrice = 0;
-            gridCheck.resetText.text = "Retry";
+
             foreach (GameObject go in spin.slotsList)
             {
                 go.GetComponentInChildren<Image>(true).enabled = false;
@@ -34,10 +35,11 @@ public class CollectReward : MonoBehaviour
             {
                 slotText.GetComponentInChildren<TextMeshProUGUI>().text = "?";
             }
+            ResetTime();
         }
     }
 
-    void StartMessageCoroutine()
+    void CollectRewardPopMsg()
     {
         if (gridCheck.slingoCount >= 3 && gridCheck.slingoCount <= 9)
         {
@@ -46,12 +48,34 @@ public class CollectReward : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void ResetTime()
     {
-        InvokeRepeating("StartMessageCoroutine", 1, timeInterval);
+        invokeTime = 0;
     }
 
+    private void Update()
+    {
+        if (gridCheck.slingoCount >= 3 && spin.wCount <= 0)
+        {
 
+            invokeTime += Time.deltaTime;
+
+            if (gridCheck.slingoIsHit)
+            {
+                gridCheck.slingoIsHit = false;
+                CollectRewardPopMsg();
+            }
+            else if (invokeTime >= 7.5f)
+            {
+                CollectRewardPopMsg();
+            }
+        }
+        else
+        {
+            ResetTime();
+        }
+        Debug.Log("pop msg time: " + invokeTime);
+    }
 
 
 }
