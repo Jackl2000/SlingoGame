@@ -7900,6 +7900,7 @@ MonoBehaviour:
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 5276959930472451008}
   spinWaitTime: 0.6
+  wildChance: 15
   slotsList:
   - {fileID: 7798638019828884268}
   - {fileID: 3026685873912758083}

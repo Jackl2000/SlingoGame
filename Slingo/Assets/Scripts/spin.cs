@@ -23,6 +23,7 @@ public class spin : MonoBehaviour
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
     [SerializeField] private float spinWaitTime;
+    [SerializeField] private int wildChance;
 
     [Space(10)]
     public List<GameObject> slotsList;
@@ -74,7 +75,7 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
 
-            int wildPick = UnityEngine.Random.Range(0, 18);
+            int wildPick = UnityEngine.Random.Range(0, wildChance + 1);
 
             if (wildPick == 0)
             {

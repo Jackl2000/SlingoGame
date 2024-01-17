@@ -56,7 +56,7 @@ public class CollectReward : MonoBehaviour
 
     private void Update()
     {
-        if (gridCheck.slingoCount >= 3 && spin.wCount <= 0)
+        if (gridCheck.slingoCount >= 3 && spin.wCount <= 0 && spin.spinLeft <= 0)
         {
 
             invokeTime += Time.deltaTime;
@@ -71,6 +71,7 @@ public class CollectReward : MonoBehaviour
                 CollectRewardPopMsg();
             }
         }
+        Debug.Log("pop-up time: " + invokeTime);
     }
 
 
