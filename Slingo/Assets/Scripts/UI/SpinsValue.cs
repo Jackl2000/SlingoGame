@@ -21,8 +21,11 @@ public class SpinsValue : MonoBehaviour
 
     public void SetSpinBets(float bet)
     {
-        spin.spinBets = bet;
-        SpinsBetPanel.SetActive(false);
-        gridCheck.UpdateRewards(bet);
+        if(spin.spinLeft == 8)
+        {
+            spin.spinBets = bet;
+            SpinsBetPanel.SetActive(false);
+            gridCheck.UpdateRewards(bet);
+        }
     }
 }
