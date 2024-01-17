@@ -70,7 +70,7 @@ public class spin : MonoBehaviour
             spinNumbers.Clear();
         }
 
-        foreach (var slotText in slotsList)
+        foreach (var spinSlot in slotsList)
         {
             rnd = UnityEngine.Random.Range(min, max);
             min += 15;
@@ -81,8 +81,8 @@ public class spin : MonoBehaviour
             if (wildPick == 0)
             {
                 spinNumbers.Add(0);
-                slotText.GetComponentInChildren<Image>().enabled = true;
-                slotText.GetComponentInChildren<TextMeshProUGUI>().text = "";
+                spinSlot.GetComponentInChildren<Image>().enabled = true;
+                spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
                 blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
 
@@ -95,7 +95,7 @@ public class spin : MonoBehaviour
             }
             else
             {
-                slotText.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
+                spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
                 spinNumbers.Add(rnd);
             }
         }
@@ -214,8 +214,8 @@ public class spin : MonoBehaviour
         for (int spinCount = 0; spinCount <= spinLeft;)
         {
             Spin();
-            Debug.Log("Spin running" + "\n" +
-                        "Spin left:" + spinLeft);
+
+            //Debug.Log("Spin running"    +       "\n"     +   "Spin left:" + spinLeft);
             yield return new WaitForSeconds(spinWaitTime);
         }
 

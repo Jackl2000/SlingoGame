@@ -39,10 +39,14 @@ public class GridGeneration : MonoBehaviour
         columns.Clear();
         numberPositions.Clear();
         spinsCounter.text = "8";
+        spinScript.wCount = 0;
         GetColumns();
-        foreach(var slotText in spinScript.slotsList) 
+
+        //spin numbers returns to ?
+        foreach(var spinSlot in spinScript.slotsList) 
         {
-            slotText.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+            spinSlot.GetComponentInChildren<Image>().enabled = false;
+            spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
         }
     }
 
