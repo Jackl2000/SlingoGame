@@ -13,6 +13,13 @@ public class GridGeneration : MonoBehaviour
     [SerializeField] private TextMeshProUGUI BalanceText;
     private List<GameObject> columns = new List<GameObject>();
 
+    private spin spinScript;
+
+    private void Awake()
+    {
+        spinScript = this.GetComponentInChildren<spin>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +40,10 @@ public class GridGeneration : MonoBehaviour
         numberPositions.Clear();
         spinsCounter.text = "8";
         GetColumns();
+        foreach(var slotText in spinScript.slotsList) 
+        {
+            slotText.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+        }
     }
 
     private void GetColumns()
