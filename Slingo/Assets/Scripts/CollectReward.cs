@@ -36,6 +36,7 @@ public class CollectReward : MonoBehaviour
             {
                 slotText.GetComponentInChildren<TextMeshProUGUI>().text = "?";
             }
+            collectBorderMessage.SetActive(false);
             ResetTime();
         }
     }

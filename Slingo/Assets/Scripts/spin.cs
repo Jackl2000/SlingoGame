@@ -13,6 +13,7 @@ public class spin : MonoBehaviour
     public GridGeneration gridGeneration;
     public GridCheck gridCheck;
     public PlayerData playerData;
+    public Button retryButton;
     [HideInInspector] private CollectReward collectReward;
 
     [Space(5)]
@@ -238,6 +239,7 @@ public class spin : MonoBehaviour
         else
         {
             StartCoroutine(spinCoroutine);
+            retryButton.enabled = false;
         }
     }
 
@@ -248,7 +250,7 @@ public class spin : MonoBehaviour
             StopCoroutine(spinCoroutine);
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
-            //PriceCaculator();
+            retryButton.enabled = true;
 
             Debug.Log("Spinleft:" + spinLeft +
                 "\n" + "Spinning stopped");
