@@ -78,7 +78,7 @@ public class spin : MonoBehaviour
 
             int wildPick = UnityEngine.Random.Range(0, wildChance + 1);
 
-            if (wildPick == 0)
+            if (wildPick == 5)
             {
                 spinNumbers.Add(0);
                 slotText.GetComponentInChildren<Image>().enabled = true;
@@ -127,14 +127,14 @@ public class spin : MonoBehaviour
         possibleRewardAmplifiere = gridCheck.CheckForMaxReward();
 
         float starMultipliere = 0.015f + (gridCheck.starsCount * 0.05f);
-        float slingoReward = 0.015f * gridCheck.starsCount;
+        float slingoReward = 0.015f * (gridCheck.starsCount * 5);
         if (gridCheck.slingoCount == 0)
         {
-            slingoReward = 0.015f;
+            slingoReward = 0.015f + starMultipliere;
         }
         if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
         {
-            slingoReward = (gridCheck.rewards[gridCheck.slingoCount + 1] / spinBets) / Mathf.Clamp((10 + (gridCheck.slingoCount * 2)) / gridCheck.slingoCount, 2, (10 + (gridCheck.slingoCount * 2)) / gridCheck.slingoCount) * (starMultipliere + 0.5f);
+            slingoReward = (gridCheck.rewards[gridCheck.slingoCount + 1] / spinBets) / Mathf.Clamp((1 + gridCheck.slingoCount) / gridCheck.slingoCount, 2, (1 + gridCheck.slingoCount) / gridCheck.slingoCount) * (starMultipliere + 0.5f);
         }
 
         float maxSlingoAmplifiere = Mathf.Clamp(possibleRewardAmplifiere - 0.5f, 0.5f, 1.8f);
@@ -154,14 +154,14 @@ public class spin : MonoBehaviour
                 for (float j = 10; j < 25; j++)
                 {
                     float multipliere = 0.015f + (j * 0.05f);
-                    float slingoRewards = 0.015f * j;
+                    float slingoRewards = 0.015f * (j * 5);
                     if (i == 0)
                     {
-                        slingoRewards = 0.015f;
+                        slingoRewards = 0.015f + multipliere;
                     }
                     if (gridCheck.rewards.ContainsKey(Convert.ToInt32(i) + 1))
                     {
-                        slingoRewards = gridCheck.rewards[Convert.ToInt32(i) + 1] / Mathf.Clamp((10 + (i * 2)) / i, 2, (10 + (i * 2)) / i) * (multipliere + 0.5f);
+                        slingoRewards = (gridCheck.rewards[Convert.ToInt32(i) + 1] / bet) / Mathf.Clamp((1 + i) / i, 2, (1 + i) / i) * (multipliere + 0.5f);
                     }
                     float maxSlingoAmplifiere = Mathf.Clamp(m - 0.5f, 0.5f, 1.8f);
                     float price = slingoRewards * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
