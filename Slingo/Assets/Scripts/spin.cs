@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class spin : MonoBehaviour
@@ -23,7 +22,10 @@ public class spin : MonoBehaviour
     [Header("Spin settings")]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
-    [SerializeField] private float spinWaitTime;
+    /// <summary>
+    /// wait time before next spin, when auto spin
+    /// </summary>
+    [SerializeField] private float spinWaitTime; 
     [SerializeField] private int wildChance;
 
     [Space(10)]
@@ -32,7 +34,13 @@ public class spin : MonoBehaviour
 
     #region others variables
     [HideInInspector] public float spinBets = 1;
-    [HideInInspector] public int wCount = 0;
+    /// <summary>
+    /// How many wildpicks you have
+    /// </summary>
+    [HideInInspector] public int wildPicks = 0;
+    /// <summary>
+    /// spins left before you pay
+    /// </summary>
     [HideInInspector] public int spinLeft = 8;
     int rnd;
     int min = 1;
@@ -91,7 +99,7 @@ public class spin : MonoBehaviour
                     blinkEffect[i].FlashingEffect();
                 }
                 StopCoroutine(spinCoroutine);
-                wCount++;
+                wildPicks++;
             }
             else
             {
@@ -189,7 +197,7 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        if (wildPicked < wCount)
+        if (wildPicked < wildPicks)
         {
             wildPicked++;
             foreach (int gridNumber in gridGeneration.numberPositions.Keys)
@@ -258,9 +266,9 @@ public class spin : MonoBehaviour
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
 
         #region Enables to pick any number on plate if user got wildpicks
-        if (wildPicked == wCount)
+        if (wildPicked == wildPicks)
         {
-            wCount = 0;
+            wildPicks = 0;
             wildPicked = 0;
             spinButton.enabled = true;
         }

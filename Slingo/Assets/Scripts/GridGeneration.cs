@@ -39,7 +39,7 @@ public class GridGeneration : MonoBehaviour
         columns.Clear();
         numberPositions.Clear();
         spinsCounter.text = "8";
-        spinScript.wCount = 0;
+        spinScript.wildPicks = 0;
         GetColumns();
 
         //spin numbers returns to ?
