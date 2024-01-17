@@ -7,10 +7,12 @@ public class SettingsMenu : MonoBehaviour
 {
     public GameObject SettingsMenuPanel;
     public TextMeshProUGUI soundText;
+    public GameObject spinsBetPanel;
 
     public void ViewSettingsPanel()
     {
-        SettingsMenuPanel.SetActive(!SettingsMenuPanel.gameObject.activeSelf);
+        SettingsMenuPanel.SetActive(!SettingsMenuPanel.activeSelf);
+        spinsBetPanel.SetActive(false);
     }
 
     public void Sound()

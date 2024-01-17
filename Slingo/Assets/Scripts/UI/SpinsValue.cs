@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SpinsValue : MonoBehaviour
 {
-    public GameObject SpinsBetPanel;
+    public GameObject spinsBetPanel;
+    public GameObject settingsPanel;
+
     private spin spin;
     private GridCheck gridCheck;
 
@@ -16,7 +18,8 @@ public class SpinsValue : MonoBehaviour
 
     public void ViewSpinsBets()
     {
-        SpinsBetPanel.SetActive(!SpinsBetPanel.gameObject.activeSelf);
+        spinsBetPanel.SetActive(!spinsBetPanel.activeSelf);
+        settingsPanel.SetActive(false);
     }
 
     public void SetSpinBets(float bet)
@@ -24,7 +27,7 @@ public class SpinsValue : MonoBehaviour
         if(spin.spinLeft == 8)
         {
             spin.spinBets = bet;
-            SpinsBetPanel.SetActive(false);
+            spinsBetPanel.SetActive(false);
             gridCheck.UpdateRewards(bet);
         }
     }
