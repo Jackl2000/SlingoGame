@@ -51,7 +51,7 @@ public class spin : MonoBehaviour
 
     private void Start()
     {
-        TestCalculation();
+        //TestCalculation();
         spinCoroutine = AutoSpin();
     }
 
@@ -127,27 +127,25 @@ public class spin : MonoBehaviour
         possibleRewardAmplifiere = gridCheck.CheckForMaxReward();
 
         float starMultipliere = 0.015f + (gridCheck.starsCount * 0.05f);
-        float slingoReward = 0.015f * (gridCheck.starsCount / 3);
+        float slingoReward = 0.015f * gridCheck.starsCount;
         if (gridCheck.slingoCount == 0)
         {
             slingoReward = 0.015f;
         }
         if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
         {
-            slingoReward = gridCheck.rewards[gridCheck.slingoCount + 1] / Mathf.Clamp((10 + gridCheck.slingoCount) / gridCheck.slingoCount, 2, (10 + gridCheck.slingoCount) / gridCheck.slingoCount) * (starMultipliere + 0.5f);
+            slingoReward = (gridCheck.rewards[gridCheck.slingoCount + 1] / spinBets) / Mathf.Clamp((10 + (gridCheck.slingoCount * 2)) / gridCheck.slingoCount, 2, (10 + (gridCheck.slingoCount * 2)) / gridCheck.slingoCount) * (starMultipliere + 0.5f);
         }
 
-        float maxSlingoAmplifiere = possibleRewardAmplifiere - 0.65f;
+        float maxSlingoAmplifiere = Mathf.Clamp(possibleRewardAmplifiere - 0.5f, 0.5f, 1.8f);
         float price = slingoReward * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
-
-        spinLeftText.text = UIManager.Instance.DisplayMoney(Mathf.Clamp(price, 0.015f, price));
-        Debug.Log("Multi: " + starMultipliere + " SlingoReward: " + slingoReward + " MaxAmplifiere" + maxSlingoAmplifiere + " Price: " + price);
-        return Mathf.Clamp(price, 0.015f, price);
+        price *= spinBets;
+        spinLeftText.text = UIManager.Instance.DisplayMoney(price);
+        return price;
     }
 
     private void TestCalculation()
     {
-        //Make it work without bet spin multipliere first
         float bet = 1; 
         for (float m = 0; m < 3; m++)
         {
@@ -156,17 +154,18 @@ public class spin : MonoBehaviour
                 for (float j = 10; j < 25; j++)
                 {
                     float multipliere = 0.015f + (j * 0.05f);
-                    float slingoRewards = 0.015f * (j / 3);
+                    float slingoRewards = 0.015f * j;
                     if (i == 0)
                     {
                         slingoRewards = 0.015f;
                     }
                     if (gridCheck.rewards.ContainsKey(Convert.ToInt32(i) + 1))
                     {
-                        slingoRewards = gridCheck.rewards[Convert.ToInt32(i) + 1] / Mathf.Clamp((10 + i) / i, 2, (10 + i) / i) * (multipliere + 0.5f);
+                        slingoRewards = gridCheck.rewards[Convert.ToInt32(i) + 1] / Mathf.Clamp((10 + (i * 2)) / i, 2, (10 + (i * 2)) / i) * (multipliere + 0.5f);
                     }
-                    float maxSlingoAmplifiere = m - 0.65f;
+                    float maxSlingoAmplifiere = Mathf.Clamp(m - 0.5f, 0.5f, 1.8f);
                     float price = slingoRewards * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
+                    price *= bet;
                     Debug.Log("SlingoCount: " + i + " Starscount: " + j + " Multipliere: " + multipliere + " Amplifiere: " + maxSlingoAmplifiere + " final value: " + UIManager.Instance.DisplayMoney(price));
                 }
             }
