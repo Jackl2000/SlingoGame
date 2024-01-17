@@ -7896,6 +7896,7 @@ MonoBehaviour:
   gridGeneration: {fileID: 1458205632472944407}
   gridCheck: {fileID: 4374248674525639591}
   playerData: {fileID: 0}
+  retryButton: {fileID: 8477973678467015395}
   balanceText: {fileID: 4166002204279154401}
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 5276959930472451008}
@@ -11689,7 +11690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1905424769863644655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19278,7 +19279,6 @@ GameObject:
   - component: {fileID: 4541405285958639682}
   - component: {fileID: 1458205632472944407}
   - component: {fileID: 4374248674525639591}
-  - component: {fileID: 9069633584784156971}
   - component: {fileID: 2795408711446792720}
   m_Layer: 5
   m_Name: SlingoCanvas
@@ -19420,25 +19420,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9601c6bf62db084499971930e7f89fcf, type: 3}
   - {fileID: 21300000, guid: de9fbcb825a788c4bb941546e011b078, type: 3}
   slingoIsHit: 0
---- !u!114 &9069633584784156971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7929506682988506404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23a7ace4474c74648aca643cd8e953aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridCheck: {fileID: 4374248674525639591}
-  playerData: {fileID: 0}
-  spin: {fileID: 4055942201498400139}
-  collectBorderMessage: {fileID: 0}
-  collectMessage: {fileID: 0}
-  timeInterval: 10
-  invokeTime: 5
 --- !u!114 &2795408711446792720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19746,18 +19727,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1458205632472944407}
         m_TargetAssemblyTypeName: GridGeneration, Assembly-CSharp
         m_MethodName: ReGenerateGrid
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2795408711446792720}
-        m_TargetAssemblyTypeName: CollectReward, Assembly-CSharp
-        m_MethodName: ResetTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
