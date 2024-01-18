@@ -279,7 +279,7 @@ public class spin : MonoBehaviour
     public void StartSpin( )
     {
         if (isSpinning) return;
-        Debug.Log("Spinsleft: " + spinLeft);
+
         if (spinLeft == 8)
         {
             playerData.balance -= spinBets;

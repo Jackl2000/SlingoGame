@@ -10,7 +10,7 @@ public class SpinsValue : MonoBehaviour
     private spin spin;
     private GridCheck gridCheck;
 
-    private void Start()
+    private void Awake()
     {
         spin = GetComponent<spin>();
         gridCheck = GetComponentInParent<GridCheck>();

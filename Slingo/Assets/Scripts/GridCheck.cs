@@ -107,7 +107,6 @@ public class GridCheck : MonoBehaviour
     public void CheckGrid(int h, int v, bool diagonal, bool check)
     {
         rewardCount = 0;
-
         int horIndex = 0;
         foreach (GridNumbers number in grid.numberPositions.Values)
         {

@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public GameObject SettingsMenuPanel;
+    public GameObject settingsMenuPanel;
     public TextMeshProUGUI soundText;
     public GameObject spinsBetPanel;
 
     public void ViewSettingsPanel()
     {
-        SettingsMenuPanel.SetActive(!SettingsMenuPanel.activeSelf);
+        settingsMenuPanel.SetActive(!settingsMenuPanel.activeSelf);
         spinsBetPanel.SetActive(false);
     }
 
