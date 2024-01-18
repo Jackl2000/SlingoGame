@@ -107,8 +107,11 @@ public class spin : MonoBehaviour
             }
         }
 
-        CheckMatchingNumb();
+        //CheckMatchingNumb();
+    }
 
+    private void SpinsLeft()
+    {
         if (spinLeft <= 0)
         {
             playerData.balance -= PriceCaculator();
@@ -119,7 +122,7 @@ public class spin : MonoBehaviour
         {
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
-            if(spinLeft <= 0)
+            if (spinLeft <= 0)
             {
                 PriceCaculator();
                 isSpinning = false;
@@ -181,7 +184,7 @@ public class spin : MonoBehaviour
         }
     }
 
-    void CheckMatchingNumb()
+    public void CheckMatchingNumb()
     {
         foreach (int spin in spinNumbers)
         {
@@ -228,6 +231,12 @@ public class spin : MonoBehaviour
     {
         if(!once)
         {
+            Spin();
+            SpinsLeft();
+            CheckMatchingNumb();
+            //Debug.Log("Spin running"    +       "\n"     +   "Spin left:" + spinLeft);
+            yield return new WaitForSeconds(spinWaitTime);
+
             for (int spinCount = 0; spinCount <= spinLeft;)
             {
                 if (spinLeft != 8)
@@ -278,8 +287,10 @@ public class spin : MonoBehaviour
         isSpinning = true;
         if (spinLeft < 0)
         {
+
+            Spin();
+            SpinsLeft();
             StartCoroutine(AutoSpin(true));
-            //Spin();
             //reset time for collect reward pop message
             collectReward.ResetTime();
         }
