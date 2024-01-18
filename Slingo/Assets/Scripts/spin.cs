@@ -261,8 +261,6 @@ public class spin : MonoBehaviour
     {
         if(!once)
         {
-            yield return new WaitForSeconds(spinWaitTime);
-
             for (int spinCount = 0; spinCount <= spinLeft;)
             {
                 if (spinLeft != 8)

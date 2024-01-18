@@ -128,8 +128,8 @@ public class GridCheck : MonoBehaviour
                     gridSlingoList["h" + h] = true;
                     slingoIsHit = true;
                     slingoCount++;
-                    
                     CheckForReward();
+                    PlaySlingoAnimation("h", h);
                     break;
                 }
             }
@@ -157,6 +157,7 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
+                    PlaySlingoAnimation("v", v);
                     break;
                 }
             }
@@ -188,6 +189,7 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
+                            PlaySlingoAnimation("l", 0);
                             break;
                         }
                     }
@@ -217,6 +219,7 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
+                            PlaySlingoAnimation("r", 0);
                             break;
                         }
                     }
@@ -277,6 +280,62 @@ public class GridCheck : MonoBehaviour
             }
         }
         return maxReward;
+    }
+
+
+    private void PlaySlingoAnimation(string slingoType, int index)
+    {
+        List<GameObject> numbersInSlingo = new List<GameObject>();
+        if(slingoType == "h")
+        {
+            foreach(GridNumbers numbers in grid.numberPositions.Values)
+            {
+                if(numbers.h == index)
+                {
+                    numbersInSlingo.Add(numbers.gameObject);
+                }
+            }
+        }
+        else if (slingoType == "v")
+        {
+            foreach (GridNumbers numbers in grid.numberPositions.Values)
+            {
+                if (numbers.v == index)
+                {
+                    numbersInSlingo.Add(numbers.gameObject);
+                }
+            }
+        }
+        else if (slingoType == "l")
+        {
+            foreach (GridNumbers numbers in grid.numberPositions.Values)
+            {
+                if (numbers.diagonal && numbers.h == numbers.v)
+                {
+                    numbersInSlingo.Add(numbers.gameObject);
+                }
+            }
+        }
+        else
+        {
+            foreach (GridNumbers numbers in grid.numberPositions.Values)
+            {
+                if ((numbers.h == numbers.v && numbers.h == 3) || (numbers.h == 5 && numbers.v == 1) || (numbers.h == 4 && numbers.v == 2) || (numbers.h == 2 && numbers.v == 4) || numbers.h == 1 && numbers.v == 5)
+                {
+                    numbersInSlingo.Add(numbers.gameObject);
+                }
+            }
+        }
+        SlingoAnimation(numbersInSlingo);
+    }
+
+    private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
+    {
+        foreach(GameObject go in slingoNumbers)
+        {
+            go.GetComponent<Animator>().SetBool("Slingo", true);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }
 
