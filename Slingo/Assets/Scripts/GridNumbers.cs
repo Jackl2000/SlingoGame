@@ -36,26 +36,42 @@ public class GridNumbers
     {
         if (hasBeenHit) return;
         hasBeenHit = true;
-        gameObject.GetComponentInParent<GridCheck>().starsCount++;
-        gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
-        gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
-        if(!joker)
+        try
         {
-            childImage.GetComponentInChildren<Image>().enabled = true;
-            childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+            gameObject.GetComponentInParent<GridCheck>().starsCount++;
+            gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
+            gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
+            if (!joker)
+            {
+                childImage.GetComponentInChildren<Image>().enabled = true;
+                childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
+            }
         }
-        else
+        catch (System.Exception)
         {
-            childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
+
+            Debug.Log("No child image");
         }
 
     }
 
     public void ResetData()
     {
-        childImage.GetComponentInChildren<Image>().enabled = false;
-        childImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
-        childImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
+        try
+        {
+            childImage.GetComponentInChildren<Image>().enabled = false;
+            childImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            childImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("No child image");
+        }
+        
         hasBeenHit = false;
     }
 }

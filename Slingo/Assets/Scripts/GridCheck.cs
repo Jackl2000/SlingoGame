@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,7 +48,12 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("dr", false);
         UpdateRewards(1);
 
-        slingoBorders = slingoPanel.GetComponentsInChildren<Image>().SkipLast(1).ToArray();
+        if(slingoPanel != null)
+        {
+            slingoBorders = slingoPanel.GetComponentsInChildren<Image>().SkipLast(1).ToArray();
+        }
+        
+
     }
 
     public void UpdateRewards(float multiplyere)
