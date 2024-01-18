@@ -22,6 +22,7 @@ public class spin : MonoBehaviour
     [Header("Spin settings")]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
+    public float spinSpeed = 5f;
     /// <summary>
     /// wait time before next spin, when auto spin
     /// </summary>
@@ -30,6 +31,7 @@ public class spin : MonoBehaviour
 
     [Space(10)]
     public List<GameObject> slotsList;
+    List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
     public List<int> spinNumbers;
 
     #region others variables
@@ -59,6 +61,10 @@ public class spin : MonoBehaviour
     {
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         spinAnimation = GetComponentInChildren<Animator>();
+        foreach (GameObject spinSlot in slotsList)
+        {
+            slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
+        }
     }
 
     private void Start()
@@ -104,9 +110,31 @@ public class spin : MonoBehaviour
             {
                 spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
                 spinNumbers.Add(rnd);
-            }
+          }
         }
     }
+
+    /// <summary>
+    /// Interpolates between a and b
+    /// </summary>
+    void NumberSpinning()
+    {
+        min = 1;
+        max = 16;
+
+        if (spinAnimation.GetBool("Spinning"))
+        {
+            foreach (var text in slotTextList)
+            {
+                min += 15;
+                max += 15;
+                int numbers = (int)Mathf.Lerp(min, max, Mathf.PingPong(Time.time * spinSpeed, 1));
+                text.text = numbers.ToString();
+            }
+        }
+        
+    }
+
 
     private void SpinsLeft()
     {
@@ -267,6 +295,7 @@ public class spin : MonoBehaviour
                     slot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
                 }
             }
+            
             spinAnimation.SetBool("Spinning", true);
             yield return new WaitForSeconds(spinWaitTime);
             spinAnimation.SetBool("Spinning", false);
@@ -293,6 +322,7 @@ public class spin : MonoBehaviour
         }
         else
         {
+
             StartCoroutine(spinCoroutine);
             retryButton.enabled = false;
         }
@@ -300,6 +330,9 @@ public class spin : MonoBehaviour
 
     private void Update()
     {
+        NumberSpinning();
+        Debug.Log("Spin speed: " + spinSpeed);
+
         if (spinLeft == 0)
         {
             StopCoroutine(spinCoroutine);
