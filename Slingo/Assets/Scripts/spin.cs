@@ -22,6 +22,7 @@ public class spin : MonoBehaviour
     [Header("Spin settings")]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
+    public float spinSpeed = 5f;
     /// <summary>
     /// wait time before next spin, when auto spin
     /// </summary>
@@ -49,7 +50,6 @@ public class spin : MonoBehaviour
     int wildPicked = 0;
     private int possibleRewardAmplifiere;
     private Animator spinAnimation;
-    int spinSpeed;
     [SerializeField] private bool isSpinning = false;
 
     PanelEffects[] blinkEffect;
@@ -122,14 +122,14 @@ public class spin : MonoBehaviour
         min = 1;
         max = 16;
 
-        if (isSpinning)
+        if (spinAnimation.GetBool("Spinning"))
         {
             foreach (var text in slotTextList)
             {
                 min += 15;
                 max += 15;
-                spinSpeed = (int)Mathf.Lerp(min, max, Mathf.PingPong(Time.time * 4f, 1));
-                text.text = spinSpeed.ToString();
+                int numbers = (int)Mathf.Lerp(min, max, Mathf.PingPong(Time.time * spinSpeed, 1));
+                text.text = numbers.ToString();
             }
         }
         
@@ -330,11 +330,7 @@ public class spin : MonoBehaviour
 
     private void Update()
     {
-        if (isSpinning)
-        {
-            NumberSpinning();
-        }
-
+        NumberSpinning();
         Debug.Log("Spin speed: " + spinSpeed);
 
         if (spinLeft == 0)
