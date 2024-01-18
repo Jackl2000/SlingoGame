@@ -87,7 +87,6 @@ public class spin : MonoBehaviour
 
             if (wildPick == 5)
             {
-                Debug.Log("Wild should appear");
                 spinNumbers.Add(0);
                 spinSlot.GetComponentInChildren<Image>().enabled = true;
                 spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "";
@@ -107,8 +106,6 @@ public class spin : MonoBehaviour
                 spinNumbers.Add(rnd);
             }
         }
-
-        //CheckMatchingNumb();
     }
 
     private void SpinsLeft()

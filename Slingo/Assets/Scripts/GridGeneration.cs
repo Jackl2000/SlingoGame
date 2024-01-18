@@ -137,6 +137,9 @@ public class GridGeneration : MonoBehaviour
     }
     private void Update()
     {
-        FillPlate();
+        if(Application.isEditor)
+        {
+            FillPlate();
+        }
     }
 }
