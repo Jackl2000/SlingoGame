@@ -39,29 +39,28 @@ public class spin : MonoBehaviour
     int max = 15;
     int wildPicked = 0;
     private int possibleRewardAmplifiere;
+    private Animator spinAnimation;
+    [SerializeField] private bool isSpinning = false;
 
     PanelEffects[] blinkEffect;
     private IEnumerator spinCoroutine;
+    private IEnumerator spinCoroutineOnce;
     #endregion
 
     private void Awake()
     {
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
+        spinAnimation = GetComponentInChildren<Animator>();
     }
 
     private void Start()
     {
         //TestCalculation();
-        spinCoroutine = AutoSpin();
+        spinCoroutine = AutoSpin(false);
     }
 
     public void Spin()
     {
-        foreach(GameObject go in slotsList)
-        {
-            go.GetComponentInChildren<Image>(true).enabled = false;
-        }
-
         min = 1;
         max = 16;
 
@@ -105,6 +104,7 @@ public class spin : MonoBehaviour
         if (spinLeft <= 0)
         {
             playerData.balance -= PriceCaculator();
+            isSpinning = false;
         }
 
         if (spinLeft >= 1)
@@ -114,6 +114,7 @@ public class spin : MonoBehaviour
             if(spinLeft <= 0)
             {
                 PriceCaculator();
+                isSpinning = false;
             }
         }
     }
@@ -205,33 +206,72 @@ public class spin : MonoBehaviour
             if (spinLeft <= 0)
             {
                 PriceCaculator();
+                isSpinning = false;
             }
+        }
+        if(spinLeft > 0)
+        {
+            StartCoroutine(spinCoroutine);
+            retryButton.enabled = false;
         }
     }
 
-    IEnumerator AutoSpin()
+    IEnumerator AutoSpin(bool once)
     {
-        for (int spinCount = 0; spinCount <= spinLeft;)
+        if(!once)
         {
-            Spin();
+            for (int spinCount = 0; spinCount <= spinLeft;)
+            {
+                if (spinLeft != 8)
+                {
+                    yield return new WaitForSeconds(1);
+                }
+                foreach (GameObject slot in slotsList)
+                {
+                    if(slot.GetComponentInChildren<Image>().enabled)
+                    {
+                        slot.GetComponentInChildren<Image>().enabled = false;
+                        slot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+                    }   
+                }
+                spinAnimation.SetBool("Spinning", true);
+                yield return new WaitForSeconds(spinWaitTime);
+                spinAnimation.SetBool("Spinning", false);
+                Spin();
 
-            //Debug.Log("Spin running"    +       "\n"     +   "Spin left:" + spinLeft);
-            yield return new WaitForSeconds(spinWaitTime);
+                //Debug.Log("Spin running"    +       "\n"     +   "Spin left:" + spinLeft);
+            }
         }
-
+        else
+        {
+            foreach (GameObject slot in slotsList)
+            {
+                if (slot.GetComponentInChildren<Image>().enabled)
+                {
+                    slot.GetComponentInChildren<Image>().enabled = false;
+                    slot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+                }
+            }
+            spinAnimation.SetBool("Spinning", true);
+            yield return new WaitForSeconds(spinWaitTime);
+            spinAnimation.SetBool("Spinning", false);
+            Spin();
+        }
     }
 
     public void StartSpin( )
     {
+        if (isSpinning) return;
         Debug.Log("Spinsleft: " + spinLeft);
         if (spinLeft == 8)
         {
             playerData.balance -= spinBets;
         }
-
+        isSpinning = true;
         if (spinLeft < 0)
         {
-            Spin();
+            StartCoroutine(AutoSpin(true));
+            //Spin();
             //reset time for collect reward pop message
             collectReward.ResetTime();
         }
