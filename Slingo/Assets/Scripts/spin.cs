@@ -87,6 +87,7 @@ public class spin : MonoBehaviour
 
             if (wildPick == 5)
             {
+                Debug.Log("Wild should appear");
                 spinNumbers.Add(0);
                 spinSlot.GetComponentInChildren<Image>().enabled = true;
                 spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "";
@@ -214,27 +215,27 @@ public class spin : MonoBehaviour
                     }
                 }
             }
+        }
+        if(wildPicked == wildPicks)
+        {
             if (spinLeft <= 0)
             {
                 PriceCaculator();
                 isSpinning = false;
             }
+            if (spinLeft > 0)
+            {
+                StartCoroutine(spinCoroutine);
+                retryButton.enabled = false;
+            }
         }
-        if(spinLeft > 0)
-        {
-            StartCoroutine(spinCoroutine);
-            retryButton.enabled = false;
-        }
+
     }
 
     IEnumerator AutoSpin(bool once)
     {
         if(!once)
         {
-            Spin();
-            SpinsLeft();
-            CheckMatchingNumb();
-            //Debug.Log("Spin running"    +       "\n"     +   "Spin left:" + spinLeft);
             yield return new WaitForSeconds(spinWaitTime);
 
             for (int spinCount = 0; spinCount <= spinLeft;)
@@ -255,8 +256,8 @@ public class spin : MonoBehaviour
                 yield return new WaitForSeconds(spinWaitTime);
                 spinAnimation.SetBool("Spinning", false);
                 Spin();
-
-                //Debug.Log("Spin running"    +       "\n"     +   "Spin left:" + spinLeft);
+                CheckMatchingNumb();
+                SpinsLeft();
             }
         }
         else
@@ -273,6 +274,8 @@ public class spin : MonoBehaviour
             yield return new WaitForSeconds(spinWaitTime);
             spinAnimation.SetBool("Spinning", false);
             Spin();
+            CheckMatchingNumb();
+            SpinsLeft();
         }
     }
 
@@ -287,9 +290,6 @@ public class spin : MonoBehaviour
         isSpinning = true;
         if (spinLeft < 0)
         {
-
-            Spin();
-            SpinsLeft();
             StartCoroutine(AutoSpin(true));
             //reset time for collect reward pop message
             collectReward.ResetTime();

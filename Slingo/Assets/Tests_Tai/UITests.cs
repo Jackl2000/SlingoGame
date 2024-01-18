@@ -36,7 +36,6 @@ public class UITests
         go.AddComponent<GridCheck>();
         int actual = go.GetComponent<GridCheck>().rewards.Count;
 
-
         Assert.AreEqual(10, actual);
     }
 }
