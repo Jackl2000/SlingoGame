@@ -23,14 +23,14 @@ public class PanelEffects : MonoBehaviour
     {
         foreach (GridNumbers number in gridGeneration.numberPositions.Values)
         {
-            if (spinScript.wCount > 0)
+            if (spinScript.wildPicks > 0)
             {
                 if (!number.hasBeenHit)
                 {
                     number.gameObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
                 }
             }
-            if (spinScript.wCount <= 0)
+            if (spinScript.wildPicks <= 0)
             {
                 if (!number.hasBeenHit)
                 {

@@ -57,7 +57,7 @@ public class CollectReward : MonoBehaviour
 
     private void Update()
     {
-        if (gridCheck.slingoCount >= 3 && spin.wCount <= 0 && spin.spinLeft <= 0)
+        if (gridCheck.slingoCount >= 3 && spin.wildPicks <= 0 && spin.spinLeft <= 0)
         {
 
             invokeTime += Time.deltaTime;
