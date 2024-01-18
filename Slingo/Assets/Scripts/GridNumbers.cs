@@ -12,6 +12,7 @@ public class GridNumbers
     public GameObject gameObject;
     public bool diagonal { get; private set; }
     private Image childImage;
+    private Animator starAnimation;
 
     public GridNumbers(int horizontal, int vertical, GameObject gameObject)
     {
@@ -19,6 +20,7 @@ public class GridNumbers
         v = vertical;
         this.gameObject = gameObject;
         childImage = gameObject.GetComponentInChildren<Image>();
+        starAnimation = childImage.GetComponent<Animator>();
         diagonal = CheckForDiagonal();
     }
 
@@ -40,14 +42,18 @@ public class GridNumbers
         {
             gameObject.GetComponentInParent<GridCheck>().starsCount++;
             gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
+            
             gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
             if (!joker)
             {
+                starAnimation.SetBool("Hit", true);
                 childImage.GetComponentInChildren<Image>().enabled = true;
                 childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+                
             }
             else
             {
+                starAnimation.SetBool("Hit", true);
                 childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
             }
         }
@@ -66,6 +72,7 @@ public class GridNumbers
             childImage.GetComponentInChildren<Image>().enabled = false;
             childImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
             childImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
+            starAnimation.SetBool("Hit", false);
         }
         catch (System.Exception)
         {
