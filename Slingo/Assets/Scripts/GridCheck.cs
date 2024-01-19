@@ -104,9 +104,8 @@ public class GridCheck : MonoBehaviour
         }
     }
 
-    public bool CheckGrid(int h, int v, bool diagonal, bool check)
+    public void CheckGrid(int h, int v, bool diagonal, bool check)
     {
-        bool slingo = false;
         rewardCount = 0;
         int horIndex = 0;
         foreach (GridNumbers number in grid.numberPositions.Values)
@@ -129,7 +128,6 @@ public class GridCheck : MonoBehaviour
                     gridSlingoList["h" + h] = true;
                     slingoIsHit = true;
                     slingoCount++;
-                    slingo = true;
                     CheckForReward();
                     PlaySlingoAnimation("h", h);
                     break;
@@ -158,7 +156,6 @@ public class GridCheck : MonoBehaviour
                     gridSlingoList["v" + v] = true;
                     slingoIsHit = true;
                     slingoCount++;
-                    slingo = true;
                     CheckForReward();
                     PlaySlingoAnimation("v", v);
                     break;
@@ -191,7 +188,6 @@ public class GridCheck : MonoBehaviour
                             gridSlingoList["dl"] = true;
                             slingoIsHit = true;
                             slingoCount++;
-                            slingo = true;
                             CheckForReward();
                             PlaySlingoAnimation("l", 0);
                             break;
@@ -222,7 +218,6 @@ public class GridCheck : MonoBehaviour
                             gridSlingoList["dr"] = true;
                             slingoIsHit = true;
                             slingoCount++;
-                            slingo = true;
                             CheckForReward();
                             PlaySlingoAnimation("r", 0);
                             break;
@@ -231,7 +226,6 @@ public class GridCheck : MonoBehaviour
                 }
             }
         }
-        return slingo;
     }
 
     private void CheckForReward()
@@ -339,15 +333,14 @@ public class GridCheck : MonoBehaviour
     {
         foreach (GameObject go in slingoNumbers)
         {
-            go.GetComponentInChildren<Animator>().SetBool("Hit", false);
-            go.GetComponentInChildren<Animator>().speed = 0.8f;
+            go.GetComponentInChildren<Animator>().SetBool("Slingo", false);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         foreach (GameObject go in slingoNumbers)
         {
-            go.GetComponentInChildren<Animator>().SetBool("Hit", true);
-            yield return new WaitForSeconds(0.1f);
+            go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
