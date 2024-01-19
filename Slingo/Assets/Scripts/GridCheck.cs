@@ -291,7 +291,6 @@ public class GridCheck : MonoBehaviour
 
     private void PlaySlingoAnimation(string slingoType, int index)
     {
-        Debug.Log("Play Animation");
         List<GameObject> numbersInSlingo = new List<GameObject>();
         if(slingoType == "h")
         {
@@ -299,6 +298,7 @@ public class GridCheck : MonoBehaviour
             {
                 if(numbers.h == index)
                 {
+                    Debug.Log("Number added: " + numbers.h + ":" + numbers.v);
                     numbersInSlingo.Add(numbers.gameObject);
                 }
             }
@@ -341,9 +341,9 @@ public class GridCheck : MonoBehaviour
         foreach (GameObject go in slingoNumbers)
         {
             go.GetComponentInChildren<Animator>().SetBool("Hit", false);
-            go.GetComponentInChildren<Animator>().speed = 0.5f;
+            go.GetComponentInChildren<Animator>().speed = 0.8f;
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
         foreach (GameObject go in slingoNumbers)
         {
