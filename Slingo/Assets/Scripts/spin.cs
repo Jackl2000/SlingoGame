@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -85,6 +86,11 @@ public class spin : MonoBehaviour
 
         foreach (var spinSlot in slotsList)
         {
+            //if (spinSlot.GetComponentInChildren<Image>().enabled)
+            //{
+            //    spinSlot.GetComponentInChildren<Image>().enabled = false;
+            //}
+
             rnd = UnityEngine.Random.Range(min, max);
             min += 15;
             max += 15;
@@ -105,13 +111,17 @@ public class spin : MonoBehaviour
                 }
                 StopCoroutine(spinCoroutine);
                 wildPicks++;
+                retryButton.enabled = false;
             }
             else
             {
                 spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
                 spinNumbers.Add(rnd);
-          }
+            }
+            
+
         }
+        CheckMatchingNumb();
     }
 
     /// <summary>
@@ -148,10 +158,11 @@ public class spin : MonoBehaviour
         {
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
+            isSpinning = false;
+
             if (spinLeft <= 0)
             {
                 PriceCaculator();
-                isSpinning = false;
             }
         }
     }
@@ -248,12 +259,8 @@ public class spin : MonoBehaviour
                 PriceCaculator();
                 isSpinning = false;
             }
-            if (spinLeft > 0)
-            {
-                StartCoroutine(spinCoroutine);
-                retryButton.enabled = false;
-            }
         }
+        retryButton.enabled = true;
 
     }
 
@@ -272,7 +279,6 @@ public class spin : MonoBehaviour
                     if(slot.GetComponentInChildren<Image>().enabled)
                     {
                         slot.GetComponentInChildren<Image>().enabled = false;
-                        slot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
                     }   
                 }
                 spinAnimation.SetBool("Spinning", true);
@@ -285,12 +291,12 @@ public class spin : MonoBehaviour
         }
         else
         {
+
             foreach (GameObject slot in slotsList)
             {
                 if (slot.GetComponentInChildren<Image>().enabled)
                 {
                     slot.GetComponentInChildren<Image>().enabled = false;
-                    slot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
                 }
             }
             
@@ -301,6 +307,8 @@ public class spin : MonoBehaviour
             CheckMatchingNumb();
             SpinsLeft();
         }
+
+
     }
 
     public void StartSpin( )
@@ -312,23 +320,28 @@ public class spin : MonoBehaviour
             playerData.balance -= spinBets;
         }
         isSpinning = true;
+
         if (spinLeft < 0)
         {
             StartCoroutine(AutoSpin(true));
+
             //reset time for collect reward pop message
             collectReward.ResetTime();
         }
         else
         {
 
-            StartCoroutine(spinCoroutine);
-            retryButton.enabled = false;
+            StartCoroutine(AutoSpin(true));
+            //retryButton.enabled = false;
         }
+
     }
 
     private void Update()
     {
         NumberSpinning();
+
+
         if (spinLeft == 0)
         {
             StopCoroutine(spinCoroutine);
