@@ -23,10 +23,11 @@ public class CollectReward : MonoBehaviour
         if (gridCheck.slingoCount >= 3)
         {
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
+            spin.spinCountHeader.text = "SPINS";
             spin.spinLeft = 8;
-            gridCheck.retryButtonImg.color = Color.white;
-            gridCheck.collectText.text = "";
-            gridCheck.collectText.gameObject.SetActive(false);
+            gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
+            //gridCheck.collectText.text = "";
+            //gridCheck.collectText.gameObject.SetActive(false);
 
             foreach (GameObject go in spin.slotsList)
             {
@@ -46,7 +47,7 @@ public class CollectReward : MonoBehaviour
         if (gridCheck.slingoCount >= 3 && gridCheck.slingoCount <= 9)
         {
             collectMessage.text = "Collect your reward on " + gridCheck.rewards[gridCheck.slingoCount] + "kr or continue";
-            collectBorderMessage.SetActive(true); ;
+            collectBorderMessage.SetActive(true);
         }
     }
 
