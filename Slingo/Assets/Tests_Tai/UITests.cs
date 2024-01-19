@@ -94,10 +94,7 @@ public class UITests
     [Test]
     public void TestSpinBetsViewer()
     {
-        GameObject parentObject = new GameObject();
-        parentObject.AddComponent<GridCheck>();
         GameObject go = new GameObject();
-        go.transform.parent = parentObject.transform;
         SpinsValue bets = go.AddComponent<SpinsValue>();
         go.AddComponent<spin>();
         GameObject betsPanel = new GameObject();
@@ -118,13 +115,6 @@ public class UITests
     public void TestSetSpinBets()
     {
         GameObject go = new GameObject();
-        GameObject parent = new GameObject();
-        parent.AddComponent<CollectReward>();
-        go.transform.parent = parent.transform;
-        GameObject child = new GameObject();
-        child.AddComponent<Animator>();
-        child.transform.parent = go.transform;
-
         spin spin = go.AddComponent<spin>();
         go.AddComponent<GridCheck>();
         go.AddComponent<GridGeneration>();

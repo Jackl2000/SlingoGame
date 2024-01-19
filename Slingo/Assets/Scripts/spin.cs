@@ -30,7 +30,7 @@ public class spin : MonoBehaviour
     [SerializeField] private int wildChance;
 
     [Space(10)]
-    public List<GameObject> slotsList;
+    public List<GameObject> slotsList = new List<GameObject>();
     List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
     public List<int> spinNumbers;
 
@@ -182,7 +182,7 @@ public class spin : MonoBehaviour
         }
         if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
         {
-            slingoReward = (gridCheck.rewards[gridCheck.slingoCount + 1] / spinBets) / Mathf.Clamp((1 + gridCheck.slingoCount) / gridCheck.slingoCount, 2, (1 + gridCheck.slingoCount) / gridCheck.slingoCount) * (starMultipliere + 0.5f);
+            slingoReward = (gridCheck.rewards[gridCheck.slingoCount + 1] / spinBets) / Mathf.Clamp((1 + gridCheck.slingoCount) / gridCheck.slingoCount, 3, (1 + gridCheck.slingoCount) / gridCheck.slingoCount) * (starMultipliere + 0.5f);
         }
 
         float maxSlingoAmplifiere = Mathf.Clamp(possibleRewardAmplifiere - 0.5f, 0.5f, 1.8f);
@@ -209,7 +209,7 @@ public class spin : MonoBehaviour
                     }
                     if (gridCheck.rewards.ContainsKey(Convert.ToInt32(i) + 1))
                     {
-                        slingoRewards = (gridCheck.rewards[Convert.ToInt32(i) + 1] / bet) / Mathf.Clamp((1 + i) / i, 2, (1 + i) / i) * (multipliere + 0.5f);
+                        slingoRewards = (gridCheck.rewards[Convert.ToInt32(i) + 1] / bet) / Mathf.Clamp((1 + i) / i, 3, (1 + i) / i) * (multipliere + 0.5f);
                     }
                     float maxSlingoAmplifiere = Mathf.Clamp(m - 0.5f, 0.5f, 1.8f);
                     float price = slingoRewards * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);

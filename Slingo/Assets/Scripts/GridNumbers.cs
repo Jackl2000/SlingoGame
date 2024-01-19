@@ -19,16 +19,9 @@ public class GridNumbers
         h = horizontal;
         v = vertical;
         this.gameObject = gameObject;
-        try
-        {
-            childImage = gameObject.GetComponentInChildren<Image>();
-            starAnimation = childImage.GetComponent<Animator>();
-        }
-        catch (System.Exception)
-        {
-            Debug.Log("No child image");
-        }
-        
+        childImage = gameObject.GetComponentInChildren<Image>();
+        if(childImage != null ) starAnimation = childImage.GetComponent<Animator>();
+
         diagonal = CheckForDiagonal();
     }
 
