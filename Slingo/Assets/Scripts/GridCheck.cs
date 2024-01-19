@@ -288,17 +288,15 @@ public class GridCheck : MonoBehaviour
         return maxReward;
     }
 
-}
-
     private void PlaySlingoAnimation(string slingoType, int index)
     {
         Debug.Log("Play Animation");
         List<GameObject> numbersInSlingo = new List<GameObject>();
-        if(slingoType == "h")
+        if (slingoType == "h")
         {
-            foreach(GridNumbers numbers in grid.numberPositions.Values)
+            foreach (GridNumbers numbers in grid.numberPositions.Values)
             {
-                if(numbers.h == index)
+                if (numbers.h == index)
                 {
                     numbersInSlingo.Add(numbers.gameObject);
                 }
@@ -352,4 +350,5 @@ public class GridCheck : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+
 }

@@ -71,8 +71,6 @@ public class CollectReward : MonoBehaviour
             {
                 CollectRewardPopMsg();
             }
-
-            Debug.Log("pop-up time: " + invokeTime);
         }
     }
 
