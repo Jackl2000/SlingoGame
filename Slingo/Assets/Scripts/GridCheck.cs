@@ -278,5 +278,6 @@ public class GridCheck : MonoBehaviour
         }
         return maxReward;
     }
+
 }
 
