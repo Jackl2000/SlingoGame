@@ -13,6 +13,7 @@ public class spin : MonoBehaviour
     public GridCheck gridCheck;
     public PlayerData playerData;
     public Button retryButton;
+    public TextMeshProUGUI spinCountHeader;
     [HideInInspector] private CollectReward collectReward;
 
     [Space(5)]
@@ -54,7 +55,6 @@ public class spin : MonoBehaviour
 
     PanelEffects[] blinkEffect;
     private IEnumerator spinCoroutine;
-    private IEnumerator spinCoroutineOnce;
     #endregion
 
     private void Awake()
@@ -150,6 +150,7 @@ public class spin : MonoBehaviour
             spinLeftText.text = spinLeft.ToString();
             if (spinLeft <= 0)
             {
+                spinCountHeader.text = "COST";
                 PriceCaculator();
                 isSpinning = false;
             }
@@ -245,6 +246,7 @@ public class spin : MonoBehaviour
         {
             if (spinLeft <= 0)
             {
+                spinCountHeader.text = "COST";
                 PriceCaculator();
                 isSpinning = false;
             }

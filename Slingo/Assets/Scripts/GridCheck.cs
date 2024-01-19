@@ -9,8 +9,8 @@ using UnityEngine.UI;
 
 public class GridCheck : MonoBehaviour
 {
-    public TextMeshProUGUI collectText;
-    public Image retryButtonImg;
+    //public TextMeshProUGUI collectText;
+    public Image resetButton;
 
     [HideInInspector] public int slingoCount = 0;
     [HideInInspector] public int starsCount = 0;
@@ -129,7 +129,7 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
-                    PlaySlingoAnimation("h", h);
+                    StartCoroutine(SlingoAnimation(PlaySlingoAnimation("h", number.h)));
                     break;
                 }
             }
@@ -157,7 +157,7 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
-                    PlaySlingoAnimation("v", v);
+                    StartCoroutine(SlingoAnimation(PlaySlingoAnimation("v", number.v)));
                     break;
                 }
             }
@@ -189,7 +189,7 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
-                            PlaySlingoAnimation("l", 0);
+                            StartCoroutine(SlingoAnimation(PlaySlingoAnimation("l", 0)));
                             break;
                         }
                     }
@@ -219,7 +219,7 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
-                            PlaySlingoAnimation("r", 0);
+                            StartCoroutine(SlingoAnimation(PlaySlingoAnimation("r", 0)));
                             break;
                         }
                     }
@@ -249,9 +249,9 @@ public class GridCheck : MonoBehaviour
         if (slingoCount >= 3)
         {
             //retry button image to black
-            retryButtonImg.color = Color.black;
-            collectText.text = "Collect " + rewards[slingoCount].ToString() + "kr";
-            collectText.gameObject.SetActive(true);
+            resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Collect " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
+            //collectText.text = "Collect " + rewards[slingoCount].ToString() + "kr";
+            //collectText.gameObject.SetActive(true);
         }
         if (slingoCount == 12)
         {
@@ -282,8 +282,9 @@ public class GridCheck : MonoBehaviour
         return maxReward;
     }
 
-    private void PlaySlingoAnimation(string slingoType, int index)
+    private List<GameObject> PlaySlingoAnimation(string slingoType, int index)
     {
+        Debug.Log("Slingotype: " + slingoType + " Index: " + index);
         List<GameObject> numbersInSlingo = new List<GameObject>();
         if (slingoType == "h")
         {
@@ -291,7 +292,6 @@ public class GridCheck : MonoBehaviour
             {
                 if (numbers.h == index)
                 {
-                    Debug.Log("Number added: " + numbers.h + ":" + numbers.v);
                     numbersInSlingo.Add(numbers.gameObject);
                 }
             }
@@ -326,7 +326,7 @@ public class GridCheck : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(SlingoAnimation(numbersInSlingo));
+        return numbersInSlingo;
     }
 
     private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
@@ -335,7 +335,7 @@ public class GridCheck : MonoBehaviour
         {
             go.GetComponentInChildren<Animator>().SetBool("Slingo", false);
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         foreach (GameObject go in slingoNumbers)
         {
