@@ -9,16 +9,7 @@ using UnityEngine.UI;
 public class GridGeneration : MonoBehaviour
 {
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
-    [SerializeField] private TextMeshProUGUI spinsCounter;
-    [SerializeField] private TextMeshProUGUI BalanceText;
     private List<GameObject> columns = new List<GameObject>();
-
-    private spin spinScript;
-
-    private void Awake()
-    {
-        spinScript = this.GetComponentInChildren<spin>();
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -38,16 +29,7 @@ public class GridGeneration : MonoBehaviour
         GetComponent<GridCheck>().ResetGrid();
         columns.Clear();
         numberPositions.Clear();
-        spinsCounter.text = "8";
-        spinScript.wildPicks = 0;
         GetColumns();
-
-        //spin numbers returns to ?
-        foreach(var spinSlot in spinScript.slotsList) 
-        {
-            spinSlot.GetComponentInChildren<Image>().enabled = false;
-            spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
-        }
     }
 
     private void GetColumns()

@@ -8,9 +8,8 @@ using UnityEngine.UI;
 public class CollectReward : MonoBehaviour
 {
     [Header("References")]
-    public GridCheck gridCheck;
-    public PlayerData playerData;
     public spin spin;
+    [SerializeField] private TextMeshProUGUI spinsCounter;
 
     [Header("Collect message settings")]
     public GameObject collectBorderMessage;
@@ -18,16 +17,33 @@ public class CollectReward : MonoBehaviour
     public float timeInterval = 10f;
     public float invokeTime = 5;
 
+    private GridCheck gridCheck;
+    private PlayerData playerData;
+
+    private void Start()
+    {
+        gridCheck = GetComponent<GridCheck>();
+        playerData = GetComponent<PlayerData>();
+    }
+
     public void Collect()
     {
+        //Reset values in spin
+        spin.spinCountHeader.text = "SPINS";
+        spinsCounter.text = "8";
+        spin.spinLeft = 8;
+        spin.wildPicks = 0;
+        foreach (var spinSlot in spin.slotsList)
+        {
+            spinSlot.GetComponentInChildren<Image>().enabled = false;
+            spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+        }
+
         if (gridCheck.slingoCount >= 3)
         {
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
-            spin.spinCountHeader.text = "SPINS";
-            spin.spinLeft = 8;
+            
             gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
-            //gridCheck.collectText.text = "";
-            //gridCheck.collectText.gameObject.SetActive(false);
 
             foreach (GameObject go in spin.slotsList)
             {
@@ -42,7 +58,7 @@ public class CollectReward : MonoBehaviour
         }
     }
 
-    void CollectRewardPopMsg()
+    private void CollectRewardPopMsg()
     {
         if (gridCheck.slingoCount >= 3 && gridCheck.slingoCount <= 9)
         {
@@ -74,6 +90,4 @@ public class CollectReward : MonoBehaviour
             }
         }
     }
-
-
 }
