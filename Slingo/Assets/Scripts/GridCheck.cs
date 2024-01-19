@@ -344,7 +344,7 @@ public class GridCheck : MonoBehaviour
         foreach (GameObject go in slingoNumbers)
         {
             go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         yield return new WaitForSeconds(1.8f);

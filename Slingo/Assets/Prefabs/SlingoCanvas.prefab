@@ -7827,6 +7827,7 @@ MonoBehaviour:
   balanceText: {fileID: 4166002204279154401}
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 5276959930472451008}
+  spinSpeed: 5
   spinWaitTime: 0.7
   wildChance: 20
   slotsList:
@@ -16667,7 +16668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a03221f26879f4280866b017d60849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SettingsMenuPanel: {fileID: 7987460182231669537}
+  settingsMenuPanel: {fileID: 0}
   soundText: {fileID: 94120796863207926}
   spinsBetPanel: {fileID: 3150828936742231700}
 --- !u!114 &545115821410600103
