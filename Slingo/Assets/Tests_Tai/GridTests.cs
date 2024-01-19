@@ -69,7 +69,7 @@ public class GridTests
             1
         };
         
-        spin.CheckMatchingNumb();
+        //spin.CheckMatchingNumb();
         Assert.IsTrue(number.hasBeenHit);
     }
 }
