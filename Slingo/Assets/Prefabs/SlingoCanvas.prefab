@@ -18342,6 +18342,7 @@ GameObject:
   - component: {fileID: 7790448004923972084}
   - component: {fileID: 6461677307014929321}
   - component: {fileID: 6223522897773723016}
+  - component: {fileID: 5713893832037854988}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -18406,6 +18407,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &5713893832037854988
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281565576395924152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 87a9ba87db7a2e74185a6dc7ebbd4ed1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7305154733994897045
 GameObject:
   m_ObjectHideFlags: 0
@@ -19663,8 +19685,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2922395f00dffb40b15baa7166fd2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinsCounter: {fileID: 7484134286775104099}
-  BalanceText: {fileID: 4166002204279154401}
 --- !u!114 &4374248674525639591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19678,6 +19698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resetButton: {fileID: 7678843588789484500}
+  headerAnimator: {fileID: 5713893832037854988}
   slingoCount: 0
   starsCount: 0
   slingoPanel: {fileID: 8294825953586362885}
@@ -19704,9 +19725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a7ace4474c74648aca643cd8e953aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridCheck: {fileID: 4374248674525639591}
-  playerData: {fileID: 5487674222419349512}
   spin: {fileID: 4055942201498400139}
+  spinsCounter: {fileID: 7484134286775104099}
   collectBorderMessage: {fileID: 4615568449392734210}
   collectMessage: {fileID: 3413761267369758757}
   timeInterval: 10

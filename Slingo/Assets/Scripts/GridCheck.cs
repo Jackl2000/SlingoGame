@@ -13,17 +13,17 @@ public class GridCheck : MonoBehaviour
     public Image resetButton;
     public Animator headerAnimator;
 
-
-    [HideInInspector] public int slingoCount = 0;
-    [HideInInspector] public int starsCount = 0;
-    [HideInInspector] public Dictionary<int, float> rewards = new Dictionary<int, float>();
+    [HideInInspector] public int slingoCount { get; private set; } = 0;
+    [HideInInspector] public int starsCount { get; set; } = 0;
+    [HideInInspector] public Dictionary<int, float> rewards{ get; private set; } = new Dictionary<int, float>();
 
     [Space(5)]
     [SerializeField] private GameObject slingoPanel;
     [SerializeField] private Sprite[] slingoBorderImages;
     [SerializeField] private Sprite[] starImages;
+
     [Space(5)]
-    public GameObject jackpotMessage;
+    [SerializeField] private GameObject jackpotMessage;
     [SerializeField] private Sprite[] jackpotSlingoBorderImages;
 
     private GridGeneration grid;
@@ -91,7 +91,6 @@ public class GridCheck : MonoBehaviour
         }
         slingoCount = 0;
         starsCount = 0;
-        GetComponentInChildren<spin>().spinLeft = 8;
         foreach(Image item in slingoBorders)
         {
             if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Length - 1])
@@ -250,10 +249,7 @@ public class GridCheck : MonoBehaviour
         }
         if (slingoCount >= 3)
         {
-            //retry button image to black
             resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Collect " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
-            //collectText.text = "Collect " + rewards[slingoCount].ToString() + "kr";
-            //collectText.gameObject.SetActive(true);
         }
         if (slingoCount == 12)
         {
@@ -286,7 +282,6 @@ public class GridCheck : MonoBehaviour
 
     private List<GameObject> PlaySlingoAnimation(string slingoType, int index)
     {
-        Debug.Log("Slingotype: " + slingoType + " Index: " + index);
         List<GameObject> numbersInSlingo = new List<GameObject>();
         if (slingoType == "h")
         {
@@ -350,5 +345,4 @@ public class GridCheck : MonoBehaviour
         yield return new WaitForSeconds(1.8f);
         headerAnimator.SetBool("isTwerking", false);
     }
-
 }
