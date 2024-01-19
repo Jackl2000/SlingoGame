@@ -47,7 +47,6 @@ public class PanelEffects : MonoBehaviour
         this.gameObject.GetComponent<Graphic>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
     }
 
-
     private void Update()
     {
         if (numbersPlateIsBlinking)

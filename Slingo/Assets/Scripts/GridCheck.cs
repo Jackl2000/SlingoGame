@@ -11,6 +11,8 @@ public class GridCheck : MonoBehaviour
 {
     //public TextMeshProUGUI collectText;
     public Image resetButton;
+    public Animator headerAnimator;
+
 
     [HideInInspector] public int slingoCount = 0;
     [HideInInspector] public int starsCount = 0;
@@ -331,6 +333,8 @@ public class GridCheck : MonoBehaviour
 
     private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
     {
+        headerAnimator.SetBool("isTwerking", true);
+
         foreach (GameObject go in slingoNumbers)
         {
             go.GetComponentInChildren<Animator>().SetBool("Slingo", false);
@@ -342,6 +346,9 @@ public class GridCheck : MonoBehaviour
             go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
             yield return new WaitForSeconds(0.1f);
         }
+
+        yield return new WaitForSeconds(1.8f);
+        headerAnimator.SetBool("isTwerking", false);
     }
 
 }

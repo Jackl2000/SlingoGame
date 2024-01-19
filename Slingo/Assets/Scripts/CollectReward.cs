@@ -63,12 +63,12 @@ public class CollectReward : MonoBehaviour
 
             invokeTime += Time.deltaTime;
 
-            if (gridCheck.slingoIsHit)
+            if (gridCheck.slingoIsHit && invokeTime > 3)
             {
                 gridCheck.slingoIsHit = false;
                 CollectRewardPopMsg();
             }
-            else if (invokeTime >= 7.5f)
+            else if (invokeTime >= 13f)
             {
                 CollectRewardPopMsg();
             }
