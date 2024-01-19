@@ -329,8 +329,6 @@ public class spin : MonoBehaviour
     private void Update()
     {
         NumberSpinning();
-        Debug.Log("Spin speed: " + spinSpeed);
-
         if (spinLeft == 0)
         {
             StopCoroutine(spinCoroutine);

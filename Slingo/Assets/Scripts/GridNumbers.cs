@@ -49,19 +49,19 @@ public class GridNumbers
         try
         {
             gameObject.GetComponentInParent<GridCheck>().starsCount++;
-            gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
+            bool slingoReward = gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
             
             gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
             if (!joker)
             {
-                starAnimation.SetBool("Hit", true);
+                starAnimation.SetBool("Hit", !slingoReward);
                 childImage.GetComponentInChildren<Image>().enabled = true;
                 childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
                 
             }
             else
             {
-                starAnimation.SetBool("Hit", true);
+                starAnimation.SetBool("Hit", !slingoReward);
                 childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
             }
         }
@@ -81,6 +81,7 @@ public class GridNumbers
             childImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
             childImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
             starAnimation.SetBool("Hit", false);
+            starAnimation.GetComponent<Animator>().speed = 1;
         }
         catch (System.Exception)
         {
