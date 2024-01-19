@@ -37,6 +37,7 @@ public class GridTests
     {
         GameObject go = new GameObject();
         GridNumbers gridNumber = new GridNumbers(3, 3, go);
+
         gridNumber.hasBeenHit = true;
         gridNumber.ResetData();
         Assert.AreEqual(false, gridNumber.hasBeenHit);
@@ -60,6 +61,7 @@ public class GridTests
         GameObject grid = new GameObject();
         grid.AddComponent<GridGeneration>();
         spin.gridGeneration = grid.GetComponent<GridGeneration>();
+
         GridNumbers number = new GridNumbers(1, 1, go);
         spin.gridGeneration.numberPositions.Add(1, number);
         spin.spinNumbers = new List<int>

@@ -26,7 +26,7 @@ public class GridCheck : MonoBehaviour
 
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
-    [HideInInspector]public bool slingoIsHit = false;
+    [HideInInspector] public bool slingoIsHit = false;
     private Image[] slingoBorders;
     private int rewardCount;
 
@@ -104,8 +104,9 @@ public class GridCheck : MonoBehaviour
         }
     }
 
-    public void CheckGrid(int h, int v, bool diagonal, bool check)
+    public bool CheckGrid(int h, int v, bool diagonal, bool check)
     {
+        bool slingo = false;
         rewardCount = 0;
         int horIndex = 0;
         foreach (GridNumbers number in grid.numberPositions.Values)
@@ -128,8 +129,9 @@ public class GridCheck : MonoBehaviour
                     gridSlingoList["h" + h] = true;
                     slingoIsHit = true;
                     slingoCount++;
-                    
+                    slingo = true;
                     CheckForReward();
+                    PlaySlingoAnimation("h", h);
                     break;
                 }
             }
@@ -156,7 +158,9 @@ public class GridCheck : MonoBehaviour
                     gridSlingoList["v" + v] = true;
                     slingoIsHit = true;
                     slingoCount++;
+                    slingo = true;
                     CheckForReward();
+                    PlaySlingoAnimation("v", v);
                     break;
                 }
             }
@@ -187,7 +191,9 @@ public class GridCheck : MonoBehaviour
                             gridSlingoList["dl"] = true;
                             slingoIsHit = true;
                             slingoCount++;
+                            slingo = true;
                             CheckForReward();
+                            PlaySlingoAnimation("l", 0);
                             break;
                         }
                     }
@@ -216,13 +222,16 @@ public class GridCheck : MonoBehaviour
                             gridSlingoList["dr"] = true;
                             slingoIsHit = true;
                             slingoCount++;
+                            slingo = true;
                             CheckForReward();
+                            PlaySlingoAnimation("r", 0);
                             break;
                         }
                     }
                 }
             }
         }
+        return slingo;
     }
 
     private void CheckForReward()
@@ -281,3 +290,66 @@ public class GridCheck : MonoBehaviour
 
 }
 
+    private void PlaySlingoAnimation(string slingoType, int index)
+    {
+        Debug.Log("Play Animation");
+        List<GameObject> numbersInSlingo = new List<GameObject>();
+        if(slingoType == "h")
+        {
+            foreach(GridNumbers numbers in grid.numberPositions.Values)
+            {
+                if(numbers.h == index)
+                {
+                    numbersInSlingo.Add(numbers.gameObject);
+                }
+            }
+        }
+        else if (slingoType == "v")
+        {
+            foreach (GridNumbers numbers in grid.numberPositions.Values)
+            {
+                if (numbers.v == index)
+                {
+                    numbersInSlingo.Add(numbers.gameObject);
+                }
+            }
+        }
+        else if (slingoType == "l")
+        {
+            foreach (GridNumbers numbers in grid.numberPositions.Values)
+            {
+                if (numbers.diagonal && numbers.h == numbers.v)
+                {
+                    numbersInSlingo.Add(numbers.gameObject);
+                }
+            }
+        }
+        else
+        {
+            foreach (GridNumbers numbers in grid.numberPositions.Values)
+            {
+                if ((numbers.h == numbers.v && numbers.h == 3) || (numbers.h == 5 && numbers.v == 1) || (numbers.h == 4 && numbers.v == 2) || (numbers.h == 2 && numbers.v == 4) || numbers.h == 1 && numbers.v == 5)
+                {
+                    numbersInSlingo.Add(numbers.gameObject);
+                }
+            }
+        }
+        StartCoroutine(SlingoAnimation(numbersInSlingo));
+    }
+
+    private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
+    {
+        foreach (GameObject go in slingoNumbers)
+        {
+            go.GetComponentInChildren<Animator>().SetBool("Hit", false);
+            go.GetComponentInChildren<Animator>().speed = 0.5f;
+        }
+        yield return new WaitForSeconds(0.1f);
+
+        foreach (GameObject go in slingoNumbers)
+        {
+            go.GetComponentInChildren<Animator>().SetBool("Hit", true);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+}
