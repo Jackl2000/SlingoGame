@@ -54,6 +54,7 @@ public class spin : MonoBehaviour
     private int possibleRewardAmplifiere;
     private Animator spinAnimation;
     private Animator spinButtonAnimation;
+    private Queue<GameObject> wilds = new Queue<GameObject>();
 
     PanelEffects[] blinkEffect;
     #endregion
@@ -108,15 +109,17 @@ public class spin : MonoBehaviour
     {
         if (wildPicked < wildPicks)
         {
-            wildPicked++;
             foreach (int gridNumber in gridGeneration.numberPositions.Keys)
             {
                 if (gridButton.gameObject.GetComponent<TextMeshProUGUI>().text != "")
                 {
                     if (gridNumber == Convert.ToInt32(gridButton.gameObject.GetComponent<TextMeshProUGUI>().text))
                     {
-                        //if (gridGeneration.numberPositions[gridNumber].hasBeenHit) break;
                         gridGeneration.numberPositions[gridNumber].Hit(true);
+
+                        GameObject wild = wilds.Dequeue();
+                        wild.GetComponentInChildren<Image>().color = Color.green;
+                        wildPicked++;
                         break;
                     }
                 }
@@ -142,12 +145,12 @@ public class spin : MonoBehaviour
         }
 
         if (isSpinning) return;
-        
-        
+
         foreach (GameObject slot in slotsList)
         {
             if (slot.GetComponentInChildren<Image>().enabled)
             {
+                slot.GetComponentInChildren<Image>().color = Color.white;
                 slot.GetComponentInChildren<Image>().enabled = false;
             }
         }
@@ -170,7 +173,6 @@ public class spin : MonoBehaviour
         {
 
             StartCoroutine(Spinner());
-            //retryButton.enabled = false;
         }
 
     }
@@ -196,6 +198,7 @@ public class spin : MonoBehaviour
 
             if (wildPick == 5)
             {
+                wilds.Enqueue(spinSlot);
                 spinNumbers.Add(0);
                 spinSlot.GetComponentInChildren<Image>().enabled = true;
                 spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "";
