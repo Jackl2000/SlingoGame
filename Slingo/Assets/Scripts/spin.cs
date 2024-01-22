@@ -34,7 +34,7 @@ public class spin : MonoBehaviour
     public List<GameObject> slotsList = new List<GameObject>();
 
     public List<int> spinNumbers;
-    public Queue<GameObject> wilds = new Queue<GameObject>();
+    
 
     #region others variables
     [HideInInspector] public float spinBets = 1;
@@ -47,7 +47,7 @@ public class spin : MonoBehaviour
     /// </summary>
     [HideInInspector] public int spinLeft = 8;
     private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
-    //private List<Image> slotWildImage = new List<Image>();
+    private Queue<GameObject> wilds = new Queue<GameObject>();
     int rnd;
     int min = 1;
     int max = 15;
@@ -64,13 +64,11 @@ public class spin : MonoBehaviour
     {
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         spinAnimation = GetComponentInChildren<Animator>();
-        spinButtonAnimation = spinButton.GetComponent<Animator>();
+        if(spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
         foreach (GameObject spinSlot in slotsList)
         {
             slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
-            //slotWildImage.Add(spinSlot.GetComponentInChildren<Image>());
         }
-
     }
 
 
@@ -185,7 +183,7 @@ public class spin : MonoBehaviour
         if (spinNumbers.Count >= 5)
         {
             spinNumbers.Clear();
-
+            if(wilds.Count > 0) wilds.Clear();
         }
 
         foreach (var spinSlot in slotsList)
@@ -304,7 +302,6 @@ public class spin : MonoBehaviour
                 text.text = numbers.ToString();
             }
         }
-        
     }
 
 
@@ -361,5 +358,4 @@ public class spin : MonoBehaviour
             }
         }
     }
-
 }

@@ -273,9 +273,9 @@ public class GridCheck : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks for max amount of slingos by one number
+    /// Get max amount of slingos by one number to use with cost of extra spins
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Returns max number of possible slingo by getting one more number</returns>
     public int CheckForMaxReward()
     {
         int maxReward = 0;

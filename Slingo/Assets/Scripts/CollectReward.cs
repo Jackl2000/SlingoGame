@@ -34,12 +34,12 @@ public class CollectReward : MonoBehaviour
         spin.spinLeft = 8;
 
         spin.wildPicks = 0;
-        spin.wilds.Clear();
         foreach (var spinSlot in spin.slotsList)
         {
             spinSlot.GetComponentInChildren<Image>().color = Color.white;
             spinSlot.GetComponentInChildren<Image>().enabled = false;
             spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+            spinSlot.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
 
         if (gridCheck.slingoCount >= 3)

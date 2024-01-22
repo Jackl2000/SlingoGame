@@ -73,7 +73,7 @@ public class GridGeneration : MonoBehaviour
     /// <param name="range">Determines the range of the number </param>
     /// <param name="usedNumbers">A list containing used numbers that this method can not return</param>
     /// <returns></returns>
-    public int GenerateNumber(int range, List<int> usedNumbers)
+    private int GenerateNumber(int range, List<int> usedNumbers)
     {
         int random = 0;
         switch (range)
