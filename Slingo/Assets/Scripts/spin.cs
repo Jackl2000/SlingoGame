@@ -53,6 +53,7 @@ public class spin : MonoBehaviour
     int wildPicked = 0;
     private int possibleRewardAmplifiere;
     private Animator spinAnimation;
+    private Animator spinButtonAnimation;
 
     PanelEffects[] blinkEffect;
     #endregion
@@ -61,6 +62,7 @@ public class spin : MonoBehaviour
     {
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         spinAnimation = GetComponentInChildren<Animator>();
+        spinButtonAnimation = spinButton.GetComponent<Animator>();
         foreach (GameObject spinSlot in slotsList)
         {
             slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
@@ -134,6 +136,7 @@ public class spin : MonoBehaviour
     {
         if (isSpinning) return;
         
+        
         foreach (GameObject slot in slotsList)
         {
             if (slot.GetComponentInChildren<Image>().enabled)
@@ -141,7 +144,7 @@ public class spin : MonoBehaviour
                 slot.GetComponentInChildren<Image>().enabled = false;
             }
         }
-
+        
         if (spinLeft == 8)
         {
             playerData.balance -= spinBets;
@@ -248,10 +251,13 @@ public class spin : MonoBehaviour
 
     IEnumerator Spinner()
     {
-
+        //yield return new WaitForSeconds(0.05f);
+        
         spinAnimation.SetBool("Spinning", true);
+        spinButtonAnimation.SetBool("Spin", true);
         yield return new WaitForSeconds(spinWaitTime);
         spinAnimation.SetBool("Spinning", false);
+        spinButtonAnimation.SetBool("Spin", false);
 
         Spin();
         CheckMatchingNumb();
