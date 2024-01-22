@@ -43,8 +43,8 @@ public class GridNumbers
         {
             gameObject.GetComponentInParent<GridCheck>().starsCount++;
             gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
-            
             gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
+
             if (!wild)
             {
                 starAnimation.SetBool("Hit", true);

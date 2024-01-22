@@ -140,6 +140,11 @@ public class spin : MonoBehaviour
     }
     public void StartSpin( )
     {
+        foreach (var slotText in slotTextList)
+        {
+            slotText.color = Color.white;
+        }
+
         if (isSpinning) return;
 
         foreach (GameObject slot in slotsList)
@@ -176,7 +181,6 @@ public class spin : MonoBehaviour
     {
         min = 1;
         max = 16;
-
         
         if (spinNumbers.Count >= 5)
         {
@@ -186,6 +190,7 @@ public class spin : MonoBehaviour
 
         foreach (var spinSlot in slotsList)
         {
+            
             rnd = UnityEngine.Random.Range(min, max);
             min += 15;
             max += 15;
@@ -210,7 +215,9 @@ public class spin : MonoBehaviour
             }
             else
             {
-                spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = rnd.ToString();
+                TextMeshProUGUI text = spinSlot.GetComponentInChildren<TextMeshProUGUI>();
+                text.text = rnd.ToString();
+
                 spinNumbers.Add(rnd);
             }
             
@@ -218,19 +225,29 @@ public class spin : MonoBehaviour
         }
         CheckMatchingNumb();
     }
+
     private void CheckMatchingNumb()
     {
-        foreach (int spin in spinNumbers)
+        foreach (var slotText in slotTextList)
         {
-            foreach (int gridNumber in gridGeneration.numberPositions.Keys)
+            foreach (int spin in spinNumbers)
             {
-                if (spin == gridNumber)
+                foreach (int gridNumber in gridGeneration.numberPositions.Keys)
                 {
-                    gridGeneration.numberPositions[gridNumber].Hit(false);
-                    break;
+                    if (spin == gridNumber)
+                    {
+                        TextMeshProUGUI text = slotText.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+                        if (text.text == spin.ToString())
+                        {
+                            text.color = Color.green;
+                        }
+                        gridGeneration.numberPositions[gridNumber].Hit(false);
+                        break;
+                    }
                 }
             }
         }
+        
     }
 
     private void SpinsLeft()
