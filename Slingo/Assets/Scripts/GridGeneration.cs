@@ -17,6 +17,9 @@ public class GridGeneration : MonoBehaviour
         GetColumns();
     }
 
+    /// <summary>
+    /// Clears the grid and creates a new
+    /// </summary>
     public void ReGenerateGrid()
     {
         foreach (GridNumbers number in numberPositions.Values)
@@ -32,6 +35,9 @@ public class GridGeneration : MonoBehaviour
         GetColumns();
     }
 
+    /// <summary>
+    /// Gets the colums of the grid
+    /// </summary>
     private void GetColumns()
     {
         GameObject[] columArray = GameObject.FindGameObjectsWithTag("Column").OrderBy(go => go.GetComponent<GridLayoutGroup>().cellSize.x).ToArray();
@@ -43,7 +49,9 @@ public class GridGeneration : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Generate the numbers inside each column
+    /// </summary>
     private void GenerateColumn(GameObject column, int range, int columnCount)
     {
         List<TextMeshProUGUI> fields = new List<TextMeshProUGUI>();
@@ -59,7 +67,13 @@ public class GridGeneration : MonoBehaviour
         }
     }
 
-    private int GenerateNumber(int range, List<int> usedNumbers)
+    /// <summary>
+    /// Returns a random number within a range which does not exists in the list
+    /// </summary>
+    /// <param name="range">Determines the range of the number </param>
+    /// <param name="usedNumbers">A list containing used numbers that this method can not return</param>
+    /// <returns></returns>
+    public int GenerateNumber(int range, List<int> usedNumbers)
     {
         int random = 0;
         switch (range)

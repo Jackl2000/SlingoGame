@@ -32,9 +32,12 @@ public class CollectReward : MonoBehaviour
         spin.spinCountHeader.text = "SPINS";
         spinsCounter.text = "8";
         spin.spinLeft = 8;
+
         spin.wildPicks = 0;
+        spin.wilds.Clear();
         foreach (var spinSlot in spin.slotsList)
         {
+            spinSlot.GetComponentInChildren<Image>().color = Color.white;
             spinSlot.GetComponentInChildren<Image>().enabled = false;
             spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
         }
