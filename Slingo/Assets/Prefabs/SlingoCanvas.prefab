@@ -8102,14 +8102,14 @@ MonoBehaviour:
   gridGeneration: {fileID: 1458205632472944407}
   gridCheck: {fileID: 4374248674525639591}
   playerData: {fileID: 5487674222419349512}
-  retryButton: {fileID: 6279792653059246180}
   spinCountHeader: {fileID: 7787662666394665884}
   balanceText: {fileID: 4166002204279154401}
-  spinLeftText: {fileID: 7484134286775104099}
-  spinButton: {fileID: 8420042036595658971}
   spinSpeed: 5
   spinWaitTime: 0.7
   wildChance: 20
+  isSpinning: 0
+  spinLeftText: {fileID: 7484134286775104099}
+  spinButton: {fileID: 8420042036595658971}
   slotsList:
   - {fileID: 7798638019828884268}
   - {fileID: 3026685873912758083}
@@ -8120,7 +8120,6 @@ MonoBehaviour:
   spinBets: 1
   wildPicks: 0
   spinLeft: 8
-  isSpinning: 0
 --- !u!114 &527621969584549633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11641,6 +11640,7 @@ GameObject:
   - component: {fileID: 6267425118422256974}
   - component: {fileID: 3016001572748793407}
   - component: {fileID: 8420042036595658971}
+  - component: {fileID: 587985071004346433}
   m_Layer: 5
   m_Name: SpinButton
   m_TagString: Untagged
@@ -11762,6 +11762,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &587985071004346433
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509156442935069427}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a37e131e72511514c978483dc1bdc519, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4560661402099382458
 GameObject:
   m_ObjectHideFlags: 0
@@ -16879,7 +16900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a03221f26879f4280866b017d60849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsMenuPanel: {fileID: 0}
+  settingsMenuPanel: {fileID: 7987460182231669537}
   soundText: {fileID: 94120796863207926}
   spinsBetPanel: {fileID: 3150828936742231700}
 --- !u!114 &545115821410600103
@@ -19699,8 +19720,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetButton: {fileID: 7678843588789484500}
   headerAnimator: {fileID: 5713893832037854988}
-  slingoCount: 0
-  starsCount: 0
   slingoPanel: {fileID: 8294825953586362885}
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}
