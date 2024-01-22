@@ -35,7 +35,6 @@ public class spin : MonoBehaviour
     public List<GameObject> slotsList = new List<GameObject>();
     List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
     List<Image> slotWildImage = new List<Image>();
-    public List<int> spinNumbers;
 
     #region others variables
     [HideInInspector] public float spinBets = 1;
@@ -139,10 +138,7 @@ public class spin : MonoBehaviour
     }
     public void StartSpin( )
     {
-        foreach (var slotText in slotTextList)
-        {
-            slotText.color = Color.white;
-        }
+        ColorReset();
 
         if (isSpinning) return;
 
@@ -180,12 +176,6 @@ public class spin : MonoBehaviour
     {
         min = 1;
         max = 16;
-        
-        if (spinNumbers.Count >= 5)
-        {
-            spinNumbers.Clear();
-
-        }
 
         foreach (var spinSlot in slotsList)
         {
@@ -199,7 +189,6 @@ public class spin : MonoBehaviour
             if (wildPick == 5)
             {
                 wilds.Enqueue(spinSlot);
-                spinNumbers.Add(0);
                 spinSlot.GetComponentInChildren<Image>().enabled = true;
                 spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
@@ -216,8 +205,6 @@ public class spin : MonoBehaviour
             {
                 TextMeshProUGUI text = spinSlot.GetComponentInChildren<TextMeshProUGUI>();
                 text.text = rnd.ToString();
-
-                spinNumbers.Add(rnd);
             }
             
 
@@ -227,22 +214,16 @@ public class spin : MonoBehaviour
 
     private void CheckMatchingNumb()
     {
-        foreach (var slotText in slotTextList)
+        foreach (var slot in slotsList)
         {
-            foreach (int spin in spinNumbers)
+            TextMeshProUGUI text = slot.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            foreach (int gridNumber in gridGeneration.numberPositions.Keys)
             {
-                foreach (int gridNumber in gridGeneration.numberPositions.Keys)
+
+                if (text.text == gridNumber.ToString() && !gridGeneration.numberPositions[gridNumber].hasBeenHit)
                 {
-                    if (spin == gridNumber)
-                    {
-                        TextMeshProUGUI text = slotText.gameObject.GetComponentInChildren<TextMeshProUGUI>();
-                        if (text.text == spin.ToString())
-                        {
-                            text.color = Color.green;
-                        }
-                        gridGeneration.numberPositions[gridNumber].Hit(false);
-                        break;
-                    }
+                    text.color = Color.green;
+                    gridGeneration.numberPositions[gridNumber].Hit(false);
                 }
             }
         }
@@ -306,6 +287,13 @@ public class spin : MonoBehaviour
         
     }
 
+    public void ColorReset()
+    {
+        foreach (var slotText in slotTextList)
+        {
+            slotText.color = Color.white;
+        }
+    }
 
     private float PriceCaculator()
     {
