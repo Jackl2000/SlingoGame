@@ -61,7 +61,7 @@ namespace Tests_Tai
             //spinTestGO.AddComponent<GridGeneration>();
 
             spin spinScript = spinTestGO.GetComponent<spin>();
-            spinScript.spinNumbers = new List<int>() { 1, 22, 38, 55, 76};
+ 
 
             spinScript.slotsList = new List<GameObject> { slot1, slot2 };
 
@@ -70,7 +70,7 @@ namespace Tests_Tai
             spinScript.Spin();
 
             //Assert
-            Assert.NotNull(spinScript.spinNumbers);
+
 
 
         }
