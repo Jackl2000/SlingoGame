@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class GridCheck : MonoBehaviour
 {
-    //public TextMeshProUGUI collectText;
     public Image resetButton;
     public Animator headerAnimator;
 
@@ -54,8 +53,6 @@ public class GridCheck : MonoBehaviour
         {
             slingoBorders = slingoPanel.GetComponentsInChildren<Image>().SkipLast(1).ToArray();
         }
-        
-
     }
 
     public void UpdateRewards(float multiplyere)
@@ -91,18 +88,27 @@ public class GridCheck : MonoBehaviour
         }
         slingoCount = 0;
         starsCount = 0;
-        foreach(Image item in slingoBorders)
+
+        try
         {
-            if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Length - 1])
+            foreach (Image item in slingoBorders)
             {
-                item.sprite = slingoBorderImages[0];
+                if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Length - 1])
+                {
+                    item.sprite = slingoBorderImages[0];
+                }
+                else if (item == slingoBorders[slingoBorders.Length - 1])
+                {
+                    item.sprite = jackpotSlingoBorderImages[0];
+                }
+                else break;
             }
-            else if(item == slingoBorders[slingoBorders.Length - 1])
-            {
-                item.sprite = jackpotSlingoBorderImages[0];
-            }
-            else break;
         }
+        catch (Exception e)
+        {
+            Debug.Log("Exception: " + e.Message);
+        }
+
     }
 
     public void CheckGrid(int h, int v, bool diagonal, bool check)
