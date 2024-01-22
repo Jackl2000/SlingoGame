@@ -115,7 +115,9 @@ public class spin : MonoBehaviour
                 {
                     if (gridNumber == Convert.ToInt32(gridButton.gameObject.GetComponent<TextMeshProUGUI>().text))
                     {
+                        //if (gridGeneration.numberPositions[gridNumber].hasBeenHit) break;
                         gridGeneration.numberPositions[gridNumber].Hit(true);
+                        break;
                     }
                 }
             }
@@ -251,8 +253,6 @@ public class spin : MonoBehaviour
 
     IEnumerator Spinner()
     {
-        //yield return new WaitForSeconds(0.05f);
-        
         spinAnimation.SetBool("Spinning", true);
         spinButtonAnimation.SetBool("Spin", true);
         yield return new WaitForSeconds(spinWaitTime);

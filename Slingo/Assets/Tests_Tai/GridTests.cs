@@ -78,6 +78,7 @@ public class GridTests
         Type type = typeof(GridGeneration);
         var grid = Activator.CreateInstance(type);
         MethodInfo method = type.GetMethod("GenerateNumber", BindingFlags.NonPublic | BindingFlags.Instance);
+
         object[] parameters =
         {
             1,
@@ -85,6 +86,7 @@ public class GridTests
         };
         
         int result = (int)method.Invoke(grid, parameters);
+
         Assert.AreEqual(2, result);
     }
 }

@@ -19,6 +19,16 @@ public class UITests
     }
 
     [Test]
+    public void TestUIManagerGetMoneyValue()
+    {
+        string value = "195,45 kr";
+        float expected = 195.45f;
+        float actual = UIManager.Instance.GetMoneyValue(value);
+
+        Assert.AreEqual(expected, actual);
+    }
+
+    [Test]
     public void TestUpdateRewardsFirstValue()
     {
         int multipliere = 5;
@@ -126,7 +136,5 @@ public class UITests
         spinValue.SetSpinBets(bet);
 
         Assert.AreEqual(10, spin.spinBets);
-
-        
     }
 }
