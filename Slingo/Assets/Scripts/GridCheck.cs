@@ -80,6 +80,9 @@ public class GridCheck : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reset all the data about the grid like slingo count and etc.
+    /// </summary>
     public void ResetGrid()
     {
         foreach(string item in gridSlingoList.Keys.ToList())
@@ -111,6 +114,9 @@ public class GridCheck : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Checks for new slingo with new number
+    /// </summary>
     public void CheckGrid(int h, int v, bool diagonal, bool check)
     {
         rewardCount = 0;
@@ -235,6 +241,9 @@ public class GridCheck : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the new slingo gives a new reward
+    /// </summary>
     private void CheckForReward()
     {
         if (rewards.ContainsKey(slingoCount))
@@ -285,7 +294,10 @@ public class GridCheck : MonoBehaviour
         }
         return maxReward;
     }
-
+    
+    /// <summary>
+    /// Returns a list of game objects to play the slingo animation on
+    /// </summary>
     private List<GameObject> PlaySlingoAnimation(string slingoType, int index)
     {
         List<GameObject> numbersInSlingo = new List<GameObject>();
@@ -332,6 +344,9 @@ public class GridCheck : MonoBehaviour
         return numbersInSlingo;
     }
 
+    /// <summary>
+    /// Plays the slingo animation on the list of game object
+    /// </summary>
     private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
     {
         headerAnimator.SetBool("isTwerking", true);

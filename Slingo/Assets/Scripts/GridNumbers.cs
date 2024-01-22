@@ -35,7 +35,7 @@ public class GridNumbers
     }
 
 
-    public void Hit(bool joker)
+    public void Hit(bool wild)
     {
         if (hasBeenHit) return;
         hasBeenHit = true;
@@ -43,10 +43,9 @@ public class GridNumbers
         {
             gameObject.GetComponentInParent<GridCheck>().starsCount++;
             gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
-            
             gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
-            
-            if (!joker)
+
+            if (!wild)
             {
                 starAnimation.SetBool("Hit", true);
                 childImage.GetComponentInChildren<Image>().enabled = true;
