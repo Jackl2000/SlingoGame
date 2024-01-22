@@ -45,6 +45,7 @@ public class GridNumbers
             gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
             
             gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
+            
             if (!joker)
             {
                 starAnimation.SetBool("Hit", true);
