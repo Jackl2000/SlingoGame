@@ -241,8 +241,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 400, y: 80}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 330, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8260995293098709703
 CanvasRenderer:
@@ -274,8 +274,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Reset
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
+  m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.6
+  m_fontSize: 62
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -0.48069757, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1923,8 +1923,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 230, y: 59}
-  m_SizeDelta: {x: 450, y: 100}
+  m_AnchoredPosition: {x: 190, y: 50}
+  m_SizeDelta: {x: 355, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9189297414597955068
 CanvasRenderer:
@@ -2004,7 +2004,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3016001572748793407}
+  m_TargetGraphic: {fileID: 7678843588789484500}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -8101,10 +8101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridGeneration: {fileID: 1458205632472944407}
   gridCheck: {fileID: 4374248674525639591}
-  playerData: {fileID: 5487674222419349512}
+  playerData: {fileID: 0}
   spinCountHeader: {fileID: 7787662666394665884}
   balanceText: {fileID: 4166002204279154401}
-  spinSpeed: 5
+  spinSpeed: 15
   spinWaitTime: 0.7
   wildChance: 20
   isSpinning: 0
@@ -8456,7 +8456,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 400, y: 80}
+  m_SizeDelta: {x: 330, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6368982164747038992
 CanvasRenderer:
@@ -8488,8 +8488,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 999,00 kr
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
+  m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8513,7 +8513,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.6
+  m_fontSize: 62
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11640,7 +11640,7 @@ GameObject:
   - component: {fileID: 6267425118422256974}
   - component: {fileID: 3016001572748793407}
   - component: {fileID: 8420042036595658971}
-  - component: {fileID: 587985071004346433}
+  - component: {fileID: 7098119309749585213}
   m_Layer: 5
   m_Name: SpinButton
   m_TagString: Untagged
@@ -11762,7 +11762,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!95 &587985071004346433
+--- !u!95 &7098119309749585213
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -15497,8 +15497,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -230, y: 59}
-  m_SizeDelta: {x: 450, y: 100}
+  m_AnchoredPosition: {x: -190.00003, y: 50}
+  m_SizeDelta: {x: 355, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4605861614954047731
 CanvasRenderer:
@@ -18363,7 +18363,7 @@ GameObject:
   - component: {fileID: 7790448004923972084}
   - component: {fileID: 6461677307014929321}
   - component: {fileID: 6223522897773723016}
-  - component: {fileID: 5713893832037854988}
+  - component: {fileID: 1352978434706545151}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -18387,8 +18387,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 50, y: 150}
-  m_SizeDelta: {x: 500, y: 200}
+  m_AnchoredPosition: {x: 58.161, y: 148.64}
+  m_SizeDelta: {x: 516.321, y: 202.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6461677307014929321
 CanvasRenderer:
@@ -18428,7 +18428,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &5713893832037854988
+--- !u!95 &1352978434706545151
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -19719,7 +19719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resetButton: {fileID: 7678843588789484500}
-  headerAnimator: {fileID: 5713893832037854988}
+  headerAnimator: {fileID: 1352978434706545151}
   slingoPanel: {fileID: 8294825953586362885}
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}
@@ -20258,6 +20258,7 @@ GameObject:
   - component: {fileID: 8731659616626069677}
   - component: {fileID: 2916785222404408771}
   - component: {fileID: 3660620487007336823}
+  - component: {fileID: 7356422300322805497}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -20321,6 +20322,27 @@ MonoBehaviour:
   m_Spacing: {x: -23.8, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!95 &7356422300322805497
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8110313000060278679}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3817eef066b100545ba0c05d845e1bcd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8114554970957847548
 GameObject:
   m_ObjectHideFlags: 0
@@ -22042,7 +22064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9091701411932298333}
   - component: {fileID: 242944311923765836}
-  - component: {fileID: 951089828440888800}
+  - component: {fileID: 798411299761441572}
   m_Layer: 5
   m_Name: SlotPositioner
   m_TagString: Untagged
@@ -22098,7 +22120,7 @@ MonoBehaviour:
   m_Spacing: {x: 25, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!95 &951089828440888800
+--- !u!95 &798411299761441572
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
