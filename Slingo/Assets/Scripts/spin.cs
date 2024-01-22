@@ -150,6 +150,7 @@ public class spin : MonoBehaviour
 
         if (spinLeft < 0)
         {
+            playerData.balance -= UIManager.Instance.GetMoneyValue(spinLeftText.text);
             StartCoroutine(Spinner());
 
             //reset time for collect reward pop message
@@ -227,7 +228,7 @@ public class spin : MonoBehaviour
     {
         if (spinLeft <= 0)
         {
-            playerData.balance -= PriceCaculator();
+            PriceCaculator();
             isSpinning = false;
         }
 

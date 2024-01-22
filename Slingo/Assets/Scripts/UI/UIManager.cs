@@ -22,4 +22,9 @@ public class UIManager
     {
         return money.ToString("n2") + " kr";
     }
+
+    public float GetMoneyValue(string money)
+    {
+        return float.Parse(money.Substring(0, money.Length - 3));
+    }
 }
