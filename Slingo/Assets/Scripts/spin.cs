@@ -138,9 +138,9 @@ public class spin : MonoBehaviour
     }
     public void StartSpin( )
     {
-        ColorReset();
-
         if (isSpinning) return;
+
+        ColorReset();
 
         foreach (GameObject slot in slotsList)
         {
@@ -153,6 +153,8 @@ public class spin : MonoBehaviour
         
         if (spinLeft == 8)
         {
+            spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(false);
+            spinButton.GetComponent<Image>().color = Color.white;
             playerData.balance -= spinBets;
         }
         isSpinning = true;
@@ -167,6 +169,8 @@ public class spin : MonoBehaviour
         }
         else
         {
+            spinLeft--;
+            spinLeftText.text = spinLeft.ToString();
             StartCoroutine(Spinner());
         }
 
@@ -207,12 +211,12 @@ public class spin : MonoBehaviour
                 text.text = rnd.ToString();
             }
         }
-
-        CheckMatchingNumb();
+        StartCoroutine(CheckMatchingNumb());
     }
 
-    private void CheckMatchingNumb()
+    private IEnumerator CheckMatchingNumb()
     {
+        List<int> numbersToHit = new List<int>();
         foreach (var slot in slotsList)
         {
             TextMeshProUGUI text = slot.gameObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -226,12 +230,22 @@ public class spin : MonoBehaviour
             {
                 if (text.text == gridNumber.ToString() && !gridGeneration.numberPositions[gridNumber].hasBeenHit)
                 {
-                    text.color = Color.green;
-                    
+                    text.color = Color.green;               
                     gridGeneration.numberPositions[gridNumber].Hit(false);
+                    numbersToHit.Add(Convert.ToInt32(text.text));
+
                 }
             }
         }
+        for (int i = 0; i < numbersToHit.Count; i++)
+        {
+            gridGeneration.numberPositions[numbersToHit[i]].Hit(false);
+            if (i + 1 != numbersToHit.Count)
+            {
+                yield return new WaitForSeconds(0.3f);
+            }
+        }
+        SpinsLeft();
     }
 
     public void Stakes()
@@ -251,22 +265,10 @@ public class spin : MonoBehaviour
     {
         if (spinLeft <= 0)
         {
-            PriceCaculator();
-            isSpinning = false;
+            PriceCaculator();   
+            spinCountHeader.text = "COST";
         }
-
-        if (spinLeft >= 1)
-        {
-            spinLeft--;
-            spinLeftText.text = spinLeft.ToString();
-            isSpinning = false;
-
-            if (spinLeft <= 0)
-            {
-                spinCountHeader.text = "COST";
-                PriceCaculator();
-            }
-        }
+        isSpinning = false;
     }
 
     IEnumerator Spinner()
@@ -278,9 +280,6 @@ public class spin : MonoBehaviour
         spinButtonAnimation.SetBool("Spin", false);
 
         Spin();
-        CheckMatchingNumb();
-        SpinsLeft();
-
     }
 
     /// <summary>

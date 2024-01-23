@@ -38,6 +38,7 @@ public class GridNumbers
     public void Hit(bool wild)
     {
         if (hasBeenHit) return;
+
         hasBeenHit = true;
         try
         {
