@@ -35,7 +35,6 @@ public class spin : MonoBehaviour
     private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
     public Queue<GameObject> wilds = new Queue<GameObject>();
 
-
     #region others variables
     [HideInInspector] public float spinBets = 1;
     /// <summary>
@@ -46,6 +45,7 @@ public class spin : MonoBehaviour
     /// spins left before you pay
     /// </summary>
     [HideInInspector] public int spinLeft = 8;
+
     int rnd;
     int min = 1;
     int max = 15;
@@ -62,12 +62,11 @@ public class spin : MonoBehaviour
     {
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         spinAnimation = GetComponentInChildren<Animator>();
-        spinButtonAnimation = spinButton.GetComponent<Animator>();
+        if(spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
         foreach (GameObject spinSlot in slotsList)
         {
             slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
         }
-
     }
 
 
@@ -175,9 +174,10 @@ public class spin : MonoBehaviour
         min = 1;
         max = 16;
 
+        if (wilds.Count > 0) wilds.Clear();
+
         foreach (var spinSlot in slotsList)
         {
-            
             rnd = UnityEngine.Random.Range(min, max);
             min += 15;
             max += 15;
@@ -280,7 +280,6 @@ public class spin : MonoBehaviour
                 text.text = numbers.ToString();
             }
         }
-        
     }
 
     public void ColorReset()
@@ -344,5 +343,4 @@ public class spin : MonoBehaviour
             }
         }
     }
-
 }
