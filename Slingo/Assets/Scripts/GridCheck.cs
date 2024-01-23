@@ -351,16 +351,20 @@ public class GridCheck : MonoBehaviour
     {
         headerAnimator.SetBool("isTwerking", true);
 
-        foreach (GameObject go in slingoNumbers)
-        {
-            go.GetComponentInChildren<Animator>().SetBool("Slingo", false);
-        }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         foreach (GameObject go in slingoNumbers)
         {
-            go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
-            yield return new WaitForSeconds(0.1f);
+            if(go.GetComponentInChildren<Animator>().GetBool("Slingo"))
+            {
+                go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
+            }
+            else
+            {
+                go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
+            }
+            
+            yield return new WaitForSeconds(0.2f);
         }
 
         yield return new WaitForSeconds(0.5f);
