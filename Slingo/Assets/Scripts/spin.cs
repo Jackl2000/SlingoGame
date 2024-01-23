@@ -32,6 +32,7 @@ public class spin : MonoBehaviour
     public Button spinButton;
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
+    private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
     public Queue<GameObject> wilds = new Queue<GameObject>();
 
 
@@ -45,8 +46,6 @@ public class spin : MonoBehaviour
     /// spins left before you pay
     /// </summary>
     [HideInInspector] public int spinLeft = 8;
-    private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
-    //private List<Image> slotWildImage = new List<Image>();
     int rnd;
     int min = 1;
     int max = 15;
@@ -67,7 +66,6 @@ public class spin : MonoBehaviour
         foreach (GameObject spinSlot in slotsList)
         {
             slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
-            //slotWildImage.Add(spinSlot.GetComponentInChildren<Image>());
         }
 
     }
@@ -168,7 +166,6 @@ public class spin : MonoBehaviour
         }
         else
         {
-
             StartCoroutine(Spinner());
         }
 
@@ -207,9 +204,8 @@ public class spin : MonoBehaviour
                 TextMeshProUGUI text = spinSlot.GetComponentInChildren<TextMeshProUGUI>();
                 text.text = rnd.ToString();
             }
-            
-
         }
+
         CheckMatchingNumb();
     }
 
@@ -228,7 +224,6 @@ public class spin : MonoBehaviour
                 }
             }
         }
-        
     }
 
     private void SpinsLeft()
