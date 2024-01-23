@@ -227,13 +227,13 @@ public class spin : MonoBehaviour
                     numbersToHit.Add(Convert.ToInt32(text.text));
                 }
             }
-            for (int i = 0; i < numbersToHit.Count; i++)
+        }
+        for (int i = 0; i < numbersToHit.Count; i++)
+        {
+            gridGeneration.numberPositions[numbersToHit[i]].Hit(false);
+            if (i + 1 != numbersToHit.Count)
             {
-                gridGeneration.numberPositions[numbersToHit[i]].Hit(false);
-                if(i + 1 != numbersToHit.Count)
-                {
-                    yield return new WaitForSeconds(1f);
-                }
+                yield return new WaitForSeconds(0.3f);
             }
         }
         SpinsLeft();
