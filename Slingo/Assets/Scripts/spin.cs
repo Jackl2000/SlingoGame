@@ -16,6 +16,7 @@ public class spin : MonoBehaviour
 
     [Space(5)]
     public TextMeshProUGUI balanceText;
+    public TextMeshProUGUI spentText;
 
     [Space(10)]
     [Header("Spin settings")]
@@ -35,6 +36,7 @@ public class spin : MonoBehaviour
     private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
     public Queue<GameObject> wilds = new Queue<GameObject>();
 
+
     #region others variables
     [HideInInspector] public float spinBets = 1;
     /// <summary>
@@ -45,7 +47,7 @@ public class spin : MonoBehaviour
     /// spins left before you pay
     /// </summary>
     [HideInInspector] public int spinLeft = 8;
-
+    [HideInInspector] public float stakes = 0;
     int rnd;
     int min = 1;
     int max = 15;
@@ -214,16 +216,35 @@ public class spin : MonoBehaviour
         foreach (var slot in slotsList)
         {
             TextMeshProUGUI text = slot.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            
+            //WIP adding darkout on matched number by getting child object through transform
+            //Transform goTrans;
+            //goTrans = slot.gameObject.GetComponent<Transform>();
+            //GameObject go;
+            //go = goTrans.transform.gameObject;
             foreach (int gridNumber in gridGeneration.numberPositions.Keys)
             {
-
                 if (text.text == gridNumber.ToString() && !gridGeneration.numberPositions[gridNumber].hasBeenHit)
                 {
                     text.color = Color.green;
+                    
                     gridGeneration.numberPositions[gridNumber].Hit(false);
                 }
             }
         }
+    }
+
+    public void Stakes()
+    {
+        if (spinLeft == 8)
+        {
+            stakes += spinBets;
+        }
+        if (spinLeft < 0)
+        {
+            stakes += PriceCaculator();
+        }
+        spentText.text = "Stakes: " + stakes.ToString("F2") + " kr";
     }
 
     private void SpinsLeft()
