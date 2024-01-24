@@ -25,7 +25,7 @@ public class PanelEffects : MonoBehaviour
         {
             if (spinScript.wildPicks > 0)
             {
-                if (!number.hasBeenHit)
+                if (!number.hasBeenHit && number.gameObject.GetComponent<TextMeshProUGUI>().color != Color.yellow)
                 {
                     number.gameObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
                 }
