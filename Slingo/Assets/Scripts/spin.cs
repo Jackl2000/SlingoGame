@@ -220,6 +220,7 @@ public class spin : MonoBehaviour
         
     }
 
+
     private IEnumerator CheckMatchingNumb(TextMeshProUGUI text)
     {
         if (gridGeneration.numberPositions.ContainsKey(Convert.ToInt32(text.text)) && !gridGeneration.numberPositions[Convert.ToInt32(text.text)].hasBeenHit)
@@ -228,24 +229,12 @@ public class spin : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[Convert.ToInt32(text.text)].Hit(false);
 
-            //TextMeshProUGUI text = slot.gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            
-            //WIP adding darkout on matched number by getting child object through transform
-            //Transform goTrans;
-            //goTrans = slot.gameObject.GetComponent<Transform>();
-            //GameObject go;
-            //go = goTrans.transform.gameObject;
+            Transform goTrans;
 
-            //foreach (int gridNumber in gridGeneration.numberPositions.Keys)
-            //{
-            //    if (text.text == gridNumber.ToString() && !gridGeneration.numberPositions[gridNumber].hasBeenHit)
-            //    {
-            //        text.color = Color.green;               
-            //        gridGeneration.numberPositions[gridNumber].Hit(false);
-            //        numbersToHit.Add(Convert.ToInt32(text.text));
+            goTrans = gridGeneration.numberPositions[Convert.ToInt32(text.text)].gameObject.transform.GetChild(0).GetChild(0);
+            Image starImg = goTrans.GetComponentInChildren<Image>();
+            starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
 
-            //    }
-            //}
         }
     }
 

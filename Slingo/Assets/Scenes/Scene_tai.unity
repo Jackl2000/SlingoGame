@@ -435,6 +435,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 757479796286355811, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1653225113066723283, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1170,6 +1174,10 @@ PrefabInstance:
     - target: {fileID: 7929506682988506404, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_Name
       value: SlingoCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958327117694253714, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8085679214520794067, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_Enabled
