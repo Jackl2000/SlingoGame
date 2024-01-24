@@ -199,9 +199,9 @@ public class spin : MonoBehaviour
             slot.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
             blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
-            GridNumbers bestChoice = AI.BestChoice();
+            //GridNumbers bestChoice = AI.BestChoice();
             //Debug.Log(bestChoice.h + ":" + bestChoice.v);
-            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+            //gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
             //for (int i = 0; i < blinkEffect.Length; i++)
             //{
             //    blinkEffect[i].FlashingEffect();
