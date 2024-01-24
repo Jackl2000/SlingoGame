@@ -217,12 +217,13 @@ public class spin : MonoBehaviour
         StartCoroutine(CheckMatchingNumb());
     }
 
+
     private IEnumerator CheckMatchingNumb()
     {
         List<int> numbersToHit = new List<int>();
         foreach (var slot in slotsList)
         {
-            TextMeshProUGUI text = slot.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI textSlot = slot.gameObject.GetComponentInChildren<TextMeshProUGUI>();
             
             //WIP adding darkout on matched number by getting child object through transform
             //Transform goTrans;
@@ -231,16 +232,16 @@ public class spin : MonoBehaviour
             //go = goTrans.transform.gameObject;
             foreach (int gridNumber in gridGeneration.numberPositions.Keys)
             {
-                if (text.text == gridNumber.ToString() && !gridGeneration.numberPositions[gridNumber].hasBeenHit)
+                if (textSlot.text == gridNumber.ToString() && !gridGeneration.numberPositions[gridNumber].hasBeenHit)
                 {
-                    text.color = Color.green;               
+                    textSlot.color = Color.green;               
                     gridGeneration.numberPositions[gridNumber].Hit(false);
-                    numbersToHit.Add(Convert.ToInt32(text.text));
+                    numbersToHit.Add(Convert.ToInt32(textSlot.text));
                     Transform goTrans;
 
                     goTrans = gridGeneration.numberPositions[gridNumber].gameObject.transform.GetChild(0).GetChild(0);
-                    Image childImg = goTrans.GetComponentInChildren<Image>();
-                    childImg.color = new Color(childImg.color.r, childImg.color.g, childImg.color.b, 0.4f);  
+                    Image starImg = goTrans.GetComponentInChildren<Image>();
+                    starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
 
                 }
             }

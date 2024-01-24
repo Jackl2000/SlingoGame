@@ -49,12 +49,13 @@ public class GridNumbers
             if (!wild)
             {
                 starAnimation.SetBool("Hit", true);
-                childImage.GetComponentInChildren<Image>().enabled = true;
+                //childImage.GetComponentInChildren<Image>().enabled = true;
                 childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
                 
             }
             else
             {
+                //childImage.GetComponentInChildren<Image>().enabled = true;
                 starAnimation.SetBool("Hit", true);
                 childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
             }
