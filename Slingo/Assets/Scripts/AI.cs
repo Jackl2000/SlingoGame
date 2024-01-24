@@ -2,6 +2,7 @@ using Codice.Client.Common.GameUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class AI : MonoBehaviour
@@ -18,21 +19,16 @@ public class AI : MonoBehaviour
 
     public GridNumbers BestChoice()
     {
-        int maxSlingoCount = gridCheck.CheckForMaxReward();
         bestChoiceList = BestChoiceList();
-
         int maxValue = 0;
         int currentNumber = 0;
 
-        if(maxSlingoCount == 0)
+        foreach (int item in bestChoiceList.Keys)
         {
-            foreach(int item in bestChoiceList.Keys)
+            if (bestChoiceList[item] > maxValue)
             {
-                if (bestChoiceList[item] > maxValue)
-                {
-                    maxValue = bestChoiceList[item];
-                    currentNumber = item;
-                }
+                maxValue = bestChoiceList[item];
+                currentNumber = item;
             }
         }
         return gridGeneration.numberPositions[currentNumber];
@@ -43,25 +39,82 @@ public class AI : MonoBehaviour
         Dictionary<int, int> bestChoiceValuesList = new Dictionary<int, int>();
         foreach(GridNumbers number in gridGeneration.numberPositions.Values)
         {
+            int finalScore = 0;
             if(number.hasBeenHit)
             {
-                Debug.Log(number.h + ":" + number.v + " has been hit");
                 bestChoiceValuesList.Add(number.number, 0);
+                continue;
             }
             else if(number.h == 3 && number.v == 3)
             {
-                bestChoiceValuesList.Add(number.number, 5);
+                finalScore += 5;
             }
             else if(number.diagonal)
             {
-                bestChoiceValuesList.Add(number.number, 3);
+                finalScore += 3;
             }
             else
             {
-                bestChoiceValuesList.Add(number.number, 1);
+                finalScore += 1;
             }
+            finalScore += SlingoBonus(number);
+            bestChoiceValuesList.Add(number.number, finalScore);
         }
         return bestChoiceValuesList;
-        
-    } 
+    }
+
+    private int SlingoBonus(GridNumbers number)
+    {
+        int hIndex = 0;
+        int vIndex = 0;
+        int dl = 0;
+        int dr = 0;
+        foreach(GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
+        {
+            if(gridNumbers.hasBeenHit)
+            {
+                if (gridNumbers.h == number.h)
+                {
+                    hIndex++;
+                }
+                if (gridNumbers.v == number.v)
+                {
+                    vIndex++;
+                }
+                if (number.diagonal)
+                {
+                    if (number.h == number.v && gridNumbers.h == gridNumbers.v)
+                    {
+                        dl++;
+                    }
+                    else if ((number.h == 1 && number.v == 5) || (number.h == 2 && number.v == 4) || (number.h == 4 && number.v == 2) || (number.h == 5 && number.v == 1) || (number.h == 3 && number.v == 3))
+                    {
+                        if ((gridNumbers.h == 1 && gridNumbers.v == 5) || (gridNumbers.h == 2 && gridNumbers.v == 4) || (gridNumbers.h == 4 && gridNumbers.v == 2) || (gridNumbers.h == 5 && gridNumbers.v == 1) || (gridNumbers.h == 3 && gridNumbers.v == 3))
+                        {
+                            dr++;
+                        }
+                    }
+                }
+            }
+        }
+        if(hIndex == 4)
+        {
+            hIndex *= 3;
+            hIndex += 1;
+        }
+        if(vIndex == 4)
+        {
+            vIndex *= 3;
+            vIndex += 1;
+        }
+        if(dl == 4)
+        {
+            dl *= 3;
+        }
+        if(dr == 4)
+        {
+            dr *= 3;
+        }
+        return hIndex + vIndex + dl + dr;
+    }
 }

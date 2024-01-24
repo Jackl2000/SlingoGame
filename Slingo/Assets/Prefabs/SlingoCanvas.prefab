@@ -8462,7 +8462,7 @@ MonoBehaviour:
   spentText: {fileID: 7751221399858816658}
   spinSpeed: 15
   spinWaitTime: 0.7
-  wildChance: 20
+  wildChance: 5
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
@@ -20258,6 +20258,7 @@ GameObject:
   - component: {fileID: 4374248674525639591}
   - component: {fileID: 2795408711446792720}
   - component: {fileID: 5487674222419349512}
+  - component: {fileID: 1198515194112576019}
   m_Layer: 5
   m_Name: SlingoCanvas
   m_TagString: Untagged
@@ -20424,6 +20425,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinScript: {fileID: 0}
   balance: 999
+--- !u!114 &1198515194112576019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7929506682988506404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e0d28583e8e804eb8b63aaeafd44cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7937363851391973016
 GameObject:
   m_ObjectHideFlags: 0
