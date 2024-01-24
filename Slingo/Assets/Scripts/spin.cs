@@ -215,7 +215,6 @@ public class spin : MonoBehaviour
     {
         if (gridGeneration.numberPositions.ContainsKey(Convert.ToInt32(text.text)) && !gridGeneration.numberPositions[Convert.ToInt32(text.text)].hasBeenHit)
         {
-
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[Convert.ToInt32(text.text)].Hit(false);
@@ -247,11 +246,12 @@ public class spin : MonoBehaviour
         {
             stakes += spinBets;
         }
-        if (spinLeft < 0)
+        if (spinLeft < 0 && !isSpinning)
         {
             stakes += PriceCaculator();
         }
         spentText.text = "Stakes: " + stakes.ToString("F2") + " kr";
+
     }
 
     private void SpinsLeft()
@@ -261,7 +261,11 @@ public class spin : MonoBehaviour
             PriceCaculator();
             spinCountHeader.text = "COST";
         }
-        isSpinning = false;
+        if(wildPicked == 0)
+        {
+            isSpinning = false;
+        }
+        
     }
 
     IEnumerator Spinner()
@@ -279,12 +283,13 @@ public class spin : MonoBehaviour
         max = 16;
         foreach (Animator item in spinAnimations)
         {
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(0.6f);
             item.SetBool("Spinning", false);
             Spin(item.gameObject);
             min += 15;
             max += 15;
         }
+        yield return new WaitForSeconds(0.4f);
         SpinsLeft();
     }
 
