@@ -117,10 +117,9 @@ public class spin : MonoBehaviour
         }
         if (wildPicked < wildPicks)
         {
-
             foreach (int gridNumber in gridGeneration.numberPositions.Keys)
             {
-                if (gridButton.gameObject.GetComponent<TextMeshProUGUI>().text != "")
+                if (!gridGeneration.numberPositions[gridNumber].hasBeenHit)
                 {
                     if (gridNumber == Convert.ToInt32(gridButton.gameObject.GetComponent<TextMeshProUGUI>().text))
                     {
@@ -151,7 +150,6 @@ public class spin : MonoBehaviour
 
         }
         spinButton.enabled = true;
-
     }
 
  
