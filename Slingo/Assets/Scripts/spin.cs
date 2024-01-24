@@ -1,7 +1,9 @@
+using Codice.Client.BaseCommands;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,7 +53,8 @@ public class spin : MonoBehaviour
     int max = 15;
     int wildPicked = 0;
     private int possibleRewardAmplifiere;
-    private Animator spinAnimation;
+    //private Animator spinAnimation;
+    private List<Animator> spinAnimations = new List<Animator>();
     private Animator spinButtonAnimation;
     
 
@@ -61,11 +64,12 @@ public class spin : MonoBehaviour
     private void Awake()
     {
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
-        spinAnimation = GetComponentInChildren<Animator>();
+        //spinAnimation = GetComponentInChildren<Animator>();
         if(spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
         foreach (GameObject spinSlot in slotsList)
         {
             slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
+            spinAnimations.Add(spinSlot.gameObject.GetComponent<Animator>());
         }
     }
 
@@ -173,77 +177,53 @@ public class spin : MonoBehaviour
         }
 
     }
-    public void Spin()
+    public void Spin(GameObject slot)
     {
-        min = 1;
-        max = 16;
+        rnd = UnityEngine.Random.Range(min, max);
 
-        if (wilds.Count > 0) wilds.Clear();
+        int wildPick = UnityEngine.Random.Range(0, wildChance + 1);
 
-        foreach (var spinSlot in slotsList)
+        if (wildPick == 5)
         {
-            rnd = UnityEngine.Random.Range(min, max);
-            min += 15;
-            max += 15;
+            wilds.Enqueue(slot);
+            slot.GetComponentInChildren<Image>().enabled = true;
+            slot.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
-            int wildPick = UnityEngine.Random.Range(0, wildChance + 1);
+            blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
 
-            if (wildPick == 5)
+            for (int i = 0; i < blinkEffect.Length; i++)
             {
-                wilds.Enqueue(spinSlot);
-                spinSlot.GetComponentInChildren<Image>().enabled = true;
-                spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "";
-
-                blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
-
-                for (int i = 0; i < blinkEffect.Length; i++)
-                {
-                    blinkEffect[i].FlashingEffect();
-                }
-                wildPicks++;
-                spinButton.enabled = false;
+                blinkEffect[i].FlashingEffect();
             }
-            else
-            {
-                TextMeshProUGUI text = spinSlot.GetComponentInChildren<TextMeshProUGUI>();
-                text.text = rnd.ToString();
-            }
+            wildPicks++;
+            spinButton.enabled = false;
         }
-        StartCoroutine(CheckMatchingNumb());
+        else
+        {
+            TextMeshProUGUI text = slot.GetComponentInChildren<TextMeshProUGUI>();
+            text.text = rnd.ToString();
+
+            StartCoroutine(CheckMatchingNumb(slot.GetComponentInChildren<TextMeshProUGUI>()));
+        }
+
+        
     }
 
-    private IEnumerator CheckMatchingNumb()
+    private IEnumerator CheckMatchingNumb(TextMeshProUGUI text)
     {
-        List<int> numbersToHit = new List<int>();
-        foreach (var slot in slotsList)
+        if (gridGeneration.numberPositions.ContainsKey(Convert.ToInt32(text.text)) && !gridGeneration.numberPositions[Convert.ToInt32(text.text)].hasBeenHit)
         {
-            TextMeshProUGUI text = slot.gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            foreach (int gridNumber in gridGeneration.numberPositions.Keys)
-            {
-
-                if (text.text == gridNumber.ToString() && !gridGeneration.numberPositions[gridNumber].hasBeenHit)
-                {
-                    text.color = Color.green;
-                    numbersToHit.Add(Convert.ToInt32(text.text));
-                }
-            }
+            text.color = Color.green;
+            yield return new WaitForSeconds(0.5f);
+            gridGeneration.numberPositions[Convert.ToInt32(text.text)].Hit(false);
         }
-        for (int i = 0; i < numbersToHit.Count; i++)
-        {
-            gridGeneration.numberPositions[numbersToHit[i]].Hit(false);
-            if (i + 1 != numbersToHit.Count)
-            {
-                yield return new WaitForSeconds(0.3f);
-            }
-        }
-        SpinsLeft();
     }
 
     private void SpinsLeft()
     {
         if (spinLeft <= 0)
         {
-            PriceCaculator();   
+            PriceCaculator();
             spinCountHeader.text = "COST";
         }
         isSpinning = false;
@@ -251,13 +231,29 @@ public class spin : MonoBehaviour
 
     IEnumerator Spinner()
     {
-        spinAnimation.SetBool("Spinning", true);
-        spinButtonAnimation.SetBool("Spin", true);
+        if (wilds.Count > 0) wilds.Clear();
+        foreach (Animator item in spinAnimations)
+        {
+            item.SetBool("Spinning", true);
+        }
+        //spinAnimation.SetBool("Spinning", true);
+        //spinButtonAnimation.SetBool("Spin", true);
         yield return new WaitForSeconds(spinWaitTime);
-        spinAnimation.SetBool("Spinning", false);
-        spinButtonAnimation.SetBool("Spin", false);
+        min = 1;
+        max = 16;
+        foreach (Animator item in spinAnimations)
+        {
+            yield return new WaitForSeconds(0.75f);
+            item.SetBool("Spinning", false);
+            Spin(item.gameObject);
+            min += 15;
+            max += 15;
+        }
+        //spinAnimation.SetBool("Spinning", false);
+        
+        //spinButtonAnimation.SetBool("Spin", false);
+        SpinsLeft();
 
-        Spin();
     }
 
     /// <summary>
@@ -265,18 +261,18 @@ public class spin : MonoBehaviour
     /// </summary>
     void NumberPingPong()
     {
-        min = 1;
-        max = 16;
+        int minNumber = 1;
+        int maxNumber = 16;
 
-        if (spinAnimation.GetBool("Spinning"))
+        foreach (var text in slotTextList)
         {
-            foreach (var text in slotTextList)
+            if (text.gameObject.GetComponentInParent<Animator>().GetBool("Spinning"))
             {
-                min += 15;
-                max += 15;
-                int numbers = (int)Mathf.Lerp(min, max, Mathf.PingPong(Time.time * spinSpeed, 1));
+                int numbers = (int)Mathf.Lerp(minNumber, maxNumber, Mathf.PingPong(Time.time * spinSpeed, 1));
                 text.text = numbers.ToString();
             }
+            minNumber += 15;
+            maxNumber += 15;
         }
     }
 
