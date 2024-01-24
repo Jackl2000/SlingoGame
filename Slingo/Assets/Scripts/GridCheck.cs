@@ -362,7 +362,6 @@ public class GridCheck : MonoBehaviour
             if (go.GetComponentInChildren<Animator>().GetBool("Slingo") )
             {
                 go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
-                yield return new WaitForSeconds(2.5f);
 
             }
             else
