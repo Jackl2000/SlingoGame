@@ -54,6 +54,7 @@ public class spin : MonoBehaviour
     int min = 1;
     int max = 15;
     int wildPicked = 0;
+    private List<Image> starImgs = new List<Image>();
     private int possibleRewardAmplifiere;
     //private Animator spinAnimation;
     private List<Animator> spinAnimations = new List<Animator>();
@@ -113,6 +114,7 @@ public class spin : MonoBehaviour
     {
         if (wildPicked < wildPicks)
         {
+
             foreach (int gridNumber in gridGeneration.numberPositions.Keys)
             {
                 if (gridButton.gameObject.GetComponent<TextMeshProUGUI>().text != "")
@@ -147,11 +149,19 @@ public class spin : MonoBehaviour
         spinButton.enabled = true;
 
     }
+
+ 
+
     public void StartSpin( )
     {
         if (isSpinning) return;
 
         ColorReset();
+        StartCoroutine("Fade");
+        //foreach (var starImg in starImgs)
+        //{
+        //    starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 1);
+        //}
 
         foreach (GameObject slot in slotsList)
         {
@@ -199,9 +209,9 @@ public class spin : MonoBehaviour
             slot.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
             blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
-            GridNumbers bestChoice = AI.BestChoice();
+            //GridNumbers bestChoice = AI.BestChoice();
             //Debug.Log(bestChoice.h + ":" + bestChoice.v);
-            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+            //gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
             //for (int i = 0; i < blinkEffect.Length; i++)
             //{
             //    blinkEffect[i].FlashingEffect();
@@ -234,6 +244,7 @@ public class spin : MonoBehaviour
             goTrans = gridGeneration.numberPositions[Convert.ToInt32(text.text)].gameObject.transform.GetChild(0).GetChild(0);
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
+            starImgs.Add(starImg);
 
         }
     }
@@ -316,6 +327,18 @@ public class spin : MonoBehaviour
         foreach (var slotText in slotTextList)
         {
             slotText.color = Color.white;
+        }
+    }
+
+    IEnumerator Fade()
+    {
+        foreach (var starImg in starImgs)
+        {
+            for (float i = starImg.color.a; i < 1; i += 0.1f)
+            {
+                starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, i);
+                yield return new WaitForSeconds(0.02f);
+            }
         }
     }
 
