@@ -11,14 +11,16 @@ public class GridNumbers
     public bool hasBeenHit { get; set; } = false;
     public GameObject gameObject;
     public bool diagonal { get; private set; }
+    public int number { get; private set; }
     private Image childImage;
     private Animator starAnimation;
 
-    public GridNumbers(int horizontal, int vertical, GameObject gameObject)
+    public GridNumbers(int horizontal, int vertical, GameObject gameObject, int value)
     {
         h = horizontal;
         v = vertical;
         this.gameObject = gameObject;
+        number = value;
         childImage = gameObject.GetComponentInChildren<Image>();
         if(childImage != null ) starAnimation = childImage.GetComponent<Animator>();
 

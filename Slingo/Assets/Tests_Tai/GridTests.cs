@@ -14,7 +14,7 @@ public class GridTests
     public void TestGridNumberDiagonalFalse()
     {
         GameObject go = new GameObject();
-        GridNumbers gridNumber = new GridNumbers(4, 1, go);
+        GridNumbers gridNumber = new GridNumbers(4, 1, go, 59);
 
         Assert.AreEqual(false, gridNumber.diagonal);
     }
@@ -23,7 +23,7 @@ public class GridTests
     public void TestGridNumberDiagonalTrue()
     {
         GameObject go = new GameObject();
-        GridNumbers gridNumber = new GridNumbers(3, 3, go);
+        GridNumbers gridNumber = new GridNumbers(3, 3, go, 31);
 
         Assert.AreEqual(true, gridNumber.diagonal);
     }
@@ -32,7 +32,7 @@ public class GridTests
     public void TestGridNumberHit()
     {
         GameObject go = new GameObject();
-        GridNumbers gridNumber = new GridNumbers(3, 3, go);
+        GridNumbers gridNumber = new GridNumbers(3, 3, go, 33);
 
         gridNumber.Hit(false);
 
@@ -43,7 +43,7 @@ public class GridTests
     public void TestGridNumberReset()
     {
         GameObject go = new GameObject();
-        GridNumbers gridNumber = new GridNumbers(3, 3, go);
+        GridNumbers gridNumber = new GridNumbers(3, 3, go, 37);
 
         gridNumber.hasBeenHit = true;
         gridNumber.ResetData();
@@ -61,7 +61,7 @@ public class GridTests
         for (int i = 0; i < 10; i++)
         {
             GameObject newGameObject = new GameObject();
-            grid.numberPositions.Add(i, new GridNumbers(i, i, newGameObject));
+            grid.numberPositions.Add(i, new GridNumbers(i, i, newGameObject, 41));
             grid.numberPositions[i].Hit(false);
         }
 

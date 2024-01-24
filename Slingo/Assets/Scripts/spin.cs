@@ -58,7 +58,7 @@ public class spin : MonoBehaviour
     //private Animator spinAnimation;
     private List<Animator> spinAnimations = new List<Animator>();
     private Animator spinButtonAnimation;
-    
+    private AI AI;
 
     PanelEffects[] blinkEffect;
     #endregion
@@ -66,6 +66,7 @@ public class spin : MonoBehaviour
     private void Awake()
     {
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
+        AI = GetComponentInParent<AI>();
         //spinAnimation = GetComponentInChildren<Animator>();
         if(spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
         foreach (GameObject spinSlot in slotsList)
@@ -137,6 +138,12 @@ public class spin : MonoBehaviour
                 isSpinning = false;
             }
         }
+        else
+        {
+            //GridNumbers bestChoice = AI.BestChoice();
+            //gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+
+        }
         spinButton.enabled = true;
 
     }
@@ -192,11 +199,13 @@ public class spin : MonoBehaviour
             slot.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
             blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
-
-            for (int i = 0; i < blinkEffect.Length; i++)
-            {
-                blinkEffect[i].FlashingEffect();
-            }
+            GridNumbers bestChoice = AI.BestChoice();
+            //Debug.Log(bestChoice.h + ":" + bestChoice.v);
+            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+            //for (int i = 0; i < blinkEffect.Length; i++)
+            //{
+            //    blinkEffect[i].FlashingEffect();
+            //}
             wildPicks++;
             spinButton.enabled = false;
         }
