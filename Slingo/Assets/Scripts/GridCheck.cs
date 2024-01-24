@@ -354,12 +354,16 @@ public class GridCheck : MonoBehaviour
 
         foreach (GameObject go in slingoNumbers)
         {
+            
+
             Image img = go.transform.GetChild(0).GetComponent<Image>();
             img.enabled = true;
 
-            if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
+            if (go.GetComponentInChildren<Animator>().GetBool("Slingo") )
             {
                 go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
+                yield return new WaitForSeconds(2.5f);
+
             }
             else
             {
@@ -367,10 +371,6 @@ public class GridCheck : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.2f);
-            if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
-            {
-                go.GetComponentInChildren<Animator>().SetBool("LineIsHit", true);
-            }
         }
 
         yield return new WaitForSeconds(0.5f);
