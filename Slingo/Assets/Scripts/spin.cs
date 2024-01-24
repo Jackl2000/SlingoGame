@@ -271,9 +271,10 @@ public class spin : MonoBehaviour
         {
             item.SetBool("Spinning", true);
         }
-        //spinAnimation.SetBool("Spinning", true);
-        //spinButtonAnimation.SetBool("Spin", true);
-        yield return new WaitForSeconds(spinWaitTime);
+        spinButtonAnimation.SetBool("Spin", true);
+        yield return new WaitForSeconds(0.1f);
+        spinButtonAnimation.SetBool("Spin", false);
+        yield return new WaitForSeconds(spinWaitTime - 0.1f);
         min = 1;
         max = 16;
         foreach (Animator item in spinAnimations)
@@ -284,11 +285,7 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
         }
-        //spinAnimation.SetBool("Spinning", false);
-        
-        //spinButtonAnimation.SetBool("Spin", false);
         SpinsLeft();
-
     }
 
     /// <summary>

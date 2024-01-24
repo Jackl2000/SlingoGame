@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5671771920954017437}
   - component: {fileID: 4026906078326966176}
   - component: {fileID: 7777788711843290408}
+  - component: {fileID: 5053760287721831889}
   m_Layer: 5
   m_Name: Slot (2)
   m_TagString: Untagged
@@ -75,6 +76,27 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!95 &5053760287721831889
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49765591730860136}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1299aced078a2f443b6dcde31b92ee3b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &218440452855180071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3308,7 +3330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 10
     m_Right: 0
     m_Top: 150
     m_Bottom: 0
@@ -7997,6 +8019,7 @@ GameObject:
   - component: {fileID: 6468816177672468648}
   - component: {fileID: 5479473968923730708}
   - component: {fileID: 6095491225173601345}
+  - component: {fileID: 6307920974246849840}
   m_Layer: 5
   m_Name: Slot (1)
   m_TagString: Untagged
@@ -8061,6 +8084,27 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!95 &6307920974246849840
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026685873912758083}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f487ce74a01be564086701257809a9ec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3115169235420250324
 GameObject:
   m_ObjectHideFlags: 0
@@ -14719,14 +14763,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 10
     m_Right: 0
     m_Top: 150
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 165, y: 170.5}
+  m_CellSize: {x: 170, y: 170.5}
   m_Spacing: {x: 0, y: 15}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -16200,7 +16244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 15
     m_Right: 0
     m_Top: 150
     m_Bottom: 0
@@ -16955,6 +16999,7 @@ GameObject:
   - component: {fileID: 4199956941912489919}
   - component: {fileID: 2017717753542541572}
   - component: {fileID: 391475462809924468}
+  - component: {fileID: 3443947279903797929}
   m_Layer: 5
   m_Name: Slot (3)
   m_TagString: Untagged
@@ -17019,6 +17064,27 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!95 &3443947279903797929
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443991277250788270}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd0e12e1602bad043bd579192a262699, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6462429462356110210
 GameObject:
   m_ObjectHideFlags: 0
@@ -19010,6 +19076,7 @@ GameObject:
   - component: {fileID: 1895941123175340710}
   - component: {fileID: 6259052858496341147}
   - component: {fileID: 6925943550840690883}
+  - component: {fileID: 3541867625809662487}
   m_Layer: 5
   m_Name: Slot (4)
   m_TagString: Untagged
@@ -19074,6 +19141,27 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!95 &3541867625809662487
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7305154733994897045}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 35bdace356b5b214ebd37018bd3f91b8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7315803167986404439
 GameObject:
   m_ObjectHideFlags: 0
@@ -19742,6 +19830,7 @@ GameObject:
   - component: {fileID: 104948864141851677}
   - component: {fileID: 1881878544263391814}
   - component: {fileID: 2916167033222896267}
+  - component: {fileID: 4017085377528205931}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -19806,6 +19895,27 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!95 &4017085377528205931
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798638019828884268}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b98c75843baf53042afc0598351be11d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7912326286613297076
 GameObject:
   m_ObjectHideFlags: 0
@@ -20277,9 +20387,6 @@ MonoBehaviour:
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}
   - {fileID: 21300000, guid: 56e38867de09c4342863b3989e01921c, type: 3}
-  starImages:
-  - {fileID: 21300000, guid: 32968f91aaacdfd41acaf5427e62f24c, type: 3}
-  - {fileID: 21300000, guid: a36ea29d5170eef418512936fdc229ef, type: 3}
   jackpotMessage: {fileID: 4270101091029049216}
   jackpotSlingoBorderImages:
   - {fileID: 21300000, guid: 9601c6bf62db084499971930e7f89fcf, type: 3}
@@ -20864,15 +20971,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 60
+    m_Left: 50
     m_Right: 0
     m_Top: 100
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 158, y: 100}
-  m_Spacing: {x: -23.8, y: 0}
+  m_CellSize: {x: 160, y: 100}
+  m_Spacing: {x: -25, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!95 &7356422300322805497
@@ -22230,14 +22337,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: -5
     m_Right: 0
     m_Top: 150
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 170.5}
+  m_CellSize: {x: 230, y: 170.5}
   m_Spacing: {x: 0, y: 15}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -22756,7 +22863,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8555341016745597059}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 24db1b55fe673474b8c6347766682d26, type: 2}
   m_CullingMode: 0
@@ -23762,14 +23869,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 15
     m_Right: 0
     m_Top: 150
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 120, y: 170.5}
+  m_CellSize: {x: 125, y: 170.5}
   m_Spacing: {x: 0, y: 15}
   m_Constraint: 0
   m_ConstraintCount: 2
