@@ -55,6 +55,9 @@ public class spin : MonoBehaviour
     private int possibleRewardAmplifiere;
     private Animator spinAnimation;
     private Animator spinButtonAnimation;
+
+    [Range(0f, 1f)]
+    public float starAlpha;
     
 
     PanelEffects[] blinkEffect;
@@ -233,6 +236,11 @@ public class spin : MonoBehaviour
                     text.color = Color.green;               
                     gridGeneration.numberPositions[gridNumber].Hit(false);
                     numbersToHit.Add(Convert.ToInt32(text.text));
+                    Transform goTrans;
+
+                    goTrans = gridGeneration.numberPositions[gridNumber].gameObject.transform.GetChild(0).GetChild(0);
+                    Image childImg = goTrans.GetComponentInChildren<Image>();
+                    childImg.color = new Color(childImg.color.r, childImg.color.g, childImg.color.b, 0.4f);  
 
                 }
             }

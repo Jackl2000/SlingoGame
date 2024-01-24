@@ -19,7 +19,6 @@ public class GridCheck : MonoBehaviour
     [Space(5)]
     [SerializeField] private GameObject slingoPanel;
     [SerializeField] private Sprite[] slingoBorderImages;
-    [SerializeField] private Sprite[] starImages;
 
     [Space(5)]
     [SerializeField] private GameObject jackpotMessage;
