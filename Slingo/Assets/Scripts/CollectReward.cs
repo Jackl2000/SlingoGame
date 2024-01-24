@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class CollectReward : MonoBehaviour
 {
     [Header("References")]
-    public spin spin;
+    public spin spinScript;
     [SerializeField] private TextMeshProUGUI spinsCounter;
 
     [Header("Collect message settings")]
@@ -29,12 +29,13 @@ public class CollectReward : MonoBehaviour
     public void Collect()
     {
         //Reset values in spin
-        spin.spinCountHeader.text = "SPINS";
+        spinScript.spinCountHeader.text = "SPINS";
         spinsCounter.text = "8";
-        spin.spinLeft = 8;
+        spinScript.spinLeft = 8;
+        spinScript.stakes = 0;
 
-        spin.wildPicks = 0;
-        foreach (var spinSlot in spin.slotsList)
+        spinScript.wildPicks = 0;
+        foreach (var spinSlot in spinScript.slotsList)
         {
             spinSlot.GetComponentInChildren<Image>().color = Color.white;
             spinSlot.GetComponentInChildren<Image>().enabled = false;
@@ -49,11 +50,11 @@ public class CollectReward : MonoBehaviour
             
             gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
 
-            foreach (GameObject go in spin.slotsList)
+            foreach (GameObject go in spinScript.slotsList)
             {
                 go.GetComponentInChildren<Image>(true).enabled = false;
             }
-            foreach (var slotText in spin.slotsList)
+            foreach (var slotText in spinScript.slotsList)
             {
                 slotText.GetComponentInChildren<TextMeshProUGUI>().text = "?";
             }
@@ -78,7 +79,7 @@ public class CollectReward : MonoBehaviour
 
     private void Update()
     {
-        if (gridCheck.slingoCount >= 3 && spin.wildPicks <= 0 && spin.spinLeft <= 0)
+        if (gridCheck.slingoCount >= 3 && spinScript.wildPicks <= 0 && spinScript.spinLeft <= 0)
         {
 
             invokeTime += Time.deltaTime;
