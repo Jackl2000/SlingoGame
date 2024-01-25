@@ -154,7 +154,7 @@ public class spin : MonoBehaviour
 
  
 
-    public void StartSpin( )
+    public void StartSpin()
     {
         if (isSpinning) return;
 
@@ -296,7 +296,7 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
         }
-
+        yield return new WaitForSeconds(0.1f);
 
         if(wildPicks > 0)
         {
