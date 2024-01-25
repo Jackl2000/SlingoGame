@@ -8376,6 +8376,7 @@ GameObject:
   - component: {fileID: 4055942201498400139}
   - component: {fileID: 527621969584549633}
   - component: {fileID: 4979634215744832892}
+  - component: {fileID: 3411623396790772654}
   m_Layer: 5
   m_Name: SpinNumbersBorder
   m_TagString: Untagged
@@ -8462,7 +8463,7 @@ MonoBehaviour:
   spentText: {fileID: 7751221399858816658}
   spinSpeed: 15
   spinWaitTime: 0.7
-  wildChance: 13
+  wildChance: 15
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
@@ -8496,6 +8497,7 @@ MonoBehaviour:
   endColor: {r: 0, g: 0, b: 0, a: 1}
   isBlinking: 0
   numbersPlateIsBlinking: 1
+  blinkeffectStart: 0
 --- !u!114 &4979634215744832892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8510,6 +8512,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinsBetPanel: {fileID: 3150828936742231700}
   settingsPanel: {fileID: 7987460182231669537}
+--- !u!114 &3411623396790772654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3165239912866940755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ab0423e8b76d9448ed81e082fd54ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3236865641390240657
 GameObject:
   m_ObjectHideFlags: 0
@@ -12423,6 +12437,7 @@ MonoBehaviour:
   endColor: {r: 0.99215686, g: 1, b: 0.5058824, a: 1}
   isBlinking: 1
   numbersPlateIsBlinking: 0
+  blinkeffectStart: 0
 --- !u!1 &4654942495790390694
 GameObject:
   m_ObjectHideFlags: 0
@@ -13680,6 +13695,7 @@ MonoBehaviour:
   endColor: {r: 0.9933754, g: 1, b: 0.504717, a: 1}
   isBlinking: 1
   numbersPlateIsBlinking: 0
+  blinkeffectStart: 0
 --- !u!1 &5146877452518167340
 GameObject:
   m_ObjectHideFlags: 0
@@ -20411,7 +20427,6 @@ MonoBehaviour:
   spinsCounter: {fileID: 7484134286775104099}
   collectBorderMessage: {fileID: 4615568449392734210}
   collectMessage: {fileID: 3413761267369758757}
-  timeInterval: 10
   invokeTime: 5
 --- !u!114 &5487674222419349512
 MonoBehaviour:
