@@ -376,5 +376,14 @@ public class GridCheck : MonoBehaviour
         headerAnimator.SetBool("isTwerking", false);
     }
 
+    float TimePassed = 0;
+
+    private void Update()
+    {
+        if (TimePassed > 5)
+        {
+            TimePassed += Time.deltaTime;
+        }
+    }
 
 }
