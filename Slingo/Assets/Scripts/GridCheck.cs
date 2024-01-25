@@ -253,7 +253,7 @@ public class GridCheck : MonoBehaviour
             }
         }
 
-        if (rightIndex == 5 || leftIndex == 5 || vertIndex == 5 || horIndex == 5 && !check)
+        if ((rightIndex == 5 || leftIndex == 5 || vertIndex == 5 || horIndex == 5) && !check)
         {
             StartCoroutine(SlingoAnimation(PlaySlingoAnimation(slingoTypes)));
             slingoTypes.Clear();

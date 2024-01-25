@@ -19,7 +19,6 @@ public class AI : MonoBehaviour
         bestChoiceList = BestChoiceList();
         int maxValue = 0;
         int currentNumber = 0;
-
         foreach (int item in bestChoiceList.Keys)
         {
             if (bestChoiceList[item] > maxValue)
@@ -27,6 +26,10 @@ public class AI : MonoBehaviour
                 maxValue = bestChoiceList[item];
                 currentNumber = item;
             }
+        }
+        if(maxValue == 0)
+        {
+            return null;
         }
         return gridGeneration.numberPositions[currentNumber];
     }
