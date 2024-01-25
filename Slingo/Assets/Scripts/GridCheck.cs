@@ -277,13 +277,13 @@ public class GridCheck : MonoBehaviour
     public int CheckForMaxReward()
     {
         int maxReward = 0;
-        foreach (GridNumbers item in grid.numberPositions.Values)
+        foreach (GridNumbers number in grid.numberPositions.Values)
         {
-            if(!item.hasBeenHit)
+            if(!number.hasBeenHit)
             {
-                item.hasBeenHit = true;
-                CheckGrid(item.h, item.v, item.diagonal, true);
-                item.hasBeenHit = false;
+                number.hasBeenHit = true;
+                CheckGrid(number.h, number.v, number.diagonal, true);
+                number.hasBeenHit = false;
                 if (rewardCount > maxReward)
                 {
                     maxReward = rewardCount;
@@ -349,20 +349,16 @@ public class GridCheck : MonoBehaviour
     {
         slingoAnimationFinished = false;
         headerAnimator.SetBool("isTwerking", true);
-
         yield return new WaitForSeconds(0.1f);
 
         foreach (GameObject go in slingoNumbers)
         {
-
-
             Image img = go.transform.GetChild(0).GetComponent<Image>();
             img.enabled = true;
 
             if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
             {
                 go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
-
             }
             else
             {

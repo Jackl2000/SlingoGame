@@ -160,7 +160,7 @@ public class spin : MonoBehaviour
         if (isSpinning) return;
 
         ColorReset();
-        StartCoroutine("Fade");
+        StartCoroutine(Fade());
         foreach (TextMeshProUGUI textNumber in textToGoEmpty)
         {
             textNumber.text = "";
@@ -391,7 +391,7 @@ public class spin : MonoBehaviour
             for (float i = starImg.color.a; i < 1; i += 0.1f)
             {
                 starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, i);
-                yield return new WaitForSeconds(0.02f);
+                yield return new WaitForSeconds(0.1f);
             }
         }
     }

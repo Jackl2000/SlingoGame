@@ -3041,9 +3041,9 @@ RectTransform:
   - {fileID: 4096036767507485688}
   m_Father: {fileID: 4424352891198733182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1051, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 191, y: 50}
   m_SizeDelta: {x: 355, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3701195331307974060
@@ -8462,7 +8462,7 @@ MonoBehaviour:
   spentText: {fileID: 7751221399858816658}
   spinSpeed: 15
   spinWaitTime: 0.7
-  wildChance: 5
+  wildChance: 13
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
@@ -8472,6 +8472,7 @@ MonoBehaviour:
   - {fileID: 49765591730860136}
   - {fileID: 6443991277250788270}
   - {fileID: 7305154733994897045}
+  textToGoEmpty: []
   spinBets: 1
   wildPicks: 0
   spinLeft: 8
@@ -20384,6 +20385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetButton: {fileID: 7678843588789484500}
   headerAnimator: {fileID: 1352978434706545151}
+  slingoAnimationFinished: 1
   slingoPanel: {fileID: 8294825953586362885}
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}
