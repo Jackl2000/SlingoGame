@@ -143,7 +143,10 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
-                    StartCoroutine(SlingoAnimation(PlaySlingoAnimation("h", number.h)));
+                    if (slingoAnimationFinished)
+                    {
+                        StartCoroutine(SlingoAnimation(PlaySlingoAnimation("h", number.h)));
+                    }
                     break;
                 }
             }
@@ -171,7 +174,11 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
-                    StartCoroutine(SlingoAnimation(PlaySlingoAnimation("v", number.v)));
+                    if (slingoAnimationFinished)
+                    {
+                        StartCoroutine(SlingoAnimation(PlaySlingoAnimation("v", number.v)));
+
+                    }
                     break;
                 }
             }
@@ -203,7 +210,10 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
-                            StartCoroutine(SlingoAnimation(PlaySlingoAnimation("l", 0)));
+                            if(slingoAnimationFinished)
+                            {
+                                StartCoroutine(SlingoAnimation(PlaySlingoAnimation("l", 0)));
+                            }
                             break;
                         }
                     }
@@ -233,7 +243,10 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
-                            StartCoroutine(SlingoAnimation(PlaySlingoAnimation("r", 0)));
+                            if (slingoAnimationFinished)
+                            {
+                                StartCoroutine(SlingoAnimation(PlaySlingoAnimation("r", 0)));
+                            }
                             break;
                         }
                     }
@@ -277,13 +290,13 @@ public class GridCheck : MonoBehaviour
     public int CheckForMaxReward()
     {
         int maxReward = 0;
-        foreach (GridNumbers item in grid.numberPositions.Values)
+        foreach (GridNumbers number in grid.numberPositions.Values)
         {
-            if(!item.hasBeenHit)
+            if(!number.hasBeenHit)
             {
-                item.hasBeenHit = true;
-                CheckGrid(item.h, item.v, item.diagonal, true);
-                item.hasBeenHit = false;
+                number.hasBeenHit = true;
+                CheckGrid(number.h, number.v, number.diagonal, true);
+                number.hasBeenHit = false;
                 if (rewardCount > maxReward)
                 {
                     maxReward = rewardCount;
@@ -342,8 +355,6 @@ public class GridCheck : MonoBehaviour
         return numbersInSlingo;
     }
 
-    bool isPlaying = false;
-
     /// <summary>
     /// Plays the slingo animation on the list of game object
     /// </summary>
@@ -351,31 +362,23 @@ public class GridCheck : MonoBehaviour
     {
         slingoAnimationFinished = false;
         headerAnimator.SetBool("isTwerking", true);
+        yield return new WaitForSeconds(0.1f);
 
-        if (isPlaying)
+        foreach (GameObject go in slingoNumbers)
         {
-            yield return new WaitForSeconds(0.1f);
+            Image img = go.transform.GetChild(0).GetComponent<Image>();
+            img.enabled = true;
 
-            foreach (GameObject go in slingoNumbers)
+            if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
             {
-
-
-                Image img = go.transform.GetChild(0).GetComponent<Image>();
-                img.enabled = true;
-
-                if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
-                {
-                    go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
-
-                }
-                else
-                {
-                    go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
-                }
-
-                yield return new WaitForSeconds(0.2f);
+                go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
+            }
+            else
+            {
+                go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
             }
 
+            yield return new WaitForSeconds(0.2f);
         }
 
         yield return new WaitForSeconds(0.4f);
@@ -387,6 +390,14 @@ public class GridCheck : MonoBehaviour
 
     private void Update()
     {
+        if (slingoIsHit)
+        {
+            foreach (var number in grid.numberPositions.Values)
+            {
+                CheckGrid(number.h, number.v, number.diagonal, true);
+            }
+            
+        }
         float TimePassed = 0;
         if (slingoCount == 12)
         {

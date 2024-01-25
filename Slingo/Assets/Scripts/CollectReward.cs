@@ -39,7 +39,7 @@ public class CollectReward : MonoBehaviour
         spinScript.spinLeft = 8;
         spinScript.stakes = 0;
         spinScript.spentText.text = "0";
-        spinScript.gridNumbersText.Clear();
+        spinScript.textToGoEmpty.Clear();
 
         spinScript.wildPicks = 0;
         foreach (var spinSlot in spinScript.slotsList)
