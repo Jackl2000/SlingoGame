@@ -342,8 +342,6 @@ public class GridCheck : MonoBehaviour
         return numbersInSlingo;
     }
 
-    bool isPlaying = false;
-
     /// <summary>
     /// Plays the slingo animation on the list of game object
     /// </summary>
@@ -352,30 +350,26 @@ public class GridCheck : MonoBehaviour
         slingoAnimationFinished = false;
         headerAnimator.SetBool("isTwerking", true);
 
-        if (isPlaying)
+        yield return new WaitForSeconds(0.1f);
+
+        foreach (GameObject go in slingoNumbers)
         {
-            yield return new WaitForSeconds(0.1f);
 
-            foreach (GameObject go in slingoNumbers)
+
+            Image img = go.transform.GetChild(0).GetComponent<Image>();
+            img.enabled = true;
+
+            if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
             {
+                go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
 
-
-                Image img = go.transform.GetChild(0).GetComponent<Image>();
-                img.enabled = true;
-
-                if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
-                {
-                    go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
-
-                }
-                else
-                {
-                    go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
-                }
-
-                yield return new WaitForSeconds(0.2f);
+            }
+            else
+            {
+                go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
             }
 
+            yield return new WaitForSeconds(0.2f);
         }
 
         yield return new WaitForSeconds(0.4f);

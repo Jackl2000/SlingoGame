@@ -21,30 +21,32 @@ public class PanelEffects : MonoBehaviour
 
     public void FlashingEffect()
     {
-        foreach (GridNumbers number in gridGeneration.numberPositions.Values)
-        {
-            if (spinScript.wildPicks > 0)
-            {
-                if (!number.hasBeenHit && number.gameObject.GetComponent<TextMeshProUGUI>().color != Color.yellow)
-                {
-                    number.gameObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
-                }
-            }
-            if (spinScript.wildPicks <= 0)
-            {
-                if (!number.hasBeenHit)
-                {
-                    number.gameObject.GetComponent<TextMeshProUGUI>().color = startColor;
-                }
-            }
-        }
+        Debug.Log("Flash running");
+        //foreach (GridNumbers number in gridGeneration.numberPositions.Values)
+        //{
+        //    if (spinScript.wildPicks > 0)
+        //    {
+        //        if (!number.hasBeenHit && number.gameObject.GetComponent<TextMeshProUGUI>().color != Color.yellow)
+        //        {
+        //            number.gameObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
+        //        }
+        //    }
+        //    if (spinScript.wildPicks <= 0)
+        //    {
+        //        if (!number.hasBeenHit)
+        //        {
+        //            number.gameObject.GetComponent<TextMeshProUGUI>().color = startColor;
+        //        }
+        //    }
+        //}
         
     }
 
     public void BlinkingEffect()
     {
+        Debug.Log("Blinking running");
         //color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
-        this.gameObject.GetComponent<Graphic>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
+        //this.gameObject.GetComponent<Graphic>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
     }
 
     private void Update()
