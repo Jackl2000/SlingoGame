@@ -22,6 +22,10 @@ public class GridGeneration : MonoBehaviour
     /// </summary>
     public void ReGenerateGrid()
     {
+        if (!GetComponent<GridCheck>().slingoAnimationFinished || GetComponentInChildren<spin>().isSpinning)
+        {
+            return;
+        }
         foreach (GridNumbers number in numberPositions.Values)
         {
             if(number.hasBeenHit)

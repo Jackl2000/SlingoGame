@@ -28,12 +28,18 @@ public class CollectReward : MonoBehaviour
 
     public void Collect()
     {
+        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning)
+        {
+            Debug.Log("Cancel");
+            return;
+        }
         //Reset values in spin
         spinScript.spinCountHeader.text = "SPINS";
         spinsCounter.text = "8";
         spinScript.spinLeft = 8;
         spinScript.stakes = 0;
         spinScript.spentText.text = "0";
+        spinScript.gridNumbersText.Clear();
 
         spinScript.wildPicks = 0;
         foreach (var spinSlot in spinScript.slotsList)
