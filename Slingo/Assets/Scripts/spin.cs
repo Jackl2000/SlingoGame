@@ -36,6 +36,7 @@ public class spin : MonoBehaviour
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
     private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
+    private List<TextMeshProUGUI> gridNumbersText = new List<TextMeshProUGUI>();
     public Queue<GameObject> wilds = new Queue<GameObject>();
 
 
@@ -127,6 +128,7 @@ public class spin : MonoBehaviour
 
                         GameObject wild = wilds.Dequeue();
                         wild.GetComponentInChildren<Image>().color = Color.green;
+                        gridNumbersText.Add(gridGeneration.numberPositions[gridNumber].gameObject.GetComponent<TextMeshProUGUI>());
                         wildPicked++;
                         break;
                     }
@@ -152,6 +154,7 @@ public class spin : MonoBehaviour
         spinButton.enabled = true;
     }
 
+
  
 
     public void StartSpin()
@@ -160,10 +163,10 @@ public class spin : MonoBehaviour
 
         ColorReset();
         StartCoroutine("Fade");
-        //foreach (var starImg in starImgs)
-        //{
-        //    starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 1);
-        //}
+        foreach (TextMeshProUGUI textNumber in gridNumbersText)
+        {
+            textNumber.text = "";
+        }
 
         foreach (GameObject slot in slotsList)
         {
@@ -228,7 +231,6 @@ public class spin : MonoBehaviour
         }
     }
 
-
     private IEnumerator CheckMatchingNumb(TextMeshProUGUI text)
     {
         if (gridGeneration.numberPositions.ContainsKey(Convert.ToInt32(text.text)) && !gridGeneration.numberPositions[Convert.ToInt32(text.text)].hasBeenHit)
@@ -243,7 +245,7 @@ public class spin : MonoBehaviour
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
             starImgs.Add(starImg);
-
+            gridNumbersText.Add(gridGeneration.numberPositions[Convert.ToInt32(text.text)].gameObject.GetComponent<TextMeshProUGUI>());
         }
     }
 

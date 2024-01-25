@@ -362,7 +362,6 @@ public class GridCheck : MonoBehaviour
             if (go.GetComponentInChildren<Animator>().GetBool("Slingo") )
             {
                 go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
-                yield return new WaitForSeconds(2.5f);
 
             }
             else
@@ -377,5 +376,14 @@ public class GridCheck : MonoBehaviour
         headerAnimator.SetBool("isTwerking", false);
     }
 
+    float TimePassed = 0;
+
+    private void Update()
+    {
+        if (TimePassed > 5)
+        {
+            TimePassed += Time.deltaTime;
+        }
+    }
 
 }
