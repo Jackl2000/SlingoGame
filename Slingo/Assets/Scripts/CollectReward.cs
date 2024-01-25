@@ -38,7 +38,8 @@ public class CollectReward : MonoBehaviour
         spinsCounter.text = "8";
         spinScript.spinLeft = 8;
         spinScript.stakes = 0;
-        spinScript.spentText.text = "0";
+        spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);
+
         spinScript.textToGoEmpty.Clear();
 
         spinScript.wildPicks = 0;
