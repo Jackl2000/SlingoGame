@@ -132,11 +132,12 @@ public class GridCheck : MonoBehaviour
         {
             if (number.h == h)
             {
-                horIndex++;
+                
                 if (!number.hasBeenHit)
                 {
                     break;
                 }
+                horIndex++;
 
                 if (horIndex == 5 && !gridSlingoList["h" + h])
                 {
@@ -161,11 +162,12 @@ public class GridCheck : MonoBehaviour
         {
             if (number.v == v)
             {
-                vertIndex++;
+                
                 if (!number.hasBeenHit)
                 {
                     break;
                 }
+                vertIndex++;
 
                 if (vertIndex == 5 && !gridSlingoList["v" + v])
                 {
@@ -195,11 +197,11 @@ public class GridCheck : MonoBehaviour
                 {
                     if (number.h == number.v)
                     {
-                        leftIndex++;
                         if (!number.hasBeenHit)
                         {
                             break;
                         }
+                        leftIndex++;
                         if (leftIndex == 5)
                         {
                             if (check)
@@ -225,11 +227,12 @@ public class GridCheck : MonoBehaviour
                 {
                     if ((number.h == 5 && number.v == 1) || (number.h == 4 && number.v == 2) || (number.h == 3 && number.v == 3) || (number.h == 2 && number.v == 4) || (number.h == 1 && number.v == 5))
                     {
-                        rightIndex++;
+
                         if (!number.hasBeenHit)
                         {
                             break;
                         }
+                        rightIndex++;
                         if (rightIndex == 5 && !gridSlingoList["dr"])
                         {
                             if (check)
@@ -250,11 +253,7 @@ public class GridCheck : MonoBehaviour
             }
         }
 
-
-
-
-
-        if (rightIndex == 5 || leftIndex == 5 || vertIndex == 5 || horIndex == 5)
+        if (rightIndex == 5 || leftIndex == 5 || vertIndex == 5 || horIndex == 5 && !check)
         {
             StartCoroutine(SlingoAnimation(PlaySlingoAnimation(slingoTypes)));
             slingoTypes.Clear();
@@ -372,6 +371,7 @@ public class GridCheck : MonoBehaviour
     private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
     {
         slingoAnimationFinished = false;
+        Debug.Log("Header plays");
         headerAnimator.SetBool("isTwerking", true);
         yield return new WaitForSeconds(0.1f);
 

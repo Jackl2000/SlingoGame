@@ -154,9 +154,6 @@ public class spin : MonoBehaviour
         }
     }
 
-
- 
-
     public void StartSpin()
     {
         if (isSpinning) return;
