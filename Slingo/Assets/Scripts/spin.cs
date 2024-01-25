@@ -151,7 +151,7 @@ public class spin : MonoBehaviour
             bestChoiceText.color = Color.white;
             GridNumbers bestChoice = AI.BestChoice();
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
 
         }
         spinButton.enabled = true;
@@ -165,7 +165,7 @@ public class spin : MonoBehaviour
         if (isSpinning) return;
 
         ColorReset();
-        StartCoroutine("Fade");
+        StartCoroutine(Fade());
         foreach (TextMeshProUGUI textNumber in textToGoEmpty)
         {
             textNumber.text = "";
@@ -308,7 +308,7 @@ public class spin : MonoBehaviour
             WildTransparency(false);
             GridNumbers bestChoice = AI.BestChoice();
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
         }
 
         
@@ -399,7 +399,7 @@ public class spin : MonoBehaviour
             for (float i = starImg.color.a; i < 1; i += 0.1f)
             {
                 starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, i);
-                yield return new WaitForSeconds(0.02f);
+                yield return new WaitForSeconds(0.1f);
             }
         }
     }

@@ -143,10 +143,7 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
-                    if (slingoAnimationFinished)
-                    {
-                        StartCoroutine(SlingoAnimation(PlaySlingoAnimation("h", number.h)));
-                    }
+                    StartCoroutine(SlingoAnimation(PlaySlingoAnimation("h", number.h)));
                     break;
                 }
             }
@@ -174,11 +171,7 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
-                    if (slingoAnimationFinished)
-                    {
-                        StartCoroutine(SlingoAnimation(PlaySlingoAnimation("v", number.v)));
-
-                    }
+                    StartCoroutine(SlingoAnimation(PlaySlingoAnimation("v", number.v)));
                     break;
                 }
             }
@@ -210,10 +203,7 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
-                            if(slingoAnimationFinished)
-                            {
-                                StartCoroutine(SlingoAnimation(PlaySlingoAnimation("l", 0)));
-                            }
+                            StartCoroutine(SlingoAnimation(PlaySlingoAnimation("l", 0)));
                             break;
                         }
                     }
@@ -243,10 +233,7 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
-                            if (slingoAnimationFinished)
-                            {
-                                StartCoroutine(SlingoAnimation(PlaySlingoAnimation("r", 0)));
-                            }
+                            StartCoroutine(SlingoAnimation(PlaySlingoAnimation("r", 0)));
                             break;
                         }
                     }
@@ -390,14 +377,6 @@ public class GridCheck : MonoBehaviour
 
     private void Update()
     {
-        if (slingoIsHit)
-        {
-            foreach (var number in grid.numberPositions.Values)
-            {
-                CheckGrid(number.h, number.v, number.diagonal, true);
-            }
-            
-        }
         float TimePassed = 0;
         if (slingoCount == 12)
         {
