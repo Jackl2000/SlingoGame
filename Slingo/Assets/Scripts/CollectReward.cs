@@ -28,7 +28,7 @@ public class CollectReward : MonoBehaviour
 
     public void Collect()
     {
-        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning)
+        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning || spinScript.wildPicks != 0)
         {
             Debug.Log("Cancel");
             return;

@@ -60,6 +60,7 @@ public class GridNumbers
                 //childImage.GetComponentInChildren<Image>().enabled = true;
                 starAnimation.SetBool("Hit", true);
                 childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
+                gameObject.GetComponent<TextMeshProUGUI>().text = "";
             }
         }
         catch (System.Exception)

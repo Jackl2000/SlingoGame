@@ -22,7 +22,7 @@ public class GridGeneration : MonoBehaviour
     /// </summary>
     public void ReGenerateGrid()
     {
-        if (!GetComponent<GridCheck>().slingoAnimationFinished || GetComponentInChildren<spin>().isSpinning)
+        if (!GetComponent<GridCheck>().slingoAnimationFinished || GetComponentInChildren<spin>().isSpinning || GetComponentInChildren<spin>().wildPicks != 0)
         {
             return;
         }

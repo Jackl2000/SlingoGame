@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class PanelEffects : MonoBehaviour
 {
@@ -19,9 +20,13 @@ public class PanelEffects : MonoBehaviour
     public bool isBlinking;
     public bool numbersPlateIsBlinking = false;
 
-    public void FlashingEffect()
+    [HideInInspector] public bool blinkeffectStart = false;
+
+    private TextMeshProUGUI bestChoiceText;
+
+    public void FlashingEffect(TextMeshProUGUI text)
     {
-        Debug.Log("Flash running");
+        //Debug.Log("Flash running");
         //foreach (GridNumbers number in gridGeneration.numberPositions.Values)
         //{
         //    if (spinScript.wildPicks > 0)
@@ -39,27 +44,34 @@ public class PanelEffects : MonoBehaviour
         //        }
         //    }
         //}
+        bestChoiceText = text;
+        blinkeffectStart = true;
         
+
     }
 
     public void BlinkingEffect()
     {
-        Debug.Log("Blinking running");
         //color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
         //this.gameObject.GetComponent<Graphic>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
     }
 
     private void Update()
     {
-        if (numbersPlateIsBlinking)
-        {
-            FlashingEffect();
-        }
+        //if (numbersPlateIsBlinking)
+        //{
+        //    FlashingEffect();
+        //}
 
         if (isBlinking)
         {
             BlinkingEffect();
 
+        }
+
+        if(blinkeffectStart)
+        {
+            bestChoiceText.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
         }
     }
 }
