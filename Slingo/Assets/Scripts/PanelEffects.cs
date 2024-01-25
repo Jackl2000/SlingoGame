@@ -51,15 +51,15 @@ public class PanelEffects : MonoBehaviour
 
     private void Update()
     {
-        if (numbersPlateIsBlinking)
-        {
-            FlashingEffect();
-        }
+        //if (numbersPlateIsBlinking)
+        //{
+        //    FlashingEffect();
+        //}
 
-        if (isBlinking)
-        {
-            BlinkingEffect();
+        //if (isBlinking)
+        //{
+        //    BlinkingEffect();
 
-        }
+        //}
     }
 }
