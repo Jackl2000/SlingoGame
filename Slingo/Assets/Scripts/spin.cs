@@ -54,13 +54,14 @@ public class spin : MonoBehaviour
     int max = 15;
     int wildPicked = 0;
     private List<Image> starImgs = new List<Image>();
-    private int possibleRewardAmplifiere;
+
     private List<Animator> spinAnimations = new List<Animator>();
     private Animator spinButtonAnimation;
     private AI AI;
     private TextMeshProUGUI bestChoiceText;
+    private Calculations calculations;
 
-    PanelEffects[] blinkEffect;
+    PanelEffects blinkEffect;
     #endregion
 
     private void Awake()
@@ -73,6 +74,8 @@ public class spin : MonoBehaviour
             slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
             spinAnimations.Add(spinSlot.gameObject.GetComponent<Animator>());
         }
+        blinkEffect = GetComponent<PanelEffects>();
+        calculations = GetComponent<Calculations>();
     }
 
 
@@ -105,7 +108,6 @@ public class spin : MonoBehaviour
         }
 
         #endregion
-
     }
 
     public void WildPick(Button gridButton)
@@ -114,47 +116,42 @@ public class spin : MonoBehaviour
         {
             return;
         }
+        int numberPressed = Convert.ToInt32(gridButton.GetComponent<TextMeshProUGUI>().text);
         GameObject wildNumberPicked = null;
         if (wildPicked < wildPicks)
         {
-            foreach (int gridNumber in gridGeneration.numberPositions.Keys)
+            if(!gridGeneration.numberPositions[numberPressed].hasBeenHit)
             {
-                if (!gridGeneration.numberPositions[gridNumber].hasBeenHit && gridButton.gameObject.GetComponent<TextMeshProUGUI>().text != "")
-                {
-                    if (gridNumber == Convert.ToInt32(gridButton.gameObject.GetComponent<TextMeshProUGUI>().text))
-                    {
-                        gridGeneration.numberPositions[gridNumber].Hit(true);
-                        wildNumberPicked = gridGeneration.numberPositions[gridNumber].gameObject;
-                        GameObject wild = wilds.Dequeue();
-                        wild.GetComponentInChildren<Image>().color = Color.green;
-                        textToGoEmpty.Add(gridGeneration.numberPositions[gridNumber].gameObject.GetComponent<TextMeshProUGUI>());
-                        wildPicked++;
-                        break;
-                    }
-                }
+                gridGeneration.numberPositions[numberPressed].Hit(true);
+                textToGoEmpty.Add(gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>());
+                wildNumberPicked = gridGeneration.numberPositions[numberPressed].gameObject;
+
+                GameObject wild = wilds.Dequeue();
+                wild.GetComponentInChildren<Image>().color = Color.green;
+                
+                wildPicked++;
             }
         }
-        if(wildPicked == wildPicks)
+        if (wildPicked == wildPicks)
         {
+            blinkEffect.blinkeffectStart = false;
             WildTransparency(true, wildNumberPicked);
             bestChoiceText.color = Color.white;
             if (spinLeft <= 0)
             {
                 spinCountHeader.text = "COST";
-                PriceCaculator();
+                calculations.PriceCaculator();
             }
-            
         }
         else
         {
+            blinkEffect.blinkeffectStart = false;
             WildTransparency(false, wildNumberPicked);
             bestChoiceText.color = Color.white;
             GridNumbers bestChoice = AI.BestChoice();
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
-
+            blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
-        spinButton.enabled = true;
     }
 
 
@@ -223,32 +220,30 @@ public class spin : MonoBehaviour
             //    blinkEffect[i].FlashingEffect();
             //}
             wildPicks++;
-            spinButton.enabled = false;
         }
         else
         {
             TextMeshProUGUI text = slot.GetComponentInChildren<TextMeshProUGUI>();
             text.text = rnd.ToString();
-
-            StartCoroutine(CheckMatchingNumb(slot.GetComponentInChildren<TextMeshProUGUI>()));
+            StartCoroutine(CheckMatchingNumb(text, Convert.ToInt32(text.text)));
         }
     }
 
-    private IEnumerator CheckMatchingNumb(TextMeshProUGUI text)
+    private IEnumerator CheckMatchingNumb(TextMeshProUGUI text, int number)
     {
-        if (gridGeneration.numberPositions.ContainsKey(Convert.ToInt32(text.text)) && !gridGeneration.numberPositions[Convert.ToInt32(text.text)].hasBeenHit)
+        if (gridGeneration.numberPositions.ContainsKey(number) && !gridGeneration.numberPositions[number].hasBeenHit)
         {
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
-            gridGeneration.numberPositions[Convert.ToInt32(text.text)].Hit(false);
+            gridGeneration.numberPositions[number].Hit(false);
 
             Transform goTrans;
 
-            goTrans = gridGeneration.numberPositions[Convert.ToInt32(text.text)].gameObject.transform.GetChild(0).GetChild(0);
+            goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
             starImgs.Add(starImg);
-            textToGoEmpty.Add(gridGeneration.numberPositions[Convert.ToInt32(text.text)].gameObject.GetComponent<TextMeshProUGUI>());
+            textToGoEmpty.Add(gridGeneration.numberPositions[number].gameObject.GetComponent<TextMeshProUGUI>());
         }
     }
 
@@ -260,7 +255,7 @@ public class spin : MonoBehaviour
         }
         if (spinLeft < 0 && !isSpinning)
         {
-            stakes += PriceCaculator();
+            stakes += calculations.PriceCaculator();
         }
         spentText.text = "Stakes: " + stakes.ToString("F2") + " kr";
 
@@ -270,14 +265,13 @@ public class spin : MonoBehaviour
     {
         if (spinLeft <= 0)
         {
-            PriceCaculator();
+            calculations.PriceCaculator();
             spinCountHeader.text = "COST";
         }
         if(wildPicked == 0)
         {
             isSpinning = false;
         }
-        
     }
 
     IEnumerator Spinner()
@@ -287,15 +281,17 @@ public class spin : MonoBehaviour
         {
             item.SetBool("Spinning", true);
         }
+
         spinButtonAnimation.SetBool("Spin", true);
         yield return new WaitForSeconds(0.1f);
         spinButtonAnimation.SetBool("Spin", false);
+
         yield return new WaitForSeconds(spinWaitTime - 0.1f);
         min = 1;
         max = 16;
         foreach (Animator item in spinAnimations)
         {
-            yield return new WaitForSeconds(0.6f);
+            yield return new WaitForSeconds(0.5f);
             item.SetBool("Spinning", false);
             Spin(item.gameObject);
             min += 15;
@@ -308,9 +304,8 @@ public class spin : MonoBehaviour
             WildTransparency(false);
             GridNumbers bestChoice = AI.BestChoice();
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
+            blinkEffect.FlashingEffect(bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
         }
-
         
         yield return new WaitForSeconds(0.4f);
         SpinsLeft();
@@ -318,7 +313,6 @@ public class spin : MonoBehaviour
 
     private void WildTransparency(bool stop, GameObject wildpick = null)
     {
-        if(wildpick != null) Debug.Log("namewild: " + wildpick.name);
         foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
         {
             if (!gridNumbers.hasBeenHit)
@@ -377,11 +371,10 @@ public class spin : MonoBehaviour
 
     public void ColorReset()
     {
-        if(!gridCheck.slingoAnimationFinished || isSpinning)
+        if(!gridCheck.slingoAnimationFinished || isSpinning || wildPicks != 0)
         {
             return;
         }
-        Debug.Log("Damn " + slotTextList.Count);
         foreach (var slotText in slotTextList)
         {
             slotText.color = Color.white;
@@ -394,66 +387,12 @@ public class spin : MonoBehaviour
 
     IEnumerator Fade()
     {
-        foreach (var starImg in starImgs)
+        foreach (var starImg in starImgs.ToArray())
         {
             for (float i = starImg.color.a; i < 1; i += 0.1f)
             {
                 starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, i);
                 yield return new WaitForSeconds(0.1f);
-            }
-        }
-    }
-
-    private float PriceCaculator()
-    {
-        if (gridCheck.slingoCount == 12)
-        {
-            return 0;
-        }
-        possibleRewardAmplifiere = gridCheck.CheckForMaxReward();
-
-        float starMultipliere = 0.015f + (gridCheck.starsCount * 0.05f);
-        float slingoReward = 0.015f * (gridCheck.starsCount * 5);
-        if (gridCheck.slingoCount == 0)
-        {
-            slingoReward = 0.015f + starMultipliere;
-        }
-        if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
-        {
-            slingoReward = (gridCheck.rewards[gridCheck.slingoCount + 1] / spinBets) / Mathf.Clamp((1 + gridCheck.slingoCount) / gridCheck.slingoCount, 3, (1 + gridCheck.slingoCount) / gridCheck.slingoCount) * (starMultipliere + 0.5f);
-        }
-
-        float maxSlingoAmplifiere = Mathf.Clamp(possibleRewardAmplifiere - 0.5f, 0.5f, 1.8f);
-        float price = slingoReward * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
-        price *= spinBets;
-        spinLeftText.text = UIManager.Instance.DisplayMoney(price);
-        return price;
-    }
-
-    private void TestCalculation()
-    {
-        float bet = 1;
-        for (float m = 0; m < 3; m++)
-        {
-            for (float i = 0; i < 11; i++)
-            {
-                for (float j = 10; j < 25; j++)
-                {
-                    float multipliere = 0.015f + (j * 0.05f);
-                    float slingoRewards = 0.015f * (j * 5);
-                    if (i == 0)
-                    {
-                        slingoRewards = 0.015f + multipliere;
-                    }
-                    if (gridCheck.rewards.ContainsKey(Convert.ToInt32(i) + 1))
-                    {
-                        slingoRewards = (gridCheck.rewards[Convert.ToInt32(i) + 1] / bet) / Mathf.Clamp((1 + i) / i, 3, (1 + i) / i) * (multipliere + 0.5f);
-                    }
-                    float maxSlingoAmplifiere = Mathf.Clamp(m - 0.5f, 0.5f, 1.8f);
-                    float price = slingoRewards * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
-                    price *= bet;
-                    Debug.Log("SlingoCount: " + i + " Starscount: " + j + " Multipliere: " + multipliere + " Amplifiere: " + maxSlingoAmplifiere + " final value: " + UIManager.Instance.DisplayMoney(price));
-                }
             }
         }
     }

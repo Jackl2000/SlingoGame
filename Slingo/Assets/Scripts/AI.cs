@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-    private GridCheck gridCheck;
     private GridGeneration gridGeneration;
     private Dictionary<int, int> bestChoiceList;
     // Start is called before the first frame update
     void Start()
     {
-        gridCheck = GetComponent<GridCheck>();
         gridGeneration = GetComponent<GridGeneration>();
     }
 

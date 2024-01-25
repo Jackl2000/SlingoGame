@@ -14,7 +14,6 @@ public class CollectReward : MonoBehaviour
     [Header("Collect message settings")]
     public GameObject collectBorderMessage;
     public TextMeshProUGUI collectMessage;
-    public float timeInterval = 10f;
     public float invokeTime = 5;
 
     private GridCheck gridCheck;
@@ -28,9 +27,8 @@ public class CollectReward : MonoBehaviour
 
     public void Collect()
     {
-        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning)
+        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning || spinScript.wildPicks != 0)
         {
-            Debug.Log("Cancel");
             return;
         }
         //Reset values in spin
@@ -39,10 +37,8 @@ public class CollectReward : MonoBehaviour
         spinScript.spinLeft = 8;
         spinScript.stakes = 0;
         spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);
-
         spinScript.textToGoEmpty.Clear();
 
-        spinScript.wildPicks = 0;
         foreach (var spinSlot in spinScript.slotsList)
         {
             spinSlot.GetComponentInChildren<Image>().color = Color.white;
@@ -54,18 +50,7 @@ public class CollectReward : MonoBehaviour
         if (gridCheck.slingoCount >= 3)
         {
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
-
-            
             gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
-
-            foreach (GameObject go in spinScript.slotsList)
-            {
-                go.GetComponentInChildren<Image>(true).enabled = false;
-            }
-            foreach (var slotText in spinScript.slotsList)
-            {
-                slotText.GetComponentInChildren<TextMeshProUGUI>().text = "?";
-            }
             collectBorderMessage.SetActive(false);
             ResetTime();
         }
