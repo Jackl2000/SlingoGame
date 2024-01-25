@@ -28,7 +28,7 @@ public class spin : MonoBehaviour
     /// </summary>
     [SerializeField] private float spinWaitTime;
     [SerializeField] private int wildChance;
-    [SerializeField] private bool isSpinning = false;
+    public bool isSpinning = false;
 
     [Space(5)]
     public TextMeshProUGUI spinLeftText;
@@ -36,7 +36,7 @@ public class spin : MonoBehaviour
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
     private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
-    private List<TextMeshProUGUI> textToGoEmpty = new List<TextMeshProUGUI>();
+    public List<TextMeshProUGUI> textToGoEmpty = new List<TextMeshProUGUI>();
     public Queue<GameObject> wilds = new Queue<GameObject>();
 
     #region others variables
@@ -153,7 +153,10 @@ public class spin : MonoBehaviour
         spinButton.enabled = true;
     }
 
-    public void StartSpin( )
+
+ 
+
+    public void StartSpin()
     {
         if (isSpinning) return;
 
@@ -294,7 +297,7 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
         }
-
+        yield return new WaitForSeconds(0.1f);
 
         if(wildPicks > 0)
         {
@@ -330,6 +333,10 @@ public class spin : MonoBehaviour
 
     public void ColorReset()
     {
+        if(!gridCheck.slingoAnimationFinished || isSpinning)
+        {
+            return;
+        }
         foreach (var slotText in slotTextList)
         {
             slotText.color = Color.white;

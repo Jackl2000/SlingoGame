@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class GridCheck : MonoBehaviour
     [HideInInspector] public int slingoCount { get; private set; } = 0;
     [HideInInspector] public int starsCount { get; set; } = 0;
     [HideInInspector] public Dictionary<int, float> rewards{ get; private set; } = new Dictionary<int, float>();
+    [HideInInspector] public bool slingoAnimationFinished = true;
 
     [Space(5)]
     [SerializeField] private GameObject slingoPanel;
@@ -347,6 +349,7 @@ public class GridCheck : MonoBehaviour
     /// </summary>
     private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
     {
+        slingoAnimationFinished = false;
         headerAnimator.SetBool("isTwerking", true);
 
         if (isPlaying)
@@ -377,7 +380,7 @@ public class GridCheck : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
         headerAnimator.SetBool("isTwerking", false);
-        isPlaying = false;
+        slingoAnimationFinished = true;
     }
 
 

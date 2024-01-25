@@ -99,21 +99,35 @@ public class AI : MonoBehaviour
         }
         if(hIndex == 4)
         {
-            hIndex *= 3;
-            hIndex += 1;
+            hIndex *= 4;
+        }
+        else if(hIndex == 3)
+        {
+            hIndex *= 2;
         }
         if(vIndex == 4)
         {
-            vIndex *= 3;
-            vIndex += 1;
+            vIndex *= 4;
         }
-        if(dl == 4)
+        else if (vIndex == 3)
         {
-            dl *= 3;
+            vIndex *= 2;
         }
-        if(dr == 4)
+        if (dl == 4)
         {
-            dr *= 3;
+            dl *= 4;
+        }
+        else if (dl == 3)
+        {
+            dl *= 2;
+        }
+        if (dr == 4)
+        {
+            dr *= 4;
+        }
+        else if (dr == 3)
+        {
+            dr *= 2;
         }
         return hIndex + vIndex + dl + dr;
     }
