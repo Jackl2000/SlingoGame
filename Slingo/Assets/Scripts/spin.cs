@@ -36,9 +36,8 @@ public class spin : MonoBehaviour
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
     private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
-    private List<TextMeshProUGUI> gridNumbersText = new List<TextMeshProUGUI>();
+    private List<TextMeshProUGUI> textToGoEmpty = new List<TextMeshProUGUI>();
     public Queue<GameObject> wilds = new Queue<GameObject>();
-
 
     #region others variables
     [HideInInspector] public float spinBets = 1;
@@ -128,7 +127,7 @@ public class spin : MonoBehaviour
 
                         GameObject wild = wilds.Dequeue();
                         wild.GetComponentInChildren<Image>().color = Color.green;
-                        gridNumbersText.Add(gridGeneration.numberPositions[gridNumber].gameObject.GetComponent<TextMeshProUGUI>());
+                        textToGoEmpty.Add(gridGeneration.numberPositions[gridNumber].gameObject.GetComponent<TextMeshProUGUI>());
                         wildPicked++;
                         break;
                     }
@@ -160,7 +159,7 @@ public class spin : MonoBehaviour
 
         ColorReset();
         StartCoroutine("Fade");
-        foreach (TextMeshProUGUI textNumber in gridNumbersText)
+        foreach (TextMeshProUGUI textNumber in textToGoEmpty)
         {
             textNumber.text = "";
         }
@@ -208,7 +207,7 @@ public class spin : MonoBehaviour
         {
             wilds.Enqueue(slot);
             slot.GetComponentInChildren<Image>().enabled = true;
-            slot.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            slot.GetComponentInChildren<TextMeshProUGUI>().text = ""; //Clears number behind the star when getting wild
 
             blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
 
@@ -242,7 +241,7 @@ public class spin : MonoBehaviour
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
             starImgs.Add(starImg);
-            gridNumbersText.Add(gridGeneration.numberPositions[Convert.ToInt32(text.text)].gameObject.GetComponent<TextMeshProUGUI>());
+            textToGoEmpty.Add(gridGeneration.numberPositions[Convert.ToInt32(text.text)].gameObject.GetComponent<TextMeshProUGUI>());
         }
     }
 

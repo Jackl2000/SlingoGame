@@ -265,10 +265,7 @@ public class GridCheck : MonoBehaviour
         {
             resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Collect " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
         }
-        if (slingoCount == 12)
-        {
-            jackpotMessage.SetActive(true);
-        }
+
     }
 
     /// <summary>
@@ -343,6 +340,8 @@ public class GridCheck : MonoBehaviour
         return numbersInSlingo;
     }
 
+    bool isPlaying = false;
+
     /// <summary>
     /// Plays the slingo animation on the list of game object
     /// </summary>
@@ -350,40 +349,51 @@ public class GridCheck : MonoBehaviour
     {
         headerAnimator.SetBool("isTwerking", true);
 
-        yield return new WaitForSeconds(0.1f);
-
-        foreach (GameObject go in slingoNumbers)
+        if (isPlaying)
         {
-            
+            yield return new WaitForSeconds(0.1f);
 
-            Image img = go.transform.GetChild(0).GetComponent<Image>();
-            img.enabled = true;
-
-            if (go.GetComponentInChildren<Animator>().GetBool("Slingo") )
+            foreach (GameObject go in slingoNumbers)
             {
-                go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
 
-            }
-            else
-            {
-                go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
+
+                Image img = go.transform.GetChild(0).GetComponent<Image>();
+                img.enabled = true;
+
+                if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
+                {
+                    go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
+
+                }
+                else
+                {
+                    go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
+                }
+
+                yield return new WaitForSeconds(0.2f);
             }
 
-            yield return new WaitForSeconds(0.2f);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         headerAnimator.SetBool("isTwerking", false);
+        isPlaying = false;
     }
 
-    float TimePassed = 0;
+
 
     private void Update()
     {
-        if (TimePassed > 5)
+        float TimePassed = 0;
+        if (slingoCount == 12)
         {
             TimePassed += Time.deltaTime;
+            if (TimePassed > 5)
+            {
+                jackpotMessage.SetActive(true);
+            }
         }
+
     }
 
 }
