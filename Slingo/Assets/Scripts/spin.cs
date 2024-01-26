@@ -123,7 +123,7 @@ public class spin : MonoBehaviour
             if(!gridGeneration.numberPositions[numberPressed].hasBeenHit)
             {
                 gridGeneration.numberPositions[numberPressed].Hit();
-                textToGoEmpty.Add(gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>());
+                gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
                 wildNumberPicked = gridGeneration.numberPositions[numberPressed].gameObject;
 
                 GameObject wild = wilds.Dequeue();

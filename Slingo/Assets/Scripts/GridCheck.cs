@@ -375,7 +375,6 @@ public class GridCheck : MonoBehaviour
     private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
     {
         slingoAnimationFinished = false;
-        Debug.Log("Header plays");
         headerAnimator.SetBool("isTwerking", true);
         yield return new WaitForSeconds(0.1f);
 
