@@ -59,16 +59,16 @@ public class GridCheck : MonoBehaviour
     public void UpdateRewards(float multiplyere)
     {
         rewards.Clear();
-        rewards.Add(3, 10 * multiplyere);
-        rewards.Add(4, 20 * multiplyere);
-        rewards.Add(5, 40 * multiplyere);
-        rewards.Add(6, 100 * multiplyere);
-        rewards.Add(7, 250 * multiplyere);
-        rewards.Add(8, 750 * multiplyere);
-        rewards.Add(9, 2250 * multiplyere);
-        rewards.Add(10, 5000 * multiplyere);
-        rewards.Add(11, 10000 * multiplyere);
-        rewards.Add(12, 10000 * multiplyere);
+        rewards.Add(3, 1 * multiplyere);
+        rewards.Add(4, 3 * multiplyere);
+        rewards.Add(5, 5 * multiplyere);
+        rewards.Add(6, 10 * multiplyere);
+        rewards.Add(7, 25 * multiplyere);
+        rewards.Add(8, 75 * multiplyere);
+        rewards.Add(9, 150 * multiplyere);
+        rewards.Add(10, 500 * multiplyere);
+        rewards.Add(11, 500 * multiplyere);
+        rewards.Add(12, 1000 * multiplyere);
 
         GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(go => go.transform.position.y).ToArray();
 
