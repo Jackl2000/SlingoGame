@@ -402,6 +402,4 @@ public class GridCheck : MonoBehaviour
         headerAnimator.SetBool("isTwerking", false);
         slingoAnimationFinished = true;
     }
-
-
 }
