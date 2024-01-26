@@ -122,7 +122,7 @@ public class spin : MonoBehaviour
         {
             if(!gridGeneration.numberPositions[numberPressed].hasBeenHit)
             {
-                gridGeneration.numberPositions[numberPressed].Hit(true);
+                gridGeneration.numberPositions[numberPressed].Hit();
                 textToGoEmpty.Add(gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>());
                 wildNumberPicked = gridGeneration.numberPositions[numberPressed].gameObject;
 
@@ -236,7 +236,7 @@ public class spin : MonoBehaviour
         {
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
-            gridGeneration.numberPositions[number].Hit(false);
+            gridGeneration.numberPositions[number].Hit();
 
             Transform goTrans;
 
@@ -322,7 +322,7 @@ public class spin : MonoBehaviour
     {
         foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
         {
-            if (!gridNumbers.hasBeenHit)
+            if (!gridNumbers.hasBeenHit || gridNumbers.gameObject == wildpick)
             {
                 Animator animatorObject = gridNumbers.gameObject.GetComponentInChildren<Animator>();
                 Image img = animatorObject.gameObject.transform.GetChild(1).GetComponent<Image>();
@@ -330,14 +330,6 @@ public class spin : MonoBehaviour
                 img.color = new Color(img.color.r, img.color.g, img.color.b, 1);
                 animatorObject.SetBool("Wild", false);
             }
-        }
-        if(wildpick != null)
-        {
-            Animator animatorObject = wildpick.gameObject.GetComponentInChildren<Animator>();
-            Image wildImg = animatorObject.gameObject.transform.GetChild(1).GetComponent<Image>();
-            wildImg.enabled = true;
-            wildImg.color = new Color(wildImg.color.r, wildImg.color.g, wildImg.color.b, 1);
-            animatorObject.SetBool("Wild", false);
         }
         if(stop)
         {

@@ -131,7 +131,7 @@ public class GridGeneration : MonoBehaviour
         {
             foreach (int gridNumber in numberPositions.Keys)
             {
-                numberPositions[gridNumber].Hit(false);
+                numberPositions[gridNumber].Hit();
             }
         }
     }

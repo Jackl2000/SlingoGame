@@ -34,7 +34,7 @@ public class GridTests
         GameObject go = new GameObject();
         GridNumbers gridNumber = new GridNumbers(3, 3, go, 33);
 
-        gridNumber.Hit(false);
+        gridNumber.Hit();
 
         Assert.AreEqual(true, gridNumber.hasBeenHit);
     }
@@ -62,7 +62,7 @@ public class GridTests
         {
             GameObject newGameObject = new GameObject();
             grid.numberPositions.Add(i, new GridNumbers(i, i, newGameObject, 41));
-            grid.numberPositions[i].Hit(false);
+            grid.numberPositions[i].Hit();
         }
 
         Assert.AreEqual(10, grid.numberPositions.Count);

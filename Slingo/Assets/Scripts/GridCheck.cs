@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.LowLevel;
 using UnityEngine.UI;
 
 
@@ -380,8 +381,10 @@ public class GridCheck : MonoBehaviour
 
         foreach (GameObject go in slingoNumbers)
         {
-            Image img = go.transform.GetChild(0).GetComponent<Image>();
-            img.enabled = true;
+            Image wallImage = go.GetComponentInChildren<Image>();
+            wallImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            wallImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
+            wallImage.enabled = true;
 
             if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
             {

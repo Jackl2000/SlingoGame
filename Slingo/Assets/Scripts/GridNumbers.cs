@@ -37,7 +37,7 @@ public class GridNumbers
     }
 
 
-    public void Hit(bool wild)
+    public void Hit()
     {
         if (hasBeenHit) return;
 
@@ -48,20 +48,22 @@ public class GridNumbers
             gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
             gameObject.GetComponent<TextMeshProUGUI>().color = Color.black;
 
-            if (!wild)
-            {
-                starAnimation.SetBool("Hit", true);
-                //childImage.GetComponentInChildren<Image>().enabled = true;
-                childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+
+            starAnimation.SetBool("Hit", true);
+            //childImage.GetComponentInChildren<Image>().enabled = true;
+            childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+            //if (!wild)
+            //{
+
                 
-            }
-            else
-            {
-                //childImage.GetComponentInChildren<Image>().enabled = true;
-                starAnimation.SetBool("Hit", true);
-                childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
-                gameObject.GetComponent<TextMeshProUGUI>().text = "";
-            }
+            //}
+            //else
+            //{
+            //    //childImage.GetComponentInChildren<Image>().enabled = true;
+            //    starAnimation.SetBool("Hit", true);
+            //    childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
+            //    gameObject.GetComponent<TextMeshProUGUI>().text = "";
+            //}
         }
         catch (System.Exception)
         {
