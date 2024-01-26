@@ -171,7 +171,7 @@ public class spin : MonoBehaviour
             {
                 slot.GetComponentInChildren<Image>().color = Color.white;
                 slot.GetComponentInChildren<Image>().enabled = false;
-                slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
+                slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
             }
         }
         
@@ -264,7 +264,9 @@ public class spin : MonoBehaviour
     {
         if (spinLeft <= 0)
         {
-            calculations.PriceCaculator();
+            spinButton.GetComponent<Image>().color = Color.black;
+            spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+            spinButton.GetComponentInChildren<TextMeshProUGUI>().text =  UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
             spinCountHeader.text = "COST";
         }
         if(wildPicked == 0)
