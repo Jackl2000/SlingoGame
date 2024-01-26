@@ -1,4 +1,3 @@
-using Codice.Client.BaseCommands.BranchExplorer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -285,6 +284,10 @@ public class GridCheck : MonoBehaviour
         {
             resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Collect " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
         }
+        if(slingoCount >= 12 && slingoAnimationFinished)
+        {
+            jackpotMessage.SetActive(true);
+        }
 
     }
 
@@ -397,22 +400,5 @@ public class GridCheck : MonoBehaviour
         slingoAnimationFinished = true;
     }
 
-
-
-    private void Update()
-    {
-        
-
-        float TimePassed = 0;
-        if (slingoCount == 12)
-        {
-            TimePassed += Time.deltaTime;
-            if (TimePassed > 5)
-            {
-                jackpotMessage.SetActive(true);
-            }
-        }
-
-    }
 
 }
