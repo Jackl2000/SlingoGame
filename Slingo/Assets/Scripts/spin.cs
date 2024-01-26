@@ -140,7 +140,9 @@ public class spin : MonoBehaviour
             if (spinLeft <= 0)
             {
                 spinCountHeader.text = "COST";
-                calculations.PriceCaculator();
+                spinButton.GetComponent<Image>().color = Color.black;
+                spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
             }
         }
         else
@@ -266,7 +268,7 @@ public class spin : MonoBehaviour
         {
             spinButton.GetComponent<Image>().color = Color.black;
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-            spinButton.GetComponentInChildren<TextMeshProUGUI>().text =  UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+            spinButton.GetComponentInChildren<TextMeshProUGUI>().text =  "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
             spinCountHeader.text = "COST";
         }
         if(wildPicked == 0)
@@ -283,9 +285,13 @@ public class spin : MonoBehaviour
             item.SetBool("Spinning", true);
         }
 
-        spinButtonAnimation.SetBool("Spin", true);
-        yield return new WaitForSeconds(0.1f);
-        spinButtonAnimation.SetBool("Spin", false);
+        if(spinLeft > 0)
+        {
+            spinButtonAnimation.SetBool("Spin", true);
+            yield return new WaitForSeconds(0.1f);
+            spinButtonAnimation.SetBool("Spin", false);
+        }
+        
 
         yield return new WaitForSeconds(spinWaitTime - 0.1f);
         min = 1;
