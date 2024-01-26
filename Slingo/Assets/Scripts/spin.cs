@@ -171,6 +171,7 @@ public class spin : MonoBehaviour
             {
                 slot.GetComponentInChildren<Image>().color = Color.white;
                 slot.GetComponentInChildren<Image>().enabled = false;
+                slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
             }
         }
         
@@ -208,6 +209,7 @@ public class spin : MonoBehaviour
         {
             wilds.Enqueue(slot);
             slot.GetComponentInChildren<Image>().enabled = true;
+            slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
             slot.GetComponentInChildren<TextMeshProUGUI>().text = ""; //Clears number behind the star when getting wild
 
             //blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
@@ -386,7 +388,7 @@ public class spin : MonoBehaviour
     {
         foreach (var starImg in starImgs.ToArray())
         {
-            for (float i = starImg.color.a; i < 1; i += 0.1f)
+            for (float i = starImg.color.a; i < 1; i += 0.25f)
             {
                 starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, i);
                 yield return new WaitForSeconds(0.1f);
