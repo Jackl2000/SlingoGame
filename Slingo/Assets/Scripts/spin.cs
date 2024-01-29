@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -396,11 +397,11 @@ public class spin : MonoBehaviour
 
     IEnumerator Fade()
     {
-        foreach(Image star in starImgs)
+        foreach (Image star in starImgs)
         {
             while (star.color.a < 1)
             {
-                star.color = new Color(star.color.r, star.color.g, star.color.b, star.color.a + 0.01f);
+                star.color = new Color(star.color.r, star.color.g, star.color.b, star.color.a + 0.05f);
                 yield return null;
             }
             yield return new WaitForSeconds(0.05f);
