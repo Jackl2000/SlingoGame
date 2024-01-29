@@ -44,8 +44,8 @@ public class GridGeneration : MonoBehaviour
     /// </summary>
     private void GetColumns()
     {
-        GameObject[] columnArray = GameObject.FindGameObjectsWithTag("Column");
-        columns.AddRange(columnArray.Reverse());
+        GameObject[] columnArray = GameObject.FindGameObjectsWithTag("Column").OrderBy(go => go.name).ToArray();
+        columns.AddRange(columnArray);
         for (int i = 0; i < columns.Count; i++)
         {
             int index = Convert.ToInt32(columns[i].name[columns[i].name.Length - 1].ToString());

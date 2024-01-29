@@ -385,10 +385,9 @@ public class spin : MonoBehaviour
     {
         foreach (var slotText in slotTextList)
         {
-            //Debug.Log(slotText.gameObject.name + " to white");
             slotText.color = Color.white;
         }
-        foreach(GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
+        foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
         {
             gridNumbers.gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
         }
@@ -398,7 +397,6 @@ public class spin : MonoBehaviour
     {
         foreach(Image star in starImgs)
         {
-            
             while (star.color.a < 1)
             {
                 star.color = new Color(star.color.r, star.color.g, star.color.b, star.color.a + 0.01f);
