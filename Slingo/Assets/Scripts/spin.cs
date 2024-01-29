@@ -210,6 +210,7 @@ public class spin : MonoBehaviour
 
         int wildPick = UnityEngine.Random.Range(0, wildChance + 1);
 
+
         if (wildPick == 5)
         {
             wilds.Enqueue(slot);
@@ -241,9 +242,9 @@ public class spin : MonoBehaviour
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[number].Hit();
-            Transform goTrans;
 
-            goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
+            
+            Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
             starImgs.Add(starImg);
@@ -288,7 +289,7 @@ public class spin : MonoBehaviour
             item.SetBool("Spinning", true);
         }
 
-        if(spinLeft > 0)
+        if(spinLeft >= 0)
         {
             spinButtonAnimation.SetBool("Spin", true);
             yield return new WaitForSeconds(0.1f);
@@ -312,6 +313,7 @@ public class spin : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             WildTransparency(false);
+            Debug.Log("WildTransparency() in Spinner() ran___________");
             GridNumbers bestChoice = AI.BestChoice();
             if(bestChoice != null)
             {
@@ -331,6 +333,7 @@ public class spin : MonoBehaviour
             if (!gridNumbers.hasBeenHit || gridNumbers.gameObject == wildpick)
             {
                 Animator animatorObject = gridNumbers.gameObject.GetComponentInChildren<Animator>();
+                animatorObject.GetComponent<Image>().enabled = true; //starbackground image set to true
                 Image img = animatorObject.gameObject.transform.GetChild(1).GetComponent<Image>();
                 img.enabled = false;
                 img.color = new Color(img.color.r, img.color.g, img.color.b, 1);
@@ -339,6 +342,10 @@ public class spin : MonoBehaviour
         }
         if(stop)
         {
+            foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
+            {
+                gridNumbers.gameObject.GetComponentInChildren<Image>().enabled = false;
+            }
             return;
         }
         foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
@@ -346,6 +353,7 @@ public class spin : MonoBehaviour
             if (!gridNumbers.hasBeenHit)
             {
                 Animator animatorObject = gridNumbers.gameObject.GetComponentInChildren<Animator>();
+
                 Image img = animatorObject.gameObject.transform.GetChild(1).GetComponent<Image>();
                 img.enabled = true;
                 img.color = new Color(img.color.r, img.color.g, img.color.b, 0.3f);
