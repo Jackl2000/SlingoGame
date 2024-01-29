@@ -38,14 +38,14 @@ public class CollectReward : MonoBehaviour
         spinScript.stakes = 0;
         spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);
         spinScript.textToGoEmpty.Clear();
-        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Game";
+        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).text = "Start Game";
+        spinScript.ColorReset();
 
         foreach (var spinSlot in spinScript.slotsList)
         {
             spinSlot.GetComponentInChildren<Image>().color = Color.white;
             spinSlot.GetComponentInChildren<Image>().enabled = false;
             spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
-            spinSlot.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
 
         if (gridCheck.slingoCount >= 3)

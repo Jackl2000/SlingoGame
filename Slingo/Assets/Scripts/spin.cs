@@ -112,23 +112,22 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        if(isSpinning)
+        if(isSpinning || gridButton.GetComponent<TextMeshProUGUI>().text == "" || wildPicks == 0)
         {
             return;
         }
+        GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
         int numberPressed = Convert.ToInt32(gridButton.GetComponent<TextMeshProUGUI>().text);
-        GameObject wildNumberPicked = null;
         if (wildPicked < wildPicks)
         {
             if(!gridGeneration.numberPositions[numberPressed].hasBeenHit)
             {
                 gridGeneration.numberPositions[numberPressed].Hit();
                 gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
-                wildNumberPicked = gridGeneration.numberPositions[numberPressed].gameObject;
-
+                
                 GameObject wild = wilds.Dequeue();
                 wild.GetComponentInChildren<Image>().color = Color.green;
-                
+                //starImgs.Add(wild.GetComponentInChildren<Image>());
                 wildPicked++;
             }
         }
@@ -151,6 +150,7 @@ public class spin : MonoBehaviour
             WildTransparency(false, wildNumberPicked);
             bestChoiceText.color = Color.white;
             GridNumbers bestChoice = AI.BestChoice();
+            if (bestChoice == null) return;
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
             blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
@@ -158,10 +158,16 @@ public class spin : MonoBehaviour
 
     public void StartSpin()
     {
-        if (isSpinning) return;
-
+        if (isSpinning || gridCheck.starsCount == 25) return;
+        Stakes();
         ColorReset();
         StartCoroutine(Fade());
+
+        foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values) 
+        {
+            gridnumber.gameObject.GetComponentInChildren<Image>().enabled = false;
+        }
+
         foreach (TextMeshProUGUI textNumber in textToGoEmpty)
         {
             textNumber.text = "";
@@ -207,6 +213,7 @@ public class spin : MonoBehaviour
 
         int wildPick = UnityEngine.Random.Range(0, wildChance + 1);
 
+
         if (wildPick == 5)
         {
             wilds.Enqueue(slot);
@@ -232,15 +239,14 @@ public class spin : MonoBehaviour
 
     private IEnumerator CheckMatchingNumb(TextMeshProUGUI text, int number)
     {
+
         if (gridGeneration.numberPositions.ContainsKey(number) && !gridGeneration.numberPositions[number].hasBeenHit)
         {
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[number].Hit();
 
-            Transform goTrans;
-
-            goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
+            Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
             starImgs.Add(starImg);
@@ -285,7 +291,7 @@ public class spin : MonoBehaviour
             item.SetBool("Spinning", true);
         }
 
-        if(spinLeft > 0)
+        if(spinLeft >= 0)
         {
             spinButtonAnimation.SetBool("Spin", true);
             yield return new WaitForSeconds(0.1f);
@@ -304,46 +310,54 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
         }
-        yield return new WaitForSeconds(0.1f);
-
+        
         if (wildPicks > 0)
         {
+            yield return new WaitForSeconds(0.5f);
             WildTransparency(false);
             GridNumbers bestChoice = AI.BestChoice();
-            bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            blinkEffect.FlashingEffect(bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
+            if(bestChoice != null)
+            {
+                bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
+                blinkEffect.FlashingEffect(bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
+            }
         }
         
         yield return new WaitForSeconds(0.4f);
         SpinsLeft();
     }
 
-    private void WildTransparency(bool stop, GameObject wildpick = null)
+    private void WildTransparency(bool stop, GameObject wildNumberPicked = null)
     {
-        foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
+        if (!stop)
         {
-            if (!gridNumbers.hasBeenHit || gridNumbers.gameObject == wildpick)
+            foreach (GridNumbers number in gridGeneration.numberPositions.Values)
             {
-                Animator animatorObject = gridNumbers.gameObject.GetComponentInChildren<Animator>();
-                Image img = animatorObject.gameObject.transform.GetChild(1).GetComponent<Image>();
-                img.enabled = false;
-                img.color = new Color(img.color.r, img.color.g, img.color.b, 1);
-                animatorObject.SetBool("Wild", false);
+                if (!number.hasBeenHit)
+                {
+                    Animator animatorObject = number.gameObject.GetComponentInChildren<Animator>();
+                    animatorObject.GetComponent<Image>().enabled = true;
+                }
+            }
+            if (wildNumberPicked != null)
+            {
+                wildNumberPicked.GetComponent<Image>().enabled = false;
             }
         }
-        if(stop)
+        else
         {
-            return;
-        }
-        foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
-        {
-            if (!gridNumbers.hasBeenHit)
+            foreach (GridNumbers number in gridGeneration.numberPositions.Values)
             {
-                Animator animatorObject = gridNumbers.gameObject.GetComponentInChildren<Animator>();
-                Image img = animatorObject.gameObject.transform.GetChild(1).GetComponent<Image>();
-                img.enabled = true;
-                img.color = new Color(img.color.r, img.color.g, img.color.b, 0.3f);
-                animatorObject.SetBool("Wild", true);
+                if (!number.hasBeenHit)
+                {
+                    Animator animatorObject = number.gameObject.GetComponentInChildren<Animator>();
+                    animatorObject.GetComponent<Image>().enabled = false;
+                }
+                
+            }
+            if(wildNumberPicked != null)
+            {
+                wildNumberPicked.GetComponent<Image>().enabled = false;
             }
         }
     }
@@ -370,15 +384,11 @@ public class spin : MonoBehaviour
 
     public void ColorReset()
     {
-        if(!gridCheck.slingoAnimationFinished || isSpinning || wildPicks != 0)
-        {
-            return;
-        }
         foreach (var slotText in slotTextList)
         {
             slotText.color = Color.white;
         }
-        foreach(GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
+        foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
         {
             gridNumbers.gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
         }
@@ -386,13 +396,15 @@ public class spin : MonoBehaviour
 
     IEnumerator Fade()
     {
-        foreach (var starImg in starImgs.ToArray())
+        foreach(Image star in starImgs)
         {
-            for (float i = starImg.color.a; i < 1; i += 0.25f)
+            while (star.color.a < 1)
             {
-                starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, i);
-                yield return new WaitForSeconds(0.1f);
+                star.color = new Color(star.color.r, star.color.g, star.color.b, star.color.a + 0.01f);
+                yield return null;
             }
-        }
+            yield return new WaitForSeconds(0.05f);
+        }            
+        starImgs.Clear();
     }
 }

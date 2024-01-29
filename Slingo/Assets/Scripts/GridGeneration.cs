@@ -44,8 +44,8 @@ public class GridGeneration : MonoBehaviour
     /// </summary>
     private void GetColumns()
     {
-        GameObject[] columArray = GameObject.FindGameObjectsWithTag("Column").OrderBy(go => go.GetComponent<GridLayoutGroup>().cellSize.x).ToArray();
-        columns.AddRange(columArray);
+        GameObject[] columnArray = GameObject.FindGameObjectsWithTag("Column").OrderBy(go => go.name).ToArray();
+        columns.AddRange(columnArray);
         for (int i = 0; i < columns.Count; i++)
         {
             int index = Convert.ToInt32(columns[i].name[columns[i].name.Length - 1].ToString());
@@ -121,7 +121,6 @@ public class GridGeneration : MonoBehaviour
                 return 0;
         }
     }
-
     /// <summary>
     /// Cheatsheet, click "P" to fill plate immediately
     /// </summary>

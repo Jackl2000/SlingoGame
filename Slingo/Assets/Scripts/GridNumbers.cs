@@ -40,7 +40,10 @@ public class GridNumbers
     public void Hit()
     {
         if (hasBeenHit) return;
+        if(h == 5 && v == 5)
+        {
 
+        }
         hasBeenHit = true;
         try
         {
@@ -65,9 +68,9 @@ public class GridNumbers
             //    gameObject.GetComponent<TextMeshProUGUI>().text = "";
             //}
         }
-        catch (System.Exception)
+        catch (System.Exception e)
         {
-
+            Debug.Log(e);
             Debug.Log("No child image");
         }
 

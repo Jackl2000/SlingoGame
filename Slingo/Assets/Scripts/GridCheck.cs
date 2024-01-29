@@ -116,7 +116,7 @@ public class GridCheck : MonoBehaviour
 
     }
 
-    Dictionary<int, string> slingoTypes = new Dictionary<int, string>();
+    Dictionary<string, int> slingoTypes = new Dictionary<string, int>();
 
     /// <summary>
     /// Checks for new slingo with new number
@@ -150,7 +150,7 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
-                    slingoTypes.Add(number.h, "h");
+                    slingoTypes.Add("h", number.h);
                     //StartCoroutine(SlingoAnimation(PlaySlingoAnimation("h", number.h)));
                     break;
                 }
@@ -180,7 +180,7 @@ public class GridCheck : MonoBehaviour
                     slingoIsHit = true;
                     slingoCount++;
                     CheckForReward();
-                    slingoTypes.Add(number.v, "v");
+                    slingoTypes.Add("v", number.v);
                     //StartCoroutine(SlingoAnimation(PlaySlingoAnimation("v", number.v)));
                     break;
                 }
@@ -213,7 +213,7 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
-                            slingoTypes.Add (0, "l");
+                            slingoTypes.Add("l", 0);
                             //StartCoroutine(SlingoAnimation(PlaySlingoAnimation("l", 0)));
                             break;
                         }
@@ -244,7 +244,7 @@ public class GridCheck : MonoBehaviour
                             slingoIsHit = true;
                             slingoCount++;
                             CheckForReward();
-                            slingoTypes.Add(0, "r");
+                            slingoTypes.Add("r", 0);
                             //StartCoroutine(SlingoAnimation(PlaySlingoAnimation("r", 0)));
                             break;
                         }
@@ -318,33 +318,33 @@ public class GridCheck : MonoBehaviour
     /// <summary>
     /// Returns a list of game objects to play the slingo animation on
     /// </summary>
-    private List<GameObject> PlaySlingoAnimation(Dictionary<int, string> slingoTypes)
+    private List<GameObject> PlaySlingoAnimation(Dictionary<string, int> slingoTypes)
     {
         List<GameObject> numbersInSlingo = new List<GameObject>();
-        foreach (int slingoType in slingoTypes.Keys)
+        foreach (string slingoType in slingoTypes.Keys)
         {
-            if (slingoTypes[slingoType] == "h")
+            if (slingoType == "h")
             {
                 foreach (GridNumbers numbers in grid.numberPositions.Values)
                 {
-                    if (numbers.h == slingoType)
+                    if (numbers.h == slingoTypes[slingoType])
                     {
                         numbersInSlingo.Add(numbers.gameObject);
                     }
                 }
 
             }
-            else if (slingoTypes[slingoType] == "v")
+            else if (slingoType == "v")
             {
                 foreach (GridNumbers numbers in grid.numberPositions.Values)
                 {
-                    if (numbers.v == slingoType)
+                    if (numbers.v == slingoTypes[slingoType])
                     {
                         numbersInSlingo.Add(numbers.gameObject);
                     }
                 }
             }
-            else if (slingoTypes[slingoType] == "l")
+            else if (slingoType == "l")
             {
                 foreach (GridNumbers numbers in grid.numberPositions.Values)
                 {
@@ -380,9 +380,11 @@ public class GridCheck : MonoBehaviour
 
         foreach (GameObject go in slingoNumbers)
         {
+            go.GetComponent<TextMeshProUGUI>().text = "";
             Image wallImage = go.GetComponentInChildren<Image>();
             wallImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
             wallImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
+            wallImage.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             wallImage.enabled = true;
 
             if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))

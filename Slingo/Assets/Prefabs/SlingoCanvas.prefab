@@ -2215,18 +2215,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4055942201498400139}
-        m_TargetAssemblyTypeName: spin, Scripts
-        m_MethodName: ColorReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1458205632472944407}
         m_TargetAssemblyTypeName: GridGeneration, Assembly-CSharp
         m_MethodName: ReGenerateGrid
@@ -2360,8 +2348,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: 36}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -20, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5634621543458605490
 CanvasRenderer:
@@ -2391,9 +2379,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You have won JACKPOT
-
-    10.000 kr'
+  m_text: You have won SUPER JACKPOT FLASH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2420,12 +2406,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 80
   m_fontSizeBase: 70
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 80
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -8742,7 +8728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinScript: {fileID: 4055942201498400139}
   gridGeneration: {fileID: 1458205632472944407}
-  blinkSpeed: 0.8
+  blinkSpeed: 2
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 0, g: 0, b: 0, a: 1}
   isBlinking: 0
@@ -12409,18 +12395,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4055942201498400139}
-        m_TargetAssemblyTypeName: spin, Scripts
-        m_MethodName: Stakes
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4055942201498400139}
         m_TargetAssemblyTypeName: spin, Assembly-CSharp
         m_MethodName: StartSpin
@@ -21276,7 +21250,6 @@ GameObject:
   - component: {fileID: 8731659616626069677}
   - component: {fileID: 2916785222404408771}
   - component: {fileID: 3660620487007336823}
-  - component: {fileID: 7356422300322805497}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -21340,27 +21313,6 @@ MonoBehaviour:
   m_Spacing: {x: 53, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!95 &7356422300322805497
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8110313000060278679}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3817eef066b100545ba0c05d845e1bcd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8114554970957847548
 GameObject:
   m_ObjectHideFlags: 0
