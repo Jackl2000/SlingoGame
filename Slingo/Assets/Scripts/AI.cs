@@ -99,7 +99,7 @@ public class AI : MonoBehaviour
         }
         if(hIndex == 4)
         {
-            hIndex *= 4;
+            hIndex *= 5;
         }
         else if(hIndex == 3)
         {
@@ -107,7 +107,7 @@ public class AI : MonoBehaviour
         }
         if(vIndex == 4)
         {
-            vIndex *= 4;
+            vIndex *= 5;
         }
         else if (vIndex == 3)
         {
@@ -115,7 +115,7 @@ public class AI : MonoBehaviour
         }
         if (dl == 4)
         {
-            dl *= 4;
+            dl *= 5;
         }
         else if (dl == 3)
         {
@@ -123,7 +123,7 @@ public class AI : MonoBehaviour
         }
         if (dr == 4)
         {
-            dr *= 4;
+            dr *= 5;
         }
         else if (dr == 3)
         {

@@ -112,10 +112,11 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        if(isSpinning)
+        if(isSpinning || gridButton.GetComponent<TextMeshProUGUI>().text == "" || wildPicks == 0)
         {
             return;
         }
+
         int numberPressed = Convert.ToInt32(gridButton.GetComponent<TextMeshProUGUI>().text);
         GameObject wildNumberPicked = null;
         if (wildPicked < wildPicks)
@@ -125,10 +126,10 @@ public class spin : MonoBehaviour
                 gridGeneration.numberPositions[numberPressed].Hit();
                 gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
                 wildNumberPicked = gridGeneration.numberPositions[numberPressed].gameObject;
-
+                
                 GameObject wild = wilds.Dequeue();
                 wild.GetComponentInChildren<Image>().color = Color.green;
-                
+                //starImgs.Add(wild.GetComponentInChildren<Image>());
                 wildPicked++;
             }
         }
@@ -151,6 +152,7 @@ public class spin : MonoBehaviour
             WildTransparency(false, wildNumberPicked);
             bestChoiceText.color = Color.white;
             GridNumbers bestChoice = AI.BestChoice();
+            if (bestChoice == null) return;
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
             blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
@@ -158,8 +160,8 @@ public class spin : MonoBehaviour
 
     public void StartSpin()
     {
-        if (isSpinning) return;
-
+        if (isSpinning || gridCheck.starsCount == 25) return;
+        Stakes();
         ColorReset();
         StartCoroutine(Fade());
         foreach (TextMeshProUGUI textNumber in textToGoEmpty)
@@ -310,8 +312,11 @@ public class spin : MonoBehaviour
         {
             WildTransparency(false);
             GridNumbers bestChoice = AI.BestChoice();
-            bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            blinkEffect.FlashingEffect(bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
+            if(bestChoice != null)
+            {
+                bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
+                blinkEffect.FlashingEffect(bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
+            }
         }
         
         yield return new WaitForSeconds(0.4f);
@@ -386,7 +391,7 @@ public class spin : MonoBehaviour
 
     IEnumerator Fade()
     {
-        foreach (var starImg in starImgs.ToArray())
+        foreach (var starImg in starImgs)
         {
             for (float i = starImg.color.a; i < 1; i += 0.25f)
             {
@@ -394,5 +399,7 @@ public class spin : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
         }
+        Debug.Log("Star image count: " + starImgs.Count);
+        starImgs.Clear();
     }
 }
