@@ -235,12 +235,12 @@ public class spin : MonoBehaviour
 
     private IEnumerator CheckMatchingNumb(TextMeshProUGUI text, int number)
     {
+
         if (gridGeneration.numberPositions.ContainsKey(number) && !gridGeneration.numberPositions[number].hasBeenHit)
         {
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[number].Hit();
-
             Transform goTrans;
 
             goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
@@ -307,10 +307,10 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
         }
-        yield return new WaitForSeconds(0.1f);
-
+        
         if (wildPicks > 0)
         {
+            yield return new WaitForSeconds(0.5f);
             WildTransparency(false);
             GridNumbers bestChoice = AI.BestChoice();
             if(bestChoice != null)
