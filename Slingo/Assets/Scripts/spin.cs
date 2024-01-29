@@ -164,6 +164,7 @@ public class spin : MonoBehaviour
         Stakes();
         ColorReset();
         StartCoroutine(Fade());
+
         foreach (TextMeshProUGUI textNumber in textToGoEmpty)
         {
             textNumber.text = "";
@@ -375,12 +376,9 @@ public class spin : MonoBehaviour
 
     public void ColorReset()
     {
-        if(!gridCheck.slingoAnimationFinished || isSpinning || wildPicks != 0)
-        {
-            return;
-        }
         foreach (var slotText in slotTextList)
         {
+            Debug.Log(slotText.gameObject.name + " to white");
             slotText.color = Color.white;
         }
         foreach(GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
@@ -391,15 +389,16 @@ public class spin : MonoBehaviour
 
     IEnumerator Fade()
     {
-        foreach (var starImg in starImgs)
+        foreach(Image star in starImgs)
         {
-            for (float i = starImg.color.a; i < 1; i += 0.25f)
+            
+            while (star.color.a < 1)
             {
-                starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, i);
-                yield return new WaitForSeconds(0.1f);
+                star.color = new Color(star.color.r, star.color.g, star.color.b, star.color.a + 0.01f);
+                yield return null;
             }
-        }
-        Debug.Log("Star image count: " + starImgs.Count);
+            yield return new WaitForSeconds(0.05f);
+        }            
         starImgs.Clear();
     }
 }

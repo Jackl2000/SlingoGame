@@ -384,6 +384,7 @@ public class GridCheck : MonoBehaviour
             Image wallImage = go.GetComponentInChildren<Image>();
             wallImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
             wallImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
+            wallImage.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             wallImage.enabled = true;
 
             if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
