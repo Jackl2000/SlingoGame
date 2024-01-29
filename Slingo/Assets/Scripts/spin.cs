@@ -163,6 +163,11 @@ public class spin : MonoBehaviour
         ColorReset();
         StartCoroutine(Fade());
 
+        foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values) 
+        {
+            gridnumber.gameObject.GetComponentInChildren<Image>().enabled = false;
+        }
+
         foreach (TextMeshProUGUI textNumber in textToGoEmpty)
         {
             textNumber.text = "";
@@ -241,7 +246,6 @@ public class spin : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[number].Hit();
 
-            
             Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
