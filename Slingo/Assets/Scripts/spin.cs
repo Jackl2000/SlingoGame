@@ -116,16 +116,14 @@ public class spin : MonoBehaviour
         {
             return;
         }
-
+        GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
         int numberPressed = Convert.ToInt32(gridButton.GetComponent<TextMeshProUGUI>().text);
-        GameObject wildNumberPicked = null;
         if (wildPicked < wildPicks)
         {
             if(!gridGeneration.numberPositions[numberPressed].hasBeenHit)
             {
                 gridGeneration.numberPositions[numberPressed].Hit();
                 gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
-                wildNumberPicked = gridGeneration.numberPositions[numberPressed].gameObject;
                 
                 GameObject wild = wilds.Dequeue();
                 wild.GetComponentInChildren<Image>().color = Color.green;
@@ -313,7 +311,6 @@ public class spin : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             WildTransparency(false);
-            Debug.Log("WildTransparency() in Spinner() ran___________");
             GridNumbers bestChoice = AI.BestChoice();
             if(bestChoice != null)
             {
@@ -326,38 +323,37 @@ public class spin : MonoBehaviour
         SpinsLeft();
     }
 
-    private void WildTransparency(bool stop, GameObject wildpick = null)
+    private void WildTransparency(bool stop, GameObject wildNumberPicked = null)
     {
-        foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
+        if (!stop)
         {
-            if (!gridNumbers.hasBeenHit || gridNumbers.gameObject == wildpick)
+            foreach (GridNumbers number in gridGeneration.numberPositions.Values)
             {
-                Animator animatorObject = gridNumbers.gameObject.GetComponentInChildren<Animator>();
-                animatorObject.GetComponent<Image>().enabled = true; //starbackground image set to true
-                Image img = animatorObject.gameObject.transform.GetChild(1).GetComponent<Image>();
-                img.enabled = false;
-                img.color = new Color(img.color.r, img.color.g, img.color.b, 1);
-                animatorObject.SetBool("Wild", false);
+                if (!number.hasBeenHit)
+                {
+                    Animator animatorObject = number.gameObject.GetComponentInChildren<Animator>();
+                    animatorObject.GetComponent<Image>().enabled = true;
+                }
+            }
+            if (wildNumberPicked != null)
+            {
+                wildNumberPicked.GetComponent<Image>().enabled = false;
             }
         }
-        if(stop)
+        else
         {
-            foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
+            foreach (GridNumbers number in gridGeneration.numberPositions.Values)
             {
-                gridNumbers.gameObject.GetComponentInChildren<Image>().enabled = false;
+                if (!number.hasBeenHit)
+                {
+                    Animator animatorObject = number.gameObject.GetComponentInChildren<Animator>();
+                    animatorObject.GetComponent<Image>().enabled = false;
+                }
+                
             }
-            return;
-        }
-        foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
-        {
-            if (!gridNumbers.hasBeenHit)
+            if(wildNumberPicked != null)
             {
-                Animator animatorObject = gridNumbers.gameObject.GetComponentInChildren<Animator>();
-
-                Image img = animatorObject.gameObject.transform.GetChild(1).GetComponent<Image>();
-                img.enabled = true;
-                img.color = new Color(img.color.r, img.color.g, img.color.b, 0.3f);
-                animatorObject.SetBool("Wild", true);
+                wildNumberPicked.GetComponent<Image>().enabled = false;
             }
         }
     }

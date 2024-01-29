@@ -8699,7 +8699,7 @@ MonoBehaviour:
   spentText: {fileID: 7751221399858816658}
   spinSpeed: 15
   spinWaitTime: 0.7
-  wildChance: 15
+  wildChance: 5
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
@@ -8728,7 +8728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinScript: {fileID: 4055942201498400139}
   gridGeneration: {fileID: 1458205632472944407}
-  blinkSpeed: 0.8
+  blinkSpeed: 2
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 0, g: 0, b: 0, a: 1}
   isBlinking: 0
