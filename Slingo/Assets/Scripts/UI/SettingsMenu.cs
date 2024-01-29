@@ -49,6 +49,10 @@ public class SettingsMenu : MonoBehaviour
     public void ShowPanelRewards()
     {
 
+
+
+
+
         PossibleRewards.SetActive(true);
 
     }
