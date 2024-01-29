@@ -241,13 +241,13 @@ public class spin : MonoBehaviour
 
     private IEnumerator CheckMatchingNumb(TextMeshProUGUI text, int number)
     {
+
         if (gridGeneration.numberPositions.ContainsKey(number) && !gridGeneration.numberPositions[number].hasBeenHit)
         {
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[number].Hit();
 
-            gridGeneration.numberPositions[number].gameObject.GetComponentInChildren<Image>().enabled = false; // Starbackground imagage set to false, since it set to true
             Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
@@ -293,7 +293,7 @@ public class spin : MonoBehaviour
             item.SetBool("Spinning", true);
         }
 
-        if(spinLeft > 0)
+        if(spinLeft >= 0)
         {
             spinButtonAnimation.SetBool("Spin", true);
             yield return new WaitForSeconds(0.1f);
@@ -312,10 +312,10 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
         }
-        yield return new WaitForSeconds(0.1f);
-
+        
         if (wildPicks > 0)
         {
+            yield return new WaitForSeconds(0.5f);
             WildTransparency(false);
             Debug.Log("WildTransparency() in Spinner() ran___________");
             GridNumbers bestChoice = AI.BestChoice();
