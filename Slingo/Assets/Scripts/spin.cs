@@ -51,7 +51,7 @@ public class spin : MonoBehaviour
     /// <summary>
     /// spins left before you pay
     /// </summary>
-    [HideInInspector] public int spinLeft = 10;
+    public int spinLeft = 10;
     [HideInInspector] public float stakes = 0;
     int rnd;
     int min = 1;
