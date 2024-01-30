@@ -219,7 +219,13 @@ public class spin : MonoBehaviour
         {
             wilds.Enqueue(slot);
             slot.GetComponentInChildren<Image>().enabled = true;
+            if(slot.GetComponent<Animator>().GetBool("Spinning"))
+            {
+                Debug.Log("Is not false");
+                slot.GetComponent<Animator>().SetBool("Spinning", false);
+            }
             slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
+            Debug.Log("Play animation");
             slot.GetComponentInChildren<TextMeshProUGUI>().text = ""; //Clears number behind the star when getting wild
 
             //blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
@@ -392,6 +398,13 @@ public class spin : MonoBehaviour
         foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
         {
             gridNumbers.gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
+        }
+
+        if(bestChoiceText != null)
+        {
+            Debug.Log("Best choice reset");
+            blinkEffect.blinkeffectStart = false;
+            bestChoiceText.color = Color.white;
         }
     }
 

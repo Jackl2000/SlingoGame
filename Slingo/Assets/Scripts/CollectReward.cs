@@ -27,7 +27,7 @@ public class CollectReward : MonoBehaviour
 
     public void Collect()
     {
-        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning || spinScript.wildPicks != 0)
+        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning || (spinScript.wildPicks != 0 && gridCheck.slingoCount != 12))
         {
             return;
         }
@@ -38,6 +38,7 @@ public class CollectReward : MonoBehaviour
         spinScript.stakes = 0;
         spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);
         spinScript.textToGoEmpty.Clear();
+        spinScript.wildPicks = 0;
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).text = "Start Game";
         spinScript.ColorReset();
 
