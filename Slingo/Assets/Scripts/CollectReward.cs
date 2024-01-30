@@ -33,8 +33,8 @@ public class CollectReward : MonoBehaviour
         }
         //Reset values in spin
         spinScript.spinCountHeader.text = "SPINS";
-        spinsCounter.text = "8";
-        spinScript.spinLeft = 8;
+        spinsCounter.text = "10";
+        spinScript.spinLeft = 10;
         spinScript.stakes = 0;
         spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);
         spinScript.textToGoEmpty.Clear();

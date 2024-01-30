@@ -24,7 +24,7 @@ public class SpinsValue : MonoBehaviour
 
     public void SetSpinBets(float bet)
     {
-        if(spin.spinLeft == 8)
+        if(spin.spinLeft == 10)
         {
             spin.spinBets = bet;
             spinsBetPanel.SetActive(false);
