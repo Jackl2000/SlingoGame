@@ -128,7 +128,8 @@ public class spin : MonoBehaviour
                 
                 GameObject wild = wilds.Dequeue();
                 wild.GetComponentInChildren<Image>().color = Color.green;
-                //starImgs.Add(wild.GetComponentInChildren<Image>());
+                wild.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
+
                 wildPicked++;
             }
         }
@@ -180,7 +181,6 @@ public class spin : MonoBehaviour
             {
                 slot.GetComponentInChildren<Image>().color = Color.white;
                 slot.GetComponentInChildren<Image>().enabled = false;
-                slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
             }
         }
         
