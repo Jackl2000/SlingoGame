@@ -9,11 +9,13 @@ public class SpinsValue : MonoBehaviour
 
     private spin spin;
     private GridCheck gridCheck;
+    private SettingsMenu settingsMenu;
 
     private void Awake()
     {
         spin = GetComponent<spin>();
         gridCheck = GetComponentInParent<GridCheck>();
+        settingsMenu = FindAnyObjectByType<SettingsMenu>();
     }
 
     public void ViewSpinsBets()
@@ -29,6 +31,8 @@ public class SpinsValue : MonoBehaviour
             spin.spinBets = bet;
             spinsBetPanel.SetActive(false);
             gridCheck.UpdateRewards(bet);
+
+            settingsMenu.multiplier = bet;
         }
     }
 }
