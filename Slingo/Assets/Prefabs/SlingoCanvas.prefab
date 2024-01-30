@@ -8984,7 +8984,7 @@ MonoBehaviour:
   textToGoEmpty: []
   spinBets: 1
   wildPicks: 0
-  spinLeft: 8
+  spinLeft: 10
   stakes: 0
 --- !u!114 &527621969584549633
 MonoBehaviour:

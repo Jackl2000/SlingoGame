@@ -51,7 +51,7 @@ public class spin : MonoBehaviour
     /// <summary>
     /// spins left before you pay
     /// </summary>
-    [HideInInspector] public int spinLeft = 10;
+    public int spinLeft = 10;
     [HideInInspector] public float stakes = 0;
     int rnd;
     int min = 1;
@@ -164,12 +164,10 @@ public class spin : MonoBehaviour
 
     public void StartSpin()
     {
-        Debug.Log(spinLeft);
         if (isSpinning || gridCheck.starsCount == 25) return;
         Stakes();
         ColorReset();
         StartCoroutine(Fade());
-        Debug.Log(spinLeft);
 
         foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values) 
         {
@@ -209,12 +207,11 @@ public class spin : MonoBehaviour
         else
         {
             spinLeft--;
-            Debug.Log(spinLeft);
             spinLeftText.text = spinLeft.ToString();
             StartCoroutine(Spinner());
         }
-
     }
+
     public void Spin(GameObject slot)
     {
         rnd = UnityEngine.Random.Range(min, max);
