@@ -52,6 +52,7 @@ public class spin : MonoBehaviour
     /// spins left before you pay
     /// </summary>
     public int spinLeft = 10;
+    public int spinBuyLimit = 8;
     [HideInInspector] public float stakes = 0;
     int rnd;
     int min = 1;
@@ -143,7 +144,6 @@ public class spin : MonoBehaviour
             bestChoiceText.color = Color.white;
             if (spinLeft <= 0)
             {
-                spinCountHeader.text = "COST";
                 spinButton.GetComponent<Image>().color = Color.black;
                 spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
                 spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
@@ -164,10 +164,11 @@ public class spin : MonoBehaviour
 
     public void StartSpin()
     {
-        if (isSpinning || gridCheck.starsCount == 25) return;
+        if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
         Stakes();
         ColorReset();
         StartCoroutine(Fade());
+
 
         foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values) 
         {
@@ -196,9 +197,13 @@ public class spin : MonoBehaviour
         }
         isSpinning = true;
 
-        if (spinLeft < 0)
+        if (spinBuyLimit >= 0 && spinLeft < 0)
         {
-            playerData.balance -= UIManager.Instance.GetMoneyValue(spinLeftText.text);
+            playerData.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponent<TextMeshProUGUI>().text.Substring(5));
+
+            spinBuyLimit--;
+            Debug.Log("Buy limit: " + spinBuyLimit);
+            spinLeftText.text = spinBuyLimit.ToString();
             StartCoroutine(Spinner());
 
             //reset time for collect reward pop message
@@ -209,7 +214,10 @@ public class spin : MonoBehaviour
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
             StartCoroutine(Spinner());
+
+
         }
+
     }
 
     public void Spin(GameObject slot)
@@ -281,9 +289,10 @@ public class spin : MonoBehaviour
             spinButton.GetComponent<Image>().color = Color.black;
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
             spinButton.GetComponentInChildren<TextMeshProUGUI>().text =  "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
-            spinCountHeader.text = "COST";
+            spinCountHeader.text = "Buy limit";
+            spinLeftText.text = spinBuyLimit.ToString();
         }
-        if(wildPicked == 0)
+        if (wildPicked == 0)
         {
             isSpinning = false;
         }

@@ -35,6 +35,7 @@ public class CollectReward : MonoBehaviour
         spinScript.spinCountHeader.text = "SPINS";
         spinsCounter.text = "10";
         spinScript.spinLeft = 10;
+        spinScript.spinBuyLimit = 8;
         spinScript.stakes = 0;
         spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);
         spinScript.textToGoEmpty.Clear();
@@ -58,15 +59,6 @@ public class CollectReward : MonoBehaviour
         }
     }
 
-    private void CollectRewardPopMsg()
-    {
-        if (gridCheck.slingoCount >= 3 && gridCheck.slingoCount <= 9)
-        {
-            collectMessage.text = "Collect your reward on " + gridCheck.rewards[gridCheck.slingoCount] + "kr or continue";
-            collectBorderMessage.SetActive(true);
-        }
-    }
-
     public void ResetTime()
     {
         invokeTime = 0;
@@ -74,20 +66,6 @@ public class CollectReward : MonoBehaviour
 
     private void Update()
     {
-        if (gridCheck.slingoCount >= 3 && spinScript.wildPicks <= 0 && spinScript.spinLeft <= 0)
-        {
 
-            invokeTime += Time.deltaTime;
-
-            if (gridCheck.slingoIsHit && invokeTime > 8)
-            {
-                gridCheck.slingoIsHit = false;
-                CollectRewardPopMsg();
-            }
-            else if (invokeTime >= 13f)
-            {
-                CollectRewardPopMsg();
-            }
-        }
     }
 }

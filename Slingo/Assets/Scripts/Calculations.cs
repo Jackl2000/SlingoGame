@@ -37,7 +37,7 @@ public class Calculations : MonoBehaviour
         float maxSlingoAmplifiere = Mathf.Clamp(possibleRewardAmplifiere - 0.5f, 0.5f, 1.8f);
         float price = slingoReward * Mathf.Clamp(maxSlingoAmplifiere, 1, maxSlingoAmplifiere);
         price *= spin.spinBets;
-        spin.spinLeftText.text = UIManager.Instance.DisplayMoney(price);
+        //spin.spinLeftText.text = UIManager.Instance.DisplayMoney(price);
         return price;
     }
 
