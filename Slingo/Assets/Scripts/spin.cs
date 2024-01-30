@@ -20,6 +20,9 @@ public class spin : MonoBehaviour
     public TextMeshProUGUI balanceText;
     public TextMeshProUGUI spentText;
 
+
+    [SerializeField] private Sprite[] BackgroundImages;
+
     [Space(10)]
     [Header("Spin settings")]
     public float spinSpeed = 5f;
@@ -152,6 +155,7 @@ public class spin : MonoBehaviour
             bestChoiceText.color = Color.white;
             GridNumbers bestChoice = AI.BestChoice();
             if (bestChoice == null) return;
+            bestChoice.gameObject.GetComponentInChildren<Image>().sprite = BackgroundImages[2];
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
             blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
@@ -219,13 +223,8 @@ public class spin : MonoBehaviour
         {
             wilds.Enqueue(slot);
             slot.GetComponentInChildren<Image>().enabled = true;
-            if(slot.GetComponent<Animator>().GetBool("Spinning"))
-            {
-                Debug.Log("Is not false");
-                slot.GetComponent<Animator>().SetBool("Spinning", false);
-            }
+
             slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
-            Debug.Log("Play animation");
             slot.GetComponentInChildren<TextMeshProUGUI>().text = ""; //Clears number behind the star when getting wild
 
             //blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
@@ -325,6 +324,7 @@ public class spin : MonoBehaviour
             GridNumbers bestChoice = AI.BestChoice();
             if(bestChoice != null)
             {
+                bestChoice.gameObject.GetComponentInChildren<Image>().sprite = BackgroundImages[2];
                 bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
                 blinkEffect.FlashingEffect(bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
             }
@@ -343,6 +343,7 @@ public class spin : MonoBehaviour
                 if (!number.hasBeenHit)
                 {
                     Animator animatorObject = number.gameObject.GetComponentInChildren<Animator>();
+                    animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
                     animatorObject.GetComponent<Image>().enabled = true;
                 }
             }
@@ -402,7 +403,6 @@ public class spin : MonoBehaviour
 
         if(bestChoiceText != null)
         {
-            Debug.Log("Best choice reset");
             blinkEffect.blinkeffectStart = false;
             bestChoiceText.color = Color.white;
         }
