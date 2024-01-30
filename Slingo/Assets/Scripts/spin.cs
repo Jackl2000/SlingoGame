@@ -165,6 +165,7 @@ public class spin : MonoBehaviour
     public void StartSpin()
     {
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
+        isSpinning = true;
         Stakes();
         ColorReset();
         StartCoroutine(Fade());
@@ -195,7 +196,7 @@ public class spin : MonoBehaviour
             spinButton.GetComponent<Image>().color = Color.white;
             playerData.balance -= spinBets;
         }
-        isSpinning = true;
+        
 
         if (spinBuyLimit >= 0 && spinLeft < 0)
         {
