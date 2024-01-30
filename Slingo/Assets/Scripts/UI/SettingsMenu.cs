@@ -13,11 +13,16 @@ public class SettingsMenu : MonoBehaviour
     public GameObject PossibleRewards;
     public TextMeshProUGUI JackpotText;
     public TextMeshProUGUI SuperJackpotText;
+    public float multiplier = 1; 
 
+    private GridCheck gridCheck;
 
     public void Start()
     {
         RewardButton.onClick.AddListener(ShowPanelRewards);
+
+        gridCheck = FindAnyObjectByType <GridCheck>();
+
     }
 
 
@@ -49,11 +54,24 @@ public class SettingsMenu : MonoBehaviour
     public void ShowPanelRewards()
     {
 
-
-
-
-
         PossibleRewards.SetActive(true);
+        if (gridCheck != null)
+        {
+            //Standard price is 1
+            gridCheck.UpdateRewards(multiplier);
+
+            if(gridCheck.rewards.Count > 9) 
+            {
+                float jackpotReward = gridCheck.rewards[11];
+                float superJackpotReward = gridCheck.rewards[12];
+
+                JackpotText.text = $"{jackpotReward}";
+                SuperJackpotText.text = $"{superJackpotReward}";
+
+            }
+
+
+        }
 
     }
 
