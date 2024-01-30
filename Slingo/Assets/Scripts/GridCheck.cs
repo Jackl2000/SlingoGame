@@ -26,6 +26,7 @@ public class GridCheck : MonoBehaviour
     [Space(5)]
     [SerializeField] private GameObject jackpotMessage;
     [SerializeField] private Sprite[] jackpotSlingoBorderImages;
+    [SerializeField] private Sprite slingoBackgroundImage;
 
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
@@ -382,6 +383,7 @@ public class GridCheck : MonoBehaviour
         {
             go.GetComponent<TextMeshProUGUI>().text = "";
             Image wallImage = go.GetComponentInChildren<Image>();
+            wallImage.sprite = slingoBackgroundImage;
             wallImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
             wallImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
             wallImage.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);

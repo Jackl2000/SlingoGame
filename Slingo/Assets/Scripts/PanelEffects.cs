@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 public class PanelEffects : MonoBehaviour
 {
@@ -72,6 +70,7 @@ public class PanelEffects : MonoBehaviour
         if(blinkeffectStart)
         {
             bestChoiceText.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
+            //bestChoiceText.GetComponentInChildren<Image>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
         }
     }
 }
