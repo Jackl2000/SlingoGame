@@ -129,10 +129,12 @@ public class spin : MonoBehaviour
         {
             if(gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked)
             {
-                Image starImg = wildNumberPicked.GetComponentInChildren<Animator>().transform.GetChild(0).GetComponent<Image>();
+                Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
+                Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
                 if(starImg.color.a != 0)
                 {
                     starImg.GetComponentInParent<TextMeshProUGUI>().text = "";
+                    animator.SetBool("Duppe", true);
                     StartCoroutine(Fade(starImg));
                 }
             }

@@ -70,6 +70,7 @@ public class GridNumbers
             childImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
             starAnimation.SetBool("Hit", false);
             starAnimation.SetBool("Slingo", false);
+            starAnimation.SetBool("Duppe", false);
         }
         catch (System.Exception)
         {
