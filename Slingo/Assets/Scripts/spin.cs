@@ -117,48 +117,67 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        if(isSpinning || gridButton.GetComponent<TextMeshProUGUI>().text == "" || wildPicks == 0)
+        if(isSpinning || gridButton.GetComponent<TextMeshProUGUI>().text == "")
         {
             return;
         }
+
         GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
         int numberPressed = Convert.ToInt32(gridButton.GetComponent<TextMeshProUGUI>().text);
-        if (wildPicked < wildPicks)
-        {
-            if(!gridGeneration.numberPositions[numberPressed].hasBeenHit)
-            {
-                gridGeneration.numberPositions[numberPressed].Hit();
-                gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
-                
-                GameObject wild = wilds.Dequeue();
-                wild.GetComponentInChildren<Image>().color = Color.green;
-                wild.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
 
-                wildPicked++;
-            }
-        }
-        if (wildPicked == wildPicks)
+        if (wildPicks == 0)
         {
-            blinkEffect.blinkeffectStart = false;
-            WildTransparency(true, wildNumberPicked);
-            bestChoiceText.color = Color.white;
-            if (spinLeft <= 0)
+            if(gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked)
             {
-                spinButton.GetComponent<Image>().color = Color.black;
-                spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+                Image starImg = wildNumberPicked.GetComponentInChildren<Animator>().transform.GetChild(0).GetComponent<Image>();
+                if(starImg.color.a != 0)
+                {
+                    starImg.GetComponentInParent<TextMeshProUGUI>().text = "";
+                    StartCoroutine(Fade(starImg));
+                }
             }
         }
         else
         {
-            blinkEffect.blinkeffectStart = false;
-            WildTransparency(false, wildNumberPicked);
-            bestChoiceText.color = Color.white;
-            GridNumbers bestChoice = AI.BestChoice();
-            if (bestChoice == null) return;
-            bestChoice.gameObject.GetComponentInChildren<Image>().sprite = BackgroundImages[2];
-            bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
+            
+            
+            if (wildPicked < wildPicks)
+            {
+                if (!gridGeneration.numberPositions[numberPressed].hasBeenHit)
+                {
+                    gridGeneration.numberPositions[numberPressed].Hit();
+                    gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
+
+                    GameObject wild = wilds.Dequeue();
+                    wild.GetComponentInChildren<Image>().color = Color.green;
+                    wild.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
+
+                    wildPicked++;
+                }
+            }
+            if (wildPicked == wildPicks)
+            {
+                blinkEffect.blinkeffectStart = false;
+                WildTransparency(true, wildNumberPicked);
+                bestChoiceText.color = Color.white;
+                if (spinLeft <= 0)
+                {
+                    spinButton.GetComponent<Image>().color = Color.black;
+                    spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+                    spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+                }
+            }
+            else
+            {
+                blinkEffect.blinkeffectStart = false;
+                WildTransparency(false, wildNumberPicked);
+                bestChoiceText.color = Color.white;
+                GridNumbers bestChoice = AI.BestChoice();
+                if (bestChoice == null) return;
+                bestChoice.gameObject.GetComponentInChildren<Image>().sprite = BackgroundImages[2];
+                bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
+                blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
+            }
         }
     }
 
@@ -418,17 +437,30 @@ public class spin : MonoBehaviour
         }
     }
 
-    IEnumerator Fade()
+    IEnumerator Fade(Image starImg = null)
     {
-        foreach (Image star in starImgs)
+        if(starImg == null)
         {
-            while (star.color.a < 1)
+            foreach (Image star in starImgs)
             {
-                star.color = new Color(star.color.r, star.color.g, star.color.b, star.color.a + 0.05f);
+                while (star.color.a < 1)
+                {
+                    star.color = new Color(star.color.r, star.color.g, star.color.b, star.color.a + 0.05f);
+                    yield return null;
+                }
+                yield return new WaitForSeconds(0.05f);
+            }
+            starImgs.Clear();
+        }
+        else
+        {
+            while (starImg.color.a < 1)
+            {
+                starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, starImg.color.a + 0.05f);
                 yield return null;
             }
-            yield return new WaitForSeconds(0.05f);
-        }            
-        starImgs.Clear();
+            starImgs.Remove(starImg);
+        }
+
     }
 }
