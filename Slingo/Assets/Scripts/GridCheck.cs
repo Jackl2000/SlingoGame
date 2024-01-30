@@ -66,11 +66,11 @@ public class GridCheck : MonoBehaviour
         rewards.Add(5, 5 * multiplyere);
         rewards.Add(6, 10 * multiplyere);
         rewards.Add(7, 25 * multiplyere);
-        rewards.Add(8, 75 * multiplyere);
-        rewards.Add(9, 150 * multiplyere);
-        rewards.Add(10, 500 * multiplyere);
-        rewards.Add(11, 500 * multiplyere);
-        rewards.Add(12, 1000 * multiplyere);
+        rewards.Add(8, 50 * multiplyere);
+        rewards.Add(9, 125 * multiplyere);
+        rewards.Add(10, 250 * multiplyere);
+        rewards.Add(11, 250 * multiplyere);
+        rewards.Add(12, 500 * multiplyere);
 
         GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(go => go.transform.position.y).ToArray();
 

@@ -51,7 +51,7 @@ public class spin : MonoBehaviour
     /// <summary>
     /// spins left before you pay
     /// </summary>
-    [HideInInspector] public int spinLeft = 8;
+    [HideInInspector] public int spinLeft = 10;
     [HideInInspector] public float stakes = 0;
     int rnd;
     int min = 1;
@@ -86,7 +86,7 @@ public class spin : MonoBehaviour
     private void Update()
     {
         NumberPingPong();
-
+        //spinLeft = 10;
         if (spinLeft == 0)
         {
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
@@ -164,10 +164,12 @@ public class spin : MonoBehaviour
 
     public void StartSpin()
     {
+        Debug.Log(spinLeft);
         if (isSpinning || gridCheck.starsCount == 25) return;
         Stakes();
         ColorReset();
         StartCoroutine(Fade());
+        Debug.Log(spinLeft);
 
         foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values) 
         {
@@ -188,7 +190,7 @@ public class spin : MonoBehaviour
             }
         }
         
-        if (spinLeft == 8)
+        if (spinLeft == 10)
         {
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(false);
             spinButton.GetComponent<Image>().color = Color.white;
@@ -207,6 +209,7 @@ public class spin : MonoBehaviour
         else
         {
             spinLeft--;
+            Debug.Log(spinLeft);
             spinLeftText.text = spinLeft.ToString();
             StartCoroutine(Spinner());
         }
@@ -262,7 +265,7 @@ public class spin : MonoBehaviour
 
     public void Stakes()
     {
-        if (spinLeft == 8)
+        if (spinLeft == 10)
         {
             stakes += spinBets;
         }
