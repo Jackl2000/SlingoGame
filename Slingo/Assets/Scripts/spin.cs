@@ -134,7 +134,7 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        if(isSpinning || gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
+        if(wildPicks == 0 || gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             return;
         }

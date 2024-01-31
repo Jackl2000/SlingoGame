@@ -80,7 +80,7 @@ public class GridCheck : MonoBehaviour
         {
             if (rewards.ContainsKey(i + 3) && i < 7)
             {
-                slingoRewards[i].GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
+                slingoRewards[i].GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
             }
         }
     }
