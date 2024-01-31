@@ -146,7 +146,7 @@ public class spin : MonoBehaviour
             {
                 spinButton.GetComponent<Image>().color = Color.black;
                 spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
             }
         }
         else
@@ -199,7 +199,7 @@ public class spin : MonoBehaviour
 
         if (spinBuyLimit >= 0 && spinLeft < 0)
         {
-            playerData.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponent<TextMeshProUGUI>().text.Substring(5));
+            playerData.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(14));
 
             spinBuyLimit--;
             Debug.Log("Buy limit: " + spinBuyLimit);
@@ -288,7 +288,7 @@ public class spin : MonoBehaviour
         {
             spinButton.GetComponent<Image>().color = Color.black;
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-            spinButton.GetComponentInChildren<TextMeshProUGUI>().text =  "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
             spinCountHeader.text = "Buy limit";
             spinLeftText.text = spinBuyLimit.ToString();
         }
