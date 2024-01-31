@@ -15,6 +15,9 @@ public class DiceGameUI : MonoBehaviour
     public Button lowerButton;
     public TextMeshProUGUI feedBackText;
     public Button throwButton;
+    public GameObject textPanel;
+    public Button playAgainButton;
+    public GameObject youRolledPanel;
 
     public DiceThrower diceThrower;
     private int playerRollResult;
@@ -29,6 +32,7 @@ public class DiceGameUI : MonoBehaviour
         higherButton.gameObject.SetActive(false);
         lowerButton.gameObject.SetActive(false);
         feedBackText.gameObject.SetActive(false);
+        playAgainButton.onClick.AddListener(HidePanel);
     }
 
     // Update is called once per frame
@@ -37,13 +41,19 @@ public class DiceGameUI : MonoBehaviour
         
     }
 
+    public void HidePanel()
+    {
+        textPanel.gameObject.SetActive(false);
+        throwButton.gameObject.SetActive(true);
+    }
 
     public void ShowPlayerResult(int result)
     {
         playerRollResult = result;
         higherButton.gameObject.SetActive(true);
         lowerButton.gameObject.SetActive(true);
-        feedBackText.gameObject.SetActive(true);
+        youRolledPanel.gameObject.SetActive(true);
+        feedBackText.gameObject .SetActive(true);
         feedBackText.text = $"Du slog {result}";
     }
 
@@ -57,6 +67,7 @@ public class DiceGameUI : MonoBehaviour
         // Compare player's roll against opponent
         higherButton.gameObject.SetActive(false);
         lowerButton.gameObject.SetActive(false);
+        youRolledPanel.gameObject.SetActive(false);
         feedBackText.text = "";
         int opponentRoll = await RollOpponentDice();
         bool isCorrect = (guess && opponentRoll > playerRollResult) ||
@@ -74,9 +85,12 @@ public class DiceGameUI : MonoBehaviour
             feedback += $"(Samme slag, prøv igen)";
         }
 
-        feedBackText.text = feedback;
-        feedBackText.gameObject.SetActive(true);
-        throwButton.gameObject.SetActive(true);
+        textPanel.gameObject.SetActive(true);
+
+        resultText.text = feedback;
+        //feedBackText.text = feedback;
+        //feedBackText.gameObject.SetActive(true);
+        //throwButton.gameObject.SetActive(true);
     }
 
     public void Reset()
