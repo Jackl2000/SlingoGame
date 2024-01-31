@@ -299,7 +299,7 @@ public class spin : MonoBehaviour
         {
             stakes += spinBets;
         }
-        if (spinLeft < 0 && !isSpinning)
+        if (spinLeft < 0)
         {
             stakes += calculations.PriceCaculator();
         }
