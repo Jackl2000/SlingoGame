@@ -131,7 +131,6 @@ public class spin : MonoBehaviour
             {
                 spinButton.GetComponent<Image>().color = Color.black;
                 spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
 
                 Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
                 Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
@@ -170,7 +169,7 @@ public class spin : MonoBehaviour
                 {
                     spinButton.GetComponent<Image>().color = Color.black;
                     spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-                    spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+                    spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
                 }
             }
             else
