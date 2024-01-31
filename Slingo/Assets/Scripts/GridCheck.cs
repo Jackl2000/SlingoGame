@@ -20,7 +20,6 @@ public class GridCheck : MonoBehaviour
     [HideInInspector] public bool slingoAnimationFinished = true;
 
     [Space(5)]
-    [SerializeField] private GameObject slingoPanel;
     [SerializeField] private Sprite[] slingoBorderImages;
 
     [Space(5)]
@@ -31,7 +30,7 @@ public class GridCheck : MonoBehaviour
     private GridGeneration grid;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
     [HideInInspector] public bool slingoIsHit = false;
-    private Image[] slingoBorders;
+    private List<Image> slingoBorders = new List<Image>();
     private int rewardCount;
 
     // Start is called before the first frame update
@@ -52,9 +51,10 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("dr", false);
         UpdateRewards(1);
 
-        if(slingoPanel != null)
+        GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoBoarder").OrderBy(x => x.transform.parent.position.y).ToArray();
+        foreach (GameObject go in slingoRewards)
         {
-            slingoBorders = slingoPanel.GetComponentsInChildren<Image>().SkipLast(1).ToArray();
+            slingoBorders.Add(go.GetComponent<Image>());
         }
     }
 
@@ -101,11 +101,11 @@ public class GridCheck : MonoBehaviour
         {
             foreach (Image item in slingoBorders)
             {
-                if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Length - 1])
+                if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Count - 1])
                 {
                     item.sprite = slingoBorderImages[0];
                 }
-                else if (item == slingoBorders[slingoBorders.Length - 1])
+                else if (item == slingoBorders[slingoBorders.Count - 1])
                 {
                     item.sprite = jackpotSlingoBorderImages[0];
                 }
@@ -270,15 +270,14 @@ public class GridCheck : MonoBehaviour
     {
         if (rewards.ContainsKey(slingoCount))
         {
-            Debug.Log("Hello " + slingoCount);
             if(slingoCount == 12)
             {
-                slingoBorders[slingoBorders.Length - 1].sprite = jackpotSlingoBorderImages[1];
+                slingoBorders[slingoBorders.Count - 1].sprite = jackpotSlingoBorderImages[1];
             }
 
             foreach (Image item in slingoBorders)
             {
-                if (item.sprite != slingoBorderImages[1] && item != slingoBorders[slingoBorders.Length - 1])
+                if (item.sprite != slingoBorderImages[1] && item != slingoBorders[slingoBorders.Count - 1])
                 {
                     item.sprite = slingoBorderImages[1];
                     break;
@@ -293,7 +292,6 @@ public class GridCheck : MonoBehaviour
         {
             jackpotMessage.SetActive(true);
         }
-
     }
 
     /// <summary>

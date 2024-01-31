@@ -29,7 +29,7 @@ public class Calculations : MonoBehaviour
         {
             slingoReward = starMultipliere;
         }
-        if (gridCheck.rewards.ContainsKey(gridCheck.slingoCount + 1))
+        if (gridCheck.slingoCount >= 2)
         {
             slingoReward = (gridCheck.rewards[Convert.ToInt32(gridCheck.slingoCount) + 1] / spin.spinBets) * Mathf.Clamp(gridCheck.starsCount / gridCheck.slingoCount, 0.6f, 0.95f + starMultipliere) * starMultipliere;
         }
