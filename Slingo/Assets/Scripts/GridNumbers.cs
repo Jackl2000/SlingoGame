@@ -12,7 +12,7 @@ public class GridNumbers
     public GameObject gameObject;
     public bool diagonal { get; private set; }
     public int number { get; private set; }
-    private Image childImage;
+    private Image starBackgroundImg;
     private Animator starAnimation;
 
     public GridNumbers(int horizontal, int vertical, GameObject gameObject, int value)
@@ -21,8 +21,8 @@ public class GridNumbers
         v = vertical;
         this.gameObject = gameObject;
         number = value;
-        childImage = gameObject.GetComponentInChildren<Image>();
-        if(childImage != null ) starAnimation = childImage.GetComponent<Animator>();
+        starBackgroundImg = gameObject.GetComponentInParent<Image>();
+        if(starBackgroundImg != null ) starAnimation = starBackgroundImg.GetComponent<Animator>();
 
         diagonal = CheckForDiagonal();
     }
@@ -52,7 +52,7 @@ public class GridNumbers
             gameObject.GetComponent<TextMeshProUGUI>().color = Color.black;
 
             starAnimation.SetBool("Hit", true);
-            childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+            starBackgroundImg.transform.GetChild(0).GetComponent<Image>().enabled = true;
         }
         catch (System.Exception e)
         {
@@ -65,9 +65,9 @@ public class GridNumbers
     {
         try
         {
-            childImage.GetComponentInChildren<Image>().enabled = false;
-            childImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
-            childImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
+            starBackgroundImg.GetComponentInChildren<Image>().enabled = false;
+            starBackgroundImg.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            starBackgroundImg.transform.GetChild(1).GetComponent<Image>().enabled = false;
             starAnimation.SetBool("Hit", false);
             starAnimation.SetBool("Slingo", false);
             starAnimation.SetBool("Duppe", false);

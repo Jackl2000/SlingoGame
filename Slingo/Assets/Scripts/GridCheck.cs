@@ -61,6 +61,8 @@ public class GridCheck : MonoBehaviour
     public void UpdateRewards(float multiplyere)
     {
         rewards.Clear();
+        rewards.Add(1, 0);
+        rewards.Add(2, 0);
         rewards.Add(3, 1 * multiplyere);
         rewards.Add(4, 3 * multiplyere);
         rewards.Add(5, 5 * multiplyere);
@@ -78,7 +80,7 @@ public class GridCheck : MonoBehaviour
         {
             if (rewards.ContainsKey(i + 3) && i < 7)
             {
-                slingoRewards[i].GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
+                slingoRewards[i].GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
             }
         }
     }
@@ -268,6 +270,7 @@ public class GridCheck : MonoBehaviour
     {
         if (rewards.ContainsKey(slingoCount))
         {
+            Debug.Log("Hello " + slingoCount);
             if(slingoCount == 12)
             {
                 slingoBorders[slingoBorders.Length - 1].sprite = jackpotSlingoBorderImages[1];
@@ -382,20 +385,20 @@ public class GridCheck : MonoBehaviour
         foreach (GameObject go in slingoNumbers)
         {
             go.GetComponent<TextMeshProUGUI>().text = "";
-            Image wallImage = go.GetComponentInChildren<Image>();
+            Image wallImage = go.GetComponentInParent<Image>();
             wallImage.sprite = slingoBackgroundImage;
             wallImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
             wallImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
             wallImage.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             wallImage.enabled = true;
 
-            if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
+            if (go.GetComponentInParent<Animator>().GetBool("Slingo"))
             {
-                go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
+                go.GetComponentInParent<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
             }
             else
             {
-                go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
+                go.GetComponentInParent<Animator>().SetBool("Slingo", true);
             }
 
             yield return new WaitForSeconds(0.2f);
