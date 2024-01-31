@@ -61,6 +61,8 @@ public class GridCheck : MonoBehaviour
     public void UpdateRewards(float multiplyere)
     {
         rewards.Clear();
+        rewards.Add(1, 0);
+        rewards.Add(2, 0);
         rewards.Add(3, 1 * multiplyere);
         rewards.Add(4, 3 * multiplyere);
         rewards.Add(5, 5 * multiplyere);
@@ -268,6 +270,7 @@ public class GridCheck : MonoBehaviour
     {
         if (rewards.ContainsKey(slingoCount))
         {
+            Debug.Log("Hello " + slingoCount);
             if(slingoCount == 12)
             {
                 slingoBorders[slingoBorders.Length - 1].sprite = jackpotSlingoBorderImages[1];

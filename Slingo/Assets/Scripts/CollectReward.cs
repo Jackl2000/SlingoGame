@@ -40,7 +40,9 @@ public class CollectReward : MonoBehaviour
         spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);
         spinScript.textToGoEmpty.Clear();
         spinScript.wildPicks = 0;
-        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).text = "Start Game";
+        spinScript.spinButton.GetComponent<Image>().color = Color.black;
+        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Game";
         spinScript.ColorReset();
 
         foreach (var spinSlot in spinScript.slotsList)
@@ -50,13 +52,10 @@ public class CollectReward : MonoBehaviour
             spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
         }
 
-        if (gridCheck.slingoCount >= 3)
-        {
-            playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
-            gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
-            collectBorderMessage.SetActive(false);
-            ResetTime();
-        }
+        playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
+        gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
+        collectBorderMessage.SetActive(false);
+        ResetTime();
     }
 
     public void ResetTime()
