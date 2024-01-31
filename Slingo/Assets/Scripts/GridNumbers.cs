@@ -51,29 +51,14 @@ public class GridNumbers
             gameObject.GetComponentInParent<GridCheck>().CheckGrid(h, v, diagonal, false);
             gameObject.GetComponent<TextMeshProUGUI>().color = Color.black;
 
-
             starAnimation.SetBool("Hit", true);
-            //childImage.GetComponentInChildren<Image>().enabled = true;
             childImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
-            //if (!wild)
-            //{
-
-                
-            //}
-            //else
-            //{
-            //    //childImage.GetComponentInChildren<Image>().enabled = true;
-            //    starAnimation.SetBool("Hit", true);
-            //    childImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
-            //    gameObject.GetComponent<TextMeshProUGUI>().text = "";
-            //}
         }
         catch (System.Exception e)
         {
             Debug.Log(e);
             Debug.Log("No child image");
         }
-
     }
 
     public void ResetData()
@@ -85,6 +70,7 @@ public class GridNumbers
             childImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
             starAnimation.SetBool("Hit", false);
             starAnimation.SetBool("Slingo", false);
+            starAnimation.SetBool("Duppe", false);
         }
         catch (System.Exception)
         {
