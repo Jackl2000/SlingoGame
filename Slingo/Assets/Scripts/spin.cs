@@ -117,7 +117,7 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        if(isSpinning || gridButton.GetComponent<TextMeshProUGUI>().text == "")
+        if(wildPicks <= 0 || gridButton.GetComponent<TextMeshProUGUI>().text == "")
         {
             return;
         }
@@ -157,12 +157,14 @@ public class spin : MonoBehaviour
             blinkEffect.blinkeffectStart = false;
             WildTransparency(true, wildNumberPicked);
             bestChoiceText.color = Color.white;
+            spinButton.GetComponent<Image>().color = Color.white;
             if (spinLeft <= 0)
             {
                 spinButton.GetComponent<Image>().color = Color.black;
                 spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
                 spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
             }
+            isSpinning = false;
         }
         else
         {
@@ -211,7 +213,8 @@ public class spin : MonoBehaviour
             spinButton.GetComponent<Image>().color = Color.white;
             playerData.balance -= spinBets;
         }
-        
+
+
 
         if (spinBuyLimit >= 0 && spinLeft < 0)
         {
@@ -227,13 +230,11 @@ public class spin : MonoBehaviour
         }
         else
         {
+            spinButton.GetComponent<Image>().color = Color.gray;
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
             StartCoroutine(Spinner());
-
-
         }
-
     }
 
     public void Spin(GameObject slot)
@@ -308,9 +309,13 @@ public class spin : MonoBehaviour
             spinCountHeader.text = "Buy limit";
             spinLeftText.text = spinBuyLimit.ToString();
         }
-        if (wildPicked == 0)
+        if (wildPicks == 0)
         {
             isSpinning = false;
+            if(spinLeft >= 0)
+            {
+                spinButton.GetComponent<Image>().color = Color.white;
+            }
         }
     }
 
@@ -335,7 +340,7 @@ public class spin : MonoBehaviour
         max = 16;
         foreach (Animator item in spinAnimations)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
             item.SetBool("Spinning", false);
             Spin(item.gameObject);
             min += 15;

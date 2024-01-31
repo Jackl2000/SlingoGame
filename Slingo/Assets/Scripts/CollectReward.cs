@@ -40,7 +40,9 @@ public class CollectReward : MonoBehaviour
         spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);
         spinScript.textToGoEmpty.Clear();
         spinScript.wildPicks = 0;
-        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).text = "Start Game";
+        spinScript.spinButton.GetComponent<Image>().color = Color.black;
+        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Game";
         spinScript.ColorReset();
 
         foreach (var spinSlot in spinScript.slotsList)
