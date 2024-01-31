@@ -125,61 +125,55 @@ public class spin : MonoBehaviour
         GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
         int numberPressed = Convert.ToInt32(gridButton.GetComponent<TextMeshProUGUI>().text);
 
-        if (wildPicks == 0)
+        if (gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked && starImgs.Contains(wildNumberPicked.GetComponentInChildren<Animator>().transform.GetChild(0).GetComponent<Image>()))
         {
-            if(gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked)
+            Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
+            Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
+            if (starImg.color.a != 0)
             {
-                Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
-                Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
-                if(starImg.color.a != 0)
-                {
-                    starImg.GetComponentInParent<TextMeshProUGUI>().text = "";
-                    animator.SetBool("Duppe", true);
-                    StartCoroutine(Fade(starImg));
-                }
+                starImg.GetComponentInParent<TextMeshProUGUI>().text = "";
+                animator.SetBool("Duppe", true);
+                StartCoroutine(Fade(starImg));
+                return;
+            }
+        }
+
+        if (wildPicked < wildPicks)
+        {
+            if (!gridGeneration.numberPositions[numberPressed].hasBeenHit)
+            {
+                gridGeneration.numberPositions[numberPressed].Hit();
+                gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
+
+                GameObject wild = wilds.Dequeue();
+                wild.GetComponentInChildren<Image>().color = Color.green;
+                wild.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
+
+                wildPicked++;
+            }
+        }
+        if (wildPicked == wildPicks)
+        {
+            blinkEffect.blinkeffectStart = false;
+            WildTransparency(true, wildNumberPicked);
+            bestChoiceText.color = Color.white;
+            if (spinLeft <= 0)
+            {
+                spinButton.GetComponent<Image>().color = Color.black;
+                spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
             }
         }
         else
         {
-            
-            
-            if (wildPicked < wildPicks)
-            {
-                if (!gridGeneration.numberPositions[numberPressed].hasBeenHit)
-                {
-                    gridGeneration.numberPositions[numberPressed].Hit();
-                    gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
-
-                    GameObject wild = wilds.Dequeue();
-                    wild.GetComponentInChildren<Image>().color = Color.green;
-                    wild.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
-
-                    wildPicked++;
-                }
-            }
-            if (wildPicked == wildPicks)
-            {
-                blinkEffect.blinkeffectStart = false;
-                WildTransparency(true, wildNumberPicked);
-                bestChoiceText.color = Color.white;
-                if (spinLeft <= 0)
-                {
-                    spinButton.GetComponent<Image>().color = Color.black;
-                    spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-                    spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
-                }
-            }
-            else
-            {
-                blinkEffect.blinkeffectStart = false;
-                WildTransparency(false, wildNumberPicked);
-                bestChoiceText.color = Color.white;
-                GridNumbers bestChoice = AI.BestChoice();
-                if (bestChoice == null) return;
-                bestChoice.gameObject.GetComponentInChildren<Image>().sprite = BackgroundImages[2];
-                bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-                blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
-            }
+            blinkEffect.blinkeffectStart = false;
+            WildTransparency(false, wildNumberPicked);
+            bestChoiceText.color = Color.white;
+            GridNumbers bestChoice = AI.BestChoice();
+            if (bestChoice == null) return;
+            bestChoice.gameObject.GetComponentInChildren<Image>().sprite = BackgroundImages[2];
+            bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
     }
 
