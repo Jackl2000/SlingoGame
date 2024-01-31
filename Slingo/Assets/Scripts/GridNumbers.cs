@@ -21,7 +21,7 @@ public class GridNumbers
         v = vertical;
         this.gameObject = gameObject;
         number = value;
-        childImage = gameObject.GetComponentInChildren<Image>();
+        childImage = gameObject.GetComponentInParent<Image>();
         if(childImage != null ) starAnimation = childImage.GetComponent<Animator>();
 
         diagonal = CheckForDiagonal();

@@ -80,7 +80,10 @@ public class spin : MonoBehaviour
 
     private void Awake()
     {
-
+        //if (subjectToObserve != null)
+        //{
+        //    subjectToObserve.StuffHappens += OnStuffHappens;
+        //}
 
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         AI = GetComponentInParent<AI>();
@@ -92,6 +95,7 @@ public class spin : MonoBehaviour
         }
         blinkEffect = GetComponent<PanelEffects>();
         calculations = GetComponent<Calculations>();
+
     }
 
 
@@ -128,21 +132,21 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        if(isSpinning || gridButton.GetComponent<TextMeshProUGUI>().text == "")
+        if(isSpinning || gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             return;
         }
 
         GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
-        int numberPressed = Convert.ToInt32(gridButton.GetComponent<TextMeshProUGUI>().text);
+        int numberPressed = Convert.ToInt32(gridButton.GetComponentInChildren<TextMeshProUGUI>().text);
 
-        if (gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked && starImgs.Contains(wildNumberPicked.GetComponentInChildren<Animator>().transform.GetChild(0).GetComponent<Image>()))
+        if (gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked && starImgs.Contains(wildNumberPicked.GetComponentInParent<Animator>().transform.GetChild(0).GetComponent<Image>()))
         {
             Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
             Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
             if (starImg.color.a != 0)
             {
-                starImg.GetComponentInParent<TextMeshProUGUI>().text = "";
+                starImg.GetComponent<TextMeshProUGUI>().text = "";
                 animator.SetBool("Duppe", true);
                 StartCoroutine(Fade(starImg));
                 return;
@@ -182,7 +186,7 @@ public class spin : MonoBehaviour
             bestChoiceText.color = Color.white;
             GridNumbers bestChoice = AI.BestChoice();
             if (bestChoice == null) return;
-            bestChoice.gameObject.GetComponentInChildren<Image>().sprite = BackgroundImages[2];
+            bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
             blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
@@ -199,7 +203,8 @@ public class spin : MonoBehaviour
 
         foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values) 
         {
-            gridnumber.gameObject.GetComponentInChildren<Image>().enabled = false;
+            //gridnumber.gameObject.GetComponentInChildren<Image>().enabled = false;
+            gridnumber.gameObject.transform.parent.GetComponent<Image>().enabled = false;
         }
 
         foreach (TextMeshProUGUI textNumber in textToGoEmpty)
@@ -287,7 +292,7 @@ public class spin : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[number].Hit();
 
-            Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.GetChild(0).GetChild(0);
+            Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.parent.GetChild(0);
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
             starImgs.Add(starImg);
@@ -360,7 +365,7 @@ public class spin : MonoBehaviour
             GridNumbers bestChoice = AI.BestChoice();
             if(bestChoice != null)
             {
-                bestChoice.gameObject.GetComponentInChildren<Image>().sprite = BackgroundImages[2];
+                bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
                 bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
                 blinkEffect.FlashingEffect(bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
             }
@@ -378,7 +383,7 @@ public class spin : MonoBehaviour
             {
                 if (!number.hasBeenHit)
                 {
-                    Animator animatorObject = number.gameObject.GetComponentInChildren<Animator>();
+                    Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                     animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
                     animatorObject.GetComponent<Image>().enabled = true;
                 }
@@ -394,7 +399,7 @@ public class spin : MonoBehaviour
             {
                 if (!number.hasBeenHit)
                 {
-                    Animator animatorObject = number.gameObject.GetComponentInChildren<Animator>();
+                    Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                     animatorObject.GetComponent<Image>().enabled = false;
                 }
                 

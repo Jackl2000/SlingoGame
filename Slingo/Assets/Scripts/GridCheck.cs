@@ -382,20 +382,20 @@ public class GridCheck : MonoBehaviour
         foreach (GameObject go in slingoNumbers)
         {
             go.GetComponent<TextMeshProUGUI>().text = "";
-            Image wallImage = go.GetComponentInChildren<Image>();
+            Image wallImage = go.GetComponentInParent<Image>();
             wallImage.sprite = slingoBackgroundImage;
             wallImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
             wallImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
             wallImage.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             wallImage.enabled = true;
 
-            if (go.GetComponentInChildren<Animator>().GetBool("Slingo"))
+            if (go.GetComponentInParent<Animator>().GetBool("Slingo"))
             {
-                go.GetComponentInChildren<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
+                go.GetComponentInParent<Animator>().Play("Base Layer.SlingoAnimation", -1, 0);
             }
             else
             {
-                go.GetComponentInChildren<Animator>().SetBool("Slingo", true);
+                go.GetComponentInParent<Animator>().SetBool("Slingo", true);
             }
 
             yield return new WaitForSeconds(0.2f);
