@@ -52,13 +52,10 @@ public class CollectReward : MonoBehaviour
             spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
         }
 
-        if (gridCheck.slingoCount >= 3)
-        {
-            playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
-            gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
-            collectBorderMessage.SetActive(false);
-            ResetTime();
-        }
+        playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
+        gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
+        collectBorderMessage.SetActive(false);
+        ResetTime();
     }
 
     public void ResetTime()
