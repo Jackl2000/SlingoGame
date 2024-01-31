@@ -67,6 +67,8 @@ public class spin : MonoBehaviour
     private Calculations calculations;
 
     PanelEffects blinkEffect;
+
+    [SerializeField] private GameObject CostMessage;
     #endregion
 
     [SerializeField] Test subjectToObserve;
@@ -174,6 +176,19 @@ public class spin : MonoBehaviour
                 spinButton.GetComponent<Image>().color = Color.black;
                 spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
                 spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+
+                if (spinBuyLimit == 0)
+                {
+                    CostMessage.SetActive(true);
+                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
+                }
+                else if (spinBuyLimit == 8)
+                {
+                    CostMessage.SetActive(true);
+                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
+                }
             }
             isSpinning = false;
         }
@@ -262,13 +277,6 @@ public class spin : MonoBehaviour
 
             slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
             slot.GetComponentInChildren<TextMeshProUGUI>().text = ""; //Clears number behind the star when getting wild
-
-            //blinkEffect = FindObjectsByType<PanelEffects>(FindObjectsSortMode.None);
-
-            //for (int i = 0; i < blinkEffect.Length; i++)
-            //{
-            //    blinkEffect[i].FlashingEffect();
-            //}
             wildPicks++;
         }
         else
@@ -281,7 +289,6 @@ public class spin : MonoBehaviour
 
     private IEnumerator CheckMatchingNumb(TextMeshProUGUI text, int number)
     {
-
         if (gridGeneration.numberPositions.ContainsKey(number) && !gridGeneration.numberPositions[number].hasBeenHit)
         {
             text.color = Color.green;
@@ -319,6 +326,22 @@ public class spin : MonoBehaviour
             spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
             spinCountHeader.text = "Buy limit";
             spinLeftText.text = spinBuyLimit.ToString();
+
+            if(wildPicks == 0)
+            {
+                if (spinBuyLimit == 0)
+                {
+                    CostMessage.SetActive(true);
+                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
+                }
+                else if (spinBuyLimit == 8)
+                {
+                    CostMessage.SetActive(true);
+                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
+                }
+            }
         }
         if (wildPicks == 0)
         {
