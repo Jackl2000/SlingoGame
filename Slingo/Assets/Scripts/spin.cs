@@ -129,9 +129,6 @@ public class spin : MonoBehaviour
         {
             if(gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked)
             {
-                spinButton.GetComponent<Image>().color = Color.black;
-                spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-
                 Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
                 Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
                 if(starImg.color.a != 0)
