@@ -69,8 +69,19 @@ public class spin : MonoBehaviour
     PanelEffects blinkEffect;
     #endregion
 
+    [SerializeField] Test subjectToObserve;
+
+    private void OnStuffHappens()
+    {
+        this.GetComponent<Image>().color = Color.blue;
+        Debug.Log("Stuff is happening");
+    }
+
+
     private void Awake()
     {
+
+
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         AI = GetComponentInParent<AI>();
         if(spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
