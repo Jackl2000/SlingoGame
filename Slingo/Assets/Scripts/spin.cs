@@ -134,7 +134,7 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        if(wildPicks == 0 || gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
+        if(gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             return;
         }
@@ -148,11 +148,15 @@ public class spin : MonoBehaviour
             Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
             if (starImg.color.a != 0)
             {
-                starImg.GetComponent<TextMeshProUGUI>().text = "";
+                animator.GetComponentInChildren<TextMeshProUGUI>().text = "";
                 animator.SetBool("Duppe", true);
                 StartCoroutine(Fade(starImg));
                 return;
             }
+        }
+        if(wildPicks == 0)
+        {
+            return;
         }
 
         if (wildPicked < wildPicks)
