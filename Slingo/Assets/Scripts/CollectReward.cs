@@ -25,6 +25,11 @@ public class CollectReward : MonoBehaviour
         playerData = GetComponent<PlayerData>();        
     }
 
+    private void Start()
+    {
+        
+    }
+
     public void Collect()
     {
         if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning || (spinScript.wildPicks != 0 && gridCheck.slingoCount != 12))
@@ -33,8 +38,8 @@ public class CollectReward : MonoBehaviour
         }
         //Reset values in spin
         spinScript.spinCountHeader.text = "SPINS";
-        spinsCounter.text = "10";
         spinScript.spinLeft = 10;
+        spinsCounter.text = spinScript.spinLeft.ToString();
         spinScript.spinBuyLimit = 8;
         spinScript.stakes = 0;
         spinScript.spentText.text = "Stakes: " + UIManager.Instance.DisplayMoney(0);

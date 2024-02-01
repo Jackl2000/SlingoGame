@@ -100,10 +100,17 @@ public class spin : MonoBehaviour
 
     }
 
+    float timePassedForMsg;
 
     private void Update()
     {
         NumberPingPong();
+
+        //if (gridCheck.slingoAnimationFinished)
+        //{
+        //    timePassedForMsg += Time.deltaTime;
+        //}
+
         //spinLeft = 10;
         if (spinLeft == 0)
         {
@@ -187,7 +194,7 @@ public class spin : MonoBehaviour
 
                 if (spinBuyLimit == 0)
                 {
-                    CostMessage.SetActive(true);
+                    //CostMessage.SetActive(true);
                     CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
                     CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
                 }
@@ -260,8 +267,6 @@ public class spin : MonoBehaviour
             spinLeftText.text = spinBuyLimit.ToString();
             StartCoroutine(Spinner());
 
-            //reset time for collect reward pop message
-            collectReward.ResetTime();
         }
         else
         {
@@ -338,13 +343,13 @@ public class spin : MonoBehaviour
 
             if(wildPicks == 0)
             {
-                if (spinBuyLimit == 0)
+                if (spinBuyLimit == 0 && gridCheck.slingoAnimationFinished)
                 {
-                    CostMessage.SetActive(true);
+                    //CostMessage.SetActive(true);
                     CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
                     CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
                 }
-                else if (spinBuyLimit == 8)
+                else if (spinBuyLimit == 8 && gridCheck.slingoAnimationFinished)
                 {
                     CostMessage.SetActive(true);
                     CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
