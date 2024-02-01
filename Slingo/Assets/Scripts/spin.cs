@@ -97,7 +97,6 @@ public class spin : MonoBehaviour
         }
         blinkEffect = GetComponent<PanelEffects>();
         calculations = GetComponent<Calculations>();
-
     }
 
 
@@ -189,8 +188,16 @@ public class spin : MonoBehaviour
                     if (spinBuyLimit == 0)
                     {
                         CostMessage.SetActive(true);
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
+                        if (gridCheck.slingoCount >= 3)
+                        {
+                            CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER" + "\n" + "You have earned " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+                            CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Collect";
+                        }
+                        else
+                        {
+                            CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
+                            CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
+                        }
                     }
                     else if (spinBuyLimit == 8)
                     {
@@ -344,8 +351,16 @@ public class spin : MonoBehaviour
                 if (spinBuyLimit == 0)
                 {
                     CostMessage.SetActive(true);
-                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
+                    if (gridCheck.slingoCount >= 3)
+                    {
+                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER" + "\n" + "You have earned " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Collect";
+                    }
+                    else
+                    {
+                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
+                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
+                    }
                 }
                 else if (spinBuyLimit == 8)
                 {
@@ -467,8 +482,6 @@ public class spin : MonoBehaviour
                 CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
                 CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
             }
-            
-            
         }
     }
 
