@@ -401,9 +401,11 @@ public class GridCheck : MonoBehaviour
 
             yield return new WaitForSeconds(0.2f);
         }
+        
 
         yield return new WaitForSeconds(0.4f);
         headerAnimator.SetBool("isTwerking", false);
         slingoAnimationFinished = true;
+        GetComponentInChildren<spin>().SlingoFinished();
     }
 }
