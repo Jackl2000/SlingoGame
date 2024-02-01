@@ -4064,7 +4064,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4ebf8da37d174944e955772ffe34de66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8542008f31ccf3442a458137bfb2a71e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24152,7 +24152,6 @@ MonoBehaviour:
   resetButton: {fileID: 7678843588789484500}
   headerAnimator: {fileID: 1352978434706545151}
   slingoAnimationFinished: 1
-  slingoPanel: {fileID: 8294825953586362885}
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}
   - {fileID: 21300000, guid: 56e38867de09c4342863b3989e01921c, type: 3}
