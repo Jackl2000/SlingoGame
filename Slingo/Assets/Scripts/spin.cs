@@ -104,7 +104,6 @@ public class spin : MonoBehaviour
     private void Update()
     {
         NumberPingPong();
-        //spinLeft = 10;
         if (spinLeft == 0)
         {
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
