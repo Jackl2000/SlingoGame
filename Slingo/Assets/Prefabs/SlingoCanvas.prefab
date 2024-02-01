@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 1476766488953607148}
   m_Layer: 5
   m_Name: Reward1
-  m_TagString: SlingoReward
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1132,8 +1132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2035798588695188182}
   m_Layer: 5
-  m_Name: Reward3
-  m_TagString: SlingoReward
+  m_Name: Reward5
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7961,7 +7961,7 @@ GameObject:
   - component: {fileID: 9191491141285439140}
   m_Layer: 5
   m_Name: Reward2
-  m_TagString: SlingoReward
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10926,8 +10926,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3803206699545825765}
   m_Layer: 5
-  m_Name: Reward7
-  m_TagString: SlingoReward
+  m_Name: Reward9
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10964,8 +10964,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8257880046727100159}
   m_Layer: 5
-  m_Name: Reward9
-  m_TagString: SlingoReward
+  m_Name: Reward11
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14079,8 +14079,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2444829278031794431}
   m_Layer: 5
-  m_Name: Reward4
-  m_TagString: SlingoReward
+  m_Name: Reward6
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17196,8 +17196,8 @@ GameObject:
   m_Component:
   - component: {fileID: 677836610799108142}
   m_Layer: 5
-  m_Name: Reward2
-  m_TagString: SlingoReward
+  m_Name: Reward4
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18849,8 +18849,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6696279566084892329}
   m_Layer: 5
-  m_Name: Reward8
-  m_TagString: SlingoReward
+  m_Name: Reward10
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24030,8 +24030,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8774884266943545532}
   m_Layer: 5
-  m_Name: Reward6
-  m_TagString: SlingoReward
+  m_Name: Reward8
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24545,8 +24545,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8854471115760078169}
   m_Layer: 5
-  m_Name: Reward5
-  m_TagString: SlingoReward
+  m_Name: Reward7
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25318,7 +25318,6 @@ MonoBehaviour:
   resetButton: {fileID: 7678843588789484500}
   headerAnimator: {fileID: 1352978434706545151}
   slingoAnimationFinished: 1
-  slingoPanel: {fileID: 8294825953586362885}
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}
   - {fileID: 21300000, guid: 56e38867de09c4342863b3989e01921c, type: 3}
@@ -28215,7 +28214,7 @@ GameObject:
   - component: {fileID: 3216110821699693896}
   m_Layer: 5
   m_Name: Reward3
-  m_TagString: SlingoReward
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
