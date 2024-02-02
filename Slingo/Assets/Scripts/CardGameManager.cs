@@ -13,8 +13,9 @@ public class CardGameManager : MonoBehaviour
     public Sprite goodHit;
     public Sprite badHit;
     
-    public List<GameObject> cardGOs = new List<GameObject>();
+    public List<GameObject> cardGo = new List<GameObject>();
     private List<TextMeshProUGUI> cardTexts = new List<TextMeshProUGUI>();
+    private List<Image> cardImages = new List<Image>();
 
     private int rndCard;
 
@@ -23,11 +24,16 @@ public class CardGameManager : MonoBehaviour
     {
         gameManager = this.GetComponent<CardGameManager>();
 
-        foreach (GameObject goCard in cardGOs)
+        foreach (GameObject goCard in cardGo)
         {
             cardTexts.Add(goCard.GetComponentInChildren<TextMeshProUGUI>());
+            cardImages.Add(goCard.GetComponent<Image>());
         }
+    }
 
+    private void Start()
+    {
+        ShuffleCards();
     }
 
     public void ShuffleCards()
@@ -58,6 +64,16 @@ public class CardGameManager : MonoBehaviour
 
         }
         usedNumb.Clear();
+    }
+
+    public void NewGame()
+    {
+        foreach (Image cardImage in cardImages)
+        {
+            cardImage.sprite = defualtCard;
+            cardImage.color = Color.white;
+        }
+        ShuffleCards();
     }
 
     public void FlipCard(GameObject cardObj)
