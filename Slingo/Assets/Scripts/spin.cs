@@ -105,10 +105,10 @@ public class spin : MonoBehaviour
     {
         NumberPingPong();
 
-        //if (gridCheck.slingoAnimationFinished)
-        //{
-        //    timePassedForMsg += Time.deltaTime;
-        //}
+        if (gridCheck.slingoAnimationFinished && spinBuyLimit == 0)
+        {
+            timePassedForMsg += Time.deltaTime;
+        }
 
         //spinLeft = 10;
 
@@ -355,7 +355,7 @@ public class spin : MonoBehaviour
 
             if(wildPicks == 0 && gridCheck.slingoAnimationFinished)
             {
-                if (spinBuyLimit == 0 && gridCheck.slingoAnimationFinished)
+                if (spinBuyLimit == 0 && gridCheck.slingoAnimationFinished && timePassedForMsg > 3.5f)
                 {
                     CostMessage.SetActive(true);
                     if (gridCheck.slingoCount >= 3)
