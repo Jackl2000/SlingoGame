@@ -343,10 +343,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 88478724}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -472,8 +472,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b036ee1c1636a8f47a83a69851fd884e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoodHit: {fileID: 0}
-  BadHit: {fileID: 0}
+  defualtCard: {fileID: 21300000, guid: f0fd259c041f7a94ebd9b92b0a436d9a, type: 3}
+  goodHit: {fileID: 21300000, guid: f3add0266c0fec64bb1847d308cccfc6, type: 3}
+  badHit: {fileID: 0}
   cardGOs:
   - {fileID: 2057570150}
   - {fileID: 1076784406}
@@ -780,10 +781,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 277525758}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1047,10 +1048,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 509497838}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1179,7 +1180,7 @@ GameObject:
   - component: {fileID: 633331095}
   - component: {fileID: 633331094}
   m_Layer: 5
-  m_Name: Button_Random
+  m_Name: Button_Reset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1385,10 +1386,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 642560163}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1890,10 +1891,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 841101671}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2383,10 +2384,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1076784406}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3157,10 +3158,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1663508701}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3462,10 +3463,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2057570150}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3557,10 +3558,10 @@ MonoBehaviour:
       - m_Target: {fileID: 116307320}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: FlipCard
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2092385824}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

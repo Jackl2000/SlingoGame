@@ -7,15 +7,17 @@ using UnityEngine.UI;
 
 public class CardGameManager : MonoBehaviour
 {
-
     CardGameManager gameManager;
 
     public Sprite defualtCard;
-    public Sprite GoodHit;
-    public Sprite BadHit;
+    public Sprite goodHit;
+    public Sprite badHit;
     
     public List<GameObject> cardGOs = new List<GameObject>();
-    List<TextMeshProUGUI> cardTexts = new List<TextMeshProUGUI>();
+    private List<TextMeshProUGUI> cardTexts = new List<TextMeshProUGUI>();
+
+    private int rndCard;
+
 
     private void Awake()
     {
@@ -27,13 +29,6 @@ public class CardGameManager : MonoBehaviour
         }
 
     }
-
-    private void Start()
-    {
-        ShuffleCards();
-    }
-
-    int rndCard;
 
     public void ShuffleCards()
     {
@@ -65,33 +60,58 @@ public class CardGameManager : MonoBehaviour
         usedNumb.Clear();
     }
 
-    public void FlipCard(GameObject CardToFlip)
+    public void FlipCard(GameObject cardObj)
     {
-        CardToFlip.GetComponent<Image>().sprite = GoodHit;
-        //switch (rndCard)
-        //{
-        //    case 1:
-        //        this.GetComponent<Image>().sprite = GoodHit;
-        //        break;
-        //    case 2:
-        //        break;
-        //    case 3:
-        //        break;
-        //    case 4:
-        //        break;
-        //    case 5:
+        TextMeshProUGUI cardNumberText = cardObj.GetComponentInChildren<TextMeshProUGUI>();
 
-        //        break;
-        //    case 6:
-        //        break;
-        //    case 7:
-        //        break;
-        //    case 8:
-        //        break;
-        //    case 9:
-        //        break;
-
-        //}
+        switch (Convert.ToInt32(cardNumberText.text))
+        {
+            case 1:
+                cardObj.GetComponent<Image>().color = Color.black;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "(X o X)";
+                break;
+            case 2:
+                cardObj.GetComponent<Image>().sprite = goodHit;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "x2";
+                break;
+            case 3:
+                cardObj.GetComponent<Image>().sprite = goodHit;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "x5";
+                break;
+            case 4:
+                cardObj.GetComponent<Image>().sprite = goodHit;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "x5";
+                break;
+            case 5:
+                cardObj.GetComponent<Image>().sprite = goodHit;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "x10";
+                break;
+            case 6:
+                cardObj.GetComponent<Image>().sprite = goodHit;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "x20";
+                break;
+            case 7:
+                cardObj.GetComponent<Image>().sprite = goodHit;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "x30";
+                break;
+            case 8:
+                cardObj.GetComponent<Image>().sprite = goodHit;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "x50";
+                break;
+            case 9:
+                cardObj.GetComponent<Image>().sprite = goodHit;
+                cardNumberText.enabled = true;
+                cardNumberText.text = "x100";
+                break;
+        }
     }
 
 }
