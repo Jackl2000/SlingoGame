@@ -10,9 +10,10 @@ public class CardGameManager : MonoBehaviour
 
     CardGameManager gameManager;
 
+    public Sprite defualtCard;
     public Sprite GoodHit;
     public Sprite BadHit;
-
+    
     public List<GameObject> cardGOs = new List<GameObject>();
     List<TextMeshProUGUI> cardTexts = new List<TextMeshProUGUI>();
 
@@ -36,30 +37,37 @@ public class CardGameManager : MonoBehaviour
 
     public void ShuffleCards()
     {
-        List<int> rolledNumb = new List<int>();
+        List<int> usedNumb = new List<int>();
 
         foreach (TextMeshProUGUI cardText in cardTexts)
         {
-            for (int i = 0; i < 9;)
+            rndCard = UnityEngine.Random.Range(1, 10);
+            if (!usedNumb.Contains(rndCard))
             {
-                rndCard = UnityEngine.Random.Range(0, 10);
-                if (!rolledNumb.Contains(rndCard))
+                usedNumb.Add(rndCard);
+                cardText.text = rndCard.ToString();
+            }
+            else
+            {
+                while (usedNumb.Contains(rndCard))
                 {
-                    rolledNumb.Add(rndCard);
-                    cardText.text = rndCard.ToString();
-                    i++;
+                    rndCard = UnityEngine.Random.Range(1, 10);
+                    if (!usedNumb.Contains(rndCard))
+                    {
+                        usedNumb.Add(rndCard);
+                        cardText.text = rndCard.ToString();
+                        break;
+                    }
                 }
             }
+
         }
-        rolledNumb.Clear();
+        usedNumb.Clear();
     }
 
-    public void FlipCard()
+    public void FlipCard(GameObject CardToFlip)
     {
-        if (true)
-        {
-            this.GetComponent<Image>().sprite = GoodHit;
-        }
+        CardToFlip.GetComponent<Image>().sprite = GoodHit;
         //switch (rndCard)
         //{
         //    case 1:
