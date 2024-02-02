@@ -19,7 +19,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void Start()
     {
-        RewardButton.onClick.AddListener(ShowPanelRewards);
+        //RewardButton.onClick.AddListener(ShowPanelRewards);
 
         gridCheck = FindAnyObjectByType <GridCheck>();
 

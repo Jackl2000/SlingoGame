@@ -32,7 +32,7 @@ public class CollectReward : MonoBehaviour
 
     public void Collect()
     {
-        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning || (spinScript.wildPicks != 0 && gridCheck.slingoCount != 12))
+        if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning || (spinScript.wildPicks != 0 && gridCheck.slingoCount != 12) || spinScript.spinLeft == 10)
         {
             return;
         }
@@ -57,10 +57,15 @@ public class CollectReward : MonoBehaviour
             spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
         }
 
-        playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
+        if(gridCheck.slingoCount >= 3)
+        {
+            playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
+        }
+        
         gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Reset";
         collectBorderMessage.SetActive(false);
         ResetTime();
+        GetComponent<GridGeneration>().ReGenerateGrid();
     }
 
     public void ResetTime()

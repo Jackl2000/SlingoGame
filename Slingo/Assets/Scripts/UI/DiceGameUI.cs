@@ -78,17 +78,15 @@ public class DiceGameUI : MonoBehaviour
             ? $"Korrekt! Du slog {playerRollResult}, din modstander slog {opponentRoll}"
             : $"Forkert! Du slog {playerRollResult}, din modstander slog {opponentRoll}";
 
-        if(playerRollResult == 0)
+        if(playerRollResult == opponentRollResult)
         {
-            feedback += $"(Samme slag, prøv igen)";
+            feedback = $"I Slog det samme, slå om";
         }
 
         textPanel.gameObject.SetActive(true);
 
         resultText.text = feedback;
-        //feedBackText.text = feedback;
-        //feedBackText.gameObject.SetActive(true);
-        //throwButton.gameObject.SetActive(true);
+       
     }
 
     public void Reset()
