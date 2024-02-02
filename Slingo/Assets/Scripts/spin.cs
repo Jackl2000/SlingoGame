@@ -20,8 +20,7 @@ public class spin : MonoBehaviour
     public TextMeshProUGUI balanceText;
     public TextMeshProUGUI spentText;
 
-
-    [SerializeField] private Sprite[] BackgroundImages;
+    public Sprite[] BackgroundImages;
 
     [Space(10)]
     [Header("Spin settings")]

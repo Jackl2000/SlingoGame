@@ -13,6 +13,7 @@ public class GridCheck : MonoBehaviour
 {
     public Image resetButton;
     public Animator headerAnimator;
+    public GameObject SlingoPanel;
 
     [HideInInspector] public int slingoCount { get; private set; } = 0;
     [HideInInspector] public int starsCount { get; set; } = 0;
@@ -32,6 +33,7 @@ public class GridCheck : MonoBehaviour
     [HideInInspector] public bool slingoIsHit = false;
     private List<Image> slingoBorders = new List<Image>();
     private int rewardCount;
+    private Dictionary<string, int> slingoTypes = new Dictionary<string, int>();
 
     // Start is called before the first frame update
     void Awake()
@@ -119,7 +121,7 @@ public class GridCheck : MonoBehaviour
 
     }
 
-    Dictionary<string, int> slingoTypes = new Dictionary<string, int>();
+    
 
     /// <summary>
     /// Checks for new slingo with new number
@@ -315,6 +317,11 @@ public class GridCheck : MonoBehaviour
             }
         }
         return maxReward;
+    }
+
+    public void ViewSlingoRewards()
+    {
+        SlingoPanel.SetActive(!SlingoPanel.gameObject.activeSelf);
     }
     
     /// <summary>
