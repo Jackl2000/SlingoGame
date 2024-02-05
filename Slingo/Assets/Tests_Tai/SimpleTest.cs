@@ -67,7 +67,7 @@ namespace Tests_Tai
 
 
             //Act
-            spinScript.Spin(spinTestGO);
+            spinScript.Spin(spinTestGO, 1);
 
             //Assert
 

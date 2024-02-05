@@ -14,6 +14,7 @@ public class GridCheck : MonoBehaviour
     public Image resetButton;
     public Animator headerAnimator;
     public GameObject SlingoPanel;
+    public Button slingoRewardButton;
 
     [HideInInspector] public int slingoCount { get; private set; } = 0;
     [HideInInspector] public int starsCount { get; set; } = 0;
@@ -53,11 +54,7 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("dr", false);
         UpdateRewards(1);
 
-        GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoBoarder").OrderBy(x => x.transform.parent.position.y).ToArray();
-        foreach (GameObject go in slingoRewards)
-        {
-            slingoBorders.Add(go.GetComponent<Image>());
-        }
+
     }
 
     public void UpdateRewards(float multiplyere)
@@ -262,14 +259,24 @@ public class GridCheck : MonoBehaviour
         {
             StartCoroutine(SlingoAnimation(PlaySlingoAnimation(slingoTypes)));
             slingoTypes.Clear();
+            UpdateButton();
         }
     }
 
+    private void UpdateButton()
+    {
+        if(slingoCount >= 2)
+        {
+            slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[slingoCount + 1]);
+        }
+        slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (slingoCount + 1).ToString() + " rækker";
+    }
     /// <summary>
     /// Checks if the new slingo gives a new reward
     /// </summary>
     private void CheckForReward()
     {
+        Debug.Log("damn");
         if (rewards.ContainsKey(slingoCount))
         {
             if(slingoCount == 12)
@@ -279,9 +286,9 @@ public class GridCheck : MonoBehaviour
 
             foreach (Image item in slingoBorders)
             {
-                if (item.sprite != slingoBorderImages[1] && item != slingoBorders[slingoBorders.Count - 1])
+                item.sprite = slingoBorderImages[1];
+                if (item.sprite == slingoBorders[slingoCount - 1].sprite)
                 {
-                    item.sprite = slingoBorderImages[1];
                     break;
                 }
             }
@@ -322,6 +329,17 @@ public class GridCheck : MonoBehaviour
     public void ViewSlingoRewards()
     {
         SlingoPanel.SetActive(!SlingoPanel.gameObject.activeSelf);
+
+        if(SlingoPanel.activeSelf && slingoBorders.Count == 0)
+        {
+            GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoBoarder").OrderBy(x => x.transform.parent.position.y).ToArray();
+            foreach (GameObject go in slingoRewards)
+            {
+                Debug.Log(go.name);
+                slingoBorders.Add(go.GetComponent<Image>());
+            }
+            CheckForReward();
+        }
     }
     
     /// <summary>
