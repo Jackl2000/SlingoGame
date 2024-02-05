@@ -1990,7 +1990,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c81e1a03fd26f4592162d4dea5abb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38318cca4e2c6c845b0e1975a1055ee9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5036,7 +5036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c81e1a03fd26f4592162d4dea5abb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38318cca4e2c6c845b0e1975a1055ee9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6665,7 +6665,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c81e1a03fd26f4592162d4dea5abb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38318cca4e2c6c845b0e1975a1055ee9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6980,7 +6980,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 150}
+  m_SizeDelta: {x: 325, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2400192671410596584
 CanvasRenderer:
@@ -7037,7 +7037,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 81.85
+  m_fontSize: 76
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11500,7 +11500,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f3add0266c0fec64bb1847d308cccfc6, type: 3}
   spinSpeed: 15
   spinWaitTime: 0.5
-  wildChance: 12
+  wildChance: 14
+  wildArrowChance: 7
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
@@ -11510,6 +11511,9 @@ MonoBehaviour:
   - {fileID: 49765591730860136}
   - {fileID: 6443991277250788270}
   - {fileID: 7305154733994897045}
+  wildsImages:
+  - {fileID: 21300000, guid: 38318cca4e2c6c845b0e1975a1055ee9, type: 3}
+  - {fileID: 21300000, guid: f7f73e9c77630cc4a940435ae85f72cb, type: 3}
   textToGoEmpty: []
   spinBets: 1
   wildPicks: 0
@@ -14445,7 +14449,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c81e1a03fd26f4592162d4dea5abb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38318cca4e2c6c845b0e1975a1055ee9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16139,10 +16143,10 @@ RectTransform:
   - {fileID: 8820349349103842271}
   m_Father: {fileID: 4424352891198733182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -149.99998, y: 156}
-  m_SizeDelta: {x: -450, y: -1650.0002}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 867, y: 557.99976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4001475165044925285
 CanvasRenderer:
@@ -18402,7 +18406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c81e1a03fd26f4592162d4dea5abb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38318cca4e2c6c845b0e1975a1055ee9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18896,7 +18900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5352164599768207714
@@ -26419,8 +26423,6 @@ RectTransform:
   m_Children:
   - {fileID: 5876085290941502907}
   - {fileID: 5914095224967624197}
-  - {fileID: 1905424769863644655}
-  - {fileID: 3989961590656925223}
   - {fileID: 1754546222674672649}
   - {fileID: 4741726039463278896}
   - {fileID: 3402359878653402676}
@@ -26430,6 +26432,8 @@ RectTransform:
   - {fileID: 5070771307093305284}
   - {fileID: 8007670848916106803}
   - {fileID: 8364222456613381999}
+  - {fileID: 1905424769863644655}
+  - {fileID: 3989961590656925223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -26527,6 +26531,7 @@ MonoBehaviour:
   resetButton: {fileID: 7678843588789484500}
   headerAnimator: {fileID: 1352978434706545151}
   SlingoPanel: {fileID: 6895147790509304543}
+  slingoRewardButton: {fileID: 587031509315824273}
   slingoAnimationFinished: 1
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}

@@ -40,10 +40,6 @@ public class GridNumbers
     public void Hit()
     {
         if (hasBeenHit) return;
-        if(h == 5 && v == 5)
-        {
-
-        }
         hasBeenHit = true;
         try
         {
