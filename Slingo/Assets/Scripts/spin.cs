@@ -447,6 +447,7 @@ public class spin : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         SpinsLeft();
     }
+    bool spinUsed = true;
 
     private void SpinButtonReset()
     {
@@ -476,12 +477,17 @@ public class spin : MonoBehaviour
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
                     }
                 }
-                else if (spinBuyLimit == 8)
-                {
-                    CostMessage.SetActive(true);
-                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
-                }
+                //else if (spinBuyLimit == 8)
+                //{
+                //    if (spinUsed)
+                //    {
+                //        spinUsed = false;
+                //        CostMessage.SetActive(true);
+                //        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
+                //        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
+                //    }
+                    
+                //}
             }
         }
     }
