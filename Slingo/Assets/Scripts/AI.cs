@@ -14,9 +14,23 @@ public class AI : MonoBehaviour
         gridGeneration = GetComponent<GridGeneration>();
     }
 
-    public GridNumbers BestChoice()
+    public GridNumbers BestChoice(int superCounts, List<int> arrowList)
     {
-        bestChoiceList = BestChoiceList();
+        if(superCounts == 0 && arrowList.Count == 0)
+        {
+            return null;
+        }
+        else if(superCounts == 0)
+        {
+            bestChoiceList = BestChoiceList(arrowList[0]);
+        }
+        else
+        {
+            bestChoiceList = BestChoiceList(0);
+        }
+
+        if (bestChoiceList.Count == 0) return null;
+        
         int maxValue = 0;
         int currentNumber = 0;
         foreach (int item in bestChoiceList.Keys)
@@ -27,18 +41,18 @@ public class AI : MonoBehaviour
                 currentNumber = item;
             }
         }
-        if(maxValue == 0)
-        {
-            return null;
-        }
         return gridGeneration.numberPositions[currentNumber];
     }
 
-    private Dictionary<int, int> BestChoiceList()
+    private Dictionary<int, int> BestChoiceList(int hIndex)
     {
         Dictionary<int, int> bestChoiceValuesList = new Dictionary<int, int>();
         foreach(GridNumbers number in gridGeneration.numberPositions.Values)
         {
+            if(hIndex != 0 && number.h != hIndex)
+            {
+                continue;
+            }
             int finalScore = 0;
             if(number.hasBeenHit)
             {
@@ -59,6 +73,10 @@ public class AI : MonoBehaviour
             }
             finalScore += SlingoBonus(number);
             bestChoiceValuesList.Add(number.number, finalScore);
+        }
+        if(bestChoiceValuesList.Count == 0)
+        {
+
         }
         return bestChoiceValuesList;
     }
