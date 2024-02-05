@@ -160,8 +160,9 @@ public class spin : MonoBehaviour
             return;
         }
 
-        if (wilds.Count > 0) SuperWild(wildNumberPicked, numberPressed);
-        else if (wildsArrow.Count > 0) WildArrow(wildNumberPicked, numberPressed);
+        
+        if (slotWildArrow.Count > 0) WildArrow(wildNumberPicked, numberPressed);
+        else if(wilds.Count > 0) SuperWild(wildNumberPicked, numberPressed);
     }
 
     private void StarDupping(GameObject wildNumberPicked, int numberPressed)
@@ -467,22 +468,9 @@ public class spin : MonoBehaviour
     {
         if(!stop)
         {
-             //super
-            if (wilds.Count > 0)
+             //Arrow
+            if (slotWildArrow.Count > 0)
             {
-                foreach (GridNumbers number in gridGeneration.numberPositions.Values)
-                {
-                    if (!number.hasBeenHit)
-                    {
-                        Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
-                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
-                        animatorObject.GetComponent<Image>().enabled = true;
-                    }
-                }
-            }
-            else
-            {
-                //Arrow
                 List<int> indexes = new List<int>() { 0, 0, 0, 0, 0 };
                 foreach (GridNumbers number in gridGeneration.numberPositions.Values)
                 {
@@ -499,15 +487,15 @@ public class spin : MonoBehaviour
                     wildNumberPicked.GetComponent<Image>().enabled = false;
                 }
                 int indexh = 0;
-                foreach(int index in indexes)
+                foreach (int index in indexes)
                 {
                     indexh++;
-                    if(index == 0 && slotWildArrow.Contains(indexh))
+                    if (index == 0 && slotWildArrow.Contains(indexh))
                     {
                         wildPicked++;
                         blinkEffect.FlashingEffect(false, bestChoiceText);
+                        Debug.Log("Arrow in index " + indexh + " stop");
                         WildTransparency(true, null, indexh);
-                        Debug.Log("best choice: " + bestChoiceText.text);
                         if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
                         {
                             SpinButtonReset();
@@ -516,26 +504,25 @@ public class spin : MonoBehaviour
                     }
                 }
             }
-        }
-        else
-        {
-            //Super
-            if(hIndex == 0)
+            else
             {
+                //Super
                 foreach (GridNumbers number in gridGeneration.numberPositions.Values)
                 {
                     if (!number.hasBeenHit)
                     {
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                         animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
-                        animatorObject.GetComponent<Image>().enabled = false;
+                        animatorObject.GetComponent<Image>().enabled = true;
                     }
                 }
             }
-            else
+        }
+        else
+        {
+            if(hIndex != 0)
             {
-                
-                //arrow
+                //Arrow
                 foreach (GridNumbers number in gridGeneration.numberPositions.Values)
                 {
                     if (!number.hasBeenHit && number.h == hIndex)
@@ -546,7 +533,19 @@ public class spin : MonoBehaviour
                     }
                 }
                 slotWildArrow.Remove(hIndex);
-
+            }
+            else
+            {
+                //Super
+                foreach (GridNumbers number in gridGeneration.numberPositions.Values)
+                {
+                    if (!number.hasBeenHit)
+                    {
+                        Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
+                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
+                        animatorObject.GetComponent<Image>().enabled = false;
+                    }
+                }
             }
 
             if (wildNumberPicked != null)
@@ -555,17 +554,17 @@ public class spin : MonoBehaviour
             }
 
             //Check for more wilds
-            if (wilds.Count > 0)
-            {
-                WildTransparency(false);
-            }
-            else if(slotWildArrow.Count > 0)
+            if(slotWildArrow.Count > 0)
             {
 
                 foreach (int slot in slotWildArrow.ToArray())
                 {
                     WildTransparency(false, null, slot);
                 }
+            }
+            else if (wilds.Count > 0)
+            {
+                WildTransparency(false);
             }
         }
     }

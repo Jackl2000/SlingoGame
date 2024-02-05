@@ -20,13 +20,13 @@ public class AI : MonoBehaviour
         {
             return null;
         }
-        else if(superCounts == 0)
+        else if(arrowList.Count == 0)
         {
-            bestChoiceList = BestChoiceList(arrowList[0]);
+            bestChoiceList = BestChoiceList(0);
         }
         else
         {
-            bestChoiceList = BestChoiceList(0);
+            bestChoiceList = BestChoiceList(arrowList[0]);
         }
 
         if (bestChoiceList.Count == 0) return null;
