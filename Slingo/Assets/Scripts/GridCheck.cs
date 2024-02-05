@@ -101,7 +101,6 @@ public class GridCheck : MonoBehaviour
 
         try
         {
-            Debug.Log(slingoBorders.Count);
             foreach (Image item in slingoBorders)
             {
                 if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Count - 1])
