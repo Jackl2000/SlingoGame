@@ -580,15 +580,9 @@ public class spin : MonoBehaviour
     {
         if(spinLeft <= 0 && spinBuyLimit == 8)
         {
-            
-            if (spinUsed)
-            {
-                spinUsed = false;
-                CostMessage.SetActive(true);
-                CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
-                CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
-            }
-            
+            CostMessage.SetActive(true);
+            CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
+            CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
         }
         else if(spinBuyLimit == 0)
         {
