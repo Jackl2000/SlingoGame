@@ -15,6 +15,7 @@ public class GridCheck : MonoBehaviour
     public Animator headerAnimator;
     public GameObject SlingoPanel;
     public Button slingoRewardButton;
+    private spin spinScript;
 
     [HideInInspector] public int slingoCount { get; private set; } = 0;
     [HideInInspector] public int starsCount { get; set; } = 0;
@@ -39,6 +40,8 @@ public class GridCheck : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        spinScript = this.GetComponentInChildren<spin>();
+
         grid = GetComponent<GridGeneration>();
         gridSlingoList.Add("h1", false);
         gridSlingoList.Add("h2", false);
@@ -307,7 +310,7 @@ public class GridCheck : MonoBehaviour
         {
             resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Collect " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
         }
-        if(slingoCount >= 12 && slingoAnimationFinished)
+        if(slingoCount >= 12 && slingoAnimationFinished && spinScript.timePassedForMsg > 3)
         {
             jackpotMessage.SetActive(true);
         }
