@@ -149,15 +149,23 @@ public class spin : MonoBehaviour
         {
             return;
         }
-        if (wilds.Count > 0) SuperWild(gridButton);
-        else if (wildsArrow.Count > 0) WildArrow(gridButton);
-    }
 
-    private void SuperWild(Button gridButton)
-    {
         GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
         int numberPressed = Convert.ToInt32(gridButton.GetComponentInChildren<TextMeshProUGUI>().text);
 
+        StarDupping(wildNumberPicked, numberPressed);
+
+        if (wildPicks == 0)
+        {
+            return;
+        }
+
+        if (wilds.Count > 0) SuperWild(wildNumberPicked, numberPressed);
+        else if (wildsArrow.Count > 0) WildArrow(wildNumberPicked, numberPressed);
+    }
+
+    private void StarDupping(GameObject wildNumberPicked, int numberPressed)
+    {
         if (gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked && starImgs.Contains(wildNumberPicked.GetComponentInParent<Animator>().transform.GetChild(0).GetComponent<Image>()))
         {
             Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
@@ -170,11 +178,10 @@ public class spin : MonoBehaviour
                 return;
             }
         }
-        if (wildPicks == 0)
-        {
-            return;
-        }
+    }
 
+    private void SuperWild(GameObject wildNumberPicked, int numberPressed)
+    {
         if (wildPicked < wildPicks)
         {
             if (!gridGeneration.numberPositions[numberPressed].hasBeenHit)
@@ -189,54 +196,11 @@ public class spin : MonoBehaviour
                 wildPicked++;
             }
         }
-        if (wildPicked == wildPicks)
-        {
-            blinkEffect.FlashingEffect(false, bestChoiceText);
-            WildTransparency(true, wildNumberPicked);
-            
-            if(gridCheck.slingoAnimationFinished)
-            {
-                SpinButtonReset();
-                isSpinning = false;
-            }
-        }
-        else
-        {
-            blinkEffect.FlashingEffect(false, bestChoiceText);
-            WildTransparency(true, wildNumberPicked);
-
-            if (wildPicked == wildPicks) return;
-
-            GridNumbers bestChoice = AI.BestChoice(wilds.Count, slotWildArrow);
-            if (bestChoice == null) return;
-            bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
-            bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            blinkEffect.FlashingEffect(true, gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
-        }
+        WildReset(wildNumberPicked, 0);
     }
 
-    private void WildArrow(Button gridButton)
+    private void WildArrow(GameObject wildNumberPicked, int numberPressed)
     {
-        GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
-        int numberPressed = Convert.ToInt32(gridButton.GetComponentInChildren<TextMeshProUGUI>().text);
-
-        if (gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked && starImgs.Contains(wildNumberPicked.GetComponentInParent<Animator>().transform.GetChild(0).GetComponent<Image>()))
-        {
-            Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
-            Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
-            if (starImg.color.a != 0)
-            {
-                animator.GetComponentInChildren<TextMeshProUGUI>().text = "";
-                animator.SetBool("Duppe", true);
-                StartCoroutine(Fade(starImg));
-                return;
-            }
-        }
-        if (wildPicks == 0)
-        {
-            return;
-        }
-
         if (wildPicked < wildPicks)
         {
             foreach (int slot in slotWildArrow)
@@ -251,17 +215,23 @@ public class spin : MonoBehaviour
                 }
             }
         }
+        WildReset(wildNumberPicked, gridGeneration.numberPositions[numberPressed].h);
+    }
 
+    private void WildReset(GameObject wildNumberPicked, int index)
+    {
         blinkEffect.FlashingEffect(false, bestChoiceText);
-        WildTransparency(true, wildNumberPicked, gridGeneration.numberPositions[numberPressed].h);
+        WildTransparency(true, wildNumberPicked, index);
 
         if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
         {
             SpinButtonReset();
             isSpinning = false;
         }
-        else if (wildPicked != wildPicks)
+        else if(wildPicked != wildPicks)
         {
+            if (wildPicked == wildPicks) return;
+
             GridNumbers bestChoice = AI.BestChoice(wilds.Count, slotWildArrow);
             if (bestChoice == null) return;
             bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
@@ -477,17 +447,18 @@ public class spin : MonoBehaviour
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
                     }
                 }
-                //else if (spinBuyLimit == 8)
-                //{
-                //    if (spinUsed)
-                //    {
-                //        spinUsed = false;
-                //        CostMessage.SetActive(true);
-                //        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
-                //        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
-                //    }
-                    
-                //}
+                else if (spinBuyLimit == 8)
+                {
+                    spinUsed = false;
+                    CostMessage.SetActive(true);
+                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
+
+                    //if (spinUsed)
+                    //{
+                       
+                    //}
+                }
             }
         }
     }
