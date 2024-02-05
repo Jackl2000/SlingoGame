@@ -98,7 +98,6 @@ public class GridCheck : MonoBehaviour
 
         try
         {
-            Debug.Log(slingoBorders.Count);
             foreach (Image item in slingoBorders)
             {
                 if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Count - 1])
@@ -266,6 +265,12 @@ public class GridCheck : MonoBehaviour
 
     private void UpdateButton()
     {
+        if(slingoCount == 12)
+        {
+            slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "SUPER JACKPOT FLASH";
+            slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "BIGGEST PRICE!";
+            return;
+        }
         if(slingoCount >= 2)
         {
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[slingoCount + 1]);
@@ -277,22 +282,26 @@ public class GridCheck : MonoBehaviour
     /// </summary>
     private void CheckForReward()
     {
-        if (rewards.ContainsKey(slingoCount))
+        if(slingoBorders.Count > 0)
         {
-            if(slingoCount == 12)
+            if (rewards.ContainsKey(slingoCount))
             {
-                slingoBorders[slingoBorders.Count - 1].sprite = jackpotSlingoBorderImages[1];
-            }
-
-            foreach (Image item in slingoBorders)
-            {
-                item.sprite = slingoBorderImages[1];
-                if (item.sprite == slingoBorders[slingoCount - 1].sprite)
+                if (slingoCount == 12)
                 {
-                    break;
+                    slingoBorders[slingoBorders.Count - 1].sprite = jackpotSlingoBorderImages[1];
+                }
+
+                foreach (Image item in slingoBorders)
+                {
+                    item.sprite = slingoBorderImages[1];
+                    if (item.sprite == slingoBorders[slingoCount - 1].sprite)
+                    {
+                        break;
+                    }
                 }
             }
         }
+
         if (slingoCount >= 3)
         {
             resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Collect " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);

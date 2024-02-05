@@ -9,6 +9,9 @@ public class CardGameManager : MonoBehaviour
 {
     [Header("References")]
     public PlayerData playerData;
+    public spin spinScript;
+    public SettingsMenu settingsMenuScript;
+
     private CardGameManager gameManager;
     private Animator animator;
 
@@ -16,27 +19,33 @@ public class CardGameManager : MonoBehaviour
     public GameObject LostPrefab;
 
     [Space(5)]
-    public TextMeshProUGUI rewardText;
+    public TextMeshProUGUI gevintsText;
+    public TextMeshProUGUI balanceText;
+
+    [Space(5)]
+    [Header("Reward Setting")]
+    public float multiplier = 0.5f;
+    private int rndCard;
+    private float gevints;
+    private float præmie;
+    private GameObject LostGameObject;
+
+    [Space(10)]
+    public List<GameObject> cardGameObjects = new List<GameObject>();
+    private List<TextMeshProUGUI> cardTexts = new List<TextMeshProUGUI>();
+    private List<Image> cardImages = new List<Image>();
 
     [Space(5)]
     [Header("Card sprite")]
     public Sprite defualtCard;
     public Sprite goodHit;
     public Sprite badHit;
-    
-    public List<GameObject> cardGo = new List<GameObject>();
-    private List<TextMeshProUGUI> cardTexts = new List<TextMeshProUGUI>();
-    private List<Image> cardImages = new List<Image>();
-
-    private int rndCard;
-    private int gevints;
-    private GameObject LostGameObject;
 
     private void Awake()
     {
         gameManager = this.GetComponent<CardGameManager>();
         animator = this.GetComponent<Animator>();
-        foreach (GameObject goCard in cardGo)
+        foreach (GameObject goCard in cardGameObjects)
         {
             cardTexts.Add(goCard.GetComponentInChildren<TextMeshProUGUI>());
             cardImages.Add(goCard.GetComponent<Image>());
@@ -45,6 +54,7 @@ public class CardGameManager : MonoBehaviour
 
     private void Start()
     {
+        balanceText.text = playerData.balance.ToString();
         ShuffleCards();
     }
 
@@ -80,6 +90,11 @@ public class CardGameManager : MonoBehaviour
 
     public void NewGame()
     {
+        playerData.balance += gevints;
+        balanceText.text = playerData.balance.ToString();
+        gevints = 0;
+        gevintsText.text = "Gevints: " + gevints.ToString();
+
         foreach (Image cardImage in cardImages)
         {
             cardImage.sprite = defualtCard;
@@ -88,27 +103,29 @@ public class CardGameManager : MonoBehaviour
             cardImage.gameObject.GetComponent<Button>().enabled = true;
 
         }
-        LostGameObject.SetActive(false);
+        if (LostGameObject != null)
+        {
+            LostGameObject.SetActive(false);
+        }
         animator.SetBool("isBadFlip", false);
         
-        gevints = 0;
-        rewardText.text = "Gevints: " + gevints.ToString();
-
         ShuffleCards();
     }
+
 
     public void FlipCard(GameObject cardObj)
     {
         TextMeshProUGUI cardNumberText = cardObj.GetComponentInChildren<TextMeshProUGUI>();
-        
+
+        Debug.Log("Spin bet: " + spinScript.spinBets + " multiplier: " + multiplier);
 
         switch (Convert.ToInt32(cardNumberText.text))
         {
             case 1:
-                foreach (GameObject card in cardGo)
-                {
-                    card.GetComponent<Button>().enabled = false;
-                }
+                //foreach (GameObject card in cardGameObjects)
+                //{
+                //    card.GetComponent<Button>().enabled = false;
+                //}
                 cardObj.GetComponent<Image>().color = Color.black;
                 LostGameObject = cardObj.gameObject.transform.GetChild(1).gameObject;
                 LostGameObject.SetActive(true);
@@ -116,78 +133,96 @@ public class CardGameManager : MonoBehaviour
 
                 break;
             case 2:
+                præmie = 2 + (2 + spinScript.spinBets * multiplier);
+
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
-                cardNumberText.text = "x2";
-                
-                gevints += Convert.ToInt32(cardNumberText.text.Substring(1));
-                rewardText.text = "Gevints: " + gevints + "kr";
+                cardNumberText.text = "x" + præmie; 
 
+                gevints += præmie; 
+                gevintsText.text = "Gevints: " + gevints + "kr";
+                Debug.Log("reward added to 1: " + (præmie - 2));
                 break;
             case 3:
+                præmie = 5 + (5 + spinScript.spinBets * multiplier);
+
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
-                cardNumberText.text = "x5";
+                cardNumberText.text = "x" + præmie;
                 
-                gevints += Convert.ToInt32(cardNumberText.text.Substring(1));
-                rewardText.text = "Gevints: " + gevints + "kr";
-
+                gevints += float.Parse(cardNumberText.text.Substring(1));
+                gevintsText.text = "Gevints: " + gevints + "kr";
+                Debug.Log("reward added to 2: " + (præmie - 5));
                 break;
             case 4:
+                præmie = 5 + (5 + spinScript.spinBets * multiplier);
+
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
-                cardNumberText.text = "x5";
+                cardNumberText.text = "x" + præmie;
 
-                gevints += Convert.ToInt32(cardNumberText.text.Substring(1));
-                rewardText.text = "Gevints: " + gevints + "kr";
-
+                gevints += float.Parse(cardNumberText.text.Substring(1));
+                gevintsText.text = "Gevints: " + gevints + "kr";
+                Debug.Log("reward added to 3: " + (præmie - 5));
                 break;
             case 5:
+                præmie = 10 + (10 + spinScript.spinBets * multiplier);
+
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
-                cardNumberText.text = "x10";
+                cardNumberText.text = "x" + præmie;
                 
-                gevints += Convert.ToInt32(cardNumberText.text.Substring(1));
-                rewardText.text = "Gevints: " + gevints + "kr";
-
+                gevints += float.Parse(cardNumberText.text.Substring(1));
+                gevintsText.text = "Gevints: " + gevints + "kr";
+                Debug.Log("reward added to 4: " + (præmie - 10));
                 break;
             case 6:
+                præmie = 10 + (10 + spinScript.spinBets * multiplier);
+
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
-                cardNumberText.text = "x20";
+                cardNumberText.text = "x" + præmie;
                 
-                gevints += Convert.ToInt32(cardNumberText.text.Substring(1));
-                rewardText.text = "Gevints: " + gevints + "kr";
-
+                gevints += float.Parse(cardNumberText.text.Substring(1));
+                gevintsText.text = "Gevints: " + gevints + "kr";
+                Debug.Log("reward added to 5: " + (præmie - 10));
                 break;
             case 7:
+                præmie = 30 + (30 + spinScript.spinBets * multiplier);
+
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
-                cardNumberText.text = "x30";
+                cardNumberText.text = "x" + præmie;
                 
-                gevints += Convert.ToInt32(cardNumberText.text.Substring(1));
-                rewardText.text = "Gevints: " + gevints + "kr";
-
+                gevints += float.Parse(cardNumberText.text.Substring(1));
+                gevintsText.text = "Gevints: " + gevints + "kr";
+                Debug.Log("reward added to 6: " + (præmie - 30));
                 break;
             case 8:
+                præmie = 50 + (50 + spinScript.spinBets * multiplier);
+
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
-                cardNumberText.text = "x50";
+                cardNumberText.text = "x" + præmie;
                 
-                gevints += Convert.ToInt32(cardNumberText.text.Substring(1));
-                rewardText.text = "Gevints: " + gevints + "kr";
-
+                gevints += float.Parse(cardNumberText.text.Substring(1));
+                gevintsText.text = "Gevints: " + gevints + "kr";
+                Debug.Log("reward added to 7: " + (præmie - 50));
                 break;
             case 9:
+                præmie = 100 + (100 + spinScript.spinBets * multiplier);
+
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
-                cardNumberText.text = "x100";
+                cardNumberText.text = "x" + præmie;
                 
-                gevints += Convert.ToInt32(cardNumberText.text.Substring(1));
-                rewardText.text = "Gevints: " + gevints + "kr";
-
+                gevints += float.Parse(cardNumberText.text.Substring(1));
+                gevintsText.text = "Gevints: " + gevints + "kr";
+                Debug.Log("reward added to 8: " + (præmie - 100));
                 break;
         }
+
+        
     }
 
 
