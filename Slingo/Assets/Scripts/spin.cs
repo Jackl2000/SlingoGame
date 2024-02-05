@@ -33,6 +33,7 @@ public class spin : MonoBehaviour
     [SerializeField] private int wildChance;
     [SerializeField] private int wildArrowChance;
     public bool isSpinning = false;
+    private bool isPaused;
 
     [Space(5)]
     public TextMeshProUGUI spinLeftText;
@@ -45,6 +46,12 @@ public class spin : MonoBehaviour
     public Queue<GameObject> wilds = new Queue<GameObject>();
     public Queue<GameObject> wildsArrow = new Queue<GameObject>();
     private List<int> slotWildArrow = new List<int>();
+    [SerializeField] private GameObject keepSpinningPanel;
+    [SerializeField] private TextMeshProUGUI keepSpinningText;
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button stopSpinningButton;
+    public delegate void ContineueSpinDeletegagte();
+    public static event ContineueSpinDeletegagte onContinueSpin;
 
     #region others variables
     [HideInInspector] public float spinBets = 1;
@@ -101,7 +108,9 @@ public class spin : MonoBehaviour
         }
         blinkEffect = GetComponent<PanelEffects>();
         calculations = GetComponent<Calculations>();
+
     }
+
 
     float timePassedForMsg;
 
@@ -241,16 +250,41 @@ public class spin : MonoBehaviour
         }
     }
 
+
+    public void openKeepSpinningPanel()
+    {
+        Debug.Log("Head");
+        warning = true;
+        float costPrSpin = calculations.PriceCaculator();
+        Debug.Log(UIManager.Instance.DisplayMoney(calculations.PriceCaculator()));
+      
+            keepSpinningPanel.SetActive(true);
+            keepSpinningText.text = $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}";
+
+    }
+
+    private bool warning = false;
     public void StartSpin()
     {
+
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
+
+        float costPrSpin = calculations.PriceCaculator();
+
+        if ((spinLeft < 0 || spinBets * 5 < costPrSpin) && !warning)
+        {
+            openKeepSpinningPanel();
+            return;
+        }
+
         isSpinning = true;
         Stakes();
         ColorReset();
         StartCoroutine(Fade());
 
+        keepSpinningPanel.SetActive(false);
 
-        foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values) 
+        foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values)
         {
             //gridnumber.gameObject.GetComponentInChildren<Image>().enabled = false;
             gridnumber.gameObject.transform.parent.GetComponent<Image>().enabled = false;
@@ -269,7 +303,7 @@ public class spin : MonoBehaviour
                 slot.GetComponentInChildren<Image>().enabled = false;
             }
         }
-        
+
         if (spinLeft == 10)
         {
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(false);
@@ -279,7 +313,9 @@ public class spin : MonoBehaviour
 
         if (spinBuyLimit >= 0 && spinLeft < 0)
         {
+            warning = false;
             playerData.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(14));
+
             spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
             spinBuyLimit--;
             Debug.Log("Buy limit: " + spinBuyLimit);
@@ -294,6 +330,9 @@ public class spin : MonoBehaviour
             spinLeftText.text = spinLeft.ToString();
             StartCoroutine(Spinner());
         }
+
+
+
     }
 
     public void Spin(GameObject slot, int index)
