@@ -191,53 +191,24 @@ public class spin : MonoBehaviour
         }
         if (wildPicked == wildPicks)
         {
-            blinkEffect.blinkeffectStart = false;
+            blinkEffect.FlashingEffect(false, bestChoiceText);
             WildTransparency(true, wildNumberPicked);
-            bestChoiceText.color = Color.white;
-            spinButton.GetComponent<Image>().color = Color.white;
-            if (spinLeft <= 0)
-            {
-                spinButton.GetComponent<Image>().color = Color.black;
-                spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+            SpinButtonReset();
 
-                if (gridCheck.slingoAnimationFinished)
-                {
-                    if (spinBuyLimit == 0)
-                    {
-                        CostMessage.SetActive(true);
-                        if (gridCheck.slingoCount >= 3)
-                        {
-                            CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER" + "\n" + "You have earned " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                            CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Collect";
-                        }
-                        else
-                        {
-                            CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
-                            CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
-                        }
-                    }
-                    else if (spinBuyLimit == 8)
-                    {
-                        CostMessage.SetActive(true);
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
-                    }
-                }
-
-            }
             isSpinning = false;
         }
         else
         {
-            blinkEffect.blinkeffectStart = false;
+            blinkEffect.FlashingEffect(false, bestChoiceText);
             WildTransparency(true, wildNumberPicked);
-            bestChoiceText.color = Color.white;
+
+            if (wildPicked == wildPicks) return;
+
             GridNumbers bestChoice = AI.BestChoice();
             if (bestChoice == null) return;
             bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
+            blinkEffect.FlashingEffect(true, gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
     }
 
@@ -259,25 +230,22 @@ public class spin : MonoBehaviour
                 }
             }
         }
-        if(wildPicked == wildPicks)
-        {
-            blinkEffect.blinkeffectStart = false;
-            WildTransparency(true, wildNumberPicked, gridGeneration.numberPositions[numberPressed].h);
-            bestChoiceText.color = Color.white;
-            spinButton.GetComponent<Image>().color = Color.white;
 
+        blinkEffect.FlashingEffect(false, bestChoiceText);
+        WildTransparency(true, wildNumberPicked, gridGeneration.numberPositions[numberPressed].h);
+
+        if (wildPicked == wildPicks)
+        {
+            SpinButtonReset();
             isSpinning = false;
         }
         else
         {
-            blinkEffect.blinkeffectStart = false;
-            WildTransparency(true, wildNumberPicked, gridGeneration.numberPositions[numberPressed].h);
-            bestChoiceText.color = Color.white;
             GridNumbers bestChoice = AI.BestChoice();
             if (bestChoice == null) return;
             bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-            blinkEffect.FlashingEffect(gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
+            blinkEffect.FlashingEffect(true, gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
     }
 
@@ -405,45 +373,10 @@ public class spin : MonoBehaviour
 
     private void SpinsLeft()
     {
-        if (spinLeft <= 0)
-        {
-            spinButton.GetComponent<Image>().color = Color.black;
-            spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
-            spinCountHeader.text = "Buy limit";
-            spinLeftText.text = spinBuyLimit.ToString();
-
-            if(wildPicks == 0 && gridCheck.slingoAnimationFinished)
-            {
-                if (spinBuyLimit == 0 && gridCheck.slingoAnimationFinished && timePassedForMsg > 3.5f)
-                {
-                    CostMessage.SetActive(true);
-                    if (gridCheck.slingoCount >= 3)
-                    {
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER" + "\n" + "You have earned " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Collect";
-                    }
-                    else
-                    {
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
-                    }
-                }
-                else if (spinBuyLimit == 8 && gridCheck.slingoAnimationFinished)
-                {
-                    CostMessage.SetActive(true);
-                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
-                }
-            }
-        }
+        SpinButtonReset();
         if (wildPicks == 0)
         {
             isSpinning = false;
-            if(spinLeft >= 0)
-            {
-                spinButton.GetComponent<Image>().color = Color.white;
-            }
         }
     }
 
@@ -487,12 +420,47 @@ public class spin : MonoBehaviour
             {
                 bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
                 bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
-                blinkEffect.FlashingEffect(bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
+                blinkEffect.FlashingEffect(true, bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
             }
         }
         
         yield return new WaitForSeconds(0.4f);
         SpinsLeft();
+    }
+
+    private void SpinButtonReset()
+    {
+        spinButton.GetComponent<Image>().color = Color.white;
+        if (spinLeft <= 0)
+        {
+            spinButton.GetComponent<Image>().color = Color.black;
+            spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+
+            if (gridCheck.slingoAnimationFinished)
+            {
+                if (spinBuyLimit == 0)
+                {
+                    CostMessage.SetActive(true);
+                    if (gridCheck.slingoCount >= 3)
+                    {
+                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER" + "\n" + "You have earned " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Collect";
+                    }
+                    else
+                    {
+                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
+                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
+                    }
+                }
+                else if (spinBuyLimit == 8)
+                {
+                    CostMessage.SetActive(true);
+                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
+                }
+            }
+        }
     }
 
     private void WildTransparency(bool stop, GameObject wildNumberPicked = null, int hIndex = 0)
@@ -515,6 +483,7 @@ public class spin : MonoBehaviour
             else
             {
                 //Arrow
+                List<int> indexes = new List<int>() { 0, 0, 0, 0, 0 };
                 foreach (GridNumbers number in gridGeneration.numberPositions.Values)
                 {
                     if (!number.hasBeenHit && slotWildArrow.Contains(number.h))
@@ -522,11 +491,29 @@ public class spin : MonoBehaviour
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                         animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
                         animatorObject.GetComponent<Image>().enabled = true;
+                        indexes[number.h - 1]++;
                     }
                 }
                 if (wildNumberPicked != null)
                 {
                     wildNumberPicked.GetComponent<Image>().enabled = false;
+                }
+                int indexh = 0;
+                foreach(int index in indexes)
+                {
+                    indexh++;
+                    if(index == 0 && slotWildArrow.Contains(indexh))
+                    {
+                        wildPicked++;
+                        blinkEffect.FlashingEffect(false, bestChoiceText);
+                        WildTransparency(true, null, indexh);
+                        Debug.Log("best choice: " + bestChoiceText.text);
+                        if (wildPicked == wildPicks)
+                        {
+                            SpinButtonReset();
+                            isSpinning = false;
+                        }
+                    }
                 }
             }
         }
@@ -547,6 +534,7 @@ public class spin : MonoBehaviour
             }
             else
             {
+                
                 //arrow
                 foreach (GridNumbers number in gridGeneration.numberPositions.Values)
                 {
@@ -558,6 +546,7 @@ public class spin : MonoBehaviour
                     }
                 }
                 slotWildArrow.Remove(hIndex);
+
             }
 
             if (wildNumberPicked != null)
@@ -572,8 +561,8 @@ public class spin : MonoBehaviour
             }
             else if(slotWildArrow.Count > 0)
             {
-                
-                foreach(int slot in slotWildArrow)
+
+                foreach (int slot in slotWildArrow.ToArray())
                 {
                     WildTransparency(false, null, slot);
                 }
@@ -634,12 +623,6 @@ public class spin : MonoBehaviour
         foreach (GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
         {
             gridNumbers.gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
-        }
-
-        if(bestChoiceText != null)
-        {
-            blinkEffect.blinkeffectStart = false;
-            bestChoiceText.color = Color.white;
         }
     }
 

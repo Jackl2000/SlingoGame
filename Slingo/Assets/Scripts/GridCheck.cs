@@ -98,6 +98,7 @@ public class GridCheck : MonoBehaviour
 
         try
         {
+            Debug.Log(slingoBorders.Count);
             foreach (Image item in slingoBorders)
             {
                 if (item.sprite != slingoBorderImages[0] && item != slingoBorders[slingoBorders.Count - 1])
@@ -276,7 +277,6 @@ public class GridCheck : MonoBehaviour
     /// </summary>
     private void CheckForReward()
     {
-        Debug.Log("damn");
         if (rewards.ContainsKey(slingoCount))
         {
             if(slingoCount == 12)
@@ -335,7 +335,6 @@ public class GridCheck : MonoBehaviour
             GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoBoarder").OrderBy(x => x.transform.parent.position.y).ToArray();
             foreach (GameObject go in slingoRewards)
             {
-                Debug.Log(go.name);
                 slingoBorders.Add(go.GetComponent<Image>());
             }
             CheckForReward();

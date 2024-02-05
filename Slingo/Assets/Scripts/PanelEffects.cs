@@ -22,7 +22,7 @@ public class PanelEffects : MonoBehaviour
 
     private TextMeshProUGUI bestChoiceText;
 
-    public void FlashingEffect(TextMeshProUGUI text)
+    public void FlashingEffect(bool active, TextMeshProUGUI text)
     {
         //Debug.Log("Flash running");
         //foreach (GridNumbers number in gridGeneration.numberPositions.Values)
@@ -42,10 +42,16 @@ public class PanelEffects : MonoBehaviour
         //        }
         //    }
         //}
-        bestChoiceText = text;
-        blinkeffectStart = true;
-        
-
+        if (active)
+        {
+            bestChoiceText = text;
+            blinkeffectStart = true;
+        }
+        else
+        {
+            blinkeffectStart = false;
+            text.color = Color.white;
+        }
     }
 
     public void BlinkingEffect()
@@ -70,7 +76,6 @@ public class PanelEffects : MonoBehaviour
         if(blinkeffectStart)
         {
             bestChoiceText.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
-            //bestChoiceText.GetComponentInChildren<Image>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
         }
     }
 }
