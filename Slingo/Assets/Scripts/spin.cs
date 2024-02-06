@@ -142,11 +142,11 @@ public class spin : MonoBehaviour
         #region Enables to pick any number on plate if user got wildpicks
         if (wildPicked == wildPicks)
         {
-            if (gridCheck.slingoAnimationFinished && spinLeft <= 0 && spinBuyLimit == 8 && !isSpinning && isUnderstood)
-            {
-                StartCoroutine(MessageHandler(1.5f));
-                isUnderstood = false;
-            }
+            //if (gridCheck.slingoAnimationFinished && spinLeft <= 0 && spinBuyLimit == 8 && !isSpinning && isUnderstood)
+            //{
+            //    StartCoroutine(MessageHandler(1.5f));
+            //    isUnderstood = false;
+            //}
 
             wildPicks = 0;
             wildPicked = 0;
@@ -618,16 +618,27 @@ public class spin : MonoBehaviour
 
     public void SlingoFinished()
     {
-        //if(spinLeft <= 0 && spinBuyLimit == 8 && wildPicks == wildPicked)
+        if (spinLeft <= 0 && spinBuyLimit == 8 && !isSpinning && isUnderstood)
+        {
+            StartCoroutine(MessageHandler(1.5f));
+            isUnderstood = false;
+        }
+        else
+        {
+            isSpinning = false;
+            SpinButtonReset();
+        }
+        
+        //if (spinLeft <= 0 && spinBuyLimit == 8 && wildPicks == wildPicked)
         //{
         //    CostMessage.SetActive(true);
         //    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
         //    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
         //}
-        //else if(spinBuyLimit == 0)
+        //else if (spinBuyLimit == 0)
         //{
         //    CostMessage.SetActive(true);
-        //    if(gridCheck.slingoCount >= 3)
+        //    if (gridCheck.slingoCount >= 3)
         //    {
         //        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER" + "\n" + "You have earned " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
         //        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Collect";
