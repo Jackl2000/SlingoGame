@@ -245,7 +245,6 @@ public class spin : MonoBehaviour
         if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
         {
             SpinButtonReset();
-            isSpinning = false;
         }
         else if(wildPicked != wildPicks)
         {
@@ -419,7 +418,6 @@ public class spin : MonoBehaviour
         if (wildPicks == 0 && gridCheck.slingoAnimationFinished)
         {
             SpinButtonReset();
-            isSpinning = false;
         }
     }
 
@@ -471,8 +469,9 @@ public class spin : MonoBehaviour
     }
 
 
-    private void SpinButtonReset()
+    public void SpinButtonReset()
     {
+        isSpinning = false;
         if (wildPicked == wildPicks) spinButton.GetComponent<Image>().color = Color.white;
         if (spinLeft <= 0)
         {
@@ -547,7 +546,6 @@ public class spin : MonoBehaviour
                         if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
                         {
                             SpinButtonReset();
-                            isSpinning = false;
                         }
                     }
                 }
@@ -617,26 +615,6 @@ public class spin : MonoBehaviour
         }
     }
 
-    public void SlingoFinished()
-    {
-
-        isSpinning = false;
-        SpinButtonReset();
-
-        //if (spinLeft <= 0 && spinBuyLimit == 5 && !isSpinning && !costMsgUnderstood)
-        //{
-        //    string messageText = "You have used all your spins :( Extra spins will cost per spins";
-        //    string buttonText = "Spin";
-        //    StartCoroutine(MessageHandler(CostMessage, 1.5f, messageText, buttonText));
-        //    costMsgUnderstood = true;
-        //    Debug.Log("Cost message bool changed in SlingoFinished(): " + costMsgUnderstood);
-        //}
-        //else
-        //{
-        //    
-        //}
-    }
-
     public void CostMessagePopUp()
     {
         if (spinLeft <= 0 && spinBuyLimit == 5 && !isSpinning && !costMsgUnderstood)
@@ -646,11 +624,6 @@ public class spin : MonoBehaviour
             StartCoroutine(MessageHandler(CostMessage, 0, messageText));
             costMsgUnderstood = true;
             Debug.Log("Cost message bool changed in CostMessagePopUp(): " + costMsgUnderstood);
-        }
-        else
-        {
-            isSpinning = false;
-            SpinButtonReset();
         }
     }
 
@@ -724,6 +697,5 @@ public class spin : MonoBehaviour
             }
             starImgs.Remove(starImg);
         }
-
     }
 }
