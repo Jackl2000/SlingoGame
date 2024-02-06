@@ -19496,7 +19496,7 @@ GameObject:
   - component: {fileID: 5352164599768207714}
   - component: {fileID: 8830511327887421940}
   m_Layer: 5
-  m_Name: SpinMessage
+  m_Name: CostSpinMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
