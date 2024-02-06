@@ -260,14 +260,11 @@ public class spin : MonoBehaviour
 
     public void openKeepSpinningPanel()
     {
-        Debug.Log("Head");
         warning = true;
         float costPrSpin = calculations.PriceCaculator();
         Debug.Log(UIManager.Instance.DisplayMoney(calculations.PriceCaculator()));
-      
-            keepSpinningPanel.SetActive(true);
-            keepSpinningText.text = $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}";
-
+        keepSpinningPanel.SetActive(true);
+        keepSpinningText.text = $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}";
     }
 
 
@@ -283,13 +280,13 @@ public class spin : MonoBehaviour
             openKeepSpinningPanel();
             return;
         }
+
         isSpinning = true;
         Stakes();
         ColorReset();
         StartCoroutine(Fade());
 
         keepSpinningPanel.SetActive(false);
-
 
         foreach (GridNumbers gridnumber in gridGeneration.numberPositions.Values)
         {
