@@ -50,8 +50,6 @@ public class spin : MonoBehaviour
     [SerializeField] private TextMeshProUGUI keepSpinningText;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button stopSpinningButton;
-    public delegate void ContineueSpinDeletegagte();
-    public static event ContineueSpinDeletegagte onContinueSpin;
 
     #region others variables
     [HideInInspector] public float spinBets = 1;
