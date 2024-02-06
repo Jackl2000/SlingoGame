@@ -40,7 +40,7 @@ public class CollectReward : MonoBehaviour
         spinScript.spinCountHeader.text = "SPINS";
         spinScript.spinLeft = 10;
         spinsCounter.text = spinScript.spinLeft.ToString();
-        spinScript.spinBuyLimit = 8;
+        spinScript.spinBuyLimit = 5;
         spinScript.stakes = 0;
         spinScript.spentText.text = "Satsning: " + UIManager.Instance.DisplayMoney(0);
         spinScript.textToGoEmpty.Clear();

@@ -60,7 +60,7 @@ public class spin : MonoBehaviour
     /// spins left before you pay
     /// </summary>
     public int spinLeft = 10;
-    public int spinBuyLimit = 8;
+    public int spinBuyLimit = 5;
     [HideInInspector] public float stakes = 0;
     int rnd;
     int min = 1;
@@ -496,7 +496,7 @@ public class spin : MonoBehaviour
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                     }
                 }
-                else if (spinBuyLimit == 8 && wildPicks == 0)
+                else if (spinBuyLimit == 5 && wildPicks == 0)
                 {
                     CostMessage.SetActive(true);
                     CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "Du har brugt alle dine spise :( Flere spins koster pr. spin";
@@ -614,7 +614,7 @@ public class spin : MonoBehaviour
     public void SlingoFinished()
     {
 
-        if (spinLeft <= 0 && spinBuyLimit == 8 && !isSpinning && !costMsgUnderstood)
+        if (spinLeft <= 0 && spinBuyLimit == 5 && !isSpinning && !costMsgUnderstood)
         {
             StartCoroutine(MessageHandler(CostMessage, 1.5f));
             costMsgUnderstood = true;
