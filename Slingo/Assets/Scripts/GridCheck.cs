@@ -59,7 +59,7 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("v5", false);
         gridSlingoList.Add("dl", false);
         gridSlingoList.Add("dr", false);
-
+        UpdateRewards(null, 1);
 
     }
 
@@ -79,11 +79,14 @@ public class GridCheck : MonoBehaviour
         rewards.Add(11, 125 * multiplyere);
         rewards.Add(12, 150 * multiplyere);
 
-        for (int i = 0; i < slingoRewards.Count(); i++)
+        if(slingoRewards != null)
         {
-            if (rewards.ContainsKey(i + 3) && i < 7)
+            for (int i = 0; i < slingoRewards.Count(); i++)
             {
-                slingoRewards[i].GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
+                if (rewards.ContainsKey(i + 3) && i < 7)
+                {
+                    slingoRewards[i].GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
+                }
             }
         }
     }
