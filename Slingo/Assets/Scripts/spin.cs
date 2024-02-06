@@ -483,7 +483,7 @@ public class spin : MonoBehaviour
             Debug.Log("Wildpicks left: " + wildPicks.ToString() + " Wild picked: " + wildPicked.ToString());
 
             if (wildPicked == wildPicks) spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
 
             if (gridCheck.slingoAnimationFinished)
             {
