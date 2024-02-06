@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,8 +29,8 @@ public class AI : MonoBehaviour
         {
             bestChoiceList = BestChoiceList(arrowList[0]);
         }
-
         if (bestChoiceList.Count == 0) return null;
+        if (bestChoiceList.Values.Max() == 0) return null;
         
         int maxValue = 0;
         int currentNumber = 0;
@@ -40,6 +41,10 @@ public class AI : MonoBehaviour
                 maxValue = bestChoiceList[item];
                 currentNumber = item;
             }
+        }
+        if(currentNumber == 0)
+        {
+            Debug.Log("Should never be played " + bestChoiceList.Values.Max());
         }
         return gridGeneration.numberPositions[currentNumber];
     }

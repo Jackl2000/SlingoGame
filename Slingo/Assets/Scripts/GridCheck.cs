@@ -99,6 +99,9 @@ public class GridCheck : MonoBehaviour
         slingoCount = 0;
         starsCount = 0;
 
+        slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(1);
+        slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "3 rækker";
+
         try
         {
             foreach (Image item in slingoBorders)
@@ -268,39 +271,52 @@ public class GridCheck : MonoBehaviour
 
     private void UpdateButton()
     {
-        if(slingoCount == 12)
+        if(slingoCount >= 10)
         {
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "SUPER JACKPOT FLASH";
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "BIGGEST PRICE!";
             return;
         }
-        if(slingoCount >= 2)
+        else if(slingoCount >= 3)
         {
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[slingoCount + 1]);
+            slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (slingoCount + 1).ToString() + " rækker";
         }
-        slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (slingoCount + 1).ToString() + " rækker";
     }
     /// <summary>
     /// Checks if the new slingo gives a new reward
     /// </summary>
     private void CheckForReward()
     {
-        if(slingoBorders.Count > 0)
+        if(slingoBorders.Count > 0 && SlingoPanel.activeSelf)
         {
             if (rewards.ContainsKey(slingoCount))
             {
-                if (slingoCount == 12)
-                {
-                    slingoBorders[slingoBorders.Count - 1].sprite = jackpotSlingoBorderImages[1];
-                }
-
                 foreach (Image item in slingoBorders)
                 {
-                    item.sprite = slingoBorderImages[1];
-                    if (item.sprite == slingoBorders[slingoCount - 1].sprite)
+                    if (item.sprite == slingoBorders.Last())
                     {
                         break;
                     }
+                    item.sprite = slingoBorderImages[1];
+                    if(slingoCount == 12)
+                    {
+                        foreach(Image imageItem in slingoBorders)
+                        {
+                            if (imageItem.sprite == slingoBorders.Last()) break;
+                            imageItem.sprite = slingoBorderImages[1];
+                        }
+                        break;
+                    }
+                    else if (item.sprite == slingoBorders[slingoCount - 1].sprite)
+                    {
+                        break;
+                    }
+                }
+
+                if (slingoCount == 12)
+                {
+                    slingoBorders[slingoBorders.Count - 1].sprite = jackpotSlingoBorderImages[1];
                 }
             }
         }
@@ -349,8 +365,8 @@ public class GridCheck : MonoBehaviour
             {
                 slingoBorders.Add(go.GetComponent<Image>());
             }
-            CheckForReward();
         }
+        CheckForReward();
     }
     
     /// <summary>
