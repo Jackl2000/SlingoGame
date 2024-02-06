@@ -1,9 +1,11 @@
+using Codice.Client.Common.GameUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.TextCore.LowLevel;
 using UnityEngine.UI;
@@ -61,9 +63,8 @@ public class GridCheck : MonoBehaviour
 
     }
 
-    public void UpdateRewards(GameObject[] slingoRewards, float multiplyere)
+    public void UpdateRewards(List<GameObject> slingoRewards, float multiplyere)
     {
-        Debug.Log("Hello update???");
         rewards.Clear();
         rewards.Add(1, 0);
         rewards.Add(2, 0);
@@ -78,13 +79,11 @@ public class GridCheck : MonoBehaviour
         rewards.Add(11, 125 * multiplyere);
         rewards.Add(12, 150 * multiplyere);
 
-        //GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(go => go.transform.position.y).ToArray();
-        Debug.Log("Rewards count" + slingoRewards.Length);
-        for (int i = 0; i < slingoRewards.Length; i++)
+        for (int i = 0; i < slingoRewards.Count(); i++)
         {
             if (rewards.ContainsKey(i + 3) && i < 7)
             {
-                slingoRewards[i].GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
+                slingoRewards[i].GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[i + 3]);
             }
         }
     }
@@ -352,21 +351,26 @@ public class GridCheck : MonoBehaviour
 
     public void ViewSlingoRewards()
     {
+        List<GameObject> slingoRewards = new List<GameObject>();
         SlingoPanel.SetActive(!SlingoPanel.gameObject.activeSelf);
 
         if(SlingoPanel.activeSelf && slingoBorders.Count == 0)
         {
-            GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoBoarder").OrderBy(x => x.transform.parent.position.y).ToArray();
-            foreach (GameObject go in slingoRewards)
+            GameObject[] borders = GameObject.FindGameObjectsWithTag("SlingoBoarder").OrderBy(x => x.transform.parent.position.y).ToArray();
+            
+
+            foreach (GameObject go in borders)
             {
                 slingoBorders.Add(go.GetComponent<Image>());
             }
-            if(spinScript.spinBets != currentBet)
-            {
-                currentBet = spinScript.spinBets;
-                UpdateRewards(slingoRewards, currentBet);
-            }
             
+        }
+        GameObject[] slingoRewardsArray = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(x => x.transform.parent.position.y).ToArray();
+        slingoRewards.AddRange(slingoRewardsArray);
+        if (spinScript.spinBets != currentBet && slingoRewards != null)
+        {
+            currentBet = spinScript.spinBets;
+            UpdateRewards(slingoRewards, currentBet);
         }
         CheckForReward();
     }
