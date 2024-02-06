@@ -41,13 +41,13 @@ public class SettingsMenu : MonoBehaviour
 
     public void Sound()
     {
-        if(soundText.text == "Sounds: On")
+        if(soundText.text == "Lyd: Til")
         {
-            soundText.text = "Sounds: Off";
+            soundText.text = "Lyd: Fra";
         }
         else
         {
-            soundText.text = "Sounds: On";
+            soundText.text = "Lyd: Til";
         }
     }
 
@@ -77,11 +77,11 @@ public class SettingsMenu : MonoBehaviour
 
     public void Info()
     {
-        Debug.Log("View info");
+        Debug.Log("Se info");
     }
 
     public void History()
     {
-        Debug.Log("View history");
+        Debug.Log("Se spilhistorik");
     }
 }
