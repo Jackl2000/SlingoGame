@@ -13698,9 +13698,9 @@ RectTransform:
   - {fileID: 4503626989937184775}
   - {fileID: 4217783759303233832}
   - {fileID: 4527560754734825831}
+  - {fileID: 3402359878653402676}
   - {fileID: 5496259466701497914}
   - {fileID: 1293407299227221631}
-  - {fileID: 3402359878653402676}
   m_Father: {fileID: 4424352891198733182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -17666,7 +17666,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ingen gevinst
+  m_text: 1,00 kr
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
@@ -22366,7 +22366,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1 r\xE6kker"
+  m_text: "3 r\xE6kker"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
@@ -27759,6 +27759,7 @@ MonoBehaviour:
   collectBorderMessage: {fileID: 4615568449392734210}
   collectMessage: {fileID: 3413761267369758757}
   invokeTime: 5
+  SlingoButton: {fileID: 0}
 --- !u!114 &5487674222419349512
 MonoBehaviour:
   m_ObjectHideFlags: 0

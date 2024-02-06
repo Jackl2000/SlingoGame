@@ -48,6 +48,8 @@ public class CollectReward : MonoBehaviour
         spinScript.spinButton.GetComponent<Image>().color = Color.black;
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Game";
+        //spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+        //spinScript.spinButton.enabled = true;
         spinScript.ColorReset();
 
         foreach (var spinSlot in spinScript.slotsList)
