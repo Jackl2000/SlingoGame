@@ -30,8 +30,6 @@ public class SpinsValue : MonoBehaviour
         {
             spin.spinBets = bet;
             spinsBetPanel.SetActive(false);
-            gridCheck.UpdateRewards(bet);
-
             settingsMenu.multiplier = bet;
         }
     }

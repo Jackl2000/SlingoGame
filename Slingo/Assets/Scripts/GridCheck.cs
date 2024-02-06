@@ -37,6 +37,8 @@ public class GridCheck : MonoBehaviour
     private int rewardCount;
     private Dictionary<string, int> slingoTypes = new Dictionary<string, int>();
 
+    private float currentBet = 1;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -55,13 +57,13 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("v5", false);
         gridSlingoList.Add("dl", false);
         gridSlingoList.Add("dr", false);
-        UpdateRewards(1);
 
 
     }
 
-    public void UpdateRewards(float multiplyere)
+    public void UpdateRewards(GameObject[] slingoRewards, float multiplyere)
     {
+        Debug.Log("Hello update???");
         rewards.Clear();
         rewards.Add(1, 0);
         rewards.Add(2, 0);
@@ -76,8 +78,8 @@ public class GridCheck : MonoBehaviour
         rewards.Add(11, 250 * multiplyere);
         rewards.Add(12, 500 * multiplyere);
 
-        GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(go => go.transform.position.y).ToArray();
-
+        //GameObject[] slingoRewards = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(go => go.transform.position.y).ToArray();
+        Debug.Log("Rewards count" + slingoRewards.Length);
         for (int i = 0; i < slingoRewards.Length; i++)
         {
             if (rewards.ContainsKey(i + 3) && i < 7)
@@ -124,8 +126,6 @@ public class GridCheck : MonoBehaviour
 
     }
 
-    
-
     /// <summary>
     /// Checks for new slingo with new number
     /// </summary>
@@ -159,7 +159,6 @@ public class GridCheck : MonoBehaviour
                     slingoCount++;
                     CheckForReward();
                     slingoTypes.Add("h", number.h);
-                    //StartCoroutine(SlingoAnimation(PlaySlingoAnimation("h", number.h)));
                     break;
                 }
             }
@@ -189,7 +188,6 @@ public class GridCheck : MonoBehaviour
                     slingoCount++;
                     CheckForReward();
                     slingoTypes.Add("v", number.v);
-                    //StartCoroutine(SlingoAnimation(PlaySlingoAnimation("v", number.v)));
                     break;
                 }
             }
@@ -222,7 +220,6 @@ public class GridCheck : MonoBehaviour
                             slingoCount++;
                             CheckForReward();
                             slingoTypes.Add("l", 0);
-                            //StartCoroutine(SlingoAnimation(PlaySlingoAnimation("l", 0)));
                             break;
                         }
                     }
@@ -253,7 +250,6 @@ public class GridCheck : MonoBehaviour
                             slingoCount++;
                             CheckForReward();
                             slingoTypes.Add("r", 0);
-                            //StartCoroutine(SlingoAnimation(PlaySlingoAnimation("r", 0)));
                             break;
                         }
                     }
@@ -365,6 +361,12 @@ public class GridCheck : MonoBehaviour
             {
                 slingoBorders.Add(go.GetComponent<Image>());
             }
+            if(spinScript.spinBets != currentBet)
+            {
+                currentBet = spinScript.spinBets;
+                UpdateRewards(slingoRewards, currentBet);
+            }
+            
         }
         CheckForReward();
     }

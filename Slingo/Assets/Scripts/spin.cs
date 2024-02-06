@@ -271,11 +271,9 @@ public class spin : MonoBehaviour
 
     public void StartSpin()
     {
-
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
 
         float costPrSpin = calculations.PriceCaculator();
-
         if (spinLeft < 0 && spinBets * 5 < costPrSpin && !warning)
         {
             openKeepSpinningPanel();
@@ -315,7 +313,7 @@ public class spin : MonoBehaviour
             spinButton.GetComponent<Image>().color = Color.white;
             playerData.balance -= spinBets;
         }
-        else if (spinBuyLimit >= 0 && spinLeft <= 0 && gridCheck.slingoAnimationFinished)
+        if (spinBuyLimit >= 0 && spinLeft <= 0 && gridCheck.slingoAnimationFinished)
         {
             if (spinLeftText.text == "0")
             {
@@ -335,8 +333,6 @@ public class spin : MonoBehaviour
         }
         else
         {
-            
-
             spinButton.GetComponent<Image>().color = Color.gray;
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
@@ -619,7 +615,8 @@ public class spin : MonoBehaviour
 
     public void SlingoFinished()
     {
-
+        isSpinning = false;
+        SpinButtonReset();
         //if (spinLeft <= 0 && spinBuyLimit == 8 && !isSpinning && !costMsgUnderstood)
         //{
         //    string messageText = "You have used all your spins :( Extra spins will cost per spins";
@@ -631,8 +628,7 @@ public class spin : MonoBehaviour
         //}
         //else
         //{
-        //    isSpinning = false;
-        //    SpinButtonReset();
+        //    
         //}
     }
 

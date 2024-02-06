@@ -36,7 +36,7 @@ public class UITests
         GridCheck gridCheck = go.AddComponent<GridCheck>();
         float expected = 10 * multipliere;
 
-        gridCheck.UpdateRewards(multipliere);
+        gridCheck.UpdateRewards(null, multipliere);
 
         Assert.AreEqual(expected, gridCheck.rewards[3]);
     }

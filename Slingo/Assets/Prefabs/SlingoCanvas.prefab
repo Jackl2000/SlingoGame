@@ -19776,6 +19776,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4055942201498400139}
+        m_TargetAssemblyTypeName: spin, Scripts
+        m_MethodName: StartSpin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5318492705924519158
 GameObject:
   m_ObjectHideFlags: 0
@@ -29043,7 +29055,6 @@ MonoBehaviour:
   collectBorderMessage: {fileID: 4615568449392734210}
   collectMessage: {fileID: 3413761267369758757}
   invokeTime: 5
-  SlingoButton: {fileID: 0}
 --- !u!114 &5487674222419349512
 MonoBehaviour:
   m_ObjectHideFlags: 0
