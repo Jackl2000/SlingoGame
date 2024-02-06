@@ -60,7 +60,7 @@ public class spin : MonoBehaviour
     /// spins left before you pay
     /// </summary>
     public int spinLeft = 10;
-    public int spinBuyLimit = 8;
+    public int spinBuyLimit = 5;
     [HideInInspector] public float stakes = 0;
     int rnd;
     int min = 1;
@@ -271,12 +271,12 @@ public class spin : MonoBehaviour
 
     public void StartSpin()
     {
-
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
 
         float costPrSpin = calculations.PriceCaculator();
 
         if (spinLeftText.text == "0" && !isMessageActive)
+
         {
             isMessageActive = true;
 
@@ -501,12 +501,12 @@ public class spin : MonoBehaviour
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                     }
                 }
+
                 //else if (spinBuyLimit == 8 && wildPicks == 0)
                 //{
                 //    CostMessage.SetActive(true);
                 //    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "Du har brugt alle dine spise :( Flere spins koster pr. spin";
                 //    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Forstået";
-
                 //}
             }
         }
@@ -620,25 +620,26 @@ public class spin : MonoBehaviour
     public void SlingoFinished()
     {
 
-        //if (spinLeft <= 0 && spinBuyLimit == 8 && !isSpinning && !costMsgUnderstood)
+        isSpinning = false;
+        SpinButtonReset();
+
+        //if (spinLeft <= 0 && spinBuyLimit == 5 && !isSpinning && !costMsgUnderstood)
         //{
         //    string messageText = "You have used all your spins :( Extra spins will cost per spins";
         //    string buttonText = "Spin";
-
         //    StartCoroutine(MessageHandler(CostMessage, 1.5f, messageText, buttonText));
         //    costMsgUnderstood = true;
         //    Debug.Log("Cost message bool changed in SlingoFinished(): " + costMsgUnderstood);
         //}
         //else
         //{
-        //    isSpinning = false;
-        //    SpinButtonReset();
+        //    
         //}
     }
 
     public void CostMessagePopUp()
     {
-        if (spinLeft <= 0 && spinBuyLimit == 8 && !isSpinning && !costMsgUnderstood)
+        if (spinLeft <= 0 && spinBuyLimit == 5 && !isSpinning && !costMsgUnderstood)
         {
             string messageText = "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin";
 

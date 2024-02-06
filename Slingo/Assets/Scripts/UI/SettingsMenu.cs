@@ -58,7 +58,7 @@ public class SettingsMenu : MonoBehaviour
         if (gridCheck != null)
         {
             //Standard price is 1
-            gridCheck.UpdateRewards(multiplier);
+            //gridCheck.UpdateRewards(multiplier);
 
             if(gridCheck.rewards.Count > 9) 
             {
@@ -67,12 +67,8 @@ public class SettingsMenu : MonoBehaviour
 
                 JackpotText.text = $"{jackpotReward}";
                 SuperJackpotText.text = $"{superJackpotReward}";
-
             }
-
-
         }
-
     }
 
     public void Info()
