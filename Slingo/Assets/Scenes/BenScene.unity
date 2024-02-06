@@ -742,6 +742,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 107935079296888355, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: Nyt Spil
+      objectReference: {fileID: 0}
     - target: {fileID: 157490202083885269, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_fontColor.b
       value: 0.57254905
@@ -1113,6 +1117,14 @@ PrefabInstance:
     - target: {fileID: 2641572933419118623, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_SizeDelta.y
       value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696960939849559270, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: Start Spil
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696960939849559270, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_fontSize
+      value: 72.45
       objectReference: {fileID: 0}
     - target: {fileID: 2857188126469257586, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1857,6 +1869,14 @@ PrefabInstance:
     - target: {fileID: 7537455854846287495, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751221399858816658, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: 'Satsning: 0 kr'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751221399858816658, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_fontSize
+      value: 65.5
       objectReference: {fileID: 0}
     - target: {fileID: 7767572187591374982, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
