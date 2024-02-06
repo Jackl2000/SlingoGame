@@ -279,12 +279,11 @@ public class spin : MonoBehaviour
 
         float costPrSpin = calculations.PriceCaculator();
 
-        if ((spinLeft < 0 || spinBets * 5 < costPrSpin) && !warning)
+        if (spinLeft < 0 && spinBets * 5 < costPrSpin && !warning)
         {
             openKeepSpinningPanel();
             return;
         }
-
         isSpinning = true;
         Stakes();
         ColorReset();
