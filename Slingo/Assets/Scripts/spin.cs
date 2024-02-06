@@ -122,11 +122,8 @@ public class spin : MonoBehaviour
             timePassedForMsg += Time.deltaTime;
         }
 
-        //spinLeft = 10;
-
         if (spinLeft == 0)
         {
-
 
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
@@ -177,7 +174,6 @@ public class spin : MonoBehaviour
         {
             return;
         }
-
         
         if (slotWildArrow.Count > 0) WildArrow(wildNumberPicked, numberPressed);
         else if(wilds.Count > 0) SuperWild(wildNumberPicked, numberPressed);
@@ -258,17 +254,7 @@ public class spin : MonoBehaviour
             blinkEffect.FlashingEffect(true, gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
     }
-
-    public void openKeepSpinningPanel()
-    {
-        isMessageActive = true;
-        float costPrSpin = calculations.PriceCaculator();
-        Debug.Log(UIManager.Instance.DisplayMoney(calculations.PriceCaculator()));
-        keepSpinningPanel.SetActive(true);
-        keepSpinningText.text = $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}";
-    }
-
-
+    
     public void StartSpin()
     {
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
@@ -276,17 +262,15 @@ public class spin : MonoBehaviour
         float costPrSpin = calculations.PriceCaculator();
 
         if (spinLeftText.text == "0" && !isMessageActive)
-
         {
             isMessageActive = true;
+            StartCoroutine(MessageHandler(CostMessage, 0, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
 
-            CostMessagePopUp();
             spinLeftText.text = spinBuyLimit.ToString();
             return;
         }
         else if (spinLeft < 0 && spinBets * 5 < costPrSpin && !isMessageActive)
         {
-            //openKeepSpinningPanel();
             isMessageActive = true;
             StartCoroutine(MessageHandler(keepSpinningPanel, 0, $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}"));
             return;
@@ -501,13 +485,6 @@ public class spin : MonoBehaviour
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                     }
                 }
-
-                //else if (spinBuyLimit == 8 && wildPicks == 0)
-                //{
-                //    CostMessage.SetActive(true);
-                //    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "Du har brugt alle dine spise :( Flere spins koster pr. spin";
-                //    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Forstået";
-                //}
             }
         }
     }
@@ -637,22 +614,7 @@ public class spin : MonoBehaviour
         //}
     }
 
-    public void CostMessagePopUp()
-    {
-        if (spinLeft <= 0 && spinBuyLimit == 5 && !isSpinning && !costMsgUnderstood)
-        {
-            string messageText = "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin";
 
-            StartCoroutine(MessageHandler(CostMessage, 0, messageText));
-            costMsgUnderstood = true;
-            Debug.Log("Cost message bool changed in CostMessagePopUp(): " + costMsgUnderstood);
-        }
-        else
-        {
-            isSpinning = false;
-            SpinButtonReset();
-        }
-    }
 
     IEnumerator MessageHandler(GameObject messageObject, float secondsToWait, string messageText)
     {
