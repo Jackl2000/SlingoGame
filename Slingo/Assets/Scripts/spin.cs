@@ -31,8 +31,9 @@ public class spin : MonoBehaviour
     [SerializeField] private float spinWaitTime;
     [SerializeField] private int wildChance;
     [SerializeField] private int wildArrowChance;
+    public int spinLeft = 10;
+    public int spinBuyLimit = 5;
     public bool isSpinning = false;
-    private bool isPaused;
 
     [Space(5)]
     public TextMeshProUGUI spinLeftText;
@@ -45,8 +46,6 @@ public class spin : MonoBehaviour
     public Queue<GameObject> wilds = new Queue<GameObject>();
     public Queue<GameObject> wildsArrow = new Queue<GameObject>();
     private List<int> slotWildArrow = new List<int>();
-    [SerializeField] private GameObject keepSpinningPanel;
-    [SerializeField] private TextMeshProUGUI keepSpinningText;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button stopSpinningButton;
 
@@ -59,8 +58,7 @@ public class spin : MonoBehaviour
     /// <summary>
     /// spins left before you pay
     /// </summary>
-    public int spinLeft = 10;
-    public int spinBuyLimit = 5;
+
     [HideInInspector] public float stakes = 0;
     int rnd;
     int min = 1;
@@ -77,27 +75,18 @@ public class spin : MonoBehaviour
 
     PanelEffects blinkEffect;
 
+    [Header("MessageObjects")]
+    [SerializeField] private GameObject keepSpinningPanel;
+    [SerializeField] private TextMeshProUGUI keepSpinningText;
     [SerializeField] private GameObject CostMessage;
-    private bool costMsgUnderstood = false;
     private bool isMessageActive = false;
 
     #endregion
 
-    [SerializeField] Test subjectToObserve;
-
-    private void OnStuffHappens()
-    {
-        this.GetComponent<Image>().color = Color.blue;
-        Debug.Log("Stuff is happening");
-    }
-
 
     private void Awake()
     {
-        //if (subjectToObserve != null)
-        //{
-        //    subjectToObserve.StuffHappens += OnStuffHappens;
-        //}
+
 
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         AI = GetComponentInParent<AI>();
@@ -241,7 +230,6 @@ public class spin : MonoBehaviour
         if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
         {
             SpinButtonReset();
-            isSpinning = false;
         }
         else if(wildPicked != wildPicks)
         {
@@ -403,7 +391,6 @@ public class spin : MonoBehaviour
         if (wildPicks == 0 && gridCheck.slingoAnimationFinished)
         {
             SpinButtonReset();
-            isSpinning = false;
         }
     }
 
@@ -455,8 +442,9 @@ public class spin : MonoBehaviour
     }
 
 
-    private void SpinButtonReset()
+    public void SpinButtonReset()
     {
+        isSpinning = false;
         if (wildPicked == wildPicks) spinButton.GetComponent<Image>().color = Color.white;
         if (spinLeft <= 0)
         {
@@ -467,7 +455,7 @@ public class spin : MonoBehaviour
             Debug.Log("Wildpicks left: " + wildPicks.ToString() + " Wild picked: " + wildPicked.ToString());
 
             if (wildPicked == wildPicks) spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
 
             if (gridCheck.slingoAnimationFinished)
             {
@@ -524,7 +512,6 @@ public class spin : MonoBehaviour
                         if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
                         {
                             SpinButtonReset();
-                            isSpinning = false;
                         }
                     }
                 }
@@ -593,28 +580,6 @@ public class spin : MonoBehaviour
             }
         }
     }
-
-    public void SlingoFinished()
-    {
-
-        isSpinning = false;
-        SpinButtonReset();
-
-        //if (spinLeft <= 0 && spinBuyLimit == 5 && !isSpinning && !costMsgUnderstood)
-        //{
-        //    string messageText = "You have used all your spins :( Extra spins will cost per spins";
-        //    string buttonText = "Spin";
-        //    StartCoroutine(MessageHandler(CostMessage, 1.5f, messageText, buttonText));
-        //    costMsgUnderstood = true;
-        //    Debug.Log("Cost message bool changed in SlingoFinished(): " + costMsgUnderstood);
-        //}
-        //else
-        //{
-        //    
-        //}
-    }
-
-
 
     IEnumerator MessageHandler(GameObject messageObject, float secondsToWait, string messageText)
     {
@@ -686,6 +651,5 @@ public class spin : MonoBehaviour
             }
             starImgs.Remove(starImg);
         }
-
     }
 }
