@@ -323,7 +323,7 @@ public class GridCheck : MonoBehaviour
 
         if (slingoCount >= 3)
         {
-            resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Collect " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
+            resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Modtag " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
         }
         if(slingoCount >= 12 && slingoAnimationFinished && spinScript.timePassedForMsg > 3)
         {
