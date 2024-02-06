@@ -408,7 +408,7 @@ public class spin : MonoBehaviour
         {
             stakes += calculations.PriceCaculator();
         }
-        spentText.text = "Stakes: " + stakes.ToString("F2") + " kr";
+        spentText.text = "Satsning: " + stakes.ToString("F2") + " kr";
 
     }
 
@@ -481,7 +481,7 @@ public class spin : MonoBehaviour
             Debug.Log("Wildpicks left" + wildPicks.ToString());
 
             if (wildPicked == wildPicks) spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Price pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris pr. spin " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
 
             if (gridCheck.slingoAnimationFinished)
             {
@@ -490,20 +490,20 @@ public class spin : MonoBehaviour
                     CostMessage.SetActive(true);
                     if (gridCheck.slingoCount >= 3)
                     {
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER" + "\n" + "You have earned " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Collect";
+                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
                     }
                     else
                     {
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "GAME OVER";
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Next Game";
+                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPIL SLUT";
+                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                     }
                 }
                 else if (spinBuyLimit == 8 && wildPicks == 0)
                 {
                     CostMessage.SetActive(true);
-                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
+                    CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "Du har brugt alle dine spise :( Flere spins koster pr. spin";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Forstået";
                 }
             }
         }
@@ -656,8 +656,8 @@ public class spin : MonoBehaviour
         yield return new WaitForSeconds(secondsToWait);
 
         messageObject.SetActive(true);
-        messageObject.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
-        messageObject.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
+        messageObject.GetComponentInChildren<TextMeshProUGUI>().text = "Du har brugt alle dine spise :( Flere spins koster pr. spin";
+        messageObject.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Forstået";
     }
 
     public void SetSpinBuyLimit(int buyLimit)
