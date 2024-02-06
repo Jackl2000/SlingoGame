@@ -619,7 +619,7 @@ public class spin : MonoBehaviour
     {
         if (spinLeft <= 0 && spinBuyLimit == 8 && !isSpinning && isUnderstood)
         {
-            StartCoroutine(MessageHandler(1.5f));
+            StartCoroutine(MessageHandler(CostMessage, 1.5f));
             isUnderstood = false;
         }
         else
@@ -650,7 +650,7 @@ public class spin : MonoBehaviour
         //}
     }
 
-    IEnumerator MessageHandler(float secondsToWait)
+    IEnumerator MessageHandler(GameObject messageObject, float secondsToWait)
     {
         yield return new WaitForSeconds(secondsToWait);
 
@@ -659,9 +659,9 @@ public class spin : MonoBehaviour
         if (spinLeft <= 0 && spinBuyLimit == 8)
         {
 
-            CostMessage.SetActive(true);
-            CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
-            CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
+            messageObject.SetActive(true);
+            messageObject.GetComponentInChildren<TextMeshProUGUI>().text = "You have used all your spins :( Extra spins will cost per spins";
+            messageObject.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "I understand";
         }
     }
 
