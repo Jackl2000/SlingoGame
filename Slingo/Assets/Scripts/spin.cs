@@ -469,11 +469,11 @@ public class spin : MonoBehaviour
             {
                 if (spinBuyLimit == 0)
                 {
-                    //CostMessage.SetActive(true);
                     if (gridCheck.slingoCount >= 3)
                     {
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                        //CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
+                        string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+                        StartCoroutine(MessageHandler(CostMessage, 1.5f, messageText));
+                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
                     }
                     else
                     {
