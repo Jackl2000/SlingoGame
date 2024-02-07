@@ -12654,7 +12654,7 @@ MonoBehaviour:
   spinWaitTime: 0.5
   wildChance: 20
   wildArrowChance: 10
-  spinLeft: 5
+  spinLeft: 10
   spinBuyLimit: 5
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}

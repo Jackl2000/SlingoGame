@@ -254,6 +254,8 @@ public class spin : MonoBehaviour
             StartCoroutine(MessageHandler(CostMessage, 0, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
 
             spinLeftText.text = spinBuyLimit.ToString();
+            spinCountHeader.text = "Extra spins";
+
             return;
         }
         else if (spinLeft < 0 && spinBets * 5 < costPrSpin && !isMessageActive)
