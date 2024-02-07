@@ -38,6 +38,7 @@ public class spin : MonoBehaviour
     [Space(5)]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
+    public TextMeshProUGUI resetButton;
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
     public Sprite[] wildsImages;
@@ -85,8 +86,8 @@ public class spin : MonoBehaviour
 
     private void Awake()
     {
-
-
+        resetButton.color = Color.gray;
+        resetButton.GetComponentInParent<Button>().enabled = false;
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         AI = GetComponentInParent<AI>();
         if(spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
@@ -254,8 +255,6 @@ public class spin : MonoBehaviour
             StartCoroutine(MessageHandler(CostMessage, 0, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
 
             spinLeftText.text = spinBuyLimit.ToString();
-            spinCountHeader.text = "Extra spins";
-
             return;
         }
         else if (spinLeft < 0 && spinBets * 5 < costPrSpin && !isMessageActive)
@@ -469,6 +468,13 @@ public class spin : MonoBehaviour
 
             if (gridCheck.slingoAnimationFinished)
             {
+                if (spinBuyLimit == 5)
+                {
+                    spinCountHeader.text = "Extra spins";
+                    resetButton.color = Color.white;
+                    resetButton.GetComponentInParent<Button>().enabled = true;
+                }
+
                 if (spinBuyLimit == 0)
                 {
                     if (gridCheck.slingoCount >= 3)
