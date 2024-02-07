@@ -435,7 +435,7 @@ public class GridCheck : MonoBehaviour
     {
         slingoAnimationFinished = false;
         headerAnimator.SetBool("isTwerking", true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
         foreach (GameObject go in slingoNumbers)
         {
@@ -460,7 +460,6 @@ public class GridCheck : MonoBehaviour
         }
         
 
-        yield return new WaitForSeconds(0.4f);
         headerAnimator.SetBool("isTwerking", false);
         slingoAnimationFinished = true;
         GetComponentInChildren<spin>().SpinButtonReset();
