@@ -90,7 +90,7 @@ public class spin : MonoBehaviour
         resetButton.GetComponentInParent<Button>().enabled = false;
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         AI = GetComponentInParent<AI>();
-        if(spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
+        if (spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
         foreach (GameObject spinSlot in slotsList)
         {
             slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
@@ -98,7 +98,6 @@ public class spin : MonoBehaviour
         }
         blinkEffect = GetComponent<PanelEffects>();
         calculations = GetComponent<Calculations>();
-
     }
 
 
@@ -145,11 +144,11 @@ public class spin : MonoBehaviour
 
         #endregion
     }
-    
+
 
     public void WildPick(Button gridButton)
     {
-        if(gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
+        if (gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             return;
         }
@@ -163,9 +162,9 @@ public class spin : MonoBehaviour
         {
             return;
         }
-        
+
         if (slotWildArrow.Count > 0) WildArrow(wildNumberPicked, numberPressed);
-        else if(wilds.Count > 0) SuperWild(wildNumberPicked, numberPressed);
+        else if (wilds.Count > 0) SuperWild(wildNumberPicked, numberPressed);
     }
 
     private void StarDupping(GameObject wildNumberPicked, int numberPressed)
@@ -231,18 +230,20 @@ public class spin : MonoBehaviour
         {
             SpinButtonReset();
         }
-        else if(wildPicked != wildPicks)
+        else if (wildPicked != wildPicks)
         {
             if (wildPicked == wildPicks) return;
 
             GridNumbers bestChoice = AI.BestChoice(wilds.Count, slotWildArrow);
             if (bestChoice == null) return;
-            bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
+
+            if (slotWildArrow.Count > 0) bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[0];
+            else bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
             blinkEffect.FlashingEffect(true, gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
         }
     }
-    
+
     public void StartSpin()
     {
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
@@ -259,7 +260,8 @@ public class spin : MonoBehaviour
         //}
         #endregion
 
-        if (spinLeft < 0 && spinBets * 5 < costPrSpin && !isMessageActive)
+        if (spinLeft < 0 && costPrSpin > 0 && !isMessageActive)
+
         {
             isMessageActive = true;
             StartCoroutine(MessageHandler(keepSpinningPanel, 0, $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}"));
@@ -403,13 +405,13 @@ public class spin : MonoBehaviour
             item.SetBool("Spinning", true);
         }
 
-        if(spinLeft >= 0)
+        if (spinLeft >= 0)
         {
             spinButtonAnimation.SetBool("Spin", true);
             yield return new WaitForSeconds(0.1f);
             spinButtonAnimation.SetBool("Spin", false);
         }
-        
+
 
         yield return new WaitForSeconds(spinWaitTime - 0.1f);
         min = 1;
@@ -424,28 +426,32 @@ public class spin : MonoBehaviour
             min += 15;
             max += 15;
         }
-        
+
         if (wildPicks > 0)
         {
             yield return new WaitForSeconds(0.5f);
-            
+
             WildTransparency(false);
             GridNumbers bestChoice = AI.BestChoice(wilds.Count, slotWildArrow);
-            if(bestChoice != null)
+            if (bestChoice != null)
             {
-                bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
+                if(slotWildArrow.Count > 0) bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[0];
+                else bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
+
                 bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
                 blinkEffect.FlashingEffect(true, bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
             }
         }
-        
+
         yield return new WaitForSeconds(0.4f);
         SpinsLeft();
+
     }
 
-
     public void SpinButtonReset()
-    {   
+    {
+        
+
         if (wildPicked == wildPicks || gridCheck.starsCount == 25)
         {
             spinButton.GetComponent<Image>().color = Color.white;
@@ -460,7 +466,7 @@ public class spin : MonoBehaviour
             if (wildPicked == wildPicks) spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
             spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
 
-            if(gridCheck.starsCount == 25)
+            if (gridCheck.starsCount == 25)
             {
                 spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "";
                 return;
@@ -491,15 +497,24 @@ public class spin : MonoBehaviour
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                     }
                 }
+                if (spinLeftText.text == "0" && !isMessageActive)
+                {
+                    isMessageActive = true;
+                    StartCoroutine(MessageHandler(CostMessage, 0, "Du har ikke flere spin :( Ekstra spins vil koste pr. spin. Dit næste spin koster " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator())));
+
+                    spinLeftText.text = spinBuyLimit.ToString();
+                    return;
+                }
+
             }
         }
     }
 
     private void WildTransparency(bool stop, GameObject wildNumberPicked = null, int hIndex = 0)
     {
-        if(!stop)
+        if (!stop)
         {
-             //Arrow
+            //Arrow
             if (slotWildArrow.Count > 0)
             {
                 List<int> indexes = new List<int>() { 0, 0, 0, 0, 0 };
@@ -508,7 +523,7 @@ public class spin : MonoBehaviour
                     if (!number.hasBeenHit && slotWildArrow.Contains(number.h))
                     {
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
-                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
+                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[3];
                         animatorObject.GetComponent<Image>().enabled = true;
                         indexes[number.h - 1]++;
                     }
@@ -550,7 +565,7 @@ public class spin : MonoBehaviour
         }
         else
         {
-            if(hIndex != 0)
+            if (hIndex != 0)
             {
                 //Arrow
                 foreach (GridNumbers number in gridGeneration.numberPositions.Values)
@@ -558,7 +573,7 @@ public class spin : MonoBehaviour
                     if (!number.hasBeenHit && number.h == hIndex)
                     {
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
-                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
+                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[3];
                         animatorObject.GetComponent<Image>().enabled = false;
                     }
                 }
@@ -584,7 +599,7 @@ public class spin : MonoBehaviour
             }
 
             //Check for more wilds
-            if(slotWildArrow.Count > 0)
+            if (slotWildArrow.Count > 0)
             {
 
                 foreach (int slot in slotWildArrow.ToArray())
@@ -647,7 +662,7 @@ public class spin : MonoBehaviour
 
     IEnumerator Fade(Image starImg = null)
     {
-        if(starImg == null)
+        if (starImg == null)
         {
             foreach (Image star in starImgs.ToArray())
             {
