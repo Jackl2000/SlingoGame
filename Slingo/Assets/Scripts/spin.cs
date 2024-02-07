@@ -301,7 +301,7 @@ public class spin : MonoBehaviour
         {
 
             isMessageActive = false;
-            playerData.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(14));
+            playerData.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(6));
 
             spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
             spinBuyLimit--;
@@ -443,9 +443,12 @@ public class spin : MonoBehaviour
 
 
     public void SpinButtonReset()
-    {
-        isSpinning = false;
-        if (wildPicked == wildPicks) spinButton.GetComponent<Image>().color = Color.white;
+    {   
+        if (wildPicked == wildPicks || gridCheck.starsCount == 25)
+        {
+            spinButton.GetComponent<Image>().color = Color.white;
+            isSpinning = false;
+        }
         if (spinLeft <= 0)
         {
             spinButton.GetComponent<Image>().color = Color.black;
@@ -457,6 +460,12 @@ public class spin : MonoBehaviour
             if (wildPicked == wildPicks) spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
             spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
 
+            if(gridCheck.starsCount == 25)
+            {
+                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "";
+                return;
+            }
+
             if (gridCheck.slingoAnimationFinished)
             {
                 if (spinBuyLimit == 0)
@@ -465,7 +474,7 @@ public class spin : MonoBehaviour
                     if (gridCheck.slingoCount >= 3)
                     {
                         CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
+                        //CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
                     }
                     else
                     {
