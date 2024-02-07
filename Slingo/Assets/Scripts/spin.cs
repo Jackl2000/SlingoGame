@@ -386,7 +386,7 @@ public class spin : MonoBehaviour
         {
             stakes += calculations.PriceCaculator();
         }
-        spentText.text = "Satsning: " + stakes.ToString("F2") + " kr";
+        spentText.text = "Indsats: " + "\n" + stakes.ToString("F2") + "kr";
 
     }
 
@@ -481,7 +481,7 @@ public class spin : MonoBehaviour
                 if (gridCheck.slingoCount >= 3)
                 {
                     StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Tag gevints";
                     CostMessage.GetComponentInChildren<Button>().onClick.AddListener(collectReward.Collect);
                 }
                 else
