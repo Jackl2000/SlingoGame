@@ -77,7 +77,6 @@ public class spin : MonoBehaviour
 
     [Header("MessageObjects")]
     [SerializeField] private GameObject keepSpinningPanel;
-    [SerializeField] private TextMeshProUGUI keepSpinningText;
     [SerializeField] private GameObject CostMessage;
     private bool isMessageActive = false;
 

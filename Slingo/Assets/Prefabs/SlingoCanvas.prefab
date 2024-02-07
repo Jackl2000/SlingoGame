@@ -12654,7 +12654,7 @@ MonoBehaviour:
   spinWaitTime: 0.5
   wildChance: 20
   wildArrowChance: 10
-  spinLeft: 10
+  spinLeft: 5
   spinBuyLimit: 5
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
@@ -12676,7 +12676,6 @@ MonoBehaviour:
   stakes: 0
   timePassedForMsg: 0
   keepSpinningPanel: {fileID: 2950752321684696061}
-  keepSpinningText: {fileID: 4828510191473249143}
   CostMessage: {fileID: 5492437303112480685}
 --- !u!114 &527621969584549633
 MonoBehaviour:
@@ -17401,18 +17400,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2795408711446792720}
-        m_TargetAssemblyTypeName: CollectReward, Scripts
-        m_MethodName: Collect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &4335380933522902343
 GameObject:
   m_ObjectHideFlags: 0
@@ -21580,7 +21567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3989961590656925223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22887,7 +22874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Afslut
+  m_text: Luk
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
