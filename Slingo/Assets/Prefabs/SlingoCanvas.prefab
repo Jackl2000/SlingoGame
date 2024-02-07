@@ -16996,18 +16996,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4055942201498400139}
-        m_TargetAssemblyTypeName: spin, Scripts
-        m_MethodName: CostMessagePopUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!95 &7098119309749585213
 Animator:
   serializedVersion: 5
@@ -19587,7 +19575,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 4055942201498400139}
         m_TargetAssemblyTypeName: spin, Scripts
-        m_MethodName: StartSpin
+        m_MethodName: StartButtonCostAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

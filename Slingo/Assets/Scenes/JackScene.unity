@@ -249,6 +249,14 @@ MonoBehaviour:
   spin: {fileID: 1171559590}
   BackgroundImage: {fileID: 1911938084}
   placeholder: {fileID: 0}
+  themes:
+  - BackGroundImage: {fileID: 0}
+    StarImage: {fileID: 0}
+    SlingoStarImage: {fileID: 0}
+    SlingoBackgroundImage: {fileID: 0}
+    WildImage: {fileID: 0}
+    WildBackgroundImage: {fileID: 0}
+    BestChoiceBackgroundImage: {fileID: 0}
 --- !u!4 &500582194
 Transform:
   m_ObjectHideFlags: 0
@@ -765,6 +773,26 @@ PrefabInstance:
     - target: {fileID: 2635275348533741553, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696960939849559270, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696960939849559270, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_fontSize
+      value: 53.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016001572748793407, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016001572748793407, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016001572748793407, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3399546232318856927, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
