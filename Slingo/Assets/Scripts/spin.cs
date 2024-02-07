@@ -38,6 +38,7 @@ public class spin : MonoBehaviour
     [Space(5)]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
+    public TextMeshProUGUI resetButton;
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
     public Sprite[] wildsImages;
@@ -85,8 +86,8 @@ public class spin : MonoBehaviour
 
     private void Awake()
     {
-
-
+        resetButton.color = Color.gray;
+        resetButton.GetComponentInParent<Button>().enabled = false;
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         AI = GetComponentInParent<AI>();
         if(spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
@@ -253,9 +254,7 @@ public class spin : MonoBehaviour
         //{
         //    isMessageActive = true;
         //    StartCoroutine(MessageHandler(CostMessage, 0, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
-
         //    spinCountHeader.text = "Extra spins";
-
         //    return;
         //}
         #endregion
@@ -473,7 +472,9 @@ public class spin : MonoBehaviour
                 {
                     isMessageActive = true;
                     StartCoroutine(MessageHandler(CostMessage, 0.5f, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
-                    spinCountHeader.text = "Spin køb";
+                    spinCountHeader.text = "Max spin køb";
+                    resetButton.color = Color.white;
+                    resetButton.GetComponentInParent<Button>().enabled = true;
                 }
                 if (spinBuyLimit == 0)
                 {

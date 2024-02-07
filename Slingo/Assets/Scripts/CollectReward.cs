@@ -25,11 +25,6 @@ public class CollectReward : MonoBehaviour
         playerData = GetComponent<PlayerData>();        
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void Collect()
     {
         if (!gridCheck.slingoAnimationFinished || spinScript.isSpinning || (spinScript.wildPicks != 0 && gridCheck.slingoCount != 12) || spinScript.spinLeft == 10)
@@ -48,7 +43,8 @@ public class CollectReward : MonoBehaviour
         spinScript.spinButton.GetComponent<Image>().color = Color.black;
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Spil";
-
+        spinScript.resetButton.color = Color.gray;
+        spinScript.resetButton.GetComponentInParent<Button>().enabled = false;
         spinScript.ColorReset();
 
         foreach (var spinSlot in spinScript.slotsList)
