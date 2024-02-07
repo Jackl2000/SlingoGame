@@ -12650,6 +12650,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c12e746a10db3804da1c8c99dae31dfb, type: 3}
   - {fileID: 21300000, guid: 19a3dcefdd4e201459a033de5753351d, type: 3}
   - {fileID: 21300000, guid: f3add0266c0fec64bb1847d308cccfc6, type: 3}
+  - {fileID: 21300000, guid: f0fd259c041f7a94ebd9b92b0a436d9a, type: 3}
   spinSpeed: 15
   spinWaitTime: 0.5
   wildChance: 20
