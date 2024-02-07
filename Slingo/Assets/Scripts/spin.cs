@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class spin : MonoBehaviour
@@ -474,13 +475,20 @@ public class spin : MonoBehaviour
 
             if (gridCheck.slingoAnimationFinished)
             {
-                if (spinBuyLimit == 5 && !isMessageActive)
+                if (spinBuyLimit == 5 && wildPicks == wildPicked && !isMessageActive)
                 {
-                    isMessageActive = true;
-                    StartCoroutine(MessageHandler(CostMessage, 0.5f, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
                     spinCountHeader.text = "Max spin køb";
+                    spinLeftText.text = spinBuyLimit.ToString();
+
                     resetButton.color = Color.white;
                     resetButton.GetComponentInParent<Button>().enabled = true;
+
+                    isMessageActive = true;
+                    StartCoroutine(MessageHandler(CostMessage, 0.5f, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
+                    Button costMsgButton = CostMessage.GetComponentInChildren<Button>();
+                    costMsgButton.onClick.RemoveListener(collectReward.Collect);
+                    costMsgButton.GetComponentInChildren<TextMeshProUGUI>().text = "Spin for " +"\n" + $"{UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}";
+
                 }
                 if (spinBuyLimit == 0)
                 {
@@ -489,6 +497,7 @@ public class spin : MonoBehaviour
                     {
                         StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
+                        CostMessage.GetComponentInChildren<Button>().onClick.AddListener(collectReward.Collect);
                     }
                     else
                     {
@@ -497,14 +506,14 @@ public class spin : MonoBehaviour
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                     }
                 }
-                if (spinLeftText.text == "0" && !isMessageActive)
-                {
-                    isMessageActive = true;
-                    StartCoroutine(MessageHandler(CostMessage, 0, "Du har ikke flere spin :( Ekstra spins vil koste pr. spin. Dit næste spin koster " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator())));
+                //if (spinLeftText.text == "0" && !isMessageActive)
+                //{
+                //    isMessageActive = true;
+                //    StartCoroutine(MessageHandler(CostMessage, 0, "Du har ikke flere spin :( Ekstra spins vil koste pr. spin. Dit næste spin koster " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator())));
 
-                    spinLeftText.text = spinBuyLimit.ToString();
-                    return;
-                }
+                //    spinLeftText.text = spinBuyLimit.ToString();
+                //    return;
+                //}
 
             }
         }
