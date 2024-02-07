@@ -250,8 +250,18 @@ public class spin : MonoBehaviour
 
         float costPrSpin = calculations.PriceCaculator();
 
+        #region --Not in use-- CostWarning message to pop on spin click button 
+        //if (spinLeftText.text == "0" && !isMessageActive)
+        //{
+        //    isMessageActive = true;
+        //    StartCoroutine(MessageHandler(CostMessage, 0, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
+        //    spinCountHeader.text = "Extra spins";
+        //    return;
+        //}
+        #endregion
 
         if (spinLeft < 0 && costPrSpin > 0 && !isMessageActive)
+
         {
             isMessageActive = true;
             StartCoroutine(MessageHandler(keepSpinningPanel, 0, $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}"));
@@ -453,8 +463,6 @@ public class spin : MonoBehaviour
 
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
 
-            Debug.Log("Wildpicks left: " + wildPicks.ToString() + " Wild picked: " + wildPicked.ToString());
-
             if (wildPicked == wildPicks) spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
             spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
 
@@ -466,24 +474,26 @@ public class spin : MonoBehaviour
 
             if (gridCheck.slingoAnimationFinished)
             {
-                if (spinBuyLimit == 5)
+                if (spinBuyLimit == 5 && !isMessageActive)
                 {
-                    spinCountHeader.text = "Extra spins";
+                    isMessageActive = true;
+                    StartCoroutine(MessageHandler(CostMessage, 0.5f, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
+                    spinCountHeader.text = "Max spin køb";
                     resetButton.color = Color.white;
                     resetButton.GetComponentInParent<Button>().enabled = true;
                 }
-
                 if (spinBuyLimit == 0)
                 {
+                    string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
                     if (gridCheck.slingoCount >= 3)
                     {
-                        string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                        StartCoroutine(MessageHandler(CostMessage, 1.5f, messageText));
+                        StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
                     }
                     else
                     {
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPIL SLUT";
+                        StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
+                        //CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPILLET SLUT";
                         CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                     }
                 }
