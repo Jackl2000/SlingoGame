@@ -38,6 +38,7 @@ public class spin : MonoBehaviour
     [Space(5)]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
+    public TextMeshProUGUI resetButton;
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
     public Sprite[] wildsImages;
@@ -85,8 +86,8 @@ public class spin : MonoBehaviour
 
     private void Awake()
     {
-
-
+        resetButton.color = Color.gray;
+        resetButton.GetComponentInParent<Button>().enabled = false;
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
         AI = GetComponentInParent<AI>();
         if (spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
@@ -462,13 +463,20 @@ public class spin : MonoBehaviour
 
             if (gridCheck.slingoAnimationFinished)
             {
+                if (spinBuyLimit == 5)
+                {
+                    spinCountHeader.text = "Extra spins";
+                    resetButton.color = Color.white;
+                    resetButton.GetComponentInParent<Button>().enabled = true;
+                }
+
                 if (spinBuyLimit == 0)
                 {
-                    //CostMessage.SetActive(true);
                     if (gridCheck.slingoCount >= 3)
                     {
-                        CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                        //CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
+                        string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+                        StartCoroutine(MessageHandler(CostMessage, 1.5f, messageText));
+                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Modtag";
                     }
                     else
                     {

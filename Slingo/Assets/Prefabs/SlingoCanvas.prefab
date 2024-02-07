@@ -12654,11 +12654,12 @@ MonoBehaviour:
   spinWaitTime: 0.5
   wildChance: 20
   wildArrowChance: 10
-  spinLeft: 5
+  spinLeft: 10
   spinBuyLimit: 5
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
+  resetButton: {fileID: 107935079296888355}
   slotsList:
   - {fileID: 7798638019828884268}
   - {fileID: 3026685873912758083}
