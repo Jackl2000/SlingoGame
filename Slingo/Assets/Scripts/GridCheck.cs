@@ -465,7 +465,6 @@ public class GridCheck : MonoBehaviour
 
         if(spinScript.wildPicks == 0)
         {
-            Debug.Log("Slingo animation");
             spinScript.SpinButtonReset();
         }
             

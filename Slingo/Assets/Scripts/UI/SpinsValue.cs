@@ -8,13 +8,11 @@ public class SpinsValue : MonoBehaviour
     public GameObject settingsPanel;
 
     private spin spin;
-    private GridCheck gridCheck;
     private SettingsMenu settingsMenu;
 
     private void Awake()
     {
         spin = GetComponent<spin>();
-        gridCheck = GetComponentInParent<GridCheck>();
         settingsMenu = FindAnyObjectByType<SettingsMenu>();
     }
 

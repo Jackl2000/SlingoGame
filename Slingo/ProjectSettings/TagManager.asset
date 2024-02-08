@@ -8,6 +8,7 @@ TagManager:
   - SlingoReward
   - SlingoBoarder
   - Card
+  - GridImage
   layers:
   - Default
   - TransparentFX

@@ -515,7 +515,7 @@ public class spin : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         spinButton.GetComponent<Animator>().SetBool("Cost", false);
         spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.5f);
         SpinButtonReset();
         StartSpin();
     }
