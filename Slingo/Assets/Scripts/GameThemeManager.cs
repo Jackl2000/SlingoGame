@@ -9,7 +9,6 @@ public class GameThemeManager : MonoBehaviour
     #region Reference for the assets to replace
     public Image Background;
     public spin spin;
-
     #endregion
 
     public GameObject themesPanel;
@@ -66,9 +65,7 @@ public class GameThemeManager : MonoBehaviour
             green.Add(star.transform.GetChild(0).gameObject);
         }
         return (yellow, green);
-
     }
-
 }
 
 [Serializable]

@@ -462,7 +462,7 @@ public class GridCheck : MonoBehaviour
 
         headerAnimator.SetBool("isTwerking", false);
         slingoAnimationFinished = true;
-
+        Debug.Log("wilds left: " + spinScript.wildPicks);
         if(spinScript.wildPicks == 0)
         {
             spinScript.SpinButtonReset();
