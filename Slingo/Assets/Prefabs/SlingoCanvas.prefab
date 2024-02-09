@@ -9952,6 +9952,7 @@ GameObject:
   - component: {fileID: 3016001572748793407}
   - component: {fileID: 8420042036595658971}
   - component: {fileID: 7098119309749585213}
+  - component: {fileID: 8150991391575771774}
   m_Layer: 5
   m_Name: SpinButton
   m_TagString: Untagged
@@ -10094,6 +10095,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8150991391575771774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4509156442935069427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f59237942e257a42aa4d572d1175c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridCheck: {fileID: 0}
+  spin: {fileID: 4055942201498400139}
 --- !u!1 &4578903735052801540
 GameObject:
   m_ObjectHideFlags: 0
@@ -15051,13 +15066,14 @@ GameObject:
   - component: {fileID: 1013823899898689272}
   - component: {fileID: 6010661904301701702}
   - component: {fileID: 303017590559568841}
+  - component: {fileID: 2759183213921454056}
   m_Layer: 5
   m_Name: SlingoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5496259466701497914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15137,6 +15153,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2759183213921454056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895147790509304543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f59237942e257a42aa4d572d1175c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridCheck: {fileID: 4374248674525639591}
+  spin: {fileID: 0}
 --- !u!1 &7011716911628130499
 GameObject:
   m_ObjectHideFlags: 0
@@ -17504,7 +17534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4587032400780682164
 RectTransform:
   m_ObjectHideFlags: 0
