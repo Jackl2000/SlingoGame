@@ -10110,6 +10110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridCheck: {fileID: 0}
   spin: {fileID: 4055942201498400139}
+  collectReward: {fileID: 0}
 --- !u!1 &4578903735052801540
 GameObject:
   m_ObjectHideFlags: 0
@@ -10876,7 +10877,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -20046,6 +20047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridCheck: {fileID: 4374248674525639591}
   spin: {fileID: 0}
+  collectReward: {fileID: 0}
 --- !u!1 &7011716911628130499
 GameObject:
   m_ObjectHideFlags: 0
@@ -21849,6 +21851,7 @@ MonoBehaviour:
   collectBorderMessage: {fileID: 4615568449392734210}
   collectMessage: {fileID: 3413761267369758757}
   invokeTime: 5
+  balanceBorder: {fileID: 0}
 --- !u!114 &5487674222419349512
 MonoBehaviour:
   m_ObjectHideFlags: 0
