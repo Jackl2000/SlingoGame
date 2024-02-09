@@ -1,11 +1,9 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class spin : MonoBehaviour
@@ -368,7 +366,8 @@ public class spin : MonoBehaviour
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[number].Hit();
-
+            gridGeneration.numberPositions[number].gameObject.transform.parent.transform.GetChild(3).GetComponentInChildren<ParticleSystem>().Stop();
+            gridGeneration.numberPositions[number].gameObject.transform.parent.transform.GetChild(3).GetComponentInChildren<ParticleSystem>().Play();
             Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.parent.GetChild(0);
             Image starImg = goTrans.GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
