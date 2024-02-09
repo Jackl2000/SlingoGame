@@ -10877,7 +10877,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -17652,6 +17652,8 @@ GameObject:
   - component: {fileID: 1754546222674672649}
   - component: {fileID: 4605861614954047731}
   - component: {fileID: 3479198275448429777}
+  - component: {fileID: 6048856847277248859}
+  - component: {fileID: 5718653121763633588}
   m_Layer: 5
   m_Name: BalanceBorder
   m_TagString: Untagged
@@ -17718,6 +17720,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &6048856847277248859
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023146232900017989}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 83235aacdf12c7848a42f3ad33555e06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5718653121763633588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023146232900017989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f59237942e257a42aa4d572d1175c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridCheck: {fileID: 0}
+  spin: {fileID: 0}
+  collectReward: {fileID: 2795408711446792720}
 --- !u!1 &6033544720370915062
 GameObject:
   m_ObjectHideFlags: 0
@@ -19953,7 +19991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5496259466701497914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21851,7 +21889,7 @@ MonoBehaviour:
   collectBorderMessage: {fileID: 4615568449392734210}
   collectMessage: {fileID: 3413761267369758757}
   invokeTime: 5
-  balanceBorder: {fileID: 0}
+  balanceBorder: {fileID: 6023146232900017989}
 --- !u!114 &5487674222419349512
 MonoBehaviour:
   m_ObjectHideFlags: 0
