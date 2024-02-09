@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,7 +57,13 @@ public class GridCheck : MonoBehaviour
         gridSlingoList.Add("dl", false);
         gridSlingoList.Add("dr", false);
         UpdateRewards(null, 1);
+        
 
+    }
+
+    private void Start()
+    {
+       
     }
 
     public void UpdateRewards(List<GameObject> slingoRewards, float multiplyere)
@@ -86,6 +93,70 @@ public class GridCheck : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator TextColorAnimation(TextMeshProUGUI text, float speed, Color[] colors, bool backWards, int times)
+    {
+        Debug.Log(text.text);
+        if (backWards) text.textInfo.wordInfo = text.textInfo.wordInfo.Reverse().ToArray();
+
+        for (int i = 0;i < text.textInfo.wordInfo.Length;i++)
+        {
+            if (text.textInfo.wordInfo[i].characterCount == 0)
+            {
+                continue;
+            }
+            else
+            {
+                TMP_WordInfo wordInfo = text.textInfo.wordInfo[i];
+                for (int j = 0; j < wordInfo.characterCount; j++)
+                {
+                    int characterIndex = 0;
+                    if (!backWards)
+                    {
+                        characterIndex = wordInfo.firstCharacterIndex + j;
+                    }
+                    else
+                    {
+                        characterIndex = wordInfo.lastCharacterIndex - j;
+                    }
+                        
+                    int meshIndex = text.textInfo.characterInfo[characterIndex].materialReferenceIndex;
+                    int vertexIndex = text.textInfo.characterInfo[characterIndex].vertexIndex;
+
+                    Color32[] vertexColor = text.textInfo.meshInfo[meshIndex].colors32;
+
+                    if(backWards)
+                    {
+                        vertexColor[vertexIndex + 0] = Color.white;
+                        vertexColor[vertexIndex + 1] = Color.white;
+                        vertexColor[vertexIndex + 2] = Color.white;
+                        vertexColor[vertexIndex + 3] = Color.white;
+                    }
+                    else
+                    {
+                        vertexColor[vertexIndex + 0] = colors[0];
+                        vertexColor[vertexIndex + 1] = colors[1];
+                        vertexColor[vertexIndex + 2] = colors[2];
+                        vertexColor[vertexIndex + 3] = colors[3];
+                    }
+
+                    text.UpdateVertexData(TMP_VertexDataUpdateFlags.All);
+                    yield return new WaitForSeconds(speed);
+                }
+            }
+        }
+        if(!backWards)
+        {
+            StartCoroutine(TextColorAnimation(text, speed, colors, true, times));
+        }
+        else if(times != 0)
+        {
+            text.textInfo.wordInfo = text.textInfo.wordInfo.Reverse().ToArray();
+            StartCoroutine(TextColorAnimation(text, speed, colors, false, times - 1));
+        }
+    }
+    
+
 
     /// <summary>
     /// Reset all the data about the grid like slingo count and etc.
@@ -259,22 +330,31 @@ public class GridCheck : MonoBehaviour
         {
             StartCoroutine(SlingoAnimation(PlaySlingoAnimation(slingoTypes)));
             slingoTypes.Clear();
-            UpdateButton();
+            StartCoroutine(UpdateButton());
         }
     }
 
-    private void UpdateButton()
+    private IEnumerator UpdateButton()
     {
         if(slingoCount >= 10)
         {
+            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, false, 2));
+            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, false, 2));
+            slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "SUPER JACKPOT FLASH";
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "BIGGEST PRICE!";
-            return;
+            yield return new WaitForSeconds(1f);
+            slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", false);
         }
         else if(slingoCount >= 3)
         {
+            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, false, 2));
+            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, false, 2));
+            slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[slingoCount + 1]);
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (slingoCount + 1).ToString() + " rækker";
+            yield return new WaitForSeconds(1f);
+            slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", false);
         }
     }
     /// <summary>
@@ -351,29 +431,44 @@ public class GridCheck : MonoBehaviour
     public void ViewSlingoRewards()
     {
         List<GameObject> slingoRewards = new List<GameObject>();
-        SlingoPanel.SetActive(!SlingoPanel.gameObject.activeSelf);
 
-        if(SlingoPanel.activeSelf && slingoBorders.Count == 0)
+        if(!SlingoPanel.gameObject.activeSelf)
         {
-            GameObject[] borders = GameObject.FindGameObjectsWithTag("SlingoBoarder").OrderBy(x => x.transform.parent.position.y).ToArray();
-            
+            SlingoPanel.SetActive(true);
+            SlingoPanel.GetComponent<Animator>().SetBool("Show", true);
 
-            foreach (GameObject go in borders)
+            if (slingoBorders.Count == 0)
             {
-                slingoBorders.Add(go.GetComponent<Image>());
+                GameObject[] borders = GameObject.FindGameObjectsWithTag("SlingoBoarder").OrderBy(x => x.transform.parent.position.y).ToArray();
+
+                foreach (GameObject go in borders)
+                {
+                    slingoBorders.Add(go.GetComponent<Image>());
+                }
             }
-            
+            GameObject[] slingoRewardsArray = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(x => x.transform.parent.position.y).ToArray();
+            slingoRewards.AddRange(slingoRewardsArray);
+            if (spinScript.spinBets != currentBet && slingoRewards != null)
+            {
+
+                currentBet = spinScript.spinBets;
+                UpdateRewards(slingoRewards, currentBet);
+            }
+            CheckForReward();
         }
-        GameObject[] slingoRewardsArray = GameObject.FindGameObjectsWithTag("SlingoReward").OrderBy(x => x.transform.parent.position.y).ToArray();
-        slingoRewards.AddRange(slingoRewardsArray);
-        if (spinScript.spinBets != currentBet && slingoRewards != null)
+        else
         {
-            currentBet = spinScript.spinBets;
-            UpdateRewards(slingoRewards, currentBet);
+            SlingoPanel.GetComponent<Animator>().SetBool("Show", false);
+            StartCoroutine(SlingoPanelDelay());
         }
-        CheckForReward();
     }
-    
+
+    private IEnumerator SlingoPanelDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SlingoPanel.SetActive(false);
+    }
+
     /// <summary>
     /// Returns a list of game objects to play the slingo animation on
     /// </summary>
@@ -462,11 +557,9 @@ public class GridCheck : MonoBehaviour
 
         headerAnimator.SetBool("isTwerking", false);
         slingoAnimationFinished = true;
-        Debug.Log("wilds left: " + spinScript.wildPicks);
         if(spinScript.wildPicks == 0)
         {
             spinScript.SpinButtonReset();
         }
-            
     }
 }
