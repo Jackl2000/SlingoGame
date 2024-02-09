@@ -541,6 +541,7 @@ public class spin : MonoBehaviour
 
     public void SpinButtonChangeFinished()
     {
+        spinButton.GetComponentInChildren<ParticleSystem>().Play();
         SpinButtonReset();
         StartSpin();
     }
