@@ -17652,8 +17652,8 @@ GameObject:
   - component: {fileID: 1754546222674672649}
   - component: {fileID: 4605861614954047731}
   - component: {fileID: 3479198275448429777}
-  - component: {fileID: 6048856847277248859}
   - component: {fileID: 5718653121763633588}
+  - component: {fileID: 7065173204824913395}
   m_Layer: 5
   m_Name: BalanceBorder
   m_TagString: Untagged
@@ -17720,7 +17720,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &6048856847277248859
+--- !u!114 &5718653121763633588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023146232900017989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f59237942e257a42aa4d572d1175c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridCheck: {fileID: 0}
+  spin: {fileID: 0}
+  collectReward: {fileID: 2795408711446792720}
+--- !u!95 &7065173204824913395
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -17741,21 +17756,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5718653121763633588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6023146232900017989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f59237942e257a42aa4d572d1175c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridCheck: {fileID: 0}
-  spin: {fileID: 0}
-  collectReward: {fileID: 2795408711446792720}
 --- !u!1 &6033544720370915062
 GameObject:
   m_ObjectHideFlags: 0
