@@ -6,6 +6,8 @@ public class EventHandler : MonoBehaviour
 {
     public GridCheck gridCheck;
     public spin spin;
+    public CollectReward collectReward;
+
     public void SlingoBoardHideAnimationEvent()
     {
         gridCheck.SlingoBorderGoIdle();
@@ -19,5 +21,10 @@ public class EventHandler : MonoBehaviour
     public void SpinButtonChangeEndEvent()
     {
         spin.SpinButtonChangeFinished();
+    }
+
+    public void BalanceBorderStopAniEvent()
+    {
+        collectReward.stopAni();
     }
 }
