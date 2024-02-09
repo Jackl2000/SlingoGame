@@ -79,6 +79,7 @@ public class spin : MonoBehaviour
     [SerializeField] private GameObject keepSpinningPanel;
     [SerializeField] private GameObject CostMessage;
     private bool isMessageActive = false;
+    private bool warning = true;
 
     #endregion
 
@@ -114,7 +115,7 @@ public class spin : MonoBehaviour
 
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
-            spinButton.enabled = true;
+            //spinButton.enabled = true;
 
             Debug.Log("Spinleft:" + spinLeft +
                 "\n" + "Spinning stopped");
@@ -134,16 +135,15 @@ public class spin : MonoBehaviour
 
             wildPicks = 0;
             wildPicked = 0;
-            spinButton.enabled = true;
+            //spinButton.enabled = true;
         }
         else
         {
-            spinButton.enabled = false;
+            //spinButton.enabled = false;
         }
 
         #endregion
     }
-
 
     public void WildPick(Button gridButton)
     {
@@ -243,6 +243,12 @@ public class spin : MonoBehaviour
         }
     }
 
+    public void HideMessage(Toggle toggle) //This is called with toogle in KeepSpinningPanel
+    {
+        if (toggle.isOn) warning = false;
+        else warning = true;
+    }
+
     public void StartSpin()
     {
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
@@ -259,7 +265,7 @@ public class spin : MonoBehaviour
         //}
         #endregion
 
-        if (spinLeft < 0 && costPrSpin > 0 && !isMessageActive)
+        if (spinLeft < 0 && costPrSpin > 0 && !isMessageActive && warning)
 
         {
             isMessageActive = true;
@@ -296,6 +302,7 @@ public class spin : MonoBehaviour
 
         if (spinLeft == 10)
         {
+            isMessageActive = false;
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(false);
             spinButton.GetComponent<Image>().color = Color.white;
             playerData.balance -= spinBets;
@@ -309,15 +316,14 @@ public class spin : MonoBehaviour
             spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
             spinBuyLimit--;
             spinLeftText.text = spinBuyLimit.ToString();
-            StartCoroutine(Spinner());
         }
         else
         {
             spinButton.GetComponent<Image>().color = Color.gray;
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
-            StartCoroutine(Spinner());
         }
+        StartCoroutine(Spinner());
     }
 
 
@@ -450,63 +456,78 @@ public class spin : MonoBehaviour
 
     public void SpinButtonReset()
     {
-        
-
-        if (wildPicked == wildPicks || gridCheck.starsCount == 25)
+        if(spinLeft > 0)
         {
             spinButton.GetComponent<Image>().color = Color.white;
-            isSpinning = false;
         }
-        if (spinLeft <= 0)
+        else
         {
-            spinButton.GetComponent<Image>().color = Color.black;
-
-            spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-
-            if (wildPicked == wildPicks) spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
-
-            if (gridCheck.starsCount == 25)
+            if (spinBuyLimit == 5 && !isMessageActive)
             {
-                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "";
+                spinCountHeader.text = "Max spin køb";
+                spinLeftText.text = spinBuyLimit.ToString();
+
+                resetButton.color = Color.white;
+                resetButton.GetComponentInParent<Button>().enabled = true;
+
+                isMessageActive = true;
+                StartCoroutine(MessageHandler(CostMessage, 0f, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
+                Button costMsgButton = CostMessage.GetComponentInChildren<Button>();
+                costMsgButton.onClick.RemoveListener(collectReward.Collect);
+                costMsgButton.GetComponentInChildren<TextMeshProUGUI>().text = "Spin for " + "\n" + $"{UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}";
                 return;
             }
-
-            if (gridCheck.slingoAnimationFinished)
+            else if (spinBuyLimit == 0)
             {
-                if (spinBuyLimit == 5 && wildPicks == wildPicked && !isMessageActive)
+                string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+                if (gridCheck.slingoCount >= 3)
                 {
-                    spinCountHeader.text = "Max spin køb";
-                    spinLeftText.text = spinBuyLimit.ToString();
-
-                    resetButton.color = Color.white;
-                    resetButton.GetComponentInParent<Button>().enabled = true;
-
-                    isMessageActive = true;
-                    StartCoroutine(MessageHandler(CostMessage, 0.5f, "Du har opbrugt all dine spins :( Ekstra spins vil koste pr. spin"));
-                    Button costMsgButton = CostMessage.GetComponentInChildren<Button>();
-                    costMsgButton.onClick.RemoveListener(collectReward.Collect);
-                    costMsgButton.GetComponentInChildren<TextMeshProUGUI>().text = "Spin for " +"\n" + $"{UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}";
-
+                    StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Tag gevints";
+                    CostMessage.GetComponentInChildren<Button>().onClick.AddListener(collectReward.Collect);
                 }
-                if (spinBuyLimit == 0)
+                else
                 {
-                    string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                    if (gridCheck.slingoCount >= 3)
-                    {
-                        StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Tag gevints";
-                        CostMessage.GetComponentInChildren<Button>().onClick.AddListener(collectReward.Collect);
-                    }
-                    else
-                    {
-                        StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
-                        //CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPILLET SLUT";
-                        CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
-                    }
+                    StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
+                    //CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPILLET SLUT";
+                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                 }
             }
+            else
+            {
+                spinButton.GetComponent<Image>().color = Color.black;
+                spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+                spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+                spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+            }
         }
+
+        if (gridCheck.starsCount == 25)
+        {
+            spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+            resetButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "JACKPOT FLASH!!!";
+        }
+        isSpinning = false;
+    }
+
+    public void StartButtonCostAnimation()
+    {
+        if (spinLeft !<= 0 && spinBuyLimit != 5) return; 
+        StartCoroutine(SpinButtonCostAnimation());
+    }
+
+    public IEnumerator SpinButtonCostAnimation()
+    {
+        spinButton.GetComponent<Animator>().SetBool("Cost", true);
+        yield return new WaitForSeconds(0.5f);
+        spinButton.GetComponent<Animator>().SetBool("Cost", false);
+        spinButton.GetComponent<Image>().color = Color.black;
+        spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+        spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+        yield return new WaitForSeconds(0.3f);
+        SpinButtonReset();
+        StartSpin();
     }
 
     private void WildTransparency(bool stop, GameObject wildNumberPicked = null, int hIndex = 0)
@@ -539,12 +560,11 @@ public class spin : MonoBehaviour
                     {
                         wildPicked++;
                         blinkEffect.FlashingEffect(false, bestChoiceText);
-                        Debug.Log("Arrow in index " + indexh + " stop");
                         WildTransparency(true, null, indexh);
-                        if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
-                        {
-                            SpinButtonReset();
-                        }
+                        //if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
+                        //{
+                        //    SpinButtonReset();
+                        //}
                     }
                 }
             }
