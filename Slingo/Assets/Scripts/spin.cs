@@ -474,6 +474,7 @@ public class spin : MonoBehaviour
                 Button costMsgButton = CostMessage.GetComponentInChildren<Button>();
                 costMsgButton.onClick.RemoveListener(collectReward.Collect);
                 costMsgButton.GetComponentInChildren<TextMeshProUGUI>().text = "Spin for " + "\n" + $"{UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}";
+                isSpinning = false;
                 return;
             }
             else if (spinBuyLimit == 0)
