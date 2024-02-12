@@ -60,11 +60,6 @@ public class GridCheck : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-       
-    }
-
     public void UpdateRewards(List<GameObject> slingoRewards, float multiplyere)
     {
         rewards.Clear();
@@ -93,12 +88,11 @@ public class GridCheck : MonoBehaviour
         }
     }
 
-    private IEnumerator TextColorAnimation(TextMeshProUGUI text, float speed, Color[] colors, bool backWards, int times)
+    private IEnumerator TextColorAnimation(TextMeshProUGUI text, float speed, Color[] colors, int times, bool backWards = false)
     {
-        Debug.Log(text.text);
         if (backWards) text.textInfo.wordInfo = text.textInfo.wordInfo.Reverse().ToArray();
 
-        for (int i = 0;i < text.textInfo.wordInfo.Length;i++)
+        for (int i = 0; i < text.textInfo.wordInfo.Length; i++)
         {
             if (text.textInfo.wordInfo[i].characterCount == 0)
             {
@@ -118,13 +112,13 @@ public class GridCheck : MonoBehaviour
                     {
                         characterIndex = wordInfo.lastCharacterIndex - j;
                     }
-                        
+
                     int meshIndex = text.textInfo.characterInfo[characterIndex].materialReferenceIndex;
                     int vertexIndex = text.textInfo.characterInfo[characterIndex].vertexIndex;
 
                     Color32[] vertexColor = text.textInfo.meshInfo[meshIndex].colors32;
 
-                    if(backWards)
+                    if (backWards)
                     {
                         vertexColor[vertexIndex + 0] = Color.white;
                         vertexColor[vertexIndex + 1] = Color.white;
@@ -144,17 +138,17 @@ public class GridCheck : MonoBehaviour
                 }
             }
         }
-        if(!backWards)
+        if (!backWards)
         {
-            StartCoroutine(TextColorAnimation(text, speed, colors, true, times));
+            StartCoroutine(TextColorAnimation(text, speed, colors, times, true));
         }
-        else if(times != 0)
+        else if (times != 0)
         {
             text.textInfo.wordInfo = text.textInfo.wordInfo.Reverse().ToArray();
-            StartCoroutine(TextColorAnimation(text, speed, colors, false, times - 1));
+            StartCoroutine(TextColorAnimation(text, speed, colors, times - 1));
         }
     }
-    
+
 
 
     /// <summary>
@@ -337,8 +331,8 @@ public class GridCheck : MonoBehaviour
     {
         if(slingoCount >= 10)
         {
-            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, false, 2));
-            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, false, 2));
+            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
+            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "SUPER JACKPOT FLASH";
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "BIGGEST PRICE!";
@@ -347,8 +341,8 @@ public class GridCheck : MonoBehaviour
         }
         else if(slingoCount >= 3)
         {
-            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, false, 2));
-            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, false, 2));
+            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
+            StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[slingoCount + 1]);
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (slingoCount + 1).ToString() + " rækker";
@@ -425,6 +419,13 @@ public class GridCheck : MonoBehaviour
             }
         }
         return maxReward;
+    }
+
+    public void SlingoBorderGoIdle()
+    {
+        SlingoPanel.GetComponent<Animator>().SetBool("Start", false);
+        SlingoPanel.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
+        SlingoPanel.SetActive(false);
     }
 
     public void ViewSlingoRewards()

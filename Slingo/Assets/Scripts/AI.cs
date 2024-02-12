@@ -131,10 +131,12 @@ public class AI : MonoBehaviour
         if(vIndex == 4)
         {
             vIndex *= 5;
+            vIndex++;
         }
         else if (vIndex == 3)
         {
             vIndex *= 2;
+            vIndex++;
         }
         if (dl == 4)
         {

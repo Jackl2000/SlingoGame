@@ -15,14 +15,18 @@ public class CollectReward : MonoBehaviour
     public GameObject collectBorderMessage;
     public TextMeshProUGUI collectMessage;
     public float invokeTime = 5;
+    public GameObject balanceBorder;
 
+ 
     private GridCheck gridCheck;
     private PlayerData playerData;
+
 
     private void Awake()
     {
         gridCheck = GetComponent<GridCheck>();
-        playerData = GetComponent<PlayerData>();        
+        playerData = GetComponent<PlayerData>();
+
     }
 
     public void Collect()
@@ -58,12 +62,16 @@ public class CollectReward : MonoBehaviour
         if(gridCheck.slingoCount >= 3)
         {
             playerData.balance += gridCheck.rewards[gridCheck.slingoCount];
+            balanceBorder.GetComponent<Animator>().SetBool("BalanceIncreased", true);
+            
+
         }
         
         gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
         collectBorderMessage.SetActive(false);
         ResetTime();
         GetComponent<GridGeneration>().ReGenerateGrid();
+       
     }
 
     public void ResetTime()
@@ -74,5 +82,10 @@ public class CollectReward : MonoBehaviour
     private void Update()
     {
 
+    }
+
+    public void stopAni()
+    {
+        balanceBorder.GetComponent<Animator>().SetBool("BalanceIncreased", false);
     }
 }

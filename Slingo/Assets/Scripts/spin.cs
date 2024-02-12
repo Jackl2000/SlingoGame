@@ -512,8 +512,9 @@ public class spin : MonoBehaviour
 
     public void StartButtonCostAnimation()
     {
-        if (spinLeft !<= 0 && spinBuyLimit != 5) return; 
-        StartCoroutine(SpinButtonCostAnimation());
+        if (spinLeft !<= 0 && spinBuyLimit != 5) return;
+        spinButton.GetComponent<Animator>().SetBool("Cost", true);
+        //StartCoroutine(SpinButtonCostAnimation());
     }
 
     public IEnumerator SpinButtonCostAnimation()
@@ -525,6 +526,21 @@ public class spin : MonoBehaviour
         spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
         spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
         yield return new WaitForSeconds(0.3f);
+        SpinButtonReset();
+        StartSpin();
+    }
+
+    public void ChangeSpinButton()
+    {
+        spinButton.GetComponent<Animator>().SetBool("Cost", false);
+        spinButton.GetComponent<Image>().color = Color.black;
+        spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+        spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+    }
+
+    public void SpinButtonChangeFinished()
+    {
+        spinButton.GetComponentInChildren<ParticleSystem>().Play();
         SpinButtonReset();
         StartSpin();
     }
