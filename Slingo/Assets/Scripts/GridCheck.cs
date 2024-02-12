@@ -86,6 +86,8 @@ public class GridCheck : MonoBehaviour
                 }
             }
         }
+
+        slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[3]);
     }
 
     private IEnumerator TextColorAnimation(TextMeshProUGUI text, float speed, Color[] colors, int times, bool backWards = false)

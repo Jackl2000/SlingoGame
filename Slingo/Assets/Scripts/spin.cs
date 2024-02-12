@@ -80,6 +80,7 @@ public class spin : MonoBehaviour
     [SerializeField] private GameObject CostMessage;
     private bool isMessageActive = false;
     private bool warning = true;
+    private bool indsatsChoosen = false;
 
     #endregion
 
@@ -253,6 +254,13 @@ public class spin : MonoBehaviour
     {
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
 
+        if(!indsatsChoosen)
+        {
+            SelectSpins();
+            return;
+        }
+
+
         float costPrSpin = calculations.PriceCaculator();
 
         #region --Not in use-- CostWarning message to pop on spin click button 
@@ -322,8 +330,20 @@ public class spin : MonoBehaviour
             spinButton.GetComponent<Image>().color = Color.gray;
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
+            if(spinLeft == 3)
+            {
+                blinkEffect.spinLeftText = spinLeftText;
+                //blinkEffect.BlinkingEffect(spinLeftText);
+                //spinLeftText.color = Color.red;
+            }
         }
         StartCoroutine(Spinner());
+    }
+
+    private void SelectSpins()
+    {
+        indsatsChoosen = true;
+        GetComponent<SpinsValue>().ViewSpinsBets();
     }
 
 

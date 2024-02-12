@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class PanelEffects : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PanelEffects : MonoBehaviour
     [HideInInspector] public bool blinkeffectStart = false;
 
     private TextMeshProUGUI bestChoiceText;
+
+    [HideInInspector] public TextMeshProUGUI spinLeftText;
 
     public void FlashingEffect(bool active, TextMeshProUGUI text)
     {
@@ -54,9 +57,9 @@ public class PanelEffects : MonoBehaviour
         }
     }
 
-    public void BlinkingEffect()
+    public void BlinkingEffect(TextMeshProUGUI text)
     {
-        //color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
+        //text.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
         //this.gameObject.GetComponent<Graphic>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
     }
 
@@ -67,13 +70,12 @@ public class PanelEffects : MonoBehaviour
         //    FlashingEffect();
         //}
 
-        if (isBlinking)
+        if (spinLeftText != null)
         {
-            BlinkingEffect();
-
+            spinLeftText.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time * blinkSpeed, 1));
         }
 
-        if(blinkeffectStart)
+        if (blinkeffectStart)
         {
             bestChoiceText.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
         }
