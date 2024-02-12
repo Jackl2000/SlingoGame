@@ -15,9 +15,9 @@ public class StarManager : MonoBehaviour
 
     private void Awake()
     {
-        starParticle = GetComponent<ParticleSystem>();
-        starImg = this.transform.GetChild(0).GetComponent<Image>();
-        starWildImg = this.transform.GetChild(1).GetComponent<Image>();
+        starParticle = GetComponentInChildren<ParticleSystem>();
+        //starImg = this.transform.GetChild(0).GetComponent<Image>();
+        //starWildImg = this.transform.GetChild(1).GetComponent<Image>();
 
     }
     
