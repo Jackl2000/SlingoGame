@@ -25019,6 +25019,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -25156,6 +25160,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -25293,6 +25301,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -25430,6 +25442,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -25567,6 +25583,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -25704,6 +25724,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -25841,6 +25865,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -25978,6 +26006,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -26115,6 +26147,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -26252,6 +26288,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -26389,6 +26429,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -26526,6 +26570,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -26663,6 +26711,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -26800,6 +26852,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -26937,6 +26993,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -27074,6 +27134,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -27211,6 +27275,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -27348,6 +27416,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -27485,6 +27557,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -27622,6 +27698,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -27759,6 +27839,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -27896,6 +27980,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -28033,6 +28121,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -28170,6 +28262,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -28307,6 +28403,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.UI.Button, UnityEngine.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      propertyPath: spinScript
+      value: 
+      objectReference: {fileID: 4055942201498400139}
     - target: {fileID: 7625675857602349751, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
