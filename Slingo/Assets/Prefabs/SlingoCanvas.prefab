@@ -1820,7 +1820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectButton: {fileID: 997496719882965195}
   playAnimation: 0
-  speed: 800
+  speed: 1400
 --- !u!1 &973463777609872853
 GameObject:
   m_ObjectHideFlags: 0
@@ -20160,7 +20160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5496259466701497914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21121,7 +21121,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 20
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -21239,7 +21239,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
