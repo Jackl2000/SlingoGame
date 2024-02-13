@@ -81,7 +81,7 @@ public class spin : MonoBehaviour
     [Header("MessageObjects")]
     [SerializeField] private GameObject keepSpinningPanel;
     [SerializeField] private GameObject CostMessage;
-    [SerializeField] private Animator MessageAnimator;
+    [SerializeField] public Animator MessageAnimator;
     [SerializeField] private GameObject CollectMessage;
 
     private bool isMessageActive = false;
