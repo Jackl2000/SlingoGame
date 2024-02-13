@@ -81,7 +81,7 @@ public class spin : MonoBehaviour
     [Header("MessageObjects")]
     [SerializeField] private GameObject keepSpinningPanel;
     [SerializeField] private GameObject CostMessage;
-    [SerializeField] private Animator MessageAnimator;
+    [SerializeField] public Animator MessageAnimator;
     [SerializeField] private GameObject CollectMessage;
 
     private bool isMessageActive = false;
@@ -500,7 +500,6 @@ public class spin : MonoBehaviour
                 resetButton.color = Color.white;
                 resetButton.GetComponentInParent<Button>().enabled = true;
 
-                isSpinning = false;
                 isMessageActive = true;
 
                 MessageAnimator.SetBool("MinimizePlate", true);
@@ -509,7 +508,6 @@ public class spin : MonoBehaviour
                 StartCoroutine(MessageHandler(CostMessage, 0f, "Du har opbrugt all dine spins og kan købe op til 5 spins. " +
                                                                 $"Køb et spin?"));
                 StartCoroutine(StartButtonCostAnimation());
-                isSpinning = false;
                 return;
             }
             else if (spinBuyLimit == 0)
@@ -582,6 +580,7 @@ public class spin : MonoBehaviour
     {
         spinButton.GetComponentInChildren<ParticleSystem>().Play();
         SpinButtonReset();
+        
         //StartSpin();
     }
 
