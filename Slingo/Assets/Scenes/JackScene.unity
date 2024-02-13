@@ -465,6 +465,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6895147790509304543, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7929506682988506404, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_Name
       value: SlingoCanvas
