@@ -7657,7 +7657,8 @@ MonoBehaviour:
   spinWaitTime: 0.5
   wildChance: 20
   wildArrowChance: 15
-  spinLeft: 5
+  startSpins: 10
+  spinLeft: 10
   spinBuyLimit: 5
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
@@ -9959,7 +9960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3022337245393987791
 RectTransform:
   m_ObjectHideFlags: 0

@@ -30,7 +30,10 @@ public class spin : MonoBehaviour
     [SerializeField] private float spinWaitTime;
     [SerializeField] private int wildChance;
     [SerializeField] private int wildArrowChance;
-    public int spinLeft = 10;
+    [Space(7)]
+    [HideInInspector]
+    public int startSpins = 10;
+    public int spinLeft;
     public int spinBuyLimit = 5;
     public bool isSpinning = false;
 
@@ -91,6 +94,7 @@ public class spin : MonoBehaviour
 
     private void Awake()
     {
+        spinLeft = startSpins;
         resetButton.color = Color.gray;
         resetButton.GetComponentInParent<Button>().enabled = false;
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
@@ -548,7 +552,7 @@ public class spin : MonoBehaviour
     {
         if (spinLeft !<= 0 && spinBuyLimit != 5) return;
         spinButton.GetComponent<Animator>().SetBool("Cost", true);
-        //StartCoroutine(SpinButtonCostAnimation());
+        StartCoroutine(SpinButtonCostAnimation());
     }
 
     public IEnumerator SpinButtonCostAnimation()
