@@ -46,6 +46,7 @@ public class spin : MonoBehaviour
     public Queue<GameObject> wilds = new Queue<GameObject>();
     public Queue<GameObject> wildsArrow = new Queue<GameObject>();
     private List<int> slotWildArrow = new List<int>();
+    public TextMeshProUGUI collectMessageText;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button stopSpinningButton;
 
@@ -78,6 +79,7 @@ public class spin : MonoBehaviour
     [Header("MessageObjects")]
     [SerializeField] private GameObject keepSpinningPanel;
     [SerializeField] private GameObject CostMessage;
+    [SerializeField] private GameObject CollectMessage;
     private bool isMessageActive = false;
     private bool warning = true;
     private bool indsatsChoosen = false;
@@ -502,15 +504,17 @@ public class spin : MonoBehaviour
                 string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
                 if (gridCheck.slingoCount >= 3)
                 {
-                    StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Tag gevints";
-                    CostMessage.GetComponentInChildren<Button>().onClick.AddListener(collectReward.Collect);
+                    CollectMessage.SetActive(true);
+                    collectMessageText.text = messageText;
+                    CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Tag Gevinst";
+
+
                 }
                 else
                 {
-                    StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
-                    //CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPILLET SLUT";
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
+                    StartCoroutine(MessageHandler(CollectMessage, 1f, messageText));
+                    CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
+                    Debug.Log("went else");
                 }
             }
             else
