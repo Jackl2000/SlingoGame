@@ -336,6 +336,7 @@ public class GridCheck : MonoBehaviour
             StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
             StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
+            slingoRewardButton.GetComponent<MoneyEffect>().playAnimation = true;
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "SUPER JACKPOT FLASH";
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "BIGGEST PRICE!";
             yield return new WaitForSeconds(1f);
@@ -345,6 +346,7 @@ public class GridCheck : MonoBehaviour
         {
             StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
             StartCoroutine(TextColorAnimation(slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
+            slingoRewardButton.GetComponent<MoneyEffect>().playAnimation = true;
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[slingoCount + 1]);
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (slingoCount + 1).ToString() + " rækker";
