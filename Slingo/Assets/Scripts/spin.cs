@@ -82,7 +82,7 @@ public class spin : MonoBehaviour
     [SerializeField] private GameObject CollectMessage;
     private bool isMessageActive = false;
     private bool warning = true;
-    private bool indsatsChoosen = false;
+    [HideInInspector] public bool indsatsChoosen = false;
 
     #endregion
 
