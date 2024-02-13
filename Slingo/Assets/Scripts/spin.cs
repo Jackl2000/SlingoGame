@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -506,9 +505,10 @@ public class spin : MonoBehaviour
 
                 MessageAnimator.SetBool("MinimizePlate", true);
                 
-                ChangeSpinButton();
+                //ChangeSpinButton();
                 StartCoroutine(MessageHandler(CostMessage, 0f, "Du har opbrugt all dine spins og kan købe op til 5 spins. " +
                                                                 $"Køb et spin?"));
+                StartCoroutine(StartButtonCostAnimation());
                 isSpinning = false;
                 return;
             }
@@ -548,9 +548,9 @@ public class spin : MonoBehaviour
         isSpinning = false;
     }
 
-    public void StartButtonCostAnimation()
+    private IEnumerator StartButtonCostAnimation()
     {
-        if (spinLeft !<= 0 && spinBuyLimit != 5) return;
+        yield return new WaitForSeconds(1f);
         spinButton.GetComponent<Animator>().SetBool("Cost", true);
         StartCoroutine(SpinButtonCostAnimation());
     }
@@ -582,7 +582,7 @@ public class spin : MonoBehaviour
     {
         spinButton.GetComponentInChildren<ParticleSystem>().Play();
         SpinButtonReset();
-        StartSpin();
+        //StartSpin();
     }
 
     private void WildTransparency(bool stop, GameObject wildNumberPicked = null, int hIndex = 0)
