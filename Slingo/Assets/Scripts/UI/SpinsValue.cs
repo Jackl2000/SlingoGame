@@ -29,6 +29,8 @@ public class SpinsValue : MonoBehaviour
             spin.spinBets = bet;
             spinsBetPanel.SetActive(false);
             settingsMenu.multiplier = bet;
+            GetComponentInParent<GridCheck>().UpdateRewards(null, bet);
+            spin.StartSpin();
         }
     }
 }

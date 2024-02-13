@@ -9,6 +9,7 @@ public class GameThemeManager : MonoBehaviour
     #region Reference for the assets to replace
     public Image Background;
     public spin spin;
+    public GridCheck gridCheck;
     #endregion
 
     public GameObject themesPanel;
@@ -23,7 +24,6 @@ public class GameThemeManager : MonoBehaviour
     }
     public void ViewThemes()
     {
-        if (!Application.isEditor) return;
         themesPanel.SetActive(!themesPanel.activeSelf);
     }
 
@@ -31,6 +31,7 @@ public class GameThemeManager : MonoBehaviour
     {
         if (currentTheme.Theme == themes[index].Theme) return;
         Background.sprite = themes[index].BackGroundImage;
+        gridCheck.SlingoPanel.GetComponent<Image>().sprite = themes[index].BackGroundImage;
         List<GameObject> green = LoadStars().greenStars;
         foreach(GameObject go in green)
         {
@@ -49,6 +50,7 @@ public class GameThemeManager : MonoBehaviour
         spin.BackgroundImages[3] = themes[index].GridBackgroundLineWildImage;
 
         currentTheme = themes[index];
+
         themesPanel.SetActive(false);
     }
 

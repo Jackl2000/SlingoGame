@@ -46,6 +46,7 @@ public class spin : MonoBehaviour
     public Queue<GameObject> wilds = new Queue<GameObject>();
     public Queue<GameObject> wildsArrow = new Queue<GameObject>();
     private List<int> slotWildArrow = new List<int>();
+    public TextMeshProUGUI collectMessageText;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button stopSpinningButton;
 
@@ -79,8 +80,11 @@ public class spin : MonoBehaviour
     [SerializeField] private GameObject keepSpinningPanel;
     [SerializeField] private GameObject CostMessage;
     [SerializeField] private Animator MessageAnimator;
+    [SerializeField] private GameObject CollectMessage;
+
     private bool isMessageActive = false;
     private bool warning = true;
+    [HideInInspector] public bool indsatsChoosen = false;
 
     #endregion
 
@@ -254,6 +258,13 @@ public class spin : MonoBehaviour
     {
         if (isSpinning || gridCheck.starsCount == 25 || spinBuyLimit == 0) return;
 
+        if(!indsatsChoosen)
+        {
+            SelectSpins();
+            return;
+        }
+
+
         float costPrSpin = calculations.PriceCaculator();
 
         #region --Not in use-- CostWarning message to pop on spin click button 
@@ -327,8 +338,20 @@ public class spin : MonoBehaviour
             spinButton.GetComponent<Image>().color = Color.gray;
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
+            if(spinLeft == 3)
+            {
+                blinkEffect.spinLeftText = spinLeftText;
+                //blinkEffect.BlinkingEffect(spinLeftText);
+                //spinLeftText.color = Color.red;
+            }
         }
         StartCoroutine(Spinner());
+    }
+
+    private void SelectSpins()
+    {
+        indsatsChoosen = true;
+        GetComponent<SpinsValue>().ViewSpinsBets();
     }
 
 
@@ -476,12 +499,13 @@ public class spin : MonoBehaviour
 
                 isSpinning = false;
                 isMessageActive = true;
+
                 MessageAnimator.SetBool("MinimizePlate", true);
                 
                 ChangeSpinButton();
                 StartCoroutine(MessageHandler(CostMessage, 0f, "Du har opbrugt all dine spins og kan købe op til 5 spins. " +
                                                                 $"Køb et spin?"));
-                
+                isSpinning = false;
                 return;
             }
             else if (spinBuyLimit == 0)
@@ -489,15 +513,17 @@ public class spin : MonoBehaviour
                 string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
                 if (gridCheck.slingoCount >= 3)
                 {
-                    StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Tag gevints";
-                    CostMessage.GetComponentInChildren<Button>().onClick.AddListener(collectReward.Collect);
+                    CollectMessage.SetActive(true);
+                    collectMessageText.text = messageText;
+                    CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Tag Gevinst";
+
+
                 }
                 else
                 {
-                    StartCoroutine(MessageHandler(CostMessage, 1f, messageText));
-                    //CostMessage.GetComponentInChildren<TextMeshProUGUI>().text = "SPILLET SLUT";
-                    CostMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
+                    StartCoroutine(MessageHandler(CollectMessage, 1f, messageText));
+                    CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
+                    Debug.Log("went else");
                 }
             }
             else

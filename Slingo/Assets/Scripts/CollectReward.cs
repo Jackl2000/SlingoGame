@@ -38,6 +38,9 @@ public class CollectReward : MonoBehaviour
         //Reset values in spin
         spinScript.spinCountHeader.text = "SPINS";
         spinScript.spinLeft = 10;
+        spinScript.GetComponent<PanelEffects>().spinLeftText = null;
+        spinScript.indsatsChoosen = false;
+        spinScript.spinLeftText.color = Color.white;
         spinsCounter.text = spinScript.spinLeft.ToString();
         spinScript.spinBuyLimit = 5;
         spinScript.stakes = 0;
