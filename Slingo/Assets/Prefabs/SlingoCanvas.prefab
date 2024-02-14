@@ -13775,7 +13775,7 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -26935,12 +26935,12 @@ RectTransform:
   - {fileID: 2551705464461879110}
   - {fileID: 8364222456613381999}
   - {fileID: 5914095224967624197}
-  - {fileID: 5070771307093305284}
   - {fileID: 7339995212961568302}
   - {fileID: 8007670848916106803}
   - {fileID: 1905424769863644655}
   - {fileID: 3989961590656925223}
   - {fileID: 7071386700314157629}
+  - {fileID: 5070771307093305284}
   - {fileID: 2093212048700931513}
   - {fileID: 3708676724052760320}
   - {fileID: 2762699502511257171}
