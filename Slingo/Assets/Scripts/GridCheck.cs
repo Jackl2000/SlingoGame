@@ -151,8 +151,6 @@ public class GridCheck : MonoBehaviour
         }
     }
 
-
-
     /// <summary>
     /// Reset all the data about the grid like slingo count and etc.
     /// </summary>
@@ -333,24 +331,26 @@ public class GridCheck : MonoBehaviour
     {
         if(slingoCount >= 10)
         {
-            StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
-            StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
+            StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, Color.white, 2));
+            StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, Color.white, 2));
             slingoRewardButton.GetComponent<MoneyEffect>().playAnimation = true;
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
+            yield return new WaitForSeconds(0.3f);
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "SUPER JACKPOT FLASH";
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "BIGGEST PRICE!";
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.7f);
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", false);
         }
         else if(slingoCount >= 3)
         {
-            StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
-            StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, 2));
+            StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, Color.white, 2));
+            StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, Color.white, 2));
             slingoRewardButton.GetComponent<MoneyEffect>().playAnimation = true;
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
+            yield return new WaitForSeconds(0.3f);
             slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[slingoCount + 1]);
             slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (slingoCount + 1).ToString() + " rækker";
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.7f);
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", false);
         }
     }
@@ -392,10 +392,10 @@ public class GridCheck : MonoBehaviour
             }
         }
 
-        if (slingoCount >= 3)
-        {
-            resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Modtag " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
-        }
+        //if (slingoCount >= 3)
+        //{
+        //    resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Modtag " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
+        //}
         if(slingoCount >= 12 && slingoAnimationFinished && spinScript.timePassedForMsg > 3)
         {
             jackpotMessage.SetActive(true);
