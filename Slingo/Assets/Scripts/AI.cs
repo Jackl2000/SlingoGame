@@ -9,6 +9,7 @@ public class AI : MonoBehaviour
 {
     private GridGeneration gridGeneration;
     private Dictionary<int, int> bestChoiceList;
+    [HideInInspector] public int currentNumber = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,7 @@ public class AI : MonoBehaviour
         if (bestChoiceList.Values.Max() == 0) return null;
         
         int maxValue = 0;
-        int currentNumber = 0;
+        
         foreach (int item in bestChoiceList.Keys)
         {
             if (bestChoiceList[item] > maxValue)
@@ -46,6 +47,7 @@ public class AI : MonoBehaviour
         {
             Debug.Log("Should never be played " + bestChoiceList.Values.Max());
         }
+        gridGeneration.numberPositions[currentNumber].gameObject.transform.parent.transform.parent.GetComponent<StarManager>().PlayHighlighter();
         return gridGeneration.numberPositions[currentNumber];
     }
 

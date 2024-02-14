@@ -26,5 +26,17 @@ public class StarManager : MonoBehaviour
         starParticle.Play();
     }
 
+    public void PlayHighlighter()
+    {
+        this.GetComponentInChildren<Animator>().SetBool("isBestChoice", true);
+        this.gameObject.transform.GetChild(0).GetChild(4).gameObject.SetActive(true);
+    }
+
+    public void StopHighlighting(GameObject numberObj)
+    {
+        numberObj.GetComponentInChildren<Animator>().SetBool("isBestChoice", false);
+        numberObj.gameObject.transform.GetChild(0).GetChild(4).gameObject.SetActive(false);
+    }
+
     
 }
