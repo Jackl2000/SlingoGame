@@ -31,13 +31,13 @@ public class CollectReward : MonoBehaviour
     // -50 -25
     public void Collect()
     {
-        if (!gridCheck.slingoAnimationFinished || (spinScript.isSpinning && gridCheck.starsCount != 25) || (spinScript.wildPicks != 0 && gridCheck.slingoCount != 12) || spinScript.spinLeft == 10)
+        if (!gridCheck.slingoAnimationFinished || (spinScript.isSpinning && gridCheck.starsCount != 25) || (spinScript.wildPicks != 0 && gridCheck.slingoCount != 12) || spinScript.spinLeft == spinScript.startSpins)
         {
             return;
         }
         //Reset values in spin
         spinScript.spinCountHeader.text = "SPINS";
-        spinScript.spinLeft = 10;
+        spinScript.spinLeft = spinScript.startSpins;
         spinScript.GetComponent<PanelEffects>().spinLeftText = null;
         spinScript.indsatsChoosen = false;
         spinScript.spinLeftText.color = Color.white;

@@ -30,9 +30,8 @@ public class spin : MonoBehaviour
     [SerializeField] private int wildChance;
     [SerializeField] private int wildArrowChance;
     [Space(7)]
-    [HideInInspector]
     public int startSpins = 10;
-    public int spinLeft;
+    [HideInInspector] public int spinLeft;
     public int spinBuyLimit = 5;
     public bool isSpinning = false;
 
@@ -94,6 +93,7 @@ public class spin : MonoBehaviour
     private void Awake()
     {
         spinLeft = startSpins;
+        spinLeftText.text = startSpins.ToString();
         resetButton.color = Color.gray;
         resetButton.GetComponentInParent<Button>().enabled = false;
         collectReward = this.gameObject.GetComponentInParent<CollectReward>();
@@ -120,13 +120,8 @@ public class spin : MonoBehaviour
 
         if (spinLeft == 0)
         {
-
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
-            //spinButton.enabled = true;
-
-            Debug.Log("Spinleft:" + spinLeft +
-                "\n" + "Spinning stopped");
         }
 
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
@@ -287,10 +282,6 @@ public class spin : MonoBehaviour
             StartCoroutine(MessageHandler(keepSpinningPanel, 0, $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}"));
             return;
         }
-        if (MessageAnimator.GetBool("MinimizePlate"))
-        {
-            
-        }
         MessageAnimator.SetBool("MinimizePlate", false);
         isSpinning = true;
         Stakes();
@@ -319,7 +310,7 @@ public class spin : MonoBehaviour
             }
         }
 
-        if (spinLeft == 10)
+        if (spinLeft == startSpins)
         {
             isMessageActive = false;
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(false);
@@ -414,7 +405,7 @@ public class spin : MonoBehaviour
 
     public void Stakes()
     {
-        if (spinLeft == 10)
+        if (spinLeft == startSpins)
         {
             stakes += spinBets;
         }
