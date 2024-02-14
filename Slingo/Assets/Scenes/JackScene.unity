@@ -793,14 +793,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4055942201498400139, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: wildChance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4055942201498400139, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: wildArrowChance
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4199956941912489919, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1025,10 +1017,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5254149640239812206, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: speed
-      value: 2000
-      objectReference: {fileID: 0}
     - target: {fileID: 5671771920954017437, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1052,18 +1040,6 @@ PrefabInstance:
     - target: {fileID: 5671771920954017437, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5717584663265216187, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5717584663265216187, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 1500
-      objectReference: {fileID: 0}
-    - target: {fileID: 5717584663265216187, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 6049137932593326042, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
