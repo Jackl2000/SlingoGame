@@ -120,13 +120,8 @@ public class spin : MonoBehaviour
 
         if (spinLeft == 0)
         {
-
             //spinLeft remains zero causing loop to be entered constantly, unless its set to -1
             spinLeft = -1;
-            //spinButton.enabled = true;
-
-            Debug.Log("Spinleft:" + spinLeft +
-                "\n" + "Spinning stopped");
         }
 
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);

@@ -539,12 +539,13 @@ public class GridCheck : MonoBehaviour
         foreach (GameObject go in slingoNumbers)
         {
             go.GetComponent<TextMeshProUGUI>().text = "";
-            Image wallImage = go.GetComponentInParent<Image>();
-            wallImage.sprite = slingoBackgroundImage;
-            wallImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
-            wallImage.transform.GetChild(1).GetComponent<Image>().enabled = true;
-            wallImage.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            wallImage.enabled = true;
+            Image starBackgroundImg = go.GetComponentInParent<Image>();
+            starBackgroundImg.sprite = slingoBackgroundImage;
+            starBackgroundImg.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            starBackgroundImg.transform.GetChild(1).GetComponent<Image>().enabled = true;
+            starBackgroundImg.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            starBackgroundImg.enabled = true;
+            starBackgroundImg.transform.parent.GetComponent<StarManager>().StarParticleEffect();
 
             if (go.GetComponentInParent<Animator>().GetBool("Slingo"))
             {
