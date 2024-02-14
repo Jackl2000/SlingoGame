@@ -8,24 +8,25 @@ public class MoneyEffect : MonoBehaviour
     [HideInInspector] public bool playAnimation = false;
 
     [SerializeField] private float speed = 15f;
-    private ParticleSystem ps;
-    private GameObject psParent;
-    private ParticleSystem.Particle[] particles = new ParticleSystem.Particle[500];
+    public ParticleSystem ps;
 
     private List<GameObject> path = new List<GameObject>();
+    public GameObject pathParent;
     private int currentPathIndex = 0;
 
+    private Vector3 startingPosition;
+    private Quaternion startingRotation;
     private bool play = false;
 
     private void Start()
     {
-        ps = transform.GetChild(4).GetComponentInChildren<ParticleSystem>();
-        psParent = ps.transform.parent.gameObject;
-        GameObject[] paths = { ps.transform.parent.GetChild(1).gameObject, ps.transform.parent.GetChild(2).gameObject, ps.transform.parent.GetChild(3).gameObject, ps.transform.parent.GetChild(4).gameObject };
+        GameObject[] paths = { pathParent.transform.GetChild(0).gameObject, pathParent.transform.GetChild(1).gameObject, pathParent.transform.GetChild(2).gameObject, pathParent.transform.GetChild(3).gameObject, pathParent.transform.GetChild(1).gameObject };
         foreach (GameObject pathObject in paths)
         {
             path.Add(pathObject);
         }
+        startingPosition = ps.gameObject.transform.position;
+        startingRotation = ps.gameObject.transform.rotation;
     }
 
     private void LateUpdate()
@@ -37,7 +38,6 @@ public class MoneyEffect : MonoBehaviour
 
         if(playAnimation)
         {
-            ps.transform.transform.parent.transform.SetParent(transform.parent, true);
             ps.Play();
             playAnimation = false;
             play = true;
@@ -79,7 +79,6 @@ public class MoneyEffect : MonoBehaviour
                 play = false;
                 ps.Stop();
                 currentPathIndex = 0;
-                ps.transform.parent.transform.SetParent(transform);
                 StartCoroutine(Delay());
             }
         }
@@ -88,6 +87,8 @@ public class MoneyEffect : MonoBehaviour
     private IEnumerator Delay()
     {
         yield return new WaitForSeconds(1);
-        ps.transform.localPosition = Vector3.zero;
+        ps.gameObject.transform.position = startingPosition;
+        ps.gameObject.transform.rotation = startingRotation;
+        //GetComponentInParent<GridCheck>().
     }
 }
