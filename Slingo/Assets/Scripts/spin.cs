@@ -150,6 +150,8 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
+        gridButton.GetComponent<StarManager>().StopHighlighting(gridGeneration.numberPositions[AI.currentNumber].gameObject.transform.parent.transform.parent.gameObject);
+
         if (gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             return;
