@@ -1838,9 +1838,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectButton: {fileID: 997496719882965195}
   playAnimation: 0
-  speed: 2000
+  speed: 2500
   ps: {fileID: 3726193549733149310}
   pathParent: {fileID: 5632595091583543716}
+  spin: {fileID: 4055942201498400139}
 --- !u!1 &973463777609872853
 GameObject:
   m_ObjectHideFlags: 0

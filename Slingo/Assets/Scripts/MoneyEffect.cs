@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MoneyEffect : MonoBehaviour
 {
@@ -9,9 +11,10 @@ public class MoneyEffect : MonoBehaviour
 
     [SerializeField] private float speed = 15f;
     public ParticleSystem ps;
+    public GameObject pathParent;
+    public spin spin;
 
     private List<GameObject> path = new List<GameObject>();
-    public GameObject pathParent;
     private int currentPathIndex = 0;
 
     private Vector3 startingPosition;
@@ -86,9 +89,20 @@ public class MoneyEffect : MonoBehaviour
 
     private IEnumerator Delay()
     {
+        GridCheck gridCheck = GetComponentInParent<GridCheck>();
+        if(gridCheck.slingoCount >= 3)
+        {
+            collectButton.GetComponentInChildren<TextMeshProUGUI>().text = "Modtag " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+        }
+        
+        if (spin.spinLeft == 0)
+        {
+            collectButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+        }
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(UIManager.Instance.TextColorAnimation(this, collectButton.GetComponentInChildren<TextMeshProUGUI>(), 0.03f, new Color[] { Color.yellow, Color.yellow, Color.white, Color.yellow }, collectButton.GetComponentInChildren<TextMeshProUGUI>().color, 2));
         yield return new WaitForSeconds(1);
         ps.gameObject.transform.position = startingPosition;
         ps.gameObject.transform.rotation = startingRotation;
-        //GetComponentInParent<GridCheck>().
     }
 }

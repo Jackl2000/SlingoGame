@@ -30,7 +30,18 @@ public class UIManager
         return float.Parse(money.Substring(0, money.Length - 3));
     }
 
-    public IEnumerator TextColorAnimation(MonoBehaviour mono, TextMeshProUGUI text, float speed, Color[] colors, int times, bool backWards = false)
+    /// <summary>
+    /// Change individuel letter/number in text over time for a nice animation
+    /// </summary>
+    /// <param name="mono"></param>
+    /// <param name="text">The text object</param>
+    /// <param name="speed">How much time between each letter/number</param>
+    /// <param name="colors">Colors to change between, has to be 4 colors in an array</param>
+    /// <param name="startingColor">Color to change back to</param>
+    /// <param name="times">How many times should it loop</param>
+    /// <param name="backWards">Only insert hvis parameter if you do not want the text to change its color back to the orignal color</param>
+    /// <returns></returns>
+    public IEnumerator TextColorAnimation(MonoBehaviour mono, TextMeshProUGUI text, float speed, Color[] colors, Color startingColor, int times, bool backWards = false)
     {
         if (backWards) text.textInfo.wordInfo = text.textInfo.wordInfo.Reverse().ToArray();
 
@@ -62,10 +73,10 @@ public class UIManager
 
                     if (backWards)
                     {
-                        vertexColor[vertexIndex + 0] = Color.white;
-                        vertexColor[vertexIndex + 1] = Color.white;
-                        vertexColor[vertexIndex + 2] = Color.white;
-                        vertexColor[vertexIndex + 3] = Color.white;
+                        vertexColor[vertexIndex + 0] = startingColor;
+                        vertexColor[vertexIndex + 1] = startingColor;
+                        vertexColor[vertexIndex + 2] = startingColor;
+                        vertexColor[vertexIndex + 3] = startingColor;
                     }
                     else
                     {
@@ -82,13 +93,12 @@ public class UIManager
         }
         if (!backWards)
         {
-            mono.StartCoroutine(TextColorAnimation(mono, text, speed, colors, times, true));
-            //StartCoroutine(TextColorAnimation(text, speed, colors, times, true));
+            mono.StartCoroutine(TextColorAnimation(mono, text, speed, colors, startingColor, times, true));
         }
-        else if (times != 0)
+        else if (times > 1)
         {
             text.textInfo.wordInfo = text.textInfo.wordInfo.Reverse().ToArray();
-            mono.StartCoroutine(TextColorAnimation(mono, text, speed, colors, times - 1));
+            mono.StartCoroutine(TextColorAnimation(mono, text, speed, colors, startingColor, times - 1));
         }
     }
 }
