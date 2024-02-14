@@ -21,7 +21,7 @@ public class StarManager : MonoBehaviour
 
     }
     
-    public void StarParticleEffect()
+    public void PlaySparkelEffect()
     {
         starParticle.Play();
     }
