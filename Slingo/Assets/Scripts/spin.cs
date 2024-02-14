@@ -394,7 +394,7 @@ public class spin : MonoBehaviour
             text.color = Color.green;
             yield return new WaitForSeconds(0.5f);
             gridGeneration.numberPositions[number].Hit();
-            gridGeneration.numberPositions[number].gameObject.transform.parent.transform.parent.GetComponent<StarManager>().StarParticleEffect();
+            gridGeneration.numberPositions[number].gameObject.transform.parent.transform.parent.GetComponent<StarManager>().PlaySparkelEffect();
             //Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.parent.GetChild(0).GetComponentInChildren<Image>();
             Image starImg = gridGeneration.numberPositions[number].gameObject.transform.parent.GetChild(0).GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
