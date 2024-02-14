@@ -126,7 +126,6 @@ public class spin : MonoBehaviour
 
         balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
 
-
         #region Enables to pick any number on plate if user got wildpicks
         if (wildPicked == wildPicks)
         {
@@ -392,7 +391,7 @@ public class spin : MonoBehaviour
         if (gridGeneration.numberPositions.ContainsKey(number) && !gridGeneration.numberPositions[number].hasBeenHit)
         {
             text.color = Color.green;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.35f);
             gridGeneration.numberPositions[number].Hit();
             gridGeneration.numberPositions[number].gameObject.transform.parent.transform.parent.GetComponent<StarManager>().PlaySparkelEffect();
             //Transform goTrans = gridGeneration.numberPositions[number].gameObject.transform.parent.GetChild(0).GetComponentInChildren<Image>();
@@ -492,7 +491,6 @@ public class spin : MonoBehaviour
                 resetButton.GetComponentInParent<Button>().enabled = true;
 
                 isMessageActive = true;
-
                 MessageAnimator.SetBool("MinimizePlate", true);
                 
                 //ChangeSpinButton();
@@ -556,7 +554,6 @@ public class spin : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         
         SpinButtonReset();
-        //StartSpin();
     }
 
     public void ChangeSpinButton()
@@ -571,8 +568,7 @@ public class spin : MonoBehaviour
     {
         spinButton.GetComponentInChildren<ParticleSystem>().Play();
         SpinButtonReset();
-        
-        //StartSpin();
+        resetButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
     }
 
     private void WildTransparency(bool stop, GameObject wildNumberPicked = null, int hIndex = 0)
@@ -606,10 +602,6 @@ public class spin : MonoBehaviour
                         wildPicked++;
                         blinkEffect.FlashingEffect(false, bestChoiceText);
                         WildTransparency(true, null, indexh);
-                        //if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
-                        //{
-                        //    SpinButtonReset();
-                        //}
                     }
                 }
             }

@@ -94,11 +94,6 @@ public class MoneyEffect : MonoBehaviour
         {
             collectButton.GetComponentInChildren<TextMeshProUGUI>().text = "Modtag " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
         }
-        
-        if (spin.spinLeft == 0)
-        {
-            collectButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-        }
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(UIManager.Instance.TextColorAnimation(this, collectButton.GetComponentInChildren<TextMeshProUGUI>(), 0.03f, new Color[] { Color.yellow, Color.yellow, Color.white, Color.yellow }, collectButton.GetComponentInChildren<TextMeshProUGUI>().color, 2));
         yield return new WaitForSeconds(1);
