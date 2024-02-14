@@ -90,12 +90,16 @@ public class MoneyEffect : MonoBehaviour
     private IEnumerator Delay()
     {
         GridCheck gridCheck = GetComponentInParent<GridCheck>();
+        TextMeshProUGUI text = collectButton.GetComponentInChildren<TextMeshProUGUI>();
+
         if(gridCheck.slingoCount >= 3)
         {
-            collectButton.GetComponentInChildren<TextMeshProUGUI>().text = "Modtag " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+            text.text = "Modtag " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
         }
+        if(spin.spinLeft <= 0) text.color = Color.white;
+        else text.color = Color.gray;
         yield return new WaitForSeconds(0.1f);
-        StartCoroutine(UIManager.Instance.TextColorAnimation(this, collectButton.GetComponentInChildren<TextMeshProUGUI>(), 0.03f, new Color[] { Color.yellow, Color.yellow, Color.white, Color.yellow }, collectButton.GetComponentInChildren<TextMeshProUGUI>().color, 2));
+        StartCoroutine(UIManager.Instance.TextColorAnimation(this, text, 0.03f, new Color[] { Color.yellow, Color.yellow, Color.white, Color.yellow }, text.color, 2));
         yield return new WaitForSeconds(1);
         ps.gameObject.transform.position = startingPosition;
         ps.gameObject.transform.rotation = startingRotation;

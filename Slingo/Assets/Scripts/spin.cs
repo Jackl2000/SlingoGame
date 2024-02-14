@@ -320,6 +320,7 @@ public class spin : MonoBehaviour
         }
         if (spinBuyLimit >= 0 && spinLeft <= 0 && gridCheck.slingoAnimationFinished)
         {
+            resetButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
             isMessageActive = false;
             
             playerData.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(6));
@@ -489,8 +490,7 @@ public class spin : MonoBehaviour
             {
                 spinCountHeader.text = "Max spin køb";
                 spinLeftText.text = spinBuyLimit.ToString();
-                resetButton.color = Color.white;
-                resetButton.GetComponentInParent<Button>().enabled = true;
+                
 
                 isMessageActive = true;
                 MessageAnimator.SetBool("MinimizePlate", true);
@@ -525,6 +525,7 @@ public class spin : MonoBehaviour
                 spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
                 spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
                 spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
+                resetButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
             }
         }
 
@@ -571,6 +572,7 @@ public class spin : MonoBehaviour
         spinButton.GetComponentInChildren<ParticleSystem>().Play();
         SpinButtonReset();
         resetButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+        resetButton.GetComponentInParent<Button>().enabled = true;
     }
 
     private void WildTransparency(bool stop, GameObject wildNumberPicked = null, int hIndex = 0)
