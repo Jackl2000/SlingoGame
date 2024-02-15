@@ -240,7 +240,7 @@ public class spin : MonoBehaviour
             GridNumbers bestChoice = AI.BestChoice(wilds.Count, slotWildArrow);
             if (bestChoice == null) return;
 
-            if (slotWildArrow.Count > 0) bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[0];
+            if (slotWildArrow.Count > 0) bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
             else bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
             blinkEffect.FlashingEffect(true, gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
@@ -464,7 +464,7 @@ public class spin : MonoBehaviour
             GridNumbers bestChoice = AI.BestChoice(wilds.Count, slotWildArrow);
             if (bestChoice != null)
             {
-                if(slotWildArrow.Count > 0) bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[0];
+                if(slotWildArrow.Count > 0) bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
                 else bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
 
                 bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -588,7 +588,7 @@ public class spin : MonoBehaviour
                     if (!number.hasBeenHit && slotWildArrow.Contains(number.h))
                     {
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
-                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[3];
+                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
                         animatorObject.GetComponent<Image>().enabled = true;
                         indexes[number.h - 1]++;
                     }
@@ -633,7 +633,7 @@ public class spin : MonoBehaviour
                     if (!number.hasBeenHit && number.h == hIndex)
                     {
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
-                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[3];
+                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
                         animatorObject.GetComponent<Image>().enabled = false;
                     }
                 }

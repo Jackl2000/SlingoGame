@@ -6,24 +6,26 @@ using UnityEngine.UI;
 
 public class GridNumbers
 {
-    public int h { get; private set; }
-    public int v { get; private set; }
-    public bool hasBeenHit { get; set; } = false;
     public GameObject gameObject;
-    public bool diagonal { get; private set; }
-    public int number { get; private set; }
+
     private Image starBackgroundImg;
     private Animator starAnimation;
 
+    public int number { get; private set; }
+    public int h { get; private set; }
+    public int v { get; private set; }
+    public bool diagonal { get; private set; }
+    public bool hasBeenHit { get; set; } = false;
+
     public GridNumbers(int horizontal, int vertical, GameObject gameObject, int value)
     {
-        h = horizontal;
-        v = vertical;
         this.gameObject = gameObject;
-        number = value;
         starBackgroundImg = gameObject.GetComponentInParent<Image>();
         if(starBackgroundImg != null ) starAnimation = starBackgroundImg.GetComponent<Animator>();
 
+        number = value;
+        h = horizontal;
+        v = vertical;
         diagonal = CheckForDiagonal();
     }
 

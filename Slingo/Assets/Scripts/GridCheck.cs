@@ -28,7 +28,7 @@ public class GridCheck : MonoBehaviour
     [SerializeField] private Sprite[] jackpotSlingoBorderImages;
     [SerializeField] private Sprite slingoBackgroundImage;
 
-    private GridGeneration grid;
+    private GridGeneration gridGeneration;
     private Dictionary<string, bool> gridSlingoList = new Dictionary<string, bool>();
     [HideInInspector] public bool slingoIsHit = false;
     private List<Image> slingoBorders = new List<Image>();
@@ -42,7 +42,7 @@ public class GridCheck : MonoBehaviour
     {
         spinScript = this.GetComponentInChildren<spin>();
 
-        grid = GetComponent<GridGeneration>();
+        gridGeneration = GetComponent<GridGeneration>();
         gridSlingoList.Add("h1", false);
         gridSlingoList.Add("h2", false);
         gridSlingoList.Add("h3", false);
@@ -198,7 +198,7 @@ public class GridCheck : MonoBehaviour
         int leftIndex = 0;
         int rightIndex = 0;
         rewardCount = 0;
-        foreach (GridNumbers number in grid.numberPositions.Values)
+        foreach (GridNumbers number in gridGeneration.numberPositions.Values)
         {
             if (number.h == h)
             {
@@ -227,7 +227,7 @@ public class GridCheck : MonoBehaviour
         }
 
 
-        foreach (GridNumbers number in grid.numberPositions.Values)
+        foreach (GridNumbers number in gridGeneration.numberPositions.Values)
         {
             if (number.v == v)
             {
@@ -261,7 +261,7 @@ public class GridCheck : MonoBehaviour
             if(!gridSlingoList["dl"])
             {
 
-                foreach (GridNumbers number in grid.numberPositions.Values)
+                foreach (GridNumbers number in gridGeneration.numberPositions.Values)
                 {
                     if (number.h == number.v)
                     {
@@ -290,7 +290,7 @@ public class GridCheck : MonoBehaviour
 
             if (!gridSlingoList["dr"])
             {
-                foreach (GridNumbers number in grid.numberPositions.Values)
+                foreach (GridNumbers number in gridGeneration.numberPositions.Values)
                 {
                     if ((number.h == 5 && number.v == 1) || (number.h == 4 && number.v == 2) || (number.h == 3 && number.v == 3) || (number.h == 2 && number.v == 4) || (number.h == 1 && number.v == 5))
                     {
@@ -409,7 +409,7 @@ public class GridCheck : MonoBehaviour
     public int CheckForMaxReward()
     {
         int maxReward = 0;
-        foreach (GridNumbers number in grid.numberPositions.Values)
+        foreach (GridNumbers number in gridGeneration.numberPositions.Values)
         {
             if(!number.hasBeenHit)
             {
@@ -483,7 +483,7 @@ public class GridCheck : MonoBehaviour
         {
             if (slingoType == "h")
             {
-                foreach (GridNumbers numbers in grid.numberPositions.Values)
+                foreach (GridNumbers numbers in gridGeneration.numberPositions.Values)
                 {
                     if (numbers.h == slingoTypes[slingoType])
                     {
@@ -494,7 +494,7 @@ public class GridCheck : MonoBehaviour
             }
             else if (slingoType == "v")
             {
-                foreach (GridNumbers numbers in grid.numberPositions.Values)
+                foreach (GridNumbers numbers in gridGeneration.numberPositions.Values)
                 {
                     if (numbers.v == slingoTypes[slingoType])
                     {
@@ -504,7 +504,7 @@ public class GridCheck : MonoBehaviour
             }
             else if (slingoType == "l")
             {
-                foreach (GridNumbers numbers in grid.numberPositions.Values)
+                foreach (GridNumbers numbers in gridGeneration.numberPositions.Values)
                 {
                     if (numbers.diagonal && numbers.h == numbers.v)
                     {
@@ -514,7 +514,7 @@ public class GridCheck : MonoBehaviour
             }
             else
             {
-                foreach (GridNumbers numbers in grid.numberPositions.Values)
+                foreach (GridNumbers numbers in gridGeneration.numberPositions.Values)
                 {
                     if ((numbers.h == numbers.v && numbers.h == 3) || (numbers.h == 5 && numbers.v == 1) || (numbers.h == 4 && numbers.v == 2) || (numbers.h == 2 && numbers.v == 4) || numbers.h == 1 && numbers.v == 5)
                     {
