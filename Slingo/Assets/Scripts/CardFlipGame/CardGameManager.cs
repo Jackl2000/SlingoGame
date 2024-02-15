@@ -10,16 +10,13 @@ public class CardGameManager : MonoBehaviour
     [Header("References")]
     public PlayerData playerData;
     public spin spinScript;
-    public SettingsMenu settingsMenuScript;
 
     private CardGameManager gameManager;
     private Animator animator;
 
     [Space(5)]
-    public GameObject LostPrefab;
-
-    [Space(5)]
     public TextMeshProUGUI gevintsText;
+    public TextMeshProUGUI indsatsText;
     public TextMeshProUGUI balanceText;
 
     [Space(5)]
@@ -41,6 +38,8 @@ public class CardGameManager : MonoBehaviour
     public Sprite goodHit;
     public Sprite badHit;
 
+    private string gevintsString;
+
     private void Awake()
     {
         gameManager = this.GetComponent<CardGameManager>();
@@ -54,7 +53,11 @@ public class CardGameManager : MonoBehaviour
 
     private void Start()
     {
-        balanceText.text = playerData.balance.ToString();
+        gevintsString = "Bonus gevints: ";
+
+        balanceText.text = "Balance: " + playerData.balance.ToString();
+        indsatsText.text = "Indsats: " + spinScript.stakes.ToString();
+
         ShuffleCards();
     }
 
@@ -91,9 +94,9 @@ public class CardGameManager : MonoBehaviour
     public void NewGame()
     {
         playerData.balance += gevints;
-        balanceText.text = playerData.balance.ToString();
+        balanceText.text = "Balance: " + playerData.balance.ToString();
         gevints = 0;
-        gevintsText.text = "Gevints: " + gevints.ToString();
+        gevintsText.text = "Bonus gevints: " + gevints.ToString();
 
         foreach (Image cardImage in cardImages)
         {
@@ -140,7 +143,7 @@ public class CardGameManager : MonoBehaviour
                 cardNumberText.text = "x" + præmie; 
 
                 gevints += præmie; 
-                gevintsText.text = "Gevints: " + gevints + "kr";
+                gevintsText.text = gevintsString + gevints + "kr";
                 Debug.Log("reward added to 1: " + (præmie - 2));
                 break;
             case 3:
@@ -151,7 +154,7 @@ public class CardGameManager : MonoBehaviour
                 cardNumberText.text = "x" + præmie;
                 
                 gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = "Gevints: " + gevints + "kr";
+                gevintsText.text = gevintsString + gevints + "kr";
                 Debug.Log("reward added to 2: " + (præmie - 5));
                 break;
             case 4:
@@ -162,7 +165,7 @@ public class CardGameManager : MonoBehaviour
                 cardNumberText.text = "x" + præmie;
 
                 gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = "Gevints: " + gevints + "kr";
+                gevintsText.text = gevintsString + gevints + "kr";
                 Debug.Log("reward added to 3: " + (præmie - 5));
                 break;
             case 5:
@@ -173,7 +176,7 @@ public class CardGameManager : MonoBehaviour
                 cardNumberText.text = "x" + præmie;
                 
                 gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = "Gevints: " + gevints + "kr";
+                gevintsText.text = gevintsString + gevints + "kr";
                 Debug.Log("reward added to 4: " + (præmie - 10));
                 break;
             case 6:
@@ -184,7 +187,7 @@ public class CardGameManager : MonoBehaviour
                 cardNumberText.text = "x" + præmie;
                 
                 gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = "Gevints: " + gevints + "kr";
+                gevintsText.text = gevintsString + gevints + "kr";
                 Debug.Log("reward added to 5: " + (præmie - 10));
                 break;
             case 7:
@@ -195,7 +198,7 @@ public class CardGameManager : MonoBehaviour
                 cardNumberText.text = "x" + præmie;
                 
                 gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = "Gevints: " + gevints + "kr";
+                gevintsText.text = gevintsString + gevints + "kr";
                 Debug.Log("reward added to 6: " + (præmie - 30));
                 break;
             case 8:
@@ -206,7 +209,7 @@ public class CardGameManager : MonoBehaviour
                 cardNumberText.text = "x" + præmie;
                 
                 gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = "Gevints: " + gevints + "kr";
+                gevintsText.text = gevintsString + gevints + "kr";
                 Debug.Log("reward added to 7: " + (præmie - 50));
                 break;
             case 9:
@@ -217,7 +220,7 @@ public class CardGameManager : MonoBehaviour
                 cardNumberText.text = "x" + præmie;
                 
                 gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = "Gevints: " + gevints + "kr";
+                gevintsText.text = gevintsString + gevints + "kr";
                 Debug.Log("reward added to 8: " + (præmie - 100));
                 break;
         }
