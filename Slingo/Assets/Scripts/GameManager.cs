@@ -30,10 +30,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void EnterBonusGame(bool isBonusGameHit)
+    public void BonusGameSwitch()
     {
-        animator.SetBool("IsBonusGameHit", isBonusGameHit);
-        cardGameManager.ShuffleCards();
+        if (!animator.GetBool("IsBonusGameHit")) 
+        {
+            animator.SetBool("IsBonusGameHit", true);
+            cardGameManager.ShuffleCards();
+        }
+        else
+        {
+            animator.SetBool("IsBonusGameHit", false);
+        }
+
     }
 
 }
