@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: f8df543ea2b1f9c4dbf3a4b5f30461b2
-  - enabled: 0
-    path: Assets/Scenes/BonusSpil_vendespil.unity
+  - enabled: 1
+    path: Assets/Scenes/BonusSpil_CardFlip.unity
     guid: 0f8ef655a5ef09f4bb157dd5f006b4a7
   m_configObjects: {}

@@ -8,6 +8,7 @@ public class MoneyEffect : MonoBehaviour
 {
     public GameObject collectButton;
     [HideInInspector] public bool playAnimation = false;
+    public GridCheck gridCheck;
 
     [SerializeField] private float speed = 15f;
     public ParticleSystem ps;
@@ -39,7 +40,7 @@ public class MoneyEffect : MonoBehaviour
             playAnimation = true;
         }
 
-        if(playAnimation)
+        if(playAnimation && gridCheck.slingoAnimationFinished)
         {
             ps.Play();
             playAnimation = false;

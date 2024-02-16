@@ -42,11 +42,14 @@ public class spin : MonoBehaviour
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
     public Sprite[] wildsImages;
+
     private List<TextMeshProUGUI> slotTextList = new List<TextMeshProUGUI>();
     public List<TextMeshProUGUI> textToGoEmpty = new List<TextMeshProUGUI>();
+
     public Queue<GameObject> wilds = new Queue<GameObject>();
     public Queue<GameObject> wildsArrow = new Queue<GameObject>();
     private List<int> slotWildArrow = new List<int>();
+
     public TextMeshProUGUI collectMessageText;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button stopSpinningButton;
@@ -105,7 +108,7 @@ public class spin : MonoBehaviour
             spinAnimations.Add(spinSlot.gameObject.GetComponent<Animator>());
         }
         blinkEffect = GetComponent<PanelEffects>();
-        calculations = GetComponent<Calculations>();
+        calculations = this.gameObject.GetComponent<Calculations>();
     }
 
 
