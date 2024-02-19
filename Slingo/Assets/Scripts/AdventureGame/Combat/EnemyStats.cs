@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyStats : MonoBehaviour
 {
     [HideInInspector] public Sprite sprite;
-    [HideInInspector] public AnimatorController animator;
+    [HideInInspector] public RuntimeAnimatorController animatorController;
 
     public int Damage { get; set; }
     public int Health { get; set; }
@@ -16,6 +15,25 @@ public class EnemyStats : MonoBehaviour
     private void Start()
     {
         sprite = GetComponent<Image>().sprite;
-        animator = GetComponent<AnimatorController>();
+        animatorController = GetComponent<RuntimeAnimatorController>();
+    }
+
+    public void EnemyTakeDamage()
+    {
+        GetComponent<Animator>().SetBool("TakeDamage", true);
+    }
+
+    public void EnemyHasTakenDamage()
+    {
+        GetComponent<Animator>().SetBool("TakeDamage", false);
+        if (Health <= 0)
+        {
+            GetComponent<Animator>().SetBool("Death", true);
+        }
+    }
+
+    public void EnemyDeath()
+    {
+
     }
 }

@@ -25,4 +25,13 @@ public class PlayerCharacter : MonoBehaviour
             animator.SetBool("CritAttack", true);
         }
     }
+    public void PlayerTakeDamage()
+    {
+        GetComponent<Animator>().SetBool("TakeDamage", true);
+    }
+
+    public void PlayerReset()
+    {
+        GetComponent<Animator>().SetBool("TakeDamage", false);
+    }
 }
