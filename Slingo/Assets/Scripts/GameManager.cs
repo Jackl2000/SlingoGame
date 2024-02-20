@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
         sceneSwap = GameObject.Find("CanvasLoader").GetComponent<SceneSwap>();
     }
 
-
     private void Update()
     {
         if (gridCheck.slingoCount == 12 && gridCheck.slingoAnimationFinished && !animator.GetBool("IsLoading"))

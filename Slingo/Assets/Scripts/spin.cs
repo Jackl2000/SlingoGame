@@ -109,6 +109,8 @@ public class spin : MonoBehaviour
         }
         blinkEffect = GetComponent<PanelEffects>();
         calculations = this.gameObject.GetComponent<Calculations>();
+
+        playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
     }
 
 

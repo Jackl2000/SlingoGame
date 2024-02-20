@@ -22,10 +22,12 @@ public class SettingsMenu : MonoBehaviour
 
     public void Start()
     {
-        RewardButton.onClick.AddListener(ShowPanelRewards);
+        if (RewardButton != null)
+        {
+            RewardButton.onClick.AddListener(ShowPanelRewards);
+        }
 
         gridCheck = FindAnyObjectByType <GridCheck>();
-        sceneSwap = GameObject.Find("CanvasLoader").GetComponent<SceneSwap>();
     }
 
 
@@ -38,7 +40,10 @@ public class SettingsMenu : MonoBehaviour
 
 
         settingsMenuPanel.SetActive(!settingsMenuPanel.activeSelf);
-        spinsBetPanel.SetActive(false);
+        if(spinsBetPanel != null)
+        {
+            spinsBetPanel.SetActive(false);
+        }
 
     }
 
@@ -86,6 +91,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void ReturnToMainScene()
     {
-        sceneSwap.LoadScene(0);
+        GameObject.Find("CanvasLoader").GetComponent<SceneSwap>().LoadScene(0);
     }
 }

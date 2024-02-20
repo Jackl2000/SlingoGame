@@ -110,6 +110,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4127912621286947016}
     m_Modifications:
+    - target: {fileID: 353772911532697685, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
+      propertyPath: m_Name
+      value: Text_gevintsButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063640037299633996, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
+      propertyPath: m_text
+      value: 'Tag gevints: 0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063640037299633996, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063640037299633996, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063640037299633996, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160569939006998938, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
+      propertyPath: m_Name
+      value: Button_gevints
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160569939006998938, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6139187912357900809, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

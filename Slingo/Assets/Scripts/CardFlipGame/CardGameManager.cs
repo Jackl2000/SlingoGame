@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class CardGameManager : MonoBehaviour
 {
     [Header("References")]
-    public PlayerData playerData;
+    private PlayerData playerData;
     public spin spinScript;
 
     private CardGameManager gameManager;
@@ -26,6 +26,7 @@ public class CardGameManager : MonoBehaviour
     private float gevints;
     private float præmie;
     private GameObject LostGameObject;
+    public TextMeshProUGUI gevinstButtonText;
 
     [Space(10)]
     public List<GameObject> cardGameObjects = new List<GameObject>();
@@ -49,14 +50,14 @@ public class CardGameManager : MonoBehaviour
             cardTexts.Add(goCard.GetComponentInChildren<TextMeshProUGUI>());
             cardImages.Add(goCard.GetComponent<Image>());
         }
+        playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
     }
 
     private void Start()
     {
         gevintsString = "Bonus gevints: ";
 
-        balanceText.text = "Balance: " + playerData.balance.ToString();
-        indsatsText.text = "Indsats: " + spinScript.stakes.ToString();
+        balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
 
         ShuffleCards();
     }
@@ -93,8 +94,8 @@ public class CardGameManager : MonoBehaviour
 
     public void NewGame()
     {
-        playerData.balance += gevints;
-        balanceText.text = "Balance: " + playerData.balance.ToString();
+        PlayerData.Instance.balance += gevints;
+        balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
         gevints = 0;
         gevintsText.text = "Bonus gevints: " + gevints.ToString();
 
@@ -120,8 +121,6 @@ public class CardGameManager : MonoBehaviour
     {
         TextMeshProUGUI cardNumberText = cardObj.GetComponentInChildren<TextMeshProUGUI>();
 
-        Debug.Log("Spin bet: " + spinScript.spinBets + " multiplier: " + multiplier);
-
         switch (Convert.ToInt32(cardNumberText.text))
         {
             case 1:
@@ -136,7 +135,7 @@ public class CardGameManager : MonoBehaviour
 
                 break;
             case 2:
-                præmie = 2 + (2 + spinScript.spinBets * multiplier);
+                præmie = 2 + (2 * multiplier);
 
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
@@ -147,7 +146,7 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 1: " + (præmie - 2));
                 break;
             case 3:
-                præmie = 5 + (5 + spinScript.spinBets * multiplier);
+                præmie = 5 + (5 * multiplier);
 
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
@@ -158,7 +157,7 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 2: " + (præmie - 5));
                 break;
             case 4:
-                præmie = 5 + (5 + spinScript.spinBets * multiplier);
+                præmie = 5 + (5 * multiplier);
 
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
@@ -169,7 +168,7 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 3: " + (præmie - 5));
                 break;
             case 5:
-                præmie = 10 + (10 + spinScript.spinBets * multiplier);
+                præmie = 10 + (10 * multiplier);
 
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
@@ -180,7 +179,7 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 4: " + (præmie - 10));
                 break;
             case 6:
-                præmie = 10 + (10 + spinScript.spinBets * multiplier);
+                præmie = 10 + (10 * multiplier);
 
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
@@ -191,7 +190,7 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 5: " + (præmie - 10));
                 break;
             case 7:
-                præmie = 30 + (30 + spinScript.spinBets * multiplier);
+                præmie = 30 + (30 * multiplier);
 
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
@@ -202,7 +201,7 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 6: " + (præmie - 30));
                 break;
             case 8:
-                præmie = 50 + (50 + spinScript.spinBets * multiplier);
+                præmie = 50 + (50 * multiplier);
 
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
@@ -213,7 +212,7 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 7: " + (præmie - 50));
                 break;
             case 9:
-                præmie = 100 + (100 + spinScript.spinBets * multiplier);
+                præmie = 100 + (100 * multiplier);
 
                 cardObj.GetComponent<Image>().sprite = goodHit;
                 cardNumberText.enabled = true;
@@ -224,11 +223,23 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 8: " + (præmie - 100));
                 break;
         }
-
+        gevinstButtonText.text = "Tag gevints: " + gevints;
         
     }
 
+    public void ExitWithReward()
+    {
+        PlayerData.Instance.balance += gevints;
+        balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
+        gevints = 0;
+        gevintsText.text = "Bonus gevints: " + gevints.ToString();
+        SceneSwap.Instance.LoadScene(0);
+    }
 
+    public void LoadMainScene()
+    {
+        SceneSwap.Instance.LoadScene(0);
+    }
  
 }
 
