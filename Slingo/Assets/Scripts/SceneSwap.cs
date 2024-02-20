@@ -5,14 +5,57 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwap : MonoBehaviour
 {
+    public Animator animator;
+
+    public float transitionTime = 1;
+
     public List<GameObject> dontDestroyObjects;
 
-    public void LoadScene(string sceneName)
+    public static SceneSwap instance;
+    public static SceneSwap Instance { get; private set; }
+
+    private void Awake()
     {
-        SceneManager.LoadScene(sceneName);
-        foreach (GameObject obj in dontDestroyObjects)
+        if (Instance != null && Instance != this)
         {
-            DontDestroyOnLoad(obj);
+            Destroy(this);
         }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            
+            DontDestroyOnLoad(this.gameObject.transform.parent.gameObject);
+
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else
+            {
+                LoadScene(0);
+            }
+            Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    public void LoadScene(int sceneIndex)
+    {        
+        StartCoroutine(TriggerSceneLoad(sceneIndex));
+    }
+
+    IEnumerator TriggerSceneLoad(int sceneIndex)
+    {
+        animator.SetTrigger("EnterScene");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(sceneIndex);
     }
 }

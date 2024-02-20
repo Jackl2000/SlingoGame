@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,19 +6,23 @@ public class GameManager : MonoBehaviour
     GridCheck gridCheck;
     Animator animator;
     public CardGameManager cardGameManager;
-
+    public SceneSwap sceneSwap;
+    public GameObject prefab_CanvasLoader;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         gridCheck = GetComponent<GridCheck>();
+
     }
+
 
     private void Update()
     {
         if (gridCheck.slingoCount == 12)
         {
-            LoadScene("BonusSpil_CardFlip");
+            //LoadScene("BonusSpil_CardFlip");
+            //sceneSwap.LoadScene("BonusSpil_CardFlip");
         }
     }
 
