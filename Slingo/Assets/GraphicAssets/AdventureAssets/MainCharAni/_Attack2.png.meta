@@ -223,9 +223,9 @@ TextureImporter:
       name: _Attack2_5
       rect:
         serializedVersion: 2
-        x: 510
+        x: 515
         y: 0
-        width: 50
+        width: 45
         height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

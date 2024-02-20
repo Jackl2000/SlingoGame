@@ -7,6 +7,8 @@ public class EventHandler : MonoBehaviour
     public GridCheck gridCheck;
     public spin spin;
     public CollectReward collectReward;
+    public PlayerCharacter player;
+    public EnemyStats enemyStats;
 
     public void SlingoBoardHideAnimationEvent()
     {
@@ -26,5 +28,28 @@ public class EventHandler : MonoBehaviour
     public void BalanceBorderStopAniEvent()
     {
         collectReward.stopAni();
+    }
+
+
+
+    //Adventure game
+    public void PlayerTakeDamageEvent()
+    {
+        player.PlayerTakeDamage();
+    }
+
+    public void PlayerHasTakenDamageEvent()
+    {
+        player.PlayerReset();
+    }
+
+    public void EnemyTakeDamageEvent()
+    {
+        enemyStats.EnemyTakeDamage();
+    }
+
+    public void EnemyHasTakenDamageEvent()
+    {
+        enemyStats.EnemyHasTakenDamage();
     }
 }
