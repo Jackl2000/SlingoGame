@@ -15,36 +15,22 @@ public class GameManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         gridCheck = GetComponent<GridCheck>();
-
+        sceneSwap = GameObject.Find("CanvasLoader").GetComponent<SceneSwap>();
     }
 
 
     private void Update()
     {
-        if (gridCheck.slingoCount == 12)
+        if (gridCheck.slingoCount == 12 && gridCheck.slingoAnimationFinished && !animator.GetBool("IsLoading"))
         {
-            //LoadScene("BonusSpil_CardFlip");
-            //sceneSwap.LoadScene("BonusSpil_CardFlip");
+            animator.SetBool("IsLoading", true);
+            sceneSwap.LoadScene(1);
         }
     }
 
-    public void LoadScene(string sceneName)
+    public void BonusGameSwitch(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void BonusGameSwitch()
-    {
-        if (!animator.GetBool("IsBonusGameHit")) 
-        {
-            animator.SetBool("IsBonusGameHit", true);
-            cardGameManager.ShuffleCards();
-        }
-        else
-        {
-            animator.SetBool("IsBonusGameHit", false);
-        }
-
+        sceneSwap.LoadScene(sceneIndex);
     }
 
 }

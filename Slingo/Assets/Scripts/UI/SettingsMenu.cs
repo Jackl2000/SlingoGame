@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
@@ -13,7 +14,9 @@ public class SettingsMenu : MonoBehaviour
     public GameObject PossibleRewards;
     public TextMeshProUGUI JackpotText;
     public TextMeshProUGUI SuperJackpotText;
-    public float multiplier = 1; 
+    public float multiplier = 1;
+
+    private SceneSwap sceneSwap;
 
     private GridCheck gridCheck;
 
@@ -22,7 +25,7 @@ public class SettingsMenu : MonoBehaviour
         RewardButton.onClick.AddListener(ShowPanelRewards);
 
         gridCheck = FindAnyObjectByType <GridCheck>();
-
+        sceneSwap = GameObject.Find("CanvasLoader").GetComponent<SceneSwap>();
     }
 
 
@@ -79,5 +82,10 @@ public class SettingsMenu : MonoBehaviour
     public void History()
     {
         Debug.Log("Se spilhistorik");
+    }
+
+    public void ReturnToMainScene()
+    {
+        sceneSwap.LoadScene(0);
     }
 }
