@@ -18,6 +18,7 @@ public class Dices : MonoBehaviour
     public TextMeshProUGUI textHPNo;
     public TextMeshProUGUI textDamageNo;
     public TextMeshProUGUI textLuckNo;
+    public GameObject BattlePanel;
 
 
     private SpriteRenderer[] diceRenderers;
@@ -37,10 +38,19 @@ public class Dices : MonoBehaviour
         diceRenderers[0] = dice1.GetComponent<SpriteRenderer>();
         diceRenderers[1] = dice2.GetComponent<SpriteRenderer>();
         diceRenderers[2] = dice3.GetComponent<SpriteRenderer>();
-        RollAllDice();
+        //Set button false temp
+        textHPNo.GetComponentInChildren<Button>().enabled = false;
+        textDamageNo.GetComponentInChildren<Button>().enabled = false;
+        textLuckNo.GetComponentInChildren<Button>().enabled = false;
+        //Get animatior
         animator = GetComponent<Animator>();
+        for (int i = 0; i < 3; i++)
+        {
+            //Temp disabled dice animation
+            diceRenderers[i].GetComponent<Animator>().enabled = false;
+        }
+
         statAssigned = new bool[3];
-        //RollDice();
 
         for(int i = 0; i < diceResults.Length; i++)
         {
@@ -49,9 +59,10 @@ public class Dices : MonoBehaviour
         }
 
     }
-
+    //Method to select stats
     public void SelectStat(string stat)
     {
+        if (isRolling == true) { return; }
         if(currentDiceIndex < 3)
         {
             int TotalValue = 0;
@@ -82,6 +93,13 @@ public class Dices : MonoBehaviour
             textLuckNo.GetComponentInChildren<Button>().enabled = false;
 
             currentDiceIndex++;
+            Debug.LogError("currentDiceIndex" + currentDiceIndex);
+            if(currentDiceIndex == 3)
+            {
+                BattlePanel.SetActive(true);
+                return;
+            }
+            RollAllDice();
         }
 
     }
@@ -89,15 +107,18 @@ public class Dices : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyUp(KeyCode.Space))
         {
             RollAllDice();
         }
+        */
     }
 
-
+    //Method to RollAllDices
     public void RollAllDice()
     {
+        isRolling = true;
         //Run Reset before next roll
         ResetDiceState();
 
@@ -120,10 +141,8 @@ public class Dices : MonoBehaviour
         }
 
 
-
-
     }
-
+    //Coroutine for dicerolling
     private IEnumerator RollDiceCoroutine(int index, int randomIndex)
     {
         diceRenderers[index].GetComponent<Animator>().enabled = true;
@@ -139,17 +158,22 @@ public class Dices : MonoBehaviour
 
         if (index == 2)
         {
+            //Calculates total value of dices
             CalculateTotalValueOfDices();
+            //Waits 1 sec before players can choose their stat and assures dice animation is done.
+            yield return new WaitForSeconds(0.2f);
+            isRolling = false;
         }
 
     }
-
+    //RollOneDice method
+    //For testing
     public void RollOneDice()
     {
         int randomDiceIndex = UnityEngine.Random.Range(0, diceFaces.Length);
         Debug.Log(randomDiceIndex);
     }
-
+    //Calculates the value of the dices
     public void CalculateTotalValueOfDices()
     {
         int total = 0;
@@ -159,7 +183,7 @@ public class Dices : MonoBehaviour
         }
         Debug.Log("Samlet værdi af slaget: " + total);
     }
-
+    //Resets the dices state
     public void ResetDiceState()
     {
         //Reset the visual state of all dice
@@ -173,7 +197,7 @@ public class Dices : MonoBehaviour
             diceResults[i] = 0;
         }
     }
-
+    //Resets dice
     private void DiceReset(GameObject dice, int index)
     {
         Image[] diceImages = dice.GetComponentsInChildren<Image>();
