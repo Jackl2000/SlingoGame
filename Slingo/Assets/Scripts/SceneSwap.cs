@@ -54,6 +54,8 @@ public class SceneSwap : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(sceneIndex);
+
+        yield return new WaitForSeconds(5f);
         animator.SetBool("IsLoading", false);
     }
 }

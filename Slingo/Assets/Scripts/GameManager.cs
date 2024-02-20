@@ -15,15 +15,15 @@ public class GameManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         gridCheck = GetComponent<GridCheck>();
-        sceneSwap = GameObject.Find("CanvasLoader").GetComponent<SceneSwap>();
     }
 
     private void Update()
     {
-        if (gridCheck.slingoCount == 12 && gridCheck.slingoAnimationFinished && !animator.GetBool("IsLoading"))
+        if (gridCheck.slingoCount == 12 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
         {
-            animator.SetBool("IsLoading", true);
-            sceneSwap.LoadScene(1);
+            SceneSwap.Instance.LoadScene(1);
+            SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().SetBool("IsLoading", true);
+            //animator.SetBool("IsLoading", true);
         }
     }
 
