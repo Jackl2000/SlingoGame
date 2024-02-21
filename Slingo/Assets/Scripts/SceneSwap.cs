@@ -10,44 +10,41 @@ public class SceneSwap : MonoBehaviour
     public float transitionTime = 1;
 
     public List<GameObject> dontDestroyObjects;
-
-    public static SceneSwap instance;
     public static SceneSwap Instance { get; private set; }
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         else
         {
             Instance = this;
         }
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            
-            DontDestroyOnLoad(this.gameObject.transform.parent.gameObject);
-
-            if (SceneManager.GetActiveScene().buildIndex == 0)
-            {
-                LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
-            else
-            {
-                LoadScene(0);
-            }
+            LoadScene(1);
             Debug.Log(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
-    public void LoadScene(int sceneIndex)
-    {        
-        StartCoroutine(TriggerSceneLoad(sceneIndex));
+    public void LoadScene(int index)
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            StartCoroutine(TriggerSceneLoad(index));
+        }
+        else
+        {
+            StartCoroutine(TriggerSceneLoad(0));
+        }
     }
 
     IEnumerator TriggerSceneLoad(int sceneIndex)
@@ -57,5 +54,8 @@ public class SceneSwap : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(sceneIndex);
+
+        yield return new WaitForSeconds(5f);
+        animator.SetBool("IsLoading", false);
     }
 }
