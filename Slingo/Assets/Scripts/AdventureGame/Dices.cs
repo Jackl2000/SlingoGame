@@ -38,10 +38,10 @@ public class Dices : MonoBehaviour
         diceRenderers[0] = dice1.GetComponent<SpriteRenderer>();
         diceRenderers[1] = dice2.GetComponent<SpriteRenderer>();
         diceRenderers[2] = dice3.GetComponent<SpriteRenderer>();
-        //Set button false temp
+        //Set buttons false temp
         textHPNo.GetComponentInChildren<Button>().enabled = false;
-        textDamageNo.GetComponentInChildren<Button>().enabled = false;
-        textLuckNo.GetComponentInChildren<Button>().enabled = false;
+        textHPNo.GetComponentInChildren<Button>().enabled = false;
+        textHPNo.GetComponentInChildren<Button>().enabled = false;
         //Get animatior
         animator = GetComponent<Animator>();
         for (int i = 0; i < 3; i++)
@@ -62,6 +62,7 @@ public class Dices : MonoBehaviour
     //Method to select stats
     public void SelectStat(string stat)
     {
+
         if (isRolling == true) { return; }
         if(currentDiceIndex < 3)
         {
@@ -93,7 +94,7 @@ public class Dices : MonoBehaviour
             textLuckNo.GetComponentInChildren<Button>().enabled = false;
 
             currentDiceIndex++;
-            Debug.LogError("currentDiceIndex" + currentDiceIndex);
+
             if(currentDiceIndex == 3)
             {
                 BattlePanel.SetActive(true);
@@ -104,15 +105,13 @@ public class Dices : MonoBehaviour
 
     }
 
+
+
+
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            RollAllDice();
-        }
-        */
+  
     }
 
     //Method to RollAllDices
@@ -126,22 +125,31 @@ public class Dices : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             StartCoroutine(RollDiceCoroutine(i, UnityEngine.Random.Range(0, diceFaces.Length)));
-        }
-        if (Convert.ToInt32(textHPNo.text) == 1)
-        {
-            textHPNo.GetComponentInChildren<Button>().enabled = true;
-        }
-        if (Convert.ToInt32(textDamageNo.text) == 1)
-        {
-            textDamageNo.GetComponentInChildren<Button>().enabled = true;
-        }
-        if (Convert.ToInt32(textLuckNo.text) == 1)
-        {
-            textLuckNo.GetComponentInChildren<Button>().enabled = true;
+            StartCoroutine(StopAni());
         }
 
+        
 
     }
+    //Waiting animation to go Idle, before disabling them
+    private IEnumerator StopAni()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (Convert.ToInt32(textHPNo.text) != 1)
+        {
+            textHPNo.GetComponentInChildren<Animator>().enabled = false;
+        }
+        if (Convert.ToInt32(textDamageNo.text) != 1)
+        {
+            textDamageNo.GetComponentInChildren<Animator>().enabled = false;
+        }
+        if (Convert.ToInt32(textLuckNo.text) != 1)
+        {
+            textLuckNo.GetComponentInChildren<Animator>().enabled = false;
+        }
+    }
+
     //Coroutine for dicerolling
     private IEnumerator RollDiceCoroutine(int index, int randomIndex)
     {
@@ -161,10 +169,25 @@ public class Dices : MonoBehaviour
             //Calculates total value of dices
             CalculateTotalValueOfDices();
             //Waits 1 sec before players can choose their stat and assures dice animation is done.
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
             isRolling = false;
+            //Checks if buttons should be available and if animation should be played
+            if (Convert.ToInt32(textHPNo.text) == 1)
+            {
+                textHPNo.GetComponentInChildren<Button>().enabled = true;
+                textHPNo.GetComponentInChildren<Animator>().SetTrigger("IdleStatsAni");
+            }
+            if (Convert.ToInt32(textDamageNo.text) == 1)
+            {
+                textDamageNo.GetComponentInChildren<Button>().enabled = true;
+                textDamageNo.GetComponentInChildren<Animator>().SetTrigger("IdleStatsAni");
+            }
+            if (Convert.ToInt32(textLuckNo.text) == 1)
+            {
+                textLuckNo.GetComponentInChildren<Button>().enabled = true;
+                textLuckNo.GetComponentInChildren<Animator>().SetTrigger("IdleStatsAni");
+            }
         }
-
     }
     //RollOneDice method
     //For testing
