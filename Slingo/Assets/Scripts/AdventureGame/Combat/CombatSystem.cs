@@ -42,7 +42,7 @@ public class CombatSystem : MonoBehaviour
 
     private void CombatSetup()
     {
-        GameObject player = null;
+        //GameObject player = null;
         //playerFullHealth = player.health;
         int level = 3;
         GameObject enemy = EnemyCreator.CreateEnemy(EnemyTypes[Random.Range(0, EnemyTypes.Count)], level, enemySpawnPoint);
