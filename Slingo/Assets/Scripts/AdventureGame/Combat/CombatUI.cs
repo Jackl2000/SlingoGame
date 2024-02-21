@@ -145,13 +145,11 @@ public class CombatUI : MonoBehaviour
             }
         }
         Debug.Log("Something went wrong");
-        return null;
+        return hearts;
     }
 
     public void CombatUIReset()
     {
-        Debug.Log("Enemy Count:" + enemyHearts.Count);
-        Debug.Log("Player Count:" + playerHearts.Count);
         foreach (GameObject heart in enemyHearts)
         {
             Destroy(heart);
