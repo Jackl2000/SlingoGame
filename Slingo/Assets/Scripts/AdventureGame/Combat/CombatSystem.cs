@@ -42,9 +42,7 @@ public class CombatSystem : MonoBehaviour
 
     private void CombatSetup()
     {
-        Debug.Log("Entering combat in level: " + PlayerStats.Instance.Level);
-        GameObject player = null;
-        //playerFullHealth = player.health;
+        //GameObject player = null;
         PlayerStats.Instance.Health = PlayerStats.Instance.MaxHealth;
         GameObject enemy = EnemyCreator.CreateEnemy(EnemyTypes[Random.Range(0, EnemyTypes.Count)], PlayerStats.Instance.Level, enemySpawnPoint);
         playerStartPosition = playerObject.transform.position;

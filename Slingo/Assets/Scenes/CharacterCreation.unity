@@ -1407,6 +1407,7 @@ GameObject:
   - component: {fileID: 556249100}
   - component: {fileID: 556249102}
   - component: {fileID: 556249101}
+  - component: {fileID: 556249103}
   m_Layer: 5
   m_Name: GoToBattlePanel
   m_TagString: Untagged
@@ -1423,7 +1424,7 @@ RectTransform:
   m_GameObject: {fileID: 556249099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1762037186}
@@ -1473,6 +1474,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556249099}
   m_CullTransparentMesh: 1
+--- !u!95 &556249103
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556249099}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a65ac79e29027e498cbf999481104a3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &641361882
 GameObject:
   m_ObjectHideFlags: 0
