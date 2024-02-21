@@ -19,5 +19,9 @@ public class PlayerStats
 
     public int Damage { get; set; }
     public int Health { get; set; }
+    public int MaxHealth { get; set; }
     public int Luck { get; set; }
+    public int Level { get; set; } = 1;
+
+    public bool CritAttack { get; set; } = false;
 }
