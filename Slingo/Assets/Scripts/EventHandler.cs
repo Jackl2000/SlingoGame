@@ -46,8 +46,19 @@ public class EventHandler : MonoBehaviour
 
     public void EnemyTakeDamageEvent()
     {
-        enemyStats.EnemyTakeDamage(3);
-        enemyStats.GetComponentInParent<CombatUI>().UpdateUI(3, "enemy");
+        int critChance = 100 / PlayerStats.Instance.Luck;
+        int random = Random.Range(0, critChance + 1);
+
+        if(random == 3)
+        {
+            Debug.Log("You crit");
+            int critDamage = PlayerStats.Instance.Damage + Mathf.RoundToInt(PlayerStats.Instance.Damage / 2);
+            enemyStats.EnemyTakeDamage(critDamage);
+            enemyStats.GetComponentInParent<CombatUI>().UpdateUI(critDamage, "enemy");
+        }
+
+        enemyStats.EnemyTakeDamage(PlayerStats.Instance.Damage);
+        enemyStats.GetComponentInParent<CombatUI>().UpdateUI(PlayerStats.Instance.Damage, "enemy");
     }
 
     public void EnemyHasTakenDamageEvent()

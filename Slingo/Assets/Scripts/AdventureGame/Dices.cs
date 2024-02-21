@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Dices : MonoBehaviour
@@ -77,12 +78,15 @@ public class Dices : MonoBehaviour
 
                 case "Liv:":
                     textHPNo.text = TotalValue.ToString();
+                    PlayerStats.Instance.Health = TotalValue;
                     break;
                 case "Skade:":
                     textDamageNo.text = TotalValue.ToString();
+                    PlayerStats.Instance.Damage = TotalValue;
                     break;
                 case "Held:":
                     textLuckNo.text = TotalValue.ToString();
+                    PlayerStats.Instance.Luck = TotalValue;
                     break;
                 default:
                     Debug.LogError("invalid stat");
@@ -229,6 +233,11 @@ public class Dices : MonoBehaviour
             image.enabled = false;
         }
         dice.transform.GetChild(index - 1).GetComponent<Image>().enabled = true;
+    }
+
+    public void StartCombat()
+    {
+        SceneManager.LoadSceneAsync("AdventureGameLoadLevelScene");
     }
 
 }

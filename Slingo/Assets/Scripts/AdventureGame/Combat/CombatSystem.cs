@@ -93,7 +93,7 @@ public class CombatSystem : MonoBehaviour
         {
             CombatEnded(true);
         }
-        //else if(player.health <= 0) CombatEnded(false);
+        else if(PlayerStats.Instance.Health <= 0) CombatEnded(false);
         else
         {
             //repeat
@@ -169,7 +169,6 @@ public class CombatSystem : MonoBehaviour
                 target = playerObject;
                 return;
             }
-
         }
         combatReset = true;
     }

@@ -25,11 +25,11 @@ public class CombatUI : MonoBehaviour
     private List<GameObject> enemyHearts = new List<GameObject>();
     private void Awake()
     {
-        playerHealthText.text = 5.ToString();
-        playerDamageText.text = 5.ToString();
-        playerCritchanceText.text = 5.ToString();
+        playerHealthText.text = PlayerStats.Instance.Health.ToString();
+        playerDamageText.text = PlayerStats.Instance.Damage.ToString();
+        playerCritchanceText.text = PlayerStats.Instance.Luck.ToString();
 
-        playerHearts = ShowHearts(11, "player");
+        playerHearts = ShowHearts(PlayerStats.Instance.Health, "player");
     }
 
     public List<GameObject> ShowHearts(int health, string type)
@@ -150,6 +150,8 @@ public class CombatUI : MonoBehaviour
 
     public void CombatUIReset()
     {
+        Debug.Log("Enemy Count:" + enemyHearts.Count);
+        Debug.Log("Player Count:" + playerHearts.Count);
         foreach (GameObject heart in enemyHearts)
         {
             Destroy(heart);
@@ -161,6 +163,6 @@ public class CombatUI : MonoBehaviour
             Destroy(heart);
         }
         playerHearts.Clear();
-        playerHearts = ShowHearts(11, "player");
+        playerHearts = ShowHearts(PlayerStats.Instance.Health, "player");
     }
 }
