@@ -17,15 +17,16 @@ public class CollectReward : MonoBehaviour
     public float invokeTime = 5;
     public GameObject balanceBorder;
 
+    public PlayerData playerData;
  
     private GridCheck gridCheck;
-    private PlayerData playerData;
 
 
     private void Awake()
     {
         gridCheck = GetComponent<GridCheck>();
-        playerData = GetComponent<PlayerData>();
+        playerData = GameObject.Find("PlayerData").gameObject.gameObject.GetComponent<PlayerData>();
+        //playerData = GetComponent<PlayerData>();
 
     } 
     // -50 -25

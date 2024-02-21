@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     GridCheck gridCheck;
     Animator animator;
     public CardGameManager cardGameManager;
-
+    public SceneSwap sceneSwap;
+    public GameObject prefab_CanvasLoader;
 
     private void Awake()
     {
@@ -18,29 +19,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (gridCheck.slingoCount == 12)
+        if (gridCheck.slingoCount == 12 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
         {
-            LoadScene("BonusSpil_CardFlip");
+            SceneSwap.Instance.LoadScene(1);
+            SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().SetBool("IsLoading", true);
+            //animator.SetBool("IsLoading", true);
         }
     }
 
-    public void LoadScene(string sceneName)
+    public void BonusGameSwitch(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void BonusGameSwitch()
-    {
-        if (!animator.GetBool("IsBonusGameHit")) 
-        {
-            animator.SetBool("IsBonusGameHit", true);
-            cardGameManager.ShuffleCards();
-        }
-        else
-        {
-            animator.SetBool("IsBonusGameHit", false);
-        }
-
+        sceneSwap.LoadScene(sceneIndex);
     }
 
 }
