@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
+    public GameObject playerPanel;
     private Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -28,10 +29,12 @@ public class PlayerCharacter : MonoBehaviour
     public void PlayerTakeDamage()
     {
         GetComponent<Animator>().SetBool("TakeDamage", true);
+        playerPanel.GetComponent<Animator>().SetBool("TookDamage", true);
     }
 
     public void PlayerReset()
     {
         GetComponent<Animator>().SetBool("TakeDamage", false);
+        playerPanel.GetComponent<Animator>().SetBool("TookDamage", false);
     }
 }

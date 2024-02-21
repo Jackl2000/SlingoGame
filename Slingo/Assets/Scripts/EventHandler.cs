@@ -36,6 +36,7 @@ public class EventHandler : MonoBehaviour
     public void PlayerTakeDamageEvent()
     {
         player.PlayerTakeDamage();
+        player.GetComponentInParent<CombatUI>().UpdateUI(enemyStats.Damage, "player");
     }
 
     public void PlayerHasTakenDamageEvent()
@@ -45,11 +46,17 @@ public class EventHandler : MonoBehaviour
 
     public void EnemyTakeDamageEvent()
     {
-        enemyStats.EnemyTakeDamage();
+        enemyStats.EnemyTakeDamage(3);
+        enemyStats.GetComponentInParent<CombatUI>().UpdateUI(3, "enemy");
     }
 
     public void EnemyHasTakenDamageEvent()
     {
         enemyStats.EnemyHasTakenDamage();
+    }
+
+    public void EnemyBorderFinishedEvent()
+    {
+        GetComponent<Animator>().SetBool("TookDamage", false);
     }
 }

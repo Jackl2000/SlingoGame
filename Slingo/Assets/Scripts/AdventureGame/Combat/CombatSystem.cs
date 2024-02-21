@@ -1,3 +1,4 @@
+using log4net.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,8 @@ public class CombatSystem : MonoBehaviour
     public GameObject OptionsPanel;
     public GameObject enemySpawnPoint;
 
+    private CombatUI combatUI;
     private float speed;
-
     public GameObject playerObject;
     private GameObject enemyObject;
     private GameObject movingCharacter;
@@ -29,11 +30,13 @@ public class CombatSystem : MonoBehaviour
     private bool choice = false;
     private bool attacking = false;
     private int playerFullHealth;
-    [SerializeField] private bool attackFinished = false;
-    [SerializeField] private bool characterMoveBack = false;
-    [SerializeField] private bool combatReset = false;
+    private bool attackFinished = false;
+    private bool characterMoveBack = false;
+    private bool combatReset = false;
+
     private void Start()
     {
+        combatUI = EnemyDice.GetComponentInParent<CombatUI>();
         CombatSetup();
     }
 
@@ -41,20 +44,22 @@ public class CombatSystem : MonoBehaviour
     {
         GameObject player = null;
         //playerFullHealth = player.health;
-        int level = 1;
+        int level = 3;
         GameObject enemy = EnemyCreator.CreateEnemy(EnemyTypes[Random.Range(0, EnemyTypes.Count)], level, enemySpawnPoint);
         playerStartPosition = playerObject.transform.position;
         enemyStartPosition = enemy.transform.position;
-        enemy.GetComponent<EventHandler>().player = playerObject.GetComponent<PlayerCharacter>();
-        startDistanceToTarget = Vector3.Distance(playerStartPosition, enemyStartPosition);
+
         playerObject.GetComponent<EventHandler>().enemyStats = enemy.GetComponent<EnemyStats>();
+        enemy.GetComponent<EventHandler>().player = playerObject.GetComponent<PlayerCharacter>();
+
+        combatUI.CombatUISetup(enemy.GetComponent<EnemyStats>());
+        startDistanceToTarget = Vector3.Distance(playerStartPosition, enemyStartPosition);
         StartCoroutine(Combat(playerObject, enemy));
     }
 
     private IEnumerator Combat(GameObject player, GameObject enemy)
     {
         //enemy roll
-        Debug.Log("Enemy roll");
         int enemyRoll = Roll();
         int enemyRoll2 = Roll();
         yield return StartCoroutine(DiceRoll(EnemyDice, EnemyDice2, enemyRoll, enemyRoll2));
@@ -70,7 +75,6 @@ public class CombatSystem : MonoBehaviour
         OptionsPanel.SetActive(false);
 
         //Player roll
-        Debug.Log("Player roll");
         int playerRoll = Roll();
         int playerRoll2 = Roll();
         yield return StartCoroutine(DiceRoll(PlayerDice, PlayerDice2, playerRoll, playerRoll2));
@@ -143,11 +147,16 @@ public class CombatSystem : MonoBehaviour
         {
             if(attacking)
             {
-                //enemy.GetComponent<EnemyStats>().Health -= player.damage;
                 player.GetComponent<Animator>().SetBool("Run", true);
                 movingCharacter = playerObject;
                 target = enemyObject;
-                enemy.GetComponent<EnemyStats>().Health = 0;
+                return;
+            }
+            else
+            {
+                enemy.GetComponent<Animator>().SetBool("Run", true);
+                movingCharacter = enemyObject;
+                target = playerObject;
                 return;
             }
         }
@@ -155,12 +164,12 @@ public class CombatSystem : MonoBehaviour
         {
             if(attacking)
             {
-                //player.health -= enemy.GetComponent<EnemyStats>().Damage;
                 enemy.GetComponent<Animator>().SetBool("Run", true);
                 movingCharacter = enemyObject;
                 target = playerObject;
                 return;
             }
+
         }
         combatReset = true;
     }
@@ -168,6 +177,7 @@ public class CombatSystem : MonoBehaviour
     private void CombatEnded(bool victory)
     {
         ResetValues();
+        combatUI.CombatUIReset();
         CombatSetup();
     }
 

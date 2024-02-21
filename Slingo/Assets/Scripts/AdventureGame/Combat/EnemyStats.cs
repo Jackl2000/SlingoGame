@@ -8,6 +8,7 @@ public class EnemyStats : MonoBehaviour
     [HideInInspector] public Sprite sprite;
     [HideInInspector] public RuntimeAnimatorController animatorController;
 
+    public string Name { get; set; }
     public int Damage { get; set; }
     public int Health { get; set; }
     public int CritChance { get; set; }
@@ -18,9 +19,10 @@ public class EnemyStats : MonoBehaviour
         animatorController = GetComponent<RuntimeAnimatorController>();
     }
 
-    public void EnemyTakeDamage()
+    public void EnemyTakeDamage(int damage)
     {
         GetComponent<Animator>().SetBool("TakeDamage", true);
+        Health -= damage;
     }
 
     public void EnemyHasTakenDamage()
@@ -30,10 +32,5 @@ public class EnemyStats : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("Death", true);
         }
-    }
-
-    public void EnemyDeath()
-    {
-
     }
 }

@@ -14,6 +14,8 @@ public class LoadingLevel : MonoBehaviour
 
     private IEnumerator LoadScene()
     {
+        Debug.Log("Level is currently being loaded");
         yield return SceneManager.LoadSceneAsync("AdventureCombat");
+        Debug.Log("Level loaded");
     }
 }
