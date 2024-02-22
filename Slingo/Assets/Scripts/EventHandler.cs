@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class EventHandler : MonoBehaviour
 {
+    [Header("Slingo")]
     public GridCheck gridCheck;
     public spin spin;
     public CollectReward collectReward;
+
+    [Space(10)]
+    [Header("AdventureGame")]
     public PlayerCharacter player;
     public EnemyStats enemyStats;
+    public LoadingLevel LoadingScene;
+    public CombatSystem combatSystem;
 
     public void SlingoBoardHideAnimationEvent()
     {
@@ -31,15 +37,27 @@ public class EventHandler : MonoBehaviour
     }
 
 
-
     //Adventure game
+    public void SceneTransitionEndEvent()
+    {
+        StartCoroutine(LoadingScene.LoadScene());
+    }
+
+    public void CombatStart()
+    {
+        combatSystem.CombatSetup();
+        gameObject.SetActive(false);
+    }
+
+
     public void PlayerTakeDamageEvent()
     {
         int random = Random.Range(0, 101);
-
+        Debug.Log("Enemy selected number:" + random);
         if(enemyStats.CritChance >= random)
         {
-            int critDamage = enemyStats.Damage + Mathf.RoundToInt(PlayerStats.Instance.Damage / 2);
+            Debug.Log("enemy crit on chance: " + enemyStats.CritChance + " selected number: " + random);
+            int critDamage = enemyStats.Damage + Mathf.RoundToInt(enemyStats.Damage / 2);
             player.PlayerTakeDamage(critDamage);
             player.GetComponentInParent<CombatUI>().UpdateUI(critDamage, "player");
         }
@@ -62,6 +80,7 @@ public class EventHandler : MonoBehaviour
             int critDamage = PlayerStats.Instance.Damage + Mathf.RoundToInt(PlayerStats.Instance.Damage / 2);
             enemyStats.EnemyTakeDamage(critDamage);
             enemyStats.GetComponentInParent<CombatUI>().UpdateUI(critDamage, "enemy");
+            PlayerStats.Instance.CritAttack = false;
         }
         else
         {
