@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CombatUI : MonoBehaviour
@@ -48,36 +49,52 @@ public class CombatUI : MonoBehaviour
         int xIndex = 0;
         int yIndex = 0;
         int yPosition = 0;
-        for (int i = 1; i <= fullHearts; i++)
-        {
-            GameObject heart = Instantiate(heartPrefab, transform);
-            RectTransform heartTransform = heart.GetComponent<RectTransform>();
-            heartTransform.anchorMax = anchorMax;
-            heartTransform.anchorMin = anchorMin;
-            heartTransform.anchoredPosition = new Vector3(xStart + (xIndex * 120), -400 - yPosition, 0);
 
-            xIndex++;
-            yIndex++;
-            if (yIndex == 4)
-            {
-                yPosition += 100;
-                xIndex = 0;
-                yIndex = 0;
-            }
-            hearts.Add(heart);
-        }
-        if (!Mathf.Approximately(fullHearts, Mathf.RoundToInt(fullHearts)) && fullHearts > 1f)
+        if(fullHearts < 1f)
         {
             GameObject halfHeart = Instantiate(heartPrefab, transform);
             RectTransform heartTransform = halfHeart.GetComponent<RectTransform>();
             heartTransform.anchorMax = anchorMax;
             heartTransform.anchorMin = anchorMin;
             halfHeart.GetComponent<Image>().sprite = heartsSprite[1];
-            int y = hearts.Count / 4;
-            int x = hearts.Count - (y * 4);
-            heartTransform.anchoredPosition = new Vector3(xStart + (x * 120), -400 - (y * 100), 0);
+            heartTransform.anchoredPosition = new Vector3(xStart, -400, 0);
             hearts.Add(halfHeart);
         }
+        else
+        {
+            for (int i = 1; i <= fullHearts; i++)
+            {
+                GameObject heart = Instantiate(heartPrefab, transform);
+                RectTransform heartTransform = heart.GetComponent<RectTransform>();
+                heartTransform.anchorMax = anchorMax;
+                heartTransform.anchorMin = anchorMin;
+                heartTransform.anchoredPosition = new Vector3(xStart + (xIndex * 120), -400 - yPosition, 0);
+
+                xIndex++;
+                yIndex++;
+                if (yIndex == 4)
+                {
+                    yPosition += 100;
+                    xIndex = 0;
+                    yIndex = 0;
+                }
+                hearts.Add(heart);
+            }
+            if (!Mathf.Approximately(fullHearts, Mathf.RoundToInt(fullHearts)) && fullHearts > 1f)
+            {
+                GameObject halfHeart = Instantiate(heartPrefab, transform);
+                RectTransform heartTransform = halfHeart.GetComponent<RectTransform>();
+                heartTransform.anchorMax = anchorMax;
+                heartTransform.anchorMin = anchorMin;
+                halfHeart.GetComponent<Image>().sprite = heartsSprite[1];
+                int y = hearts.Count / 4;
+                int x = hearts.Count - (y * 4);
+                heartTransform.anchoredPosition = new Vector3(xStart + (x * 120), -400 - (y * 100), 0);
+                hearts.Add(halfHeart);
+            }
+        }
+
+
         return hearts;
     }
 
@@ -161,6 +178,11 @@ public class CombatUI : MonoBehaviour
             Destroy(heart);
         }
         playerHearts.Clear();
-        playerHearts = ShowHearts(PlayerStats.Instance.Health, "player");
+        playerHearts = ShowHearts(PlayerStats.Instance.MaxHealth, "player");
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadSceneAsync("CharacterCreation");
     }
 }

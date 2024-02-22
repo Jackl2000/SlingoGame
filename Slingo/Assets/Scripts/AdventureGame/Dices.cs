@@ -58,6 +58,7 @@ public class Dices : MonoBehaviour
             diceResults[i] = 0;
             statAssigned[i] = false;
         }
+        PlayerStats.Instance.Level = 1;
 
     }
     //Method to select stats
@@ -79,6 +80,7 @@ public class Dices : MonoBehaviour
                 case "Liv:":
                     textHPNo.text = TotalValue.ToString();
                     PlayerStats.Instance.Health = TotalValue;
+                    PlayerStats.Instance.MaxHealth = TotalValue;
                     break;
                 case "Skade:":
                     textDamageNo.text = TotalValue.ToString();

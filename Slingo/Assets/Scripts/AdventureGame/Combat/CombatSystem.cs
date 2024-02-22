@@ -1,4 +1,3 @@
-using log4net.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +14,7 @@ public class CombatSystem : MonoBehaviour
     public GameObject Description;
     public GameObject OptionsPanel;
     public GameObject enemySpawnPoint;
+    public GameObject GameOverPanel;
 
     private CombatUI combatUI;
     private float speed;
@@ -43,9 +43,8 @@ public class CombatSystem : MonoBehaviour
     private void CombatSetup()
     {
         //GameObject player = null;
-        //playerFullHealth = player.health;
-        int level = 3;
-        GameObject enemy = EnemyCreator.CreateEnemy(EnemyTypes[Random.Range(0, EnemyTypes.Count)], level, enemySpawnPoint);
+        PlayerStats.Instance.Health = PlayerStats.Instance.MaxHealth;
+        GameObject enemy = EnemyCreator.CreateEnemy(EnemyTypes[Random.Range(0, EnemyTypes.Count)], PlayerStats.Instance.Level, enemySpawnPoint);
         playerStartPosition = playerObject.transform.position;
         enemyStartPosition = enemy.transform.position;
 
@@ -175,9 +174,19 @@ public class CombatSystem : MonoBehaviour
 
     private void CombatEnded(bool victory)
     {
-        ResetValues();
-        combatUI.CombatUIReset();
-        CombatSetup();
+        Debug.Log("Combat ended in a win?:" + victory);
+        if(victory)
+        {
+            PlayerStats.Instance.Level++;
+            ResetValues();
+            combatUI.CombatUIReset();
+            CombatSetup();
+        }
+        else
+        {
+            GameOverPanel.SetActive(true);
+        }
+
     }
 
     private void Update()
@@ -223,12 +232,40 @@ public class CombatSystem : MonoBehaviour
     private IEnumerator Attack(GameObject attacker)
     {
         attackFinished = true;
-        attacker.GetComponent<Animator>().SetBool("Attack", true);
-        yield return new WaitForSeconds(0.4f);
-        attacker.GetComponent<Animator>().SetBool("Attack", false);
-        yield return new WaitForSeconds(0.2f);
-        Turn(attacker);
-        characterMoveBack = true;
+
+        if(attacker == playerObject)
+        {
+            int random = Random.Range(0, 101);
+
+            if (PlayerStats.Instance.Luck >= random)
+            {
+                PlayerStats.Instance.CritAttack = true;
+                attacker.GetComponent<Animator>().SetBool("CritAttack", true);
+                yield return new WaitForSeconds(0.4f);
+                attacker.GetComponent<Animator>().SetBool("CritAttack", false);
+                yield return new WaitForSeconds(0.2f);
+                Turn(attacker);
+                characterMoveBack = true;
+            }
+            else
+            {
+                attacker.GetComponent<Animator>().SetBool("Attack", true);
+                yield return new WaitForSeconds(0.4f);
+                attacker.GetComponent<Animator>().SetBool("Attack", false);
+                yield return new WaitForSeconds(0.2f);
+                Turn(attacker);
+                characterMoveBack = true;
+            }
+        }
+        else
+        {
+            attacker.GetComponent<Animator>().SetBool("Attack", true);
+            yield return new WaitForSeconds(0.4f);
+            attacker.GetComponent<Animator>().SetBool("Attack", false);
+            yield return new WaitForSeconds(0.2f);
+            Turn(attacker);
+            characterMoveBack = true;
+        }
     }
 
     private void Turn(GameObject character)
