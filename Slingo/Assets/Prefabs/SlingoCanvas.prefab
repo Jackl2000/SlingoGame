@@ -7934,13 +7934,13 @@ MonoBehaviour:
   spinBets: 1
   stakes: 0
   wildPicks: 0
+  numberPressed: 0
   timePassedForMsg: 0
   keepSpinningPanel: {fileID: 2950752321684696061}
   CostMessage: {fileID: 5492437303112480685}
   MessageAnimator: {fileID: 1421844460600163024}
   CollectMessage: {fileID: 4615568449392734210}
   indsatsChoosen: 0
-  numberPressed: 0
 --- !u!114 &527621969584549633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10619,6 +10619,8 @@ MonoBehaviour:
   collectReward: {fileID: 0}
   player: {fileID: 0}
   enemyStats: {fileID: 0}
+  LoadingScene: {fileID: 0}
+  combatSystem: {fileID: 0}
 --- !u!1 &4578903735052801540
 GameObject:
   m_ObjectHideFlags: 0
@@ -18321,6 +18323,8 @@ MonoBehaviour:
   collectReward: {fileID: 2795408711446792720}
   player: {fileID: 0}
   enemyStats: {fileID: 0}
+  LoadingScene: {fileID: 0}
+  combatSystem: {fileID: 0}
 --- !u!95 &7065173204824913395
 Animator:
   serializedVersion: 5
@@ -20675,6 +20679,8 @@ MonoBehaviour:
   collectReward: {fileID: 0}
   player: {fileID: 0}
   enemyStats: {fileID: 0}
+  LoadingScene: {fileID: 0}
+  combatSystem: {fileID: 0}
 --- !u!1 &7011716911628130499
 GameObject:
   m_ObjectHideFlags: 0
@@ -27328,7 +27334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff141709efcf4c04f883acde39447f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetButton: {fileID: 7678843588789484500}
   headerAnimator: {fileID: 1352978434706545151}
   SlingoPanel: {fileID: 6895147790509304543}
   slingoRewardButton: {fileID: 587031509315824273}

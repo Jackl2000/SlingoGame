@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
         }
         if (!hasPicked)
         {
-            //numbersAnimator.Reverse();
             foreach (Animator animator in reversedAnimatorList)
             {
                 animator.gameObject.GetComponentInChildren<Image>().enabled = true;
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
                 animator.SetBool("HasPicked", hasPicked);
             }
         }
-        reversedAnimatorList.Clear();
+
     }
 
     private void BonusGameHit()

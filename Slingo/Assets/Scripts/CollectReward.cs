@@ -29,7 +29,7 @@ public class CollectReward : MonoBehaviour
         //playerData = GetComponent<PlayerData>();
 
     } 
-    // -50 -25
+
     public void Collect()
     {
         if (!gridCheck.slingoAnimationFinished || (spinScript.isSpinning && gridCheck.starsCount != 25) || (spinScript.wildPicks != 0 && gridCheck.slingoCount != 12) || spinScript.spinLeft == spinScript.startSpins)
@@ -37,23 +37,27 @@ public class CollectReward : MonoBehaviour
             return;
         }
         //Reset values in spin
+        spinsCounter.text = spinScript.spinLeft.ToString();
+        spinScript.textToGoEmpty.Clear();
         spinScript.spinCountHeader.text = "SPINS";
         spinScript.spinLeft = spinScript.startSpins;
         spinScript.GetComponent<PanelEffects>().spinLeftText = null;
         spinScript.indsatsChoosen = false;
         spinScript.spinLeftText.color = Color.white;
-        spinsCounter.text = spinScript.spinLeft.ToString();
-        spinScript.spinBuyLimit = 5;
-        spinScript.stakes = 0;
         spinScript.spentText.text = "Satsning: " + UIManager.Instance.DisplayMoney(0);
-        spinScript.textToGoEmpty.Clear();
+        spinScript.stakes = 0;
+        spinScript.spinBuyLimit = 5;
         spinScript.wildPicks = 0;
+
         spinScript.spinButton.GetComponent<Image>().color = Color.black;
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Spil";
+
         spinScript.resetButton.color = Color.gray;
         spinScript.resetButton.GetComponentInParent<Button>().enabled = false;
+        spinScript.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
+        
         spinScript.MessageAnimator.SetBool("MinimizePlate", false);
         spinScript.ColorReset();
 
@@ -72,7 +76,6 @@ public class CollectReward : MonoBehaviour
 
         }
         
-        gridCheck.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
         collectBorderMessage.SetActive(false);
         ResetTime();
         GetComponent<GridGeneration>().ReGenerateGrid();
@@ -82,11 +85,6 @@ public class CollectReward : MonoBehaviour
     public void ResetTime()
     {
         invokeTime = 0;
-    }
-
-    private void Update()
-     {
-
     }
 
     public void stopAni()

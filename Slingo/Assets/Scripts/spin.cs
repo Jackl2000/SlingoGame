@@ -392,12 +392,17 @@ public class spin : MonoBehaviour
             text.color = Color.green;
             yield return new WaitForSeconds(0.35f);
             gridGeneration.numberPositions[number].Hit();
-            gridGeneration.numberPositions[number].gameObject.transform.parent.transform.parent.GetComponent<NumberManager>().PlaySparkelEffect();
-        
+            NumberManager numberManager = gridGeneration.numberPositions[number].gameObject.transform.parent.transform.parent.GetComponent<NumberManager>();
+            numberManager.PlaySparkelEffect();
+
+
             Image starImg = gridGeneration.numberPositions[number].gameObject.transform.parent.GetChild(0).GetComponentInChildren<Image>();
             starImg.color = new Color(starImg.color.r, starImg.color.g, starImg.color.b, 0.4f);
             starImgs.Add(starImg);
+
             textToGoEmpty.Add(gridGeneration.numberPositions[number].gameObject.GetComponent<TextMeshProUGUI>());
+            //animator on starbackground sets to bool to false to avoid bug where StarAnimation dont play
+            numberManager.gameObject.transform.GetChild(0).GetComponentInChildren<Animator>().SetBool("isBestChoice", false);
         }
     }
 
