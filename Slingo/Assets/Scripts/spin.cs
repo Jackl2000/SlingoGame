@@ -60,6 +60,7 @@ public class spin : MonoBehaviour
     /// How many wildpicks you have
     /// </summary>
     [HideInInspector] public int wildPicks = 0;
+    [HideInInspector] public int numberPressed;
     /// <summary>
     /// spins left before you pay
     /// </summary>
@@ -152,7 +153,6 @@ public class spin : MonoBehaviour
         #endregion
     }
 
-    public int numberPressed;
 
     public void WildPick(Button gridButton)
     {
