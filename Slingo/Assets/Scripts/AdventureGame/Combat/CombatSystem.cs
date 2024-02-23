@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CombatSystem : MonoBehaviour
@@ -14,9 +17,11 @@ public class CombatSystem : MonoBehaviour
     public GameObject Description;
     public GameObject OptionsPanel;
     public GameObject enemySpawnPoint;
+    public GameObject GameOverPanel;
+    public Animator sceneTranisition;
 
+    private CombatUI combatUI;
     private float speed;
-
     public GameObject playerObject;
     private GameObject enemyObject;
     private GameObject movingCharacter;
@@ -29,32 +34,35 @@ public class CombatSystem : MonoBehaviour
     private bool choice = false;
     private bool attacking = false;
     private int playerFullHealth;
-    [SerializeField] private bool attackFinished = false;
-    [SerializeField] private bool characterMoveBack = false;
-    [SerializeField] private bool combatReset = false;
+    private bool attackFinished = false;
+    private bool characterMoveBack = false;
+    private bool combatReset = false;
+
     private void Start()
     {
-        CombatSetup();
+        sceneTranisition.SetBool("Combat", true);
+        combatUI = EnemyDice.GetComponentInParent<CombatUI>();
     }
 
-    private void CombatSetup()
+    public void CombatSetup()
     {
-        GameObject player = null;
-        //playerFullHealth = player.health;
-        int level = 1;
-        GameObject enemy = EnemyCreator.CreateEnemy(EnemyTypes[Random.Range(0, EnemyTypes.Count)], level, enemySpawnPoint);
+        //GameObject player = null;
+        PlayerStats.Instance.Health = PlayerStats.Instance.MaxHealth;
+        GameObject enemy = EnemyCreator.CreateEnemy(EnemyTypes[Random.Range(0, EnemyTypes.Count)], PlayerStats.Instance.Level, enemySpawnPoint);
         playerStartPosition = playerObject.transform.position;
         enemyStartPosition = enemy.transform.position;
-        enemy.GetComponent<EventHandler>().player = playerObject.GetComponent<PlayerCharacter>();
-        startDistanceToTarget = Vector3.Distance(playerStartPosition, enemyStartPosition);
+
         playerObject.GetComponent<EventHandler>().enemyStats = enemy.GetComponent<EnemyStats>();
+        enemy.GetComponent<EventHandler>().player = playerObject.GetComponent<PlayerCharacter>();
+
+        combatUI.CombatUISetup(enemy.GetComponent<EnemyStats>());
+        startDistanceToTarget = Vector3.Distance(playerStartPosition, enemyStartPosition);
         StartCoroutine(Combat(playerObject, enemy));
     }
 
     private IEnumerator Combat(GameObject player, GameObject enemy)
     {
         //enemy roll
-        Debug.Log("Enemy roll");
         int enemyRoll = Roll();
         int enemyRoll2 = Roll();
         yield return StartCoroutine(DiceRoll(EnemyDice, EnemyDice2, enemyRoll, enemyRoll2));
@@ -70,7 +78,6 @@ public class CombatSystem : MonoBehaviour
         OptionsPanel.SetActive(false);
 
         //Player roll
-        Debug.Log("Player roll");
         int playerRoll = Roll();
         int playerRoll2 = Roll();
         yield return StartCoroutine(DiceRoll(PlayerDice, PlayerDice2, playerRoll, playerRoll2));
@@ -89,7 +96,7 @@ public class CombatSystem : MonoBehaviour
         {
             CombatEnded(true);
         }
-        //else if(player.health <= 0) CombatEnded(false);
+        else if(PlayerStats.Instance.Health <= 0) CombatEnded(false);
         else
         {
             //repeat
@@ -143,11 +150,16 @@ public class CombatSystem : MonoBehaviour
         {
             if(attacking)
             {
-                //enemy.GetComponent<EnemyStats>().Health -= player.damage;
                 player.GetComponent<Animator>().SetBool("Run", true);
                 movingCharacter = playerObject;
                 target = enemyObject;
-                enemy.GetComponent<EnemyStats>().Health = 0;
+                return;
+            }
+            else
+            {
+                enemy.GetComponent<Animator>().SetBool("Run", true);
+                movingCharacter = enemyObject;
+                target = playerObject;
                 return;
             }
         }
@@ -155,7 +167,6 @@ public class CombatSystem : MonoBehaviour
         {
             if(attacking)
             {
-                //player.health -= enemy.GetComponent<EnemyStats>().Damage;
                 enemy.GetComponent<Animator>().SetBool("Run", true);
                 movingCharacter = enemyObject;
                 target = playerObject;
@@ -167,8 +178,26 @@ public class CombatSystem : MonoBehaviour
 
     private void CombatEnded(bool victory)
     {
-        ResetValues();
-        CombatSetup();
+        Debug.Log("Combat ended in a win?:" + victory);
+        if(victory)
+        {
+            PlayerStats.Instance.Level++;
+            //ResetValues();
+            //combatUI.CombatUIReset();
+            //CombatSetup();
+            StartCoroutine(EnteringNewLevel());
+        }
+        else
+        {
+            GameOverPanel.SetActive(true);
+        }
+    }
+
+    private IEnumerator EnteringNewLevel()
+    {
+        Debug.Log("Entering new level very soon");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadSceneAsync("AdventureGameLoadLevelScene");
     }
 
     private void Update()
@@ -214,12 +243,40 @@ public class CombatSystem : MonoBehaviour
     private IEnumerator Attack(GameObject attacker)
     {
         attackFinished = true;
-        attacker.GetComponent<Animator>().SetBool("Attack", true);
-        yield return new WaitForSeconds(0.4f);
-        attacker.GetComponent<Animator>().SetBool("Attack", false);
-        yield return new WaitForSeconds(0.2f);
-        Turn(attacker);
-        characterMoveBack = true;
+
+        if(attacker == playerObject)
+        {
+            int random = Random.Range(0, 101);
+            Debug.Log("Player selected number:" + random);
+            if (PlayerStats.Instance.Luck >= random)
+            {
+                PlayerStats.Instance.CritAttack = true;
+                attacker.GetComponent<Animator>().SetBool("CritAttack", true);
+                yield return new WaitForSeconds(0.4f);
+                attacker.GetComponent<Animator>().SetBool("CritAttack", false);
+                yield return new WaitForSeconds(0.2f);
+                Turn(attacker);
+                characterMoveBack = true;
+            }
+            else
+            {
+                attacker.GetComponent<Animator>().SetBool("Attack", true);
+                yield return new WaitForSeconds(0.4f);
+                attacker.GetComponent<Animator>().SetBool("Attack", false);
+                yield return new WaitForSeconds(0.2f);
+                Turn(attacker);
+                characterMoveBack = true;
+            }
+        }
+        else
+        {
+            attacker.GetComponent<Animator>().SetBool("Attack", true);
+            yield return new WaitForSeconds(0.4f);
+            attacker.GetComponent<Animator>().SetBool("Attack", false);
+            yield return new WaitForSeconds(0.2f);
+            Turn(attacker);
+            characterMoveBack = true;
+        }
     }
 
     private void Turn(GameObject character)
