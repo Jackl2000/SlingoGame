@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 5853896813946811702}
   - component: {fileID: 3625010661109985708}
   - component: {fileID: 6978875185362088314}
+  - component: {fileID: 2928396998741835977}
   m_Layer: 5
   m_Name: Number
   m_TagString: Untagged
@@ -293,7 +294,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinScript: {fileID: 0}
-  starObj: {fileID: 0}
+  starBackgroundAnimator: {fileID: 8353628254325376780}
+--- !u!95 &2928396998741835977
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242844076019020705}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 570192d2473e75242bbbc8be965b770d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1368447377015265266
 GameObject:
   m_ObjectHideFlags: 0

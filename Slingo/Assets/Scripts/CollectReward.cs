@@ -85,7 +85,7 @@ public class CollectReward : MonoBehaviour
     }
 
     private void Update()
-    {
+     {
 
     }
 

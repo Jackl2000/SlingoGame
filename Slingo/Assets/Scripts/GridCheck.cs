@@ -545,7 +545,7 @@ public class GridCheck : MonoBehaviour
             starBackgroundImg.transform.GetChild(1).GetComponent<Image>().enabled = true;
             starBackgroundImg.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             starBackgroundImg.enabled = true;
-            starBackgroundImg.transform.parent.GetComponent<StarManager>().PlaySparkelEffect();
+            starBackgroundImg.transform.parent.GetComponent<NumberManager>().PlaySparkelEffect();
 
             if (go.GetComponentInParent<Animator>().GetBool("Slingo"))
             {
