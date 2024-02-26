@@ -28,14 +28,12 @@ public class EnemyStats : MonoBehaviour
         GetComponent<Animator>().SetBool("TakeDamage", true);
         damageText.gameObject.SetActive(true);
         damageText.text = damage.ToString();
-        damageText.gameObject.GetComponent<Animator>().SetBool("DamageTaken", true);
         Health -= damage;
     }
 
     public void EnemyHasTakenDamage()
     {
         GetComponent<Animator>().SetBool("TakeDamage", false);
-        damageText.gameObject.GetComponent<Animator>().SetBool("DamageTaken", false);
         damageText.gameObject.SetActive(false);
         if (Health <= 0)
         {

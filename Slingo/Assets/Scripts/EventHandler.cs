@@ -43,16 +43,67 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(LoadingScene.LoadScene());
     }
 
-    public void CombatStart()
+    public void CombatStartEvent()
     {
         combatSystem.CombatSetup();
         gameObject.SetActive(false);
     }
 
+    public void PlayOptionsEffectEvent()
+    {
+        GetComponentInChildren<ParticleSystem>().Play();
+    }
+
+    public void OptionsPicked()
+    {
+        if (GetComponent<Animator>().GetBool("Attack")) transform.GetChild(0).GetComponent<Animator>().enabled = true;
+        else transform.GetChild(1).GetComponent<Animator>().enabled = true;
+    }
+
+    public void EnemyDicesAttackDefenceEvent()
+    {
+        combatSystem.OptionsPanel.GetComponent<Animator>().enabled = false;
+        Debug.Log("Player win: " + combatSystem.playerWin);
+
+        if (combatSystem.playerWin)
+        {
+            combatSystem.OptionsPanel.transform.GetChild(1).GetComponent<Animator>().SetBool("Successfully", true);
+        }
+        combatSystem.OptionsPanel.transform.GetChild(1).GetComponent<Animator>().SetBool("DefendPicked", true);
+        if(!combatSystem.OptionsPanel.GetComponent<Animator>().GetBool("Attack")) combatSystem.OptionsPanel.transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    public void PlayerDicesAttackEvent()
+    {
+        combatSystem.playerDices.GetComponent<Animator>().SetBool("Attack", false);
+        combatSystem.OptionsPanel.GetComponent<Animator>().enabled = false;
+        if (combatSystem.playerWin)
+        {
+            combatSystem.OptionsPanel.transform.GetChild(0).GetComponent<Animator>().SetBool("Successfully", true);
+        }
+        combatSystem.OptionsPanel.transform.GetChild(0).GetComponent<Animator>().SetBool("AttackPicked", true);
+        combatSystem.OptionsPanel.transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    public void PlayerSwordStrikeEnemyDiceEvent()
+    {
+        combatSystem.enemyDices.GetComponent<Animator>().SetBool("LostAttack", true);
+    }
+
+    public void EnemyDicesHasBeenReset()
+    {
+        if(combatSystem.enemySpawnPoint.GetComponentInChildren<EnemyStats>().Health > 0) combatSystem.enemyDices.GetComponent<Animator>().enabled = false;
+    }
+
+    public void DiceAnimationIsFinishedEvent()
+    {
+        GetComponent<Animator>().SetBool("GoBackToDefault", true);
+        combatSystem.CharacterAttack();
+    }
 
     public void PlayerTakeDamageEvent()
     {
-        int random = Random.Range(0, 101);
+        int random = Random.Range(1, 101);
         Debug.Log("Enemy selected number:" + random);
         if(enemyStats.CritChance >= random)
         {
@@ -66,6 +117,11 @@ public class EventHandler : MonoBehaviour
             player.PlayerTakeDamage(enemyStats.Damage);
             player.GetComponentInParent<CombatUI>().UpdateUI(enemyStats.Damage, "player");
         }
+    }
+
+    public void CharacterLoseBloodEvent()
+    {
+        GetComponentInChildren<ParticleSystem>().Play();
     }
 
     public void PlayerHasTakenDamageEvent()
