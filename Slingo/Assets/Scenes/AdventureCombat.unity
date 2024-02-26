@@ -6865,8 +6865,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1625066236}
   - {fileID: 1056916820}
+  - {fileID: 1625066236}
   m_Father: {fileID: 1875855239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -16029,6 +16029,7 @@ GameObject:
   - component: {fileID: 1875855242}
   - component: {fileID: 1875855241}
   - component: {fileID: 1875855240}
+  - component: {fileID: 1875855243}
   m_Layer: 5
   m_Name: Chest
   m_TagString: Untagged
@@ -16115,6 +16116,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875855238}
   m_CullTransparentMesh: 1
+--- !u!114 &1875855243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875855238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def2187739f659a4f9c7a08fcc6ac961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chest: {fileID: 1875855238}
+  SilverChestSprite: {fileID: 1829545469, guid: 3ebdc69d676cfa949bdef624a06162dc, type: 3}
+  IronChestSprite: {fileID: 314766560, guid: 7984114bea4beb1449c1987b00d1eac7, type: 3}
+  GoldChestSprite: {fileID: -1573936278, guid: 6c7dff9824f1c474f9e709caa8a80746, type: 3}
+  ChestType: 
+  chestAni: {fileID: 1875855240}
+  Reward: 0
 --- !u!1 &1912865603
 GameObject:
   m_ObjectHideFlags: 0
@@ -16381,7 +16401,7 @@ MonoBehaviour:
   enemySpawnPoint: {fileID: 1355169656}
   GameOverPanel: {fileID: 970945832}
   sceneTranisition: {fileID: 253951389}
-  chectAnimator: {fileID: 1875855240}
+  chest: {fileID: 1875855238}
   playerWin: 0
   playerObject: {fileID: 1020670068}
   attackFinished: 0

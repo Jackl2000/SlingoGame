@@ -56,21 +56,22 @@ public class EventHandler : MonoBehaviour
 
     public void OptionsPicked()
     {
+        Debug.Log("Option has been picked");
         if (GetComponent<Animator>().GetBool("Attack")) transform.GetChild(0).GetComponent<Animator>().enabled = true;
         else transform.GetChild(1).GetComponent<Animator>().enabled = true;
     }
 
     public void EnemyDicesAttackDefenceEvent()
     {
-        combatSystem.OptionsPanel.GetComponent<Animator>().enabled = false;
-        Debug.Log("Player win: " + combatSystem.playerWin);
+        if (!combatSystem.OptionsPanel.GetComponent<Animator>().GetBool("Attack")) return;
 
+        combatSystem.OptionsPanel.GetComponent<Animator>().enabled = false;
         if (combatSystem.playerWin)
         {
             combatSystem.OptionsPanel.transform.GetChild(1).GetComponent<Animator>().SetBool("Successfully", true);
+            combatSystem.OptionsPanel.transform.GetChild(1).GetComponent<Animator>().SetBool("DefendPicked", true);
+            combatSystem.OptionsPanel.transform.GetChild(0).gameObject.SetActive(false);
         }
-        combatSystem.OptionsPanel.transform.GetChild(1).GetComponent<Animator>().SetBool("DefendPicked", true);
-        if(!combatSystem.OptionsPanel.GetComponent<Animator>().GetBool("Attack")) combatSystem.OptionsPanel.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void PlayerDicesAttackEvent()
@@ -90,11 +91,6 @@ public class EventHandler : MonoBehaviour
         combatSystem.enemyDices.GetComponent<Animator>().SetBool("LostAttack", true);
     }
 
-    public void EnemyDicesHasBeenReset()
-    {
-        if(combatSystem.enemySpawnPoint.GetComponentInChildren<EnemyStats>().Health > 0) combatSystem.enemyDices.GetComponent<Animator>().enabled = false;
-    }
-
     public void DiceAnimationIsFinishedEvent()
     {
         GetComponent<Animator>().SetBool("GoBackToDefault", true);
@@ -104,7 +100,6 @@ public class EventHandler : MonoBehaviour
     public void PlayerTakeDamageEvent()
     {
         int random = Random.Range(1, 101);
-        Debug.Log("Enemy selected number:" + random);
         if(enemyStats.CritChance >= random)
         {
             Debug.Log("enemy crit on chance: " + enemyStats.CritChance + " selected number: " + random);

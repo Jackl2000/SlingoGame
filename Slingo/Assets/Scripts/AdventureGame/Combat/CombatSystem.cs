@@ -17,7 +17,7 @@ public class CombatSystem : MonoBehaviour
     public GameObject enemySpawnPoint;
     public GameObject GameOverPanel;
     public Animator sceneTranisition;
-    public Animator chectAnimator;
+    public GameObject chest;
 
     [HideInInspector] public bool playerWin;
 
@@ -76,7 +76,9 @@ public class CombatSystem : MonoBehaviour
         //enemy roll
         int enemyRoll = Roll();
         int enemyRoll2 = Roll();
+        enemyDices.GetComponent<Animator>().enabled = false;
         yield return StartCoroutine(DiceRoll(enemyDice, enemyDice2, enemyRoll, enemyRoll2));
+        enemyDices.GetComponent<Animator>().enabled = true;
 
         //player guess
         Description.SetActive(true);
@@ -158,21 +160,19 @@ public class CombatSystem : MonoBehaviour
     {
         playerObject = player;
         enemyObject = enemy;
-        
+        enemyDices.GetComponent<Animator>().SetBool("PlayerHasChosen", true);
+
         if (playerRoll > enemyRoll)
         {
-            enemyDices.GetComponent<Animator>().enabled = true;
-            enemyDices.GetComponent<Animator>().SetBool("Start", false);
-            playerDices.GetComponent<Animator>().SetBool("Start", false);
             if (attacking)
             {
                 playerDices.GetComponent<Animator>().enabled = true;
                 playerDices.GetComponent<Animator>().SetBool("Attack", true);
                 movingCharacter = playerObject;
                 target = enemyObject;
-                
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", true);
                 playerWin = true;
+                
             }
             else
             {
@@ -182,20 +182,20 @@ public class CombatSystem : MonoBehaviour
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", false);
                 playerWin = false;
             }
+            enemyDices.GetComponent<Animator>().enabled = true;
+            enemyDices.GetComponent<Animator>().SetBool("Start", false);
+            Debug.Log("Check who wins");
             return;
             
         }
         else if (playerRoll < enemyRoll)
         {
-            enemyDices.GetComponent<Animator>().enabled = true;
-            enemyDices.GetComponent<Animator>().SetBool("Start", false);
             if (attacking)
             {
                 playerDices.GetComponent<Animator>().enabled = true;
                 playerDices.GetComponent<Animator>().SetBool("Attack", true);
                 movingCharacter = enemyObject;
                 target = playerObject;
-                optionsAnimator.SetBool("Attack", false);
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", true);
                 playerWin = false;
             }
@@ -205,6 +205,9 @@ public class CombatSystem : MonoBehaviour
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", false);
                 playerWin = true;
             }
+            enemyDices.GetComponent<Animator>().enabled = true;
+            enemyDices.GetComponent<Animator>().SetBool("Start", false);
+            Debug.Log("Check who wins");
             return;
         }
         OptionsPanel.SetActive(false);
@@ -216,7 +219,7 @@ public class CombatSystem : MonoBehaviour
         if(victory)
         {
             PlayerStats.Instance.Level++;
-            chectAnimator.SetBool("DropChest", true);
+            chest.GetComponent<ChestChance>().DropChest();
         }
         else
         {
@@ -344,6 +347,7 @@ public class CombatSystem : MonoBehaviour
         optionsAnimator.SetBool("Attack", false);
         enemyDices.GetComponent<Animator>().SetBool("Start", true);
         enemyDices.GetComponent<Animator>().SetBool("LostAttack", false);
+        enemyDices.GetComponent<Animator>().SetBool("PlayerHasChosen", false);
         playerDices.GetComponent<Animator>().SetBool("Start", false);
         optionsAnimator.transform.GetChild(0).GetComponent<Animator>().SetBool("AttackPicked", false);
         optionsAnimator.transform.GetChild(1).GetComponent<Animator>().SetBool("DefendPicked", false);
