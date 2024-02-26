@@ -156,17 +156,21 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-        gridButton.GetComponent<NumberManager>().StopHighlighting(gridGeneration.numberPositions[AI.currentNumber].gameObject.transform.parent.transform.parent.gameObject);
 
         if (gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             return;
         }
 
+
         GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
         numberPressed = Convert.ToInt32(gridButton.GetComponentInChildren<TextMeshProUGUI>().text);
+        if (wildPicks > 0)
+        {
+            gridButton.GetComponent<NumberManager>().StopHighlighting(gridGeneration.numberPositions[AI.currentNumber].gameObject.transform.parent.transform.parent.gameObject);
+            StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(true));
+        }
 
-        StartCoroutine(GameManager.Instance.ArrowAnimation(true));
         StarDupping(wildNumberPicked, numberPressed);
 
         if (wildPicks == 0)
@@ -174,16 +178,16 @@ public class spin : MonoBehaviour
             return;
         }
 
-
         if (slotWildArrow.Count > 0) SlotWildArrow(wildNumberPicked, numberPressed);
         else if (wilds.Count > 0) SlotSuperWild(wildNumberPicked, numberPressed);
+
     }
 
     private void StarDupping(GameObject wildNumberPicked, int numberPressed)
     {
-        if (gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked && starImgs.Contains(wildNumberPicked.GetComponentInParent<Animator>().transform.GetChild(0).GetComponent<Image>()))
+        if (gridGeneration.numberPositions[numberPressed].hasBeenHit && wildNumberPicked && starImgs.Contains(wildNumberPicked.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>()))
         {
-            Animator animator = wildNumberPicked.GetComponentInChildren<Animator>();
+            Animator animator = wildNumberPicked.transform.GetChild(0).GetComponent<Animator>();
             Image starImg = animator.transform.GetChild(0).GetComponent<Image>();
             if (starImg.color.a != 0)
             {
@@ -471,7 +475,7 @@ public class spin : MonoBehaviour
                 bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
                 blinkEffect.FlashingEffect(true, bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
             }
-            StartCoroutine(GameManager.Instance.ArrowAnimation(false));
+            StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(false));
         }
 
         yield return new WaitForSeconds(0.4f);

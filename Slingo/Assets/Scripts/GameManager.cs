@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     }
 
     int toReversCount;
-    public IEnumerator ArrowAnimation(bool hasPicked)
+    public IEnumerator WildArrowColumnAnimation(bool hasPicked)
     {
         List<Animator> numbersAnimator = new List<Animator>();
         List<Animator> reversedAnimatorList = new List<Animator>();
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
                 animator.SetBool("HasPicked", hasPicked);
             }
         }
+        //Stops animation
         if (hasPicked && gridGeneration.numberPositions[aiScript.currentNumber].h == gridGeneration.numberPositions[spinScript.numberPressed].h)
         {
             foreach (Animator animator in reversedAnimatorList)
