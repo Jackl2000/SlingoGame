@@ -47,7 +47,8 @@ public class AI : MonoBehaviour
         {
             Debug.Log("Should never be played " + bestChoiceList.Values.Max());
         }
-        gridGeneration.numberPositions[currentNumber].gameObject.transform.parent.transform.parent.GetComponent<StarManager>().PlayHighlighter();
+        gridGeneration.numberPositions[currentNumber].gameObject.transform.parent.transform.parent.GetComponent<NumberManager>().PlayHighlighter();
+
         return gridGeneration.numberPositions[currentNumber];
     }
 

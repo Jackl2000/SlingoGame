@@ -50,7 +50,15 @@ public class CardGameManager : MonoBehaviour
             cardTexts.Add(goCard.GetComponentInChildren<TextMeshProUGUI>());
             cardImages.Add(goCard.GetComponent<Image>());
         }
-        playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
+        ShuffleCards();
+        if (GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>() == null)
+        {
+            playerData = new PlayerData();
+        }
+        else
+        {
+            playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
+        }
     }
 
     private void Start()
@@ -59,7 +67,7 @@ public class CardGameManager : MonoBehaviour
 
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
 
-        ShuffleCards();
+        
     }
 
     public void ShuffleCards()
@@ -223,7 +231,7 @@ public class CardGameManager : MonoBehaviour
                 Debug.Log("reward added to 8: " + (præmie - 100));
                 break;
         }
-        gevinstButtonText.text = "Tag gevints: " + gevints;
+        gevinstButtonText.text = "Tag gevints: " + gevints + "kr";
         
     }
 
@@ -233,12 +241,7 @@ public class CardGameManager : MonoBehaviour
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
         gevints = 0;
         gevintsText.text = "Bonus gevints: " + gevints.ToString();
-        SceneSwap.Instance.LoadScene(0);
-    }
-
-    public void LoadMainScene()
-    {
-        SceneSwap.Instance.LoadScene(0);
+        SceneSwap.Instance.SceneSwitch(0);
     }
  
 }

@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 7777788711843290408}
   - component: {fileID: 5053760287721831889}
   m_Layer: 5
-  m_Name: Slot (2)
+  m_Name: Slot3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7642,7 +7642,7 @@ GameObject:
   - component: {fileID: 6095491225173601345}
   - component: {fileID: 6307920974246849840}
   m_Layer: 5
-  m_Name: Slot (1)
+  m_Name: Slot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7927,12 +7927,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 38318cca4e2c6c845b0e1975a1055ee9, type: 3}
   - {fileID: 21300000, guid: f7f73e9c77630cc4a940435ae85f72cb, type: 3}
   textToGoEmpty: []
+  slotWildArrow: 
   collectMessageText: {fileID: 3413761267369758757}
   continueButton: {fileID: 1472758600834327774}
   stopSpinningButton: {fileID: 5159147331774119527}
   spinBets: 1
-  wildPicks: 0
   stakes: 0
+  wildPicks: 0
+  numberPressed: 0
   timePassedForMsg: 0
   keepSpinningPanel: {fileID: 2950752321684696061}
   CostMessage: {fileID: 5492437303112480685}
@@ -10617,6 +10619,8 @@ MonoBehaviour:
   collectReward: {fileID: 0}
   player: {fileID: 0}
   enemyStats: {fileID: 0}
+  LoadingScene: {fileID: 0}
+  combatSystem: {fileID: 0}
 --- !u!1 &4578903735052801540
 GameObject:
   m_ObjectHideFlags: 0
@@ -18319,6 +18323,8 @@ MonoBehaviour:
   collectReward: {fileID: 2795408711446792720}
   player: {fileID: 0}
   enemyStats: {fileID: 0}
+  LoadingScene: {fileID: 0}
+  combatSystem: {fileID: 0}
 --- !u!95 &7065173204824913395
 Animator:
   serializedVersion: 5
@@ -19441,7 +19447,7 @@ GameObject:
   - component: {fileID: 391475462809924468}
   - component: {fileID: 3443947279903797929}
   m_Layer: 5
-  m_Name: Slot (3)
+  m_Name: Slot4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20673,6 +20679,8 @@ MonoBehaviour:
   collectReward: {fileID: 0}
   player: {fileID: 0}
   enemyStats: {fileID: 0}
+  LoadingScene: {fileID: 0}
+  combatSystem: {fileID: 0}
 --- !u!1 &7011716911628130499
 GameObject:
   m_ObjectHideFlags: 0
@@ -26653,7 +26661,7 @@ GameObject:
   - component: {fileID: 6925943550840690883}
   - component: {fileID: 3541867625809662487}
   m_Layer: 5
-  m_Name: Slot (4)
+  m_Name: Slot5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26960,7 +26968,7 @@ GameObject:
   - component: {fileID: 2916167033222896267}
   - component: {fileID: 4017085377528205931}
   m_Layer: 5
-  m_Name: Slot
+  m_Name: Slot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27326,7 +27334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff141709efcf4c04f883acde39447f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetButton: {fileID: 7678843588789484500}
   headerAnimator: {fileID: 1352978434706545151}
   SlingoPanel: {fileID: 6895147790509304543}
   slingoRewardButton: {fileID: 587031509315824273}
@@ -27384,9 +27391,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db594cbdc00e0a499a41072cc4b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardGameManager: {fileID: 7394972976585155639}
-  sceneSwap: {fileID: 0}
-  prefab_CanvasLoader: {fileID: 1306808113496473372, guid: 36036c9ee5e6b0e47bac0a33ed84b5d4, type: 3}
+  spinScript: {fileID: 4055942201498400139}
+  gridGeneration: {fileID: 1458205632472944407}
+  aiScript: {fileID: 1198515194112576019}
+  toggle: {fileID: 5687582340082103092}
+  collectReward: {fileID: 2795408711446792720}
+  runs: 5
+  Columns: []
 --- !u!95 &1421844460600163024
 Animator:
   serializedVersion: 5
@@ -32786,17 +32797,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6139187912357900809, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
   m_PrefabInstance: {fileID: 5406246889402350979}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7394972976585155639 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3289563259054299572, guid: 0bb67730968ba5c41946635b715a78f1, type: 3}
-  m_PrefabInstance: {fileID: 5406246889402350979}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b036ee1c1636a8f47a83a69851fd884e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5469582886772621402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35106,7 +35106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2473898289661461273, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2473898289661461273, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
       propertyPath: m_SortingLayer
@@ -35271,7 +35271,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1242844076019020705, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6282070502017576852}
   m_SourcePrefab: {fileID: 100100000, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
 --- !u!224 &1497516120031454120 stripped
 RectTransform:
@@ -35283,7 +35286,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6978875185362088314, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
   m_PrefabInstance: {fileID: 9015055472072091935}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7792512865050794686}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94a676d3c2e3e9445a21ada3f3621945, type: 3}
@@ -35294,9 +35297,35 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3625010661109985708, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
   m_PrefabInstance: {fileID: 9015055472072091935}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7792512865050794686}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7792512865050794686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1242844076019020705, guid: 6bc8701b20288f44ead9b5ba0ca960b4, type: 3}
+  m_PrefabInstance: {fileID: 9015055472072091935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6282070502017576852
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792512865050794686}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 570192d2473e75242bbbc8be965b770d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

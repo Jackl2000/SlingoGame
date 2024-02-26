@@ -91,6 +91,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void ReturnToMainScene()
     {
-        GameObject.Find("CanvasLoader").GetComponent<SceneSwap>().LoadScene(0);
+        SceneSwap.Instance.SceneSwitch(0);
     }
 }
