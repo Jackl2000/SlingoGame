@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,13 +10,18 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     GridCheck gridCheck;
-
+    [Header("References")]
     public spin spinScript;
     public GridGeneration gridGeneration;
     public AI aiScript;
-    public Toggle toggle;
-
     public CollectReward collectReward;
+
+    [Space(7)]
+    [Header("Message settings")]
+    public Toggle toggle;
+    public GameObject messageTipObject;
+    public bool isFirstRun = true;
+
 
     public int runs = 5;
 
@@ -37,8 +43,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         BonusGameHit();
-        //SlingoSimulator();
-
     }
 
     int toReversCount;
@@ -100,6 +104,25 @@ public class GameManager : MonoBehaviour
     public void BonusGameSwitch(int sceneIndex)
     {
         SceneSwap.Instance.SceneSwitch(sceneIndex);
+    }
+
+    bool wHasBeenTipped = false;
+    bool sHasBeenTipped = false;
+
+    public void TipMessage()
+    {
+        if (spinScript.wildsArrow.Count > 0 && wHasBeenTipped == false) // arrow wild appeared set text
+        {
+            messageTipObject.SetActive(true);
+            messageTipObject.GetComponentInChildren<TextMeshProUGUI>().text = "Placere en stjerne på en fri plads i det fremhævet række";
+            wHasBeenTipped=true;
+        }
+        if (spinScript.wilds.Count > 0 && sHasBeenTipped == false && spinScript.wildsArrow.Count == 0) //super wild appeared set text 
+        {
+            messageTipObject.SetActive(true);
+            messageTipObject.GetComponentInChildren<TextMeshProUGUI>().text = "Placere en stjerne på en fri plads hvor som helst på pladen";
+            sHasBeenTipped=true;
+        }
     }
 
     private void SlingoSimulator()

@@ -180,9 +180,14 @@ public class spin : MonoBehaviour
             return;
         }
 
-        if (slotWildArrow.Count > 0) SlotWildArrow(wildNumberPicked, numberPressed);
-        else if (wilds.Count > 0) SlotSuperWild(wildNumberPicked, numberPressed);
-
+        if (slotWildArrow.Count > 0)
+        {
+            SlotWildArrow(wildNumberPicked, numberPressed);
+        }
+        else if (wilds.Count > 0)
+        {
+            SlotSuperWild(wildNumberPicked, numberPressed);
+        }
     }
 
     private void StarDupping(GameObject wildNumberPicked, int numberPressed)
@@ -277,7 +282,7 @@ public class spin : MonoBehaviour
             SelectSpins();
             return;
         }
-
+        if (GameManager.Instance.messageTipObject.activeSelf) { GameManager.Instance.messageTipObject.SetActive(false); }
 
         float costPrSpin = calculations.PriceCaculator();
 
@@ -287,6 +292,7 @@ public class spin : MonoBehaviour
             StartCoroutine(MessageHandler(keepSpinningPanel, 0, $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}"));
             return;
         }
+
         MessageAnimator.SetBool("MinimizePlate", false);
         isSpinning = true;
         Stakes();
@@ -362,6 +368,7 @@ public class spin : MonoBehaviour
 
         if (wildArrow == 2)
         {
+
             slotWildArrow.Add(index);
             wildsArrow.Enqueue(slot);
             slot.GetComponentInChildren<Image>().sprite = wildsImages[1];
@@ -375,6 +382,7 @@ public class spin : MonoBehaviour
         {
             if (wildPick == 5)
             {
+
                 wilds.Enqueue(slot);
                 slot.GetComponentInChildren<Image>().sprite = wildsImages[0];
                 slot.GetComponentInChildren<Image>().enabled = true;
@@ -590,6 +598,8 @@ public class spin : MonoBehaviour
             //Arrow
             if (slotWildArrow.Count > 0)
             {
+                GameManager.Instance.TipMessage();
+
                 List<int> indexes = new List<int>() { 0, 0, 0, 0, 0 };
                 foreach (GridNumbers number in gridGeneration.numberPositions.Values)
                 {
@@ -627,6 +637,8 @@ public class spin : MonoBehaviour
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                         animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
                         animatorObject.GetComponent<Image>().enabled = true;
+                        GameManager.Instance.TipMessage();
+
                     }
                 }
             }
@@ -643,6 +655,7 @@ public class spin : MonoBehaviour
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                         animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
                         animatorObject.GetComponent<Image>().enabled = false;
+
                     }
                 }
                 slotWildArrow.Remove(hIndex);
@@ -657,6 +670,7 @@ public class spin : MonoBehaviour
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                         animatorObject.GetComponent<Image>().sprite = BackgroundImages[1]; 
                         animatorObject.GetComponent<Image>().enabled = false;
+
                     }
                 }
             }
