@@ -164,7 +164,9 @@ public class spin : MonoBehaviour
 
 
         GameObject wildNumberPicked = gridButton.GetComponentInChildren<Animator>().gameObject;
+        wildNumberPicked.GetComponentInChildren<Image>().enabled = false;
         numberPressed = Convert.ToInt32(gridButton.GetComponentInChildren<TextMeshProUGUI>().text);
+        
         if (wildPicks > 0)
         {
             gridButton.GetComponent<NumberManager>().StopHighlighting(gridGeneration.numberPositions[AI.currentNumber].gameObject.transform.parent.transform.parent.gameObject);
