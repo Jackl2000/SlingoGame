@@ -29,8 +29,6 @@ public class CombatUI : MonoBehaviour
         playerHealthText.text = PlayerStats.Instance.Health.ToString();
         playerDamageText.text = PlayerStats.Instance.Damage.ToString();
         playerCritchanceText.text = PlayerStats.Instance.Luck.ToString();
-
-        playerHearts = ShowHearts(PlayerStats.Instance.Health, "player");
     }
 
     public List<GameObject> ShowHearts(int health, string type)
@@ -100,6 +98,7 @@ public class CombatUI : MonoBehaviour
 
     public void CombatUISetup(EnemyStats enemy)
     {
+        playerHearts = ShowHearts(PlayerStats.Instance.Health, "player");
         enemyHearts = ShowHearts(enemy.Health, "enemy");
         if(enemy.name == "Goblin") enemyBorder.sprite = EnemyPortraits[0];
         else if (enemy.name == "Skeleton") enemyBorder.sprite = EnemyPortraits[1];

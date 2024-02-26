@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class GridCheck : MonoBehaviour
 {
-    public Image resetButton;
+    //public Image resetButton;
     public Animator headerAnimator;
     public GameObject SlingoPanel;
     public Button slingoRewardButton;
@@ -532,6 +532,7 @@ public class GridCheck : MonoBehaviour
     /// </summary>
     private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
     {
+        
         slingoAnimationFinished = false;
         headerAnimator.SetBool("isTwerking", true);
         yield return new WaitForSeconds(0.5f);
@@ -545,7 +546,8 @@ public class GridCheck : MonoBehaviour
             starBackgroundImg.transform.GetChild(1).GetComponent<Image>().enabled = true;
             starBackgroundImg.transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
             starBackgroundImg.enabled = true;
-            starBackgroundImg.transform.parent.GetComponent<StarManager>().PlaySparkelEffect();
+            starBackgroundImg.transform.parent.GetComponent<NumberManager>().PlaySparkelEffect();
+            
 
             if (go.GetComponentInParent<Animator>().GetBool("Slingo"))
             {

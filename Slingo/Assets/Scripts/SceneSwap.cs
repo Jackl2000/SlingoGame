@@ -9,7 +9,6 @@ public class SceneSwap : MonoBehaviour
 
     public float transitionTime = 1;
 
-    public List<GameObject> dontDestroyObjects;
     public static SceneSwap Instance { get; private set; }
 
     private void Awake()
@@ -30,12 +29,12 @@ public class SceneSwap : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            LoadScene(1);
+            SceneSwitch(1);
             Debug.Log(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
-    public void LoadScene(int index)
+    public void SceneSwitch(int index)
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
@@ -46,6 +45,8 @@ public class SceneSwap : MonoBehaviour
             StartCoroutine(TriggerSceneLoad(0));
         }
     }
+
+
 
     IEnumerator TriggerSceneLoad(int sceneIndex)
     {

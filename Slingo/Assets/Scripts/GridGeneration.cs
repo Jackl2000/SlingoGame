@@ -130,11 +130,11 @@ public class GridGeneration : MonoBehaviour
             }
         }
     }
-    private void Update()
-    {
-        if(Application.isEditor)
-        {
-            FillPlate();
-        }
-    }
+    //private void Update()
+    //{
+    //    if(Application.isEditor)
+    //    {
+    //        FillPlate();
+    //    }
+    //}
 }

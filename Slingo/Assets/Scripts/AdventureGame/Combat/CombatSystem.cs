@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CombatSystem : MonoBehaviour
@@ -15,6 +18,7 @@ public class CombatSystem : MonoBehaviour
     public GameObject OptionsPanel;
     public GameObject enemySpawnPoint;
     public GameObject GameOverPanel;
+    public Animator sceneTranisition;
 
     private CombatUI combatUI;
     private float speed;
@@ -36,11 +40,11 @@ public class CombatSystem : MonoBehaviour
 
     private void Start()
     {
+        sceneTranisition.SetBool("Combat", true);
         combatUI = EnemyDice.GetComponentInParent<CombatUI>();
-        CombatSetup();
     }
 
-    private void CombatSetup()
+    public void CombatSetup()
     {
         //GameObject player = null;
         PlayerStats.Instance.Health = PlayerStats.Instance.MaxHealth;
@@ -178,15 +182,22 @@ public class CombatSystem : MonoBehaviour
         if(victory)
         {
             PlayerStats.Instance.Level++;
-            ResetValues();
-            combatUI.CombatUIReset();
-            CombatSetup();
+            //ResetValues();
+            //combatUI.CombatUIReset();
+            //CombatSetup();
+            StartCoroutine(EnteringNewLevel());
         }
         else
         {
             GameOverPanel.SetActive(true);
         }
+    }
 
+    private IEnumerator EnteringNewLevel()
+    {
+        Debug.Log("Entering new level very soon");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadSceneAsync("AdventureGameLoadLevelScene");
     }
 
     private void Update()
@@ -236,7 +247,7 @@ public class CombatSystem : MonoBehaviour
         if(attacker == playerObject)
         {
             int random = Random.Range(0, 101);
-
+            Debug.Log("Player selected number:" + random);
             if (PlayerStats.Instance.Luck >= random)
             {
                 PlayerStats.Instance.CritAttack = true;
