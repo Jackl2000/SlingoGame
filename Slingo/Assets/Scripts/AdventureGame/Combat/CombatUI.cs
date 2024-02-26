@@ -151,7 +151,6 @@ public class CombatUI : MonoBehaviour
 
             if (i == 0 && hearts[i].GetComponent<Image>().sprite == heartsSprite[2])
             {
-                Debug.Log("Enemy death");
                 return hearts;
             }
 
@@ -160,7 +159,6 @@ public class CombatUI : MonoBehaviour
                 return hearts;
             }
         }
-        Debug.Log("Something went wrong");
         return hearts;
     }
 
@@ -178,6 +176,26 @@ public class CombatUI : MonoBehaviour
         }
         playerHearts.Clear();
         playerHearts = ShowHearts(PlayerStats.Instance.MaxHealth, "player");
+    }
+
+    public void ResetOptionsUI(GameObject optionsParent)
+    {
+        //options
+        optionsParent.GetComponent<Animator>().enabled = false;
+        GameObject attack = optionsParent.transform.GetChild(0).gameObject;
+        attack.GetComponent<Image>().fillAmount = 1;
+        attack.transform.localPosition = new Vector3(-150, 0, 0);
+        attack.transform.localScale = Vector3.one;
+        attack.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
+        attack.transform.localRotation = Quaternion.identity;
+        //attack.transform.GetChild(0).gameObject.transform.localRotation = Quaternion.identity;
+        GameObject defend = optionsParent.transform.GetChild(1).gameObject;
+        defend.GetComponent<Image>().fillAmount = 1;
+        defend.transform.localPosition = new Vector3(150, 0, 0);
+        defend.transform.localScale = Vector3.one;
+        defend.transform.localRotation = Quaternion.identity;
+        defend.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
+        optionsParent.GetComponent<Animator>().enabled = true;
     }
 
     public void Exit()
