@@ -91,11 +91,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void ReturnToMainScene()
     {
-        SceneSwap.Instance.SceneSwitch(0);
-    }
-
-    public void CombatBonusGame()
-    {
-        SceneManager.LoadSceneAsync("CharacterCreation");
+        SceneSwap.Instance.SceneSwitch("scene_tai");
     }
 }

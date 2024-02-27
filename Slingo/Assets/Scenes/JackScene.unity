@@ -463,10 +463,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1280601228}
-        m_TargetAssemblyTypeName: SettingsMenu, Scripts
-        m_MethodName: CombatBonusGame
-        m_Mode: 1
+      - m_Target: {fileID: 2088408080}
+        m_TargetAssemblyTypeName: GameManager, Scripts
+        m_MethodName: BonusGameSwitch
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -525,63 +525,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259022651}
   m_CullTransparentMesh: 1
---- !u!114 &1280601228 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4178895007823780316, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-  m_PrefabInstance: {fileID: 1621014818}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68a03221f26879f4280866b017d60849, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1370990046
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1370990048}
-  - component: {fileID: 1370990047}
-  m_Layer: 0
-  m_Name: PlayerData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1370990047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370990046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5564e04b8e9b042bda0789f560ad08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  balance: 999
-  bet: 1
---- !u!4 &1370990048
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370990046}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 208.8118, y: 433.4218, z: 2.157539}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1598335191 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3178842476150303414, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
@@ -971,7 +914,7 @@ PrefabInstance:
     - target: {fileID: 2795408711446792720, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: playerData
       value: 
-      objectReference: {fileID: 1370990047}
+      objectReference: {fileID: 0}
     - target: {fileID: 2832323364005036006, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -998,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3173569385231782647, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3178842476150303414, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_IsActive
@@ -1107,14 +1050,18 @@ PrefabInstance:
     - target: {fileID: 4055942201498400139, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: playerData
       value: 
-      objectReference: {fileID: 1370990047}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055942201498400139, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: wildChance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4055942201498400139, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: spinTwoWild
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4055942201498400139, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: wildArrowChance
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4107971495754314994, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1411,6 +1358,10 @@ PrefabInstance:
     - target: {fileID: 5084759954285005102, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5123355113669343154, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5371055354710816287, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1805,7 +1756,8 @@ PrefabInstance:
       value: 15.00 kr
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9147465065434779420, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8007670848916106803, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       insertIndex: -1
@@ -1906,6 +1858,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &2088408080 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2340062006792121958, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+  m_PrefabInstance: {fileID: 1621014818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db594cbdc00e0a499a41072cc4b21fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2100566817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +1926,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bonus spil2
+  m_text: Bonus spil 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
@@ -2047,6 +2010,5 @@ SceneRoots:
   - {fileID: 1693648509}
   - {fileID: 330605792}
   - {fileID: 827773278}
-  - {fileID: 1370990048}
   - {fileID: 324542959}
   - {fileID: 1621014818}

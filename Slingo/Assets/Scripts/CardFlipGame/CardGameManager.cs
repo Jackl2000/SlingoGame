@@ -198,7 +198,7 @@ public class CardGameManager : MonoBehaviour
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
         gevints = 0;
         gevintsText.text = "Bonus gevints: " + gevints.ToString();
-        SceneSwap.Instance.SceneSwitch(0);
+        SceneSwap.Instance.SceneSwitch("Scene_tai");
     }
  
 }
