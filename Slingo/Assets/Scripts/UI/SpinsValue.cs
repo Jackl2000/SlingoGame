@@ -27,6 +27,7 @@ public class SpinsValue : MonoBehaviour
         if(spin.spinLeft == spin.startSpins)
         {
             spin.spinBets = bet;
+            PlayerData.Instance.bet = bet;
             spinsBetPanel.SetActive(false);
             settingsMenu.multiplier = bet;
             GetComponentInParent<GridCheck>().UpdateRewards(null, bet);

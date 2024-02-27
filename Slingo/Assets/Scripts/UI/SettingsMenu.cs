@@ -93,4 +93,9 @@ public class SettingsMenu : MonoBehaviour
     {
         SceneSwap.Instance.SceneSwitch(0);
     }
+
+    public void CombatBonusGame()
+    {
+        SceneManager.LoadSceneAsync("CharacterCreation");
+    }
 }

@@ -218,7 +218,6 @@ public class CombatSystem : MonoBehaviour
             }
             enemyDices.GetComponent<Animator>().enabled = true;
             enemyDices.GetComponent<Animator>().SetBool("Start", false);
-            Debug.Log("Check who wins");
             return;
         }
         messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Uafgjort";

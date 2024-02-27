@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     public float balance = 999;
+    public float bet = 1;
     public static PlayerData Instance { get; private set; }
 
     private void Start()
