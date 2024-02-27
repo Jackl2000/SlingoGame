@@ -73,8 +73,8 @@ public class GridCheck : MonoBehaviour
         rewards.Add(8, 12 * multiplyere);
         rewards.Add(9, 15 * multiplyere);
         rewards.Add(10, 20 * multiplyere);
-        rewards.Add(11, 25 * multiplyere);
-        rewards.Add(12, 30 * multiplyere);
+        rewards.Add(11, 20 * multiplyere);
+        rewards.Add(12, 20 * multiplyere);
 
         if(slingoRewards != null)
         {
