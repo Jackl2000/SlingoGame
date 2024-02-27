@@ -442,6 +442,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &239427317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239427318}
+  - component: {fileID: 239427320}
+  - component: {fileID: 239427319}
+  m_Layer: 0
+  m_Name: MoneyBag
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &239427318
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239427317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1414115212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -545, y: 742}
+  m_SizeDelta: {x: 115, y: 152}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &239427319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239427317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 903629764, guid: 1561c0d75d96a8045b46cd49dc1e9c49, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &239427320
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239427317}
+  m_CullTransparentMesh: 1
 --- !u!1 &291450286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,7 +1852,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -12}
+  m_AnchoredPosition: {x: 0, y: 30}
   m_SizeDelta: {x: 200, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!199 &722981118
@@ -1788,7 +1863,7 @@ ParticleSystemRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722981116}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1801,7 +1876,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7249,6 +7324,7 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   LoadingScene: {fileID: 0}
   combatSystem: {fileID: 0}
+  chestChance: {fileID: 0}
 --- !u!1 &1029351299
 GameObject:
   m_ObjectHideFlags: 0
@@ -9189,6 +9265,7 @@ RectTransform:
   - {fileID: 558722869}
   - {fileID: 1702717442}
   - {fileID: 1994159320}
+  - {fileID: 239427318}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9725,6 +9802,7 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   LoadingScene: {fileID: 0}
   combatSystem: {fileID: 0}
+  chestChance: {fileID: 0}
 --- !u!1 &1741625283
 GameObject:
   m_ObjectHideFlags: 0
@@ -10211,16 +10289,20 @@ MonoBehaviour:
   - Skeleton
   - Mushroom
   EnemyCreator: {fileID: 1565557349}
-  EnemyDice: {fileID: 1382064565}
-  EnemyDice2: {fileID: 759993929}
-  PlayerDice: {fileID: 1029351299}
-  PlayerDice2: {fileID: 2064717889}
+  enemyDices: {fileID: 0}
+  playerDices: {fileID: 0}
   Description: {fileID: 968326242}
   OptionsPanel: {fileID: 2143102024}
   enemySpawnPoint: {fileID: 1355169656}
   GameOverPanel: {fileID: 0}
   sceneTranisition: {fileID: 0}
+  chest: {fileID: 0}
+  messagePanel: {fileID: 0}
+  playerWin: 0
   playerObject: {fileID: 1020670068}
+  attackFinished: 0
+  characterMoveBack: 0
+  combatReset: 0
 --- !u!1 &1945612567
 GameObject:
   m_ObjectHideFlags: 0
@@ -10368,6 +10450,7 @@ GameObject:
   - component: {fileID: 1994159322}
   - component: {fileID: 1994159321}
   - component: {fileID: 1994159324}
+  - component: {fileID: 1994159325}
   m_Layer: 5
   m_Name: Chest
   m_TagString: Untagged
@@ -10474,6 +10557,26 @@ MonoBehaviour:
   ChestType: 
   chestAni: {fileID: 1994159321}
   Reward: 0
+--- !u!114 &1994159325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994159319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f59237942e257a42aa4d572d1175c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridCheck: {fileID: 0}
+  spin: {fileID: 0}
+  collectReward: {fileID: 0}
+  player: {fileID: 0}
+  enemyStats: {fileID: 0}
+  LoadingScene: {fileID: 0}
+  combatSystem: {fileID: 0}
+  chestChance: {fileID: 0}
 --- !u!1 &1994625569
 GameObject:
   m_ObjectHideFlags: 0
