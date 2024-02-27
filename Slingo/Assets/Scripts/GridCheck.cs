@@ -66,15 +66,15 @@ public class GridCheck : MonoBehaviour
         rewards.Add(1, 0);
         rewards.Add(2, 0);
         rewards.Add(3, 1 * multiplyere);
-        rewards.Add(4, 3 * multiplyere);
-        rewards.Add(5, 5 * multiplyere);
-        rewards.Add(6, 10 * multiplyere);
-        rewards.Add(7, 25 * multiplyere);
-        rewards.Add(8, 50 * multiplyere);
-        rewards.Add(9, 75 * multiplyere);
-        rewards.Add(10, 100 * multiplyere);
-        rewards.Add(11, 125 * multiplyere);
-        rewards.Add(12, 150 * multiplyere);
+        rewards.Add(4, 2 * multiplyere);
+        rewards.Add(5, 4 * multiplyere);
+        rewards.Add(6, 6 * multiplyere);
+        rewards.Add(7, 10 * multiplyere);
+        rewards.Add(8, 12 * multiplyere);
+        rewards.Add(9, 15 * multiplyere);
+        rewards.Add(10, 20 * multiplyere);
+        rewards.Add(11, 25 * multiplyere);
+        rewards.Add(12, 30 * multiplyere);
 
         if(slingoRewards != null)
         {

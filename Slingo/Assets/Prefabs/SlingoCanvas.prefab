@@ -11122,6 +11122,7 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   LoadingScene: {fileID: 0}
   combatSystem: {fileID: 0}
+  chestChance: {fileID: 0}
 --- !u!1 &4578903735052801540
 GameObject:
   m_ObjectHideFlags: 0
@@ -18826,6 +18827,7 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   LoadingScene: {fileID: 0}
   combatSystem: {fileID: 0}
+  chestChance: {fileID: 0}
 --- !u!95 &7065173204824913395
 Animator:
   serializedVersion: 5
@@ -21182,6 +21184,7 @@ MonoBehaviour:
   enemyStats: {fileID: 0}
   LoadingScene: {fileID: 0}
   combatSystem: {fileID: 0}
+  chestChance: {fileID: 0}
 --- !u!1 &7011716911628130499
 GameObject:
   m_ObjectHideFlags: 0

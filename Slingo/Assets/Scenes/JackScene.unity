@@ -796,6 +796,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1738745476435439262, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: 12.00 kr
+      objectReference: {fileID: 0}
     - target: {fileID: 1895941123175340710, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1023,6 +1027,10 @@ PrefabInstance:
     - target: {fileID: 3297852750853416687, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387822106747974008, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: 10.00 kr
       objectReference: {fileID: 0}
     - target: {fileID: 3528965643488965770, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1452,6 +1460,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5790062432905629439, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: 2.00 kr
+      objectReference: {fileID: 0}
     - target: {fileID: 6049137932593326042, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1619,6 +1631,10 @@ PrefabInstance:
     - target: {fileID: 6859320149706223221, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895147790509304543, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7147844497562690630, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1724,6 +1740,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlingoCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8513515302546452800, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: 6.00 kr
+      objectReference: {fileID: 0}
     - target: {fileID: 8561205572640608658, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1747,6 +1767,10 @@ PrefabInstance:
     - target: {fileID: 8561205572640608658, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675626865979699073, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: 4.00 kr
       objectReference: {fileID: 0}
     - target: {fileID: 8765595224798387446, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1775,6 +1799,10 @@ PrefabInstance:
     - target: {fileID: 9147465065434779420, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9212542950802306806, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_text
+      value: 15.00 kr
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
