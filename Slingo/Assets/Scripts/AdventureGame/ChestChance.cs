@@ -1,7 +1,9 @@
 
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ChestChance : MonoBehaviour
 {
@@ -12,12 +14,15 @@ public class ChestChance : MonoBehaviour
     public string ChestType;
     [SerializeField] private Animator chestAni;
     public float Reward;
+    public GameObject MoneyBag;
+    public float totalReward;
 
     // Start is called before the first frame update
     void Start()
     {
         ChangeChestRandomly();
         chestAni = chest.gameObject.GetComponent<Animator>();
+        TotalRewards();
     }
 
     // Update is called once per frame
@@ -70,6 +75,8 @@ public class ChestChance : MonoBehaviour
         //Change and adjust panel text to current reward and chest type.
         string price = $"Tillykke! \n Du fandt {Reward} kr i kisten";
         chest.GetComponentInChildren<TextMeshProUGUI>().text = price;
+        totalReward += Reward;
+        MoneyBag.GetComponent<TextMeshProUGUI>().text = totalReward.ToString();
         Debug.Log("Text is component" + chest.GetComponentInChildren<TextMeshProUGUI>().text);
     }
     //Method to drop chest
@@ -88,4 +95,12 @@ public class ChestChance : MonoBehaviour
             chestAni.SetBool("DropGoldChest", true);
         }
     }
+    //Gets total amount of money throughout the bonusgame
+    public void TotalRewards()
+    {
+        totalReward += Reward;
+        MoneyBag.GetComponent<TextMeshProUGUI>().text = totalReward.ToString() + " Kr.";
+    }
+
+
 }
