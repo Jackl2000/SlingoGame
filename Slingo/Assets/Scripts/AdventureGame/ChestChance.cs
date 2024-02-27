@@ -22,7 +22,6 @@ public class ChestChance : MonoBehaviour
     {
         ChangeChestRandomly();
         chestAni = chest.gameObject.GetComponent<Animator>();
-        TotalRewards();
     }
 
     // Update is called once per frame
@@ -38,6 +37,7 @@ public class ChestChance : MonoBehaviour
         //Gets random number between 0 and 1
         float chance = Random.Range(0f, 1f);
         Debug.Log(chance);
+        totalReward = PlayerData.Instance.CombatBonusReward;
         Debug.Log("Player data: " + PlayerData.Instance.bet);
         //40 chance for silver Chest.
         //40% chance for silver Chest.
@@ -46,7 +46,7 @@ public class ChestChance : MonoBehaviour
             if (chance <= 0.4f)
             {
                 //Silver chest
-                Reward = Random.Range(150, 250 + 1);
+                Reward = Random.Range(PlayerData.Instance.bet * 15, PlayerData.Instance.bet * 20 + 1);
                 chest.GetComponent<Image>().sprite = SilverChestSprite;
                 Debug.Log("Silver chest");
                 ChestType = "Silver";
@@ -56,7 +56,7 @@ public class ChestChance : MonoBehaviour
             else
             {
                 //Iron chest
-                Reward = Random.Range(50, 150 + 1);
+                Reward = Random.Range(PlayerData.Instance.bet * 10, PlayerData.Instance.bet * 15 + 1);
                 chest.GetComponent<Image>().sprite = IronChestSprite;
                 Debug.Log("Iron chest");
                 ChestType = "Iron";
@@ -66,7 +66,7 @@ public class ChestChance : MonoBehaviour
         else
         {
             //Gold chest
-            Reward = Random.Range(250, 500 + 1);
+            Reward = Random.Range(PlayerData.Instance.bet * 20, PlayerData.Instance.bet * 25 + 1);
             chest.GetComponent<Image>().sprite = GoldChestSprite;
             Debug.Log("Gold Chest");
             ChestType = "Gold";
@@ -75,8 +75,7 @@ public class ChestChance : MonoBehaviour
         //Change and adjust panel text to current reward and chest type.
         string price = $"Tillykke! \n Du fandt {Reward} kr i kisten";
         chest.GetComponentInChildren<TextMeshProUGUI>().text = price;
-        totalReward += Reward;
-        MoneyBag.GetComponent<TextMeshProUGUI>().text = totalReward.ToString();
+        MoneyBag.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(totalReward);
         Debug.Log("Text is component" + chest.GetComponentInChildren<TextMeshProUGUI>().text);
     }
     //Method to drop chest
@@ -99,7 +98,8 @@ public class ChestChance : MonoBehaviour
     public void TotalRewards()
     {
         totalReward += Reward;
-        MoneyBag.GetComponent<TextMeshProUGUI>().text = totalReward.ToString() + " Kr.";
+        PlayerData.Instance.CombatBonusReward += Reward;
+        MoneyBag.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(totalReward);
     }
 
 

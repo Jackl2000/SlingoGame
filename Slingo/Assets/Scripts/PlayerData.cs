@@ -7,6 +7,7 @@ public class PlayerData
 {
     public float balance = 999;
     public float bet = 1;
+    public float CombatBonusReward = 0;
     private static PlayerData instance;
     public static PlayerData Instance
     {
