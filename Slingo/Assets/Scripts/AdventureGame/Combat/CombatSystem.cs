@@ -1,7 +1,9 @@
+using Codice.Client.Common.GameUI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,6 +20,7 @@ public class CombatSystem : MonoBehaviour
     public GameObject GameOverPanel;
     public Animator sceneTranisition;
     public GameObject chest;
+    public GameObject messagePanel;
 
     [HideInInspector] public bool playerWin;
 
@@ -104,6 +107,12 @@ public class CombatSystem : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
+        if(messagePanel.GetComponentInChildren<TextMeshProUGUI>().text == "Uafgjort")
+        {
+            messagePanel.GetComponent<Animator>().SetBool("Show", true);
+            DrawMessageDisapear();
+        }
+
         //check for combat end
         if (enemy.GetComponent<EnemyStats>().Health <= 0)
         {
@@ -135,7 +144,8 @@ public class CombatSystem : MonoBehaviour
 
     private int Roll()
     {
-        return Random.Range(1, 7);
+        //return Random.Range(1, 7);
+        return 3;
     }
 
     private void DiceReset(GameObject dice, int index)
@@ -172,6 +182,7 @@ public class CombatSystem : MonoBehaviour
                 target = enemyObject;
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", true);
                 playerWin = true;
+                messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb lykkedes";
                 
             }
             else
@@ -181,6 +192,7 @@ public class CombatSystem : MonoBehaviour
                 enemyDices.GetComponent<Animator>().SetBool("Defended", false);
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", false);
                 playerWin = false;
+                messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Forsvar mislykkedes";
             }
             enemyDices.GetComponent<Animator>().enabled = true;
             enemyDices.GetComponent<Animator>().SetBool("Start", false);
@@ -198,20 +210,29 @@ public class CombatSystem : MonoBehaviour
                 target = playerObject;
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", true);
                 playerWin = false;
+                messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb mislykkedes";
             }
             else
             {
                 enemyDices.GetComponent<Animator>().SetBool("Defended", true);
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", false);
                 playerWin = true;
+                messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Forsvar lykkedes";
             }
             enemyDices.GetComponent<Animator>().enabled = true;
             enemyDices.GetComponent<Animator>().SetBool("Start", false);
             Debug.Log("Check who wins");
             return;
         }
+        messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Uafgjort";
         OptionsPanel.SetActive(false);
         combatReset = true;
+    }
+
+    private async void DrawMessageDisapear()
+    {
+        await Task.Delay(500);
+        messagePanel.GetComponent<Animator>().SetBool("Show", false);
     }
 
     private void CombatEnded(bool victory)
@@ -355,6 +376,5 @@ public class CombatSystem : MonoBehaviour
         optionsAnimator.transform.GetChild(1).GetComponent<Animator>().enabled = false;
         optionsAnimator.transform.GetChild(0).gameObject.SetActive(true);
         optionsAnimator.transform.GetChild(1).gameObject.SetActive(true);
-        
     }
 }
