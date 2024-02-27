@@ -192,6 +192,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Start
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: PlayerHasChosen
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8419899750369582941}
   m_Solo: 0
@@ -220,25 +223,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Defended
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Start
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: LostAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: PlayerHasChosen
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -319,6 +328,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Start
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: PlayerHasChosen
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6618035784727598660}
   m_Solo: 0
@@ -347,7 +359,7 @@ AnimatorStateMachine:
     m_Position: {x: 730, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8419899750369582941}
-    m_Position: {x: 680, y: 270, z: 0}
+    m_Position: {x: 680, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6384448610413037585}
     m_Position: {x: 470, y: -250, z: 0}

@@ -51,7 +51,7 @@ public class EventHandler : MonoBehaviour
 
     public void PlayOptionsEffectEvent()
     {
-        GetComponentInChildren<ParticleSystem>().Play();
+        transform.GetChild(transform.childCount - 1).GetComponent<ParticleSystem>().Play();
     }
 
     public void OptionsPicked()
@@ -62,15 +62,16 @@ public class EventHandler : MonoBehaviour
 
     public void EnemyDicesAttackDefenceEvent()
     {
-        combatSystem.OptionsPanel.GetComponent<Animator>().enabled = false;
-        Debug.Log("Player win: " + combatSystem.playerWin);
+        if (combatSystem.OptionsPanel.GetComponent<Animator>().GetBool("Attack")) return;
 
+        combatSystem.OptionsPanel.GetComponent<Animator>().enabled = false;
         if (combatSystem.playerWin)
         {
             combatSystem.OptionsPanel.transform.GetChild(1).GetComponent<Animator>().SetBool("Successfully", true);
         }
         combatSystem.OptionsPanel.transform.GetChild(1).GetComponent<Animator>().SetBool("DefendPicked", true);
-        if(!combatSystem.OptionsPanel.GetComponent<Animator>().GetBool("Attack")) combatSystem.OptionsPanel.transform.GetChild(0).gameObject.SetActive(false);
+        combatSystem.OptionsPanel.transform.GetChild(0).gameObject.SetActive(false);
+        combatSystem.messagePanel.GetComponent<Animator>().SetBool("Show", true);
     }
 
     public void PlayerDicesAttackEvent()
@@ -83,6 +84,12 @@ public class EventHandler : MonoBehaviour
         }
         combatSystem.OptionsPanel.transform.GetChild(0).GetComponent<Animator>().SetBool("AttackPicked", true);
         combatSystem.OptionsPanel.transform.GetChild(1).gameObject.SetActive(false);
+        combatSystem.messagePanel.GetComponent<Animator>().SetBool("Show", true);
+    }
+
+    public void SwordIconAttackEvent()
+    {
+        GetComponentInChildren<ParticleSystem>().Play();
     }
 
     public void PlayerSwordStrikeEnemyDiceEvent()
@@ -90,21 +97,16 @@ public class EventHandler : MonoBehaviour
         combatSystem.enemyDices.GetComponent<Animator>().SetBool("LostAttack", true);
     }
 
-    public void EnemyDicesHasBeenReset()
-    {
-        if(combatSystem.enemySpawnPoint.GetComponentInChildren<EnemyStats>().Health > 0) combatSystem.enemyDices.GetComponent<Animator>().enabled = false;
-    }
-
     public void DiceAnimationIsFinishedEvent()
     {
         GetComponent<Animator>().SetBool("GoBackToDefault", true);
         combatSystem.CharacterAttack();
+        combatSystem.messagePanel.GetComponent<Animator>().SetBool("Show", false);
     }
 
     public void PlayerTakeDamageEvent()
     {
         int random = Random.Range(1, 101);
-        Debug.Log("Enemy selected number:" + random);
         if(enemyStats.CritChance >= random)
         {
             Debug.Log("enemy crit on chance: " + enemyStats.CritChance + " selected number: " + random);
