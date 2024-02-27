@@ -193,7 +193,6 @@ public class CombatSystem : MonoBehaviour
             }
             enemyDices.GetComponent<Animator>().enabled = true;
             enemyDices.GetComponent<Animator>().SetBool("Start", false);
-            Debug.Log("Check who wins");
             return;
             
         }
@@ -255,7 +254,6 @@ public class CombatSystem : MonoBehaviour
         OptionsPanel.SetActive(false);
         if(movingCharacter == null)
         {
-            Debug.Log("No attacker");
             combatReset = true;
             return;
         }
