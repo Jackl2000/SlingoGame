@@ -110,7 +110,7 @@ public class CombatSystem : MonoBehaviour
             messagePanel.GetComponent<Animator>().SetBool("Show", true);
             DrawMessageDisapear();
         }
-
+        
         //check for combat end
         if (enemy.GetComponent<EnemyStats>().Health <= 0)
         {
