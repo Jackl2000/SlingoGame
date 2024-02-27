@@ -50,7 +50,15 @@ public class CardGameManager : MonoBehaviour
             cardTexts.Add(goCard.GetComponentInChildren<TextMeshProUGUI>());
             cardImages.Add(goCard.GetComponent<Image>());
         }
-        playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
+        ShuffleCards();
+        if (GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>() == null)
+        {
+            playerData = new PlayerData();
+        }
+        else
+        {
+            playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
+        }
     }
 
     private void Start()
@@ -59,7 +67,7 @@ public class CardGameManager : MonoBehaviour
 
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
 
-        ShuffleCards();
+        
     }
 
     public void ShuffleCards()

@@ -19,8 +19,8 @@ public class EnemyFactory : MonoBehaviour
                 enemy.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 200);
                 enemy.transform.localPosition = new Vector3(0, -40, 0);
                 goblinStats.name = enemyType;
-                goblinStats.Damage = RandomStatInRange(level * level, level * 3 + 2);
-                goblinStats.Health = RandomStatInRange(level, level * 2);
+                goblinStats.Damage = RandomStatInRange(level * level - level + 1, level * 3 + 2);
+                goblinStats.Health = RandomStatInRange(level, level * 4 - 2);
                 goblinStats.CritChance = RandomStatInRange(level, level + 4);
                 break;
             case "Skeleton":
@@ -38,8 +38,8 @@ public class EnemyFactory : MonoBehaviour
                 enemy.transform.localPosition = new Vector3(0, -10, 0);
                 mushroomStats.name = enemyType;
                 mushroomStats.Damage = RandomStatInRange(level + 1, level + 5);
-                mushroomStats.Health = RandomStatInRange(level, level + 4);
-                mushroomStats.CritChance = RandomStatInRange(level * level, level * 4);
+                mushroomStats.Health = RandomStatInRange(level + 2, level + 4);
+                mushroomStats.CritChance = RandomStatInRange(level * level + 2, level * 4);
                 break;
         }
         return enemy;
@@ -47,6 +47,8 @@ public class EnemyFactory : MonoBehaviour
 
     private int RandomStatInRange(int min, int max)
     {
+        if (min <= 0) min = 1;
+        if(max <= 0) max = 1;
         int tmpMin = min;
         if(min > max)
         {

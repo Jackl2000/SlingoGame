@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,7 +68,6 @@ public class ChestChance : MonoBehaviour
         //Change and adjust panel text to current reward and chest type.
         string price = $"Tillykke! \n Du fandt {Reward} kr i kisten";
         chest.GetComponentInChildren<TextMeshProUGUI>().text = price;
-        DropChest();
         Debug.Log("Text is component" + chest.GetComponentInChildren<TextMeshProUGUI>().text);
     }
     //Method to drop chest
@@ -89,7 +86,4 @@ public class ChestChance : MonoBehaviour
             chestAni.SetBool("DropGoldChest", true);
         }
     }
-
-
-
 }

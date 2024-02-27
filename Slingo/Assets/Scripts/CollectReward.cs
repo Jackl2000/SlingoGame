@@ -44,6 +44,7 @@ public class CollectReward : MonoBehaviour
         spinScript.GetComponent<PanelEffects>().spinLeftText = null;
         spinScript.indsatsChoosen = false;
         spinScript.spinLeftText.color = Color.white;
+        spinScript.spinLeftText.text = spinScript.spinLeft.ToString();
         spinScript.spentText.text = "Satsning: " + UIManager.Instance.DisplayMoney(0);
         spinScript.stakes = 0;
         spinScript.spinBuyLimit = 5;
