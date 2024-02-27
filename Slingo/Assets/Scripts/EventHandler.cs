@@ -15,6 +15,7 @@ public class EventHandler : MonoBehaviour
     public EnemyStats enemyStats;
     public LoadingLevel LoadingScene;
     public CombatSystem combatSystem;
+    public ChestChance chestChance;
 
     public void SlingoBoardHideAnimationEvent()
     {
@@ -155,5 +156,12 @@ public class EventHandler : MonoBehaviour
     public void EnemyBorderFinishedEvent()
     {
         GetComponent<Animator>().SetBool("TookDamage", false);
+    }
+
+
+    public void chestParticle()
+    {
+        chestChance.chest.GetComponentInChildren<ParticleSystem>().Play();
+       
     }
 }

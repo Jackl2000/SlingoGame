@@ -23,7 +23,7 @@ public class ChestChance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
     }
 
 
@@ -35,10 +35,12 @@ public class ChestChance : MonoBehaviour
         Debug.Log(chance);
         Debug.Log("Player data: " + PlayerData.Instance.bet);
         //40 chance for silver Chest.
+        //40% chance for silver Chest.
         if (lastBoss != true)
         {
             if (chance <= 0.4f)
             {
+                //Silver chest
                 Reward = Random.Range(150, 250 + 1);
                 chest.GetComponent<Image>().sprite = SilverChestSprite;
                 Debug.Log("Silver chest");
@@ -48,6 +50,7 @@ public class ChestChance : MonoBehaviour
             }
             else
             {
+                //Iron chest
                 Reward = Random.Range(50, 150 + 1);
                 chest.GetComponent<Image>().sprite = IronChestSprite;
                 Debug.Log("Iron chest");
@@ -57,17 +60,19 @@ public class ChestChance : MonoBehaviour
         }
         else
         {
+            //Gold chest
             Reward = Random.Range(250, 500 + 1);
             chest.GetComponent<Image>().sprite = GoldChestSprite;
             Debug.Log("Gold Chest");
             ChestType = "Gold";
             Debug.Log(Reward);
         }
+        //Change and adjust panel text to current reward and chest type.
         string price = $"Tillykke! \n Du fandt {Reward} kr i kisten";
         chest.GetComponentInChildren<TextMeshProUGUI>().text = price;
         Debug.Log("Text is component" + chest.GetComponentInChildren<TextMeshProUGUI>().text);
     }
-
+    //Method to drop chest
     public void DropChest()
     {
         if(ChestType == "Silver")
