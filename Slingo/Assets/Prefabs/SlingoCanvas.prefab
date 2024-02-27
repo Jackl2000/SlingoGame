@@ -6157,8 +6157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: 50}
-  m_SizeDelta: {x: 325, y: 100}
+  m_AnchoredPosition: {x: -0.79995, y: -0}
+  m_SizeDelta: {x: 322.6, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7085072937894584717
 CanvasRenderer:
@@ -6188,7 +6188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Placere en stjerne p\xE5 en fri plads i det fremh\xE6vet r\xE6kke"
+  m_text: "Placere hvor som helst i det fremh\xE6vet r\xE6kke"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
@@ -6215,10 +6215,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.35
-  m_fontSizeBase: 80
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 250
   m_fontStyle: 1
@@ -6251,7 +6251,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 28.734726, y: -122.14162, z: -9.550812, w: -237.49652}
+  m_margin: {x: 1.8886261, y: -29.59816, z: 5.9878654, w: -28.307652}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8266,20 +8266,14 @@ MonoBehaviour:
   gridCheck: {fileID: 4374248674525639591}
   playerData: {fileID: 0}
   spinCountHeader: {fileID: 7787662666394665884}
-  balanceText: {fileID: 4166002204279154401}
-  spentText: {fileID: 7751221399858816658}
-  BackgroundImages:
-  - {fileID: 21300000, guid: c12e746a10db3804da1c8c99dae31dfb, type: 3}
-  - {fileID: 21300000, guid: 19a3dcefdd4e201459a033de5753351d, type: 3}
-  - {fileID: 21300000, guid: f3add0266c0fec64bb1847d308cccfc6, type: 3}
-  - {fileID: 21300000, guid: f0fd259c041f7a94ebd9b92b0a436d9a, type: 3}
   spinSpeed: 15
   spinWaitTime: 0.5
-  wildChance: 7
-  wildArrowChance: 7
+  wildChance: 20
+  wildArrowChance: 10
   startSpins: 10
   spinLeft: 10
   spinBuyLimit: 5
+  spinTwoWild: 0
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
@@ -8295,6 +8289,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f7f73e9c77630cc4a940435ae85f72cb, type: 3}
   textToGoEmpty: []
   slotWildArrow: 
+  balanceText: {fileID: 4166002204279154401}
+  spentText: {fileID: 7751221399858816658}
+  BackgroundImages:
+  - {fileID: 21300000, guid: c12e746a10db3804da1c8c99dae31dfb, type: 3}
+  - {fileID: 21300000, guid: 19a3dcefdd4e201459a033de5753351d, type: 3}
+  - {fileID: 21300000, guid: f3add0266c0fec64bb1847d308cccfc6, type: 3}
+  - {fileID: 21300000, guid: f0fd259c041f7a94ebd9b92b0a436d9a, type: 3}
   collectMessageText: {fileID: 3413761267369758757}
   continueButton: {fileID: 1472758600834327774}
   stopSpinningButton: {fileID: 5159147331774119527}
@@ -9336,7 +9337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &282500094069791873
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27256,6 +27257,7 @@ GameObject:
   - component: {fileID: 3781967943876720531}
   - component: {fileID: 1143314229688765942}
   - component: {fileID: 3091826218167727729}
+  - component: {fileID: 3812286863540816135}
   m_Layer: 5
   m_Name: TipMessage
   m_TagString: Untagged
@@ -27278,10 +27280,10 @@ RectTransform:
   - {fileID: 8917959070810605169}
   m_Father: {fileID: 4424352891198733182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 373, y: 695}
-  m_SizeDelta: {x: 341, y: 500}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 194, y: 540}
+  m_SizeDelta: {x: 340, y: 191.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1143314229688765942
 CanvasRenderer:
@@ -27304,7 +27306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8862745}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -27321,6 +27323,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &3812286863540816135
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7397723533479370982}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02f06070f2e79a64b82a9b4280c22c9e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7450463480513787363
 GameObject:
   m_ObjectHideFlags: 0
@@ -27975,6 +27998,7 @@ MonoBehaviour:
   toggle: {fileID: 5687582340082103092}
   messageTipObject: {fileID: 7397723533479370982}
   isFirstRun: 1
+  isColumnAnimationFinished: 1
   runs: 5
   Columns: []
 --- !u!95 &1421844460600163024

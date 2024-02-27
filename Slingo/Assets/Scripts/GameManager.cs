@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject messageTipObject;
     public bool isFirstRun = true;
 
+    [HideInInspector] public bool isColumnAnimationFinished = true;
 
     public int runs = 5;
 
@@ -50,7 +51,6 @@ public class GameManager : MonoBehaviour
     {
         List<Animator> numbersAnimator = new List<Animator>();
         List<Animator> reversedAnimatorList = new List<Animator>();
-
         foreach (GridNumbers number in gridGeneration.numberPositions.Values) 
         {
             if (spinScript.slotWildArrow.Contains(number.h))
@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
                 if (!number.hasBeenHit)
                 {
                     numbersAnimator.Add(number.gameObject.transform.parent.parent.GetComponent<Animator>());
+                    //number.gameObject.GetComponent<Image>().sprite = spinScript.BackgroundImages[3];
                 }
             }
             if (toReversCount >= 5)
@@ -71,6 +72,8 @@ public class GameManager : MonoBehaviour
         }
         if (!hasPicked)
         {
+            isColumnAnimationFinished = false;
+
             foreach (Animator animator in reversedAnimatorList)
             {
                 animator.gameObject.GetComponentInChildren<Image>().enabled = true;
@@ -80,6 +83,9 @@ public class GameManager : MonoBehaviour
 
                 animator.SetBool("HasPicked", hasPicked);
             }
+
+            isColumnAnimationFinished = true;
+
         }
         //Stops animation
         if (hasPicked && gridGeneration.numberPositions[aiScript.currentNumber].h == gridGeneration.numberPositions[spinScript.numberPressed].h)
@@ -114,15 +120,37 @@ public class GameManager : MonoBehaviour
         if (spinScript.wildsArrow.Count > 0 && wHasBeenTipped == false) // arrow wild appeared set text
         {
             messageTipObject.SetActive(true);
-            messageTipObject.GetComponentInChildren<TextMeshProUGUI>().text = "Placere en stjerne på en fri plads i det fremhævet række";
-            wHasBeenTipped=true;
+            messageTipObject.GetComponentInChildren<TextMeshProUGUI>().text = "Placere hvor som helst i det fremhævet række";
+            wHasBeenTipped = true;
+
+            if (!messageTipObject.GetComponent<Animator>().GetBool("TipMessage"))
+            {
+                messageTipObject.GetComponent<Animator>().SetBool("TipMessage", true);
+            }
+            else
+            {
+                messageTipObject.GetComponent<Animator>().SetTrigger("SmallPop");
+                messageTipObject.GetComponent<Animator>().SetBool("TipMessage", false);
+            }
         }
         if (spinScript.wilds.Count > 0 && sHasBeenTipped == false && spinScript.wildsArrow.Count == 0) //super wild appeared set text 
         {
             messageTipObject.SetActive(true);
-            messageTipObject.GetComponentInChildren<TextMeshProUGUI>().text = "Placere en stjerne på en fri plads hvor som helst på pladen";
+            messageTipObject.GetComponentInChildren<TextMeshProUGUI>().text = "Placere hvor som helst på pladen";
             sHasBeenTipped=true;
+
+            if (!messageTipObject.GetComponent<Animator>().GetBool("TipMessage"))
+            {
+                messageTipObject.GetComponent<Animator>().SetBool("TipMessage", true);
+            }
+            else
+            {
+                messageTipObject.GetComponent<Animator>().SetTrigger("SmallPop");
+                messageTipObject.GetComponent<Animator>().SetBool("TipMessage", false);
+
+            }
         }
+
     }
 
     private void SlingoSimulator()
