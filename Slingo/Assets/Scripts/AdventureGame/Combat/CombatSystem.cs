@@ -1,7 +1,5 @@
-using Codice.Client.Common.GameUI;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -144,8 +142,7 @@ public class CombatSystem : MonoBehaviour
 
     private int Roll()
     {
-        //return Random.Range(1, 7);
-        return 3;
+        return Random.Range(1, 7);
     }
 
     private void DiceReset(GameObject dice, int index)
