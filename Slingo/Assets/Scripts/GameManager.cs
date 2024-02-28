@@ -72,18 +72,17 @@ public class GameManager : MonoBehaviour
         }
         if (!hasPicked)
         {
-            isColumnAnimationFinished = false;
 
+            isColumnAnimationFinished = false;
             foreach (Animator animator in reversedAnimatorList)
             {
                 animator.gameObject.GetComponentInChildren<Image>().enabled = true;
                 animator.SetTrigger("BeatTrigger");
 
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.1f);
 
                 animator.SetBool("HasPicked", hasPicked);
             }
-
             isColumnAnimationFinished = true;
 
         }
