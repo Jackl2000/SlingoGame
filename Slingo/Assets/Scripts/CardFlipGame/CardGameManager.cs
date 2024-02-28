@@ -64,10 +64,8 @@ public class CardGameManager : MonoBehaviour
     private void Start()
     {
         gevintsString = "Bonus gevints: ";
-
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
-
-        
+        indsatsText.text = "Indsats: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.bet);
     }
 
     public void ShuffleCards()
@@ -103,7 +101,6 @@ public class CardGameManager : MonoBehaviour
     {
         PlayerData.Instance.balance += gevints;
         balanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.balance);
-        indsatsText.text = "Indsats: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.bet);
         gevints = 0;
         gevintsText.text = "Bonus gevints: " + gevints.ToString();
 
@@ -182,23 +179,24 @@ public class CardGameManager : MonoBehaviour
             Debug.Log("reward added to 1: " + (præmie - 2));
         }
 
-        if(præmie == 0 || gevints == 50)
+        if(præmie == 0 || gevints == 50 * PlayerData.Instance.bet)
         {
             GameFinishedPanel.SetActive(true);
             gameDone = true;
+            GameFinishedPanel.GetComponentInChildren<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevints);
         }
 
         gevinstButtonText.text = "Tag gevints: " + gevints + "kr";
         
     }
 
-    public void ExitWithReward()
+    public void ExitWithReward(string sceneName)
     {
         PlayerData.Instance.balance += gevints;
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
         gevints = 0;
         gevintsText.text = "Bonus gevints: " + gevints.ToString();
-        SceneSwap.Instance.SceneSwitch("Scene_tai");
+        SceneSwap.Instance.SceneSwitch(sceneName);
     }
  
 }

@@ -36,10 +36,7 @@ public class SceneSwap : MonoBehaviour
 
     public void SceneSwitch(string sceneName)
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            StartCoroutine(TriggerSceneLoad(sceneName));
-        }
+        StartCoroutine(TriggerSceneLoad(sceneName));
     }
 
 
