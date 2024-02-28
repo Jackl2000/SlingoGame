@@ -637,7 +637,7 @@ public class spin : MonoBehaviour
                     if (!number.hasBeenHit && slotWildArrow.Contains(number.h))
                     {
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
-                        //animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
+                        animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
                         //animatorObject.GetComponent<Image>().enabled = true;
                         indexes[number.h - 1]++;
                     }
