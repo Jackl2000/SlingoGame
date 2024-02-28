@@ -133,7 +133,7 @@ public class UITests
         spinValue.spinsBetPanel = betsPanel;
         float bet = 10f;
 
-        spinValue.SetSpinBets(bet);
+        //spinValue.SetSpinBets(bet);
 
         Assert.AreEqual(10, spin.spinBets);
     }

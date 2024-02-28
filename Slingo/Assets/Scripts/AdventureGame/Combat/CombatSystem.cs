@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CombatSystem : MonoBehaviour
 {
@@ -19,6 +22,10 @@ public class CombatSystem : MonoBehaviour
     public Animator sceneTranisition;
     public GameObject chest;
     public GameObject messagePanel;
+    public bool enemyCrits;
+   
+
+
 
     [HideInInspector] public bool playerWin;
 
@@ -44,6 +51,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private bool attackFinished = false;
     [SerializeField] private bool characterMoveBack = false;
     [SerializeField] private bool combatReset = false;
+    private bool playerCritt;
 
     private void Start()
     {
@@ -162,11 +170,18 @@ public class CombatSystem : MonoBehaviour
         if(attack) optionsAnimator.SetBool("Attack", true);
         else optionsAnimator.SetBool("Defend", true);
     }
-
+    /// <summary>
+    /// Checks if action succeds or fails
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="enemy"></param>
+    /// <param name="playerRoll"></param>
+    /// <param name="enemyRoll"></param>
     private void CheckAttack(GameObject player, GameObject enemy, int playerRoll, int enemyRoll)
     {
         playerObject = player;
         enemyObject = enemy;
+        enemyObject.GetComponent<EventHandler>().combatSystem = this;
         enemyDices.GetComponent<Animator>().SetBool("PlayerHasChosen", true);
 
         if (playerRoll > enemyRoll)
@@ -180,7 +195,23 @@ public class CombatSystem : MonoBehaviour
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", true);
                 playerWin = true;
                 messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb lykkedes";
-                
+                Debug.Log("I attack" + playerCritt);
+
+
+                int random = Random.Range(1, 101);
+                Debug.Log("Player selected number:" + random);
+                Debug.Log("luck " + PlayerStats.Instance.Luck);
+                if (PlayerStats.Instance.Luck >= random)
+                {
+                    playerCritt = PlayerStats.Instance.CritAttack = true;
+
+                    messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb lykkedes \n Kritisktræffer";
+                    Debug.Log("kritisk");
+
+
+                }
+
+
             }
             else
             {
@@ -190,6 +221,19 @@ public class CombatSystem : MonoBehaviour
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", false);
                 playerWin = false;
                 messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Forsvar mislykkedes";
+
+                int enemyCritChance = enemy.GetComponent<EnemyStats>().CritChance;
+                int random = Random.Range(1, 2);
+                Debug.Log("this luck no "+ random);
+                Debug.Log("Ene critt chance" + enemyCritChance);
+                if (enemyCritChance >= random)
+                {
+                    enemyCrits = true;
+                    Debug.Log("enemy crit on chance: " + enemyCritChance  + " selected number: " + random);
+                    Debug.Log(enemyCrits);
+                    messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Forsvar mislykkedes \n Kritisktræffer";
+                }
+
             }
             enemyDices.GetComponent<Animator>().enabled = true;
             enemyDices.GetComponent<Animator>().SetBool("Start", false);
@@ -207,6 +251,19 @@ public class CombatSystem : MonoBehaviour
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", true);
                 playerWin = false;
                 messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb mislykkedes";
+
+                int enemyCritChance = enemy.GetComponent<EnemyStats>().CritChance;
+                int random = Random.Range(1, 101);
+                Debug.Log("this luck no " + random);
+                Debug.Log("Ene critt chance" + enemyCritChance);
+                if (enemyCritChance >= random)
+                {
+                    enemyCrits = true;
+                    Debug.Log("enemy crit on chance: " + enemyCritChance + " selected number: " + random);
+                    Debug.Log(enemyCrits);
+                    messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb mislykkedes \n Kritisktræffer";
+                }
+
             }
             else
             {
@@ -302,26 +359,29 @@ public class CombatSystem : MonoBehaviour
         }
     }
 
+
     private IEnumerator Attack(GameObject attacker)
     {
         attackFinished = true;
 
         if(attacker == playerObject)
         {
-            int random = Random.Range(1, 101);
-            Debug.Log("Player selected number:" + random);
-            if (PlayerStats.Instance.Luck >= random)
+      
+            if (playerCritt == true)
             {
-                PlayerStats.Instance.CritAttack = true;
                 attacker.GetComponent<Animator>().SetBool("CritAttack", true);
                 yield return new WaitForSeconds(0.4f);
                 attacker.GetComponent<Animator>().SetBool("CritAttack", false);
                 yield return new WaitForSeconds(0.2f);
                 Turn(attacker);
                 characterMoveBack = true;
+
+                Debug.Log("I attack" + playerCritt);
+
             }
             else
             {
+                playerCritt = false;
                 attacker.GetComponent<Animator>().SetBool("Attack", true);
                 yield return new WaitForSeconds(0.4f);
                 attacker.GetComponent<Animator>().SetBool("Attack", false);

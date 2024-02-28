@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EventHandler : MonoBehaviour
@@ -107,13 +108,16 @@ public class EventHandler : MonoBehaviour
 
     public void PlayerTakeDamageEvent()
     {
-        int random = Random.Range(1, 101);
-        if(enemyStats.CritChance >= random)
+        bool temp = combatSystem.enemyCrits;
+
+        Debug.Log("EV CRITTS " + temp);
+
+        if(combatSystem.enemyCrits == true)
         {
-            Debug.Log("enemy crit on chance: " + enemyStats.CritChance + " selected number: " + random);
             int critDamage = enemyStats.Damage + Mathf.RoundToInt(enemyStats.Damage / 2);
             player.PlayerTakeDamage(critDamage);
             player.GetComponentInParent<CombatUI>().UpdateUI(critDamage, "player");
+            
         }
         else
         {

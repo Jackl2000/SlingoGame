@@ -810,7 +810,7 @@ MonoBehaviour:
   spin: {fileID: 0}
   collectReward: {fileID: 0}
   player: {fileID: 0}
-  enemyStats: {fileID: 0}
+  enemyStats: {fileID: 2510113517606504523, guid: be56929a1a4c01a41907c685172d1575, type: 3}
   LoadingScene: {fileID: 0}
   combatSystem: {fileID: 1937971111}
   chestChance: {fileID: 0}
@@ -12789,7 +12789,7 @@ MonoBehaviour:
   player: {fileID: 1020670073}
   enemyStats: {fileID: 0}
   LoadingScene: {fileID: 0}
-  combatSystem: {fileID: 0}
+  combatSystem: {fileID: 1937971111}
   chestChance: {fileID: 0}
 --- !u!1 &1029351299
 GameObject:
@@ -19531,9 +19531,9 @@ RectTransform:
   - {fileID: 623933642}
   m_Father: {fileID: 1414115212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -545.0001, y: 725}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 90, y: -340}
   m_SizeDelta: {x: 115, y: 152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1314182445
@@ -21704,6 +21704,8 @@ MonoBehaviour:
   sceneTranisition: {fileID: 253951389}
   chest: {fileID: 1875855238}
   messagePanel: {fileID: 41605085}
+  enemyCrits: 0
+  enemyStats: {fileID: 2510113517606504523, guid: be56929a1a4c01a41907c685172d1575, type: 3}
   playerWin: 0
   playerObject: {fileID: 1020670068}
   attackFinished: 0
