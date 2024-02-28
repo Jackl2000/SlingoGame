@@ -204,7 +204,6 @@ public class CardGameManager : MonoBehaviour
         foreach (GameObject go in cardGameObjects)
         {
             if (go.GetComponent<Image>().sprite == goodHit) continue;
-            //go.GetComponent<Image>().sprite = goodHit;
             TextMeshProUGUI cardNumberText = go.GetComponentInChildren<TextMeshProUGUI>();
             switch (Convert.ToInt32(cardNumberText.text))
             {
