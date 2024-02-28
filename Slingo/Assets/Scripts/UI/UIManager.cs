@@ -101,4 +101,9 @@ public class UIManager
             mono.StartCoroutine(TextColorAnimation(mono, text, speed, colors, startingColor, times - 1));
         }
     }
+
+    public void ChangeTextColor(TextMeshProUGUI text, Color color)
+    {
+        text.color = color;
+    }
 }

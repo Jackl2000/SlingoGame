@@ -117,13 +117,9 @@ public class spin : MonoBehaviour
             spinAnimations.Add(spinSlot.gameObject.GetComponent<Animator>());
         }
 
-        collectMessageText.transform.parent.GetChild(2).GetComponent<Button>().onClick.AddListener(() => ChangeTextColor(resetButtonText, Color.white));
+        collectMessageText.transform.parent.GetChild(2).GetComponent<Button>().onClick.AddListener(() => UIManager.Instance.ChangeTextColor(resetButtonText, Color.white));
     }
 
-    private void ChangeTextColor(TextMeshProUGUI text, Color color)
-    {
-        text.color = color;
-    }
 
     private void Update()
     {
