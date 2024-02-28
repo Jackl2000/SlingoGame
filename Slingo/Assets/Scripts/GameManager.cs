@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        BonusGameHit();
+
     }
 
     int toReversCount;
@@ -72,18 +72,17 @@ public class GameManager : MonoBehaviour
         }
         if (!hasPicked)
         {
-            isColumnAnimationFinished = false;
 
+            isColumnAnimationFinished = false;
             foreach (Animator animator in reversedAnimatorList)
             {
                 animator.gameObject.GetComponentInChildren<Image>().enabled = true;
                 animator.SetTrigger("BeatTrigger");
 
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.1f);
 
                 animator.SetBool("HasPicked", hasPicked);
             }
-
             isColumnAnimationFinished = true;
 
         }
@@ -98,9 +97,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void BonusGameHit()
+    public void BonusGameHit()
     {
-        if (gridCheck.slingoCount == 12 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
+        if (gridCheck.slingoCount >= 10 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
         {
             SceneSwap.Instance.SceneSwitch("BonusSpil_CardFlip");
             SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().SetBool("IsLoading", true);

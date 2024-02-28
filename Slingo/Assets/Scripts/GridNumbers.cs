@@ -8,7 +8,7 @@ public class GridNumbers
 {
     public GameObject gameObject;
 
-    private Image starBackgroundImg;
+    public Image starBackgroundImg;
     private Animator starAnimation;
 
     public int number { get; private set; }
@@ -63,6 +63,7 @@ public class GridNumbers
     {
         try
         {
+            
             starBackgroundImg.GetComponentInChildren<Image>().enabled = false;
             starBackgroundImg.transform.GetChild(0).GetComponent<Image>().enabled = false;
             starBackgroundImg.transform.GetChild(1).GetComponent<Image>().enabled = false;

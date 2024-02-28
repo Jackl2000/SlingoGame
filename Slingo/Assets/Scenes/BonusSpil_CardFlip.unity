@@ -1074,8 +1074,8 @@ MonoBehaviour:
 
     Du har vundet en 1 kr.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
+  m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 175.55
+  m_fontSize: 155.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1503,13 +1503,13 @@ MonoBehaviour:
       - m_Target: {fileID: 509815954}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
         m_MethodName: ExitWithReward
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Scene_tai
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &720754222
@@ -1561,6 +1561,7 @@ GameObject:
   - component: {fileID: 806203100}
   - component: {fileID: 806203102}
   - component: {fileID: 806203101}
+  - component: {fileID: 806203103}
   m_Layer: 5
   m_Name: GameFinishedPanel
   m_TagString: Untagged
@@ -1627,6 +1628,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806203099}
   m_CullTransparentMesh: 1
+--- !u!95 &806203103
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806203099}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9aa3ab447e5091d4196bc1768e658311, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &827306089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,14 +2892,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 509815954}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
-        m_MethodName: LoadMainScene
-        m_Mode: 1
+        m_MethodName: ExitWithReward
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ScrollOut
+          m_StringArgument: Scene_tai
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 516100995}
@@ -2987,10 +3009,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Modtag og forts\xE6t"
+  m_text: Tag gevints
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
+  m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3014,7 +3036,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 147.4
+  m_fontSize: 155
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3526,6 +3548,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardFlipCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8241790910725372924, guid: 136c0c1324ac5bb49854d9e3c940ff9e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8896098741059216162, guid: 136c0c1324ac5bb49854d9e3c940ff9e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3582,6 +3608,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 971794525}
   - {fileID: 1189174155}
+  - {fileID: 7050469681534511675}
   - {fileID: 269673943}
   - {fileID: 1626483486}
-  - {fileID: 7050469681534511675}
