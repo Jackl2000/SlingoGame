@@ -547,7 +547,7 @@ public class spin : MonoBehaviour
                 string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
                 if (gridCheck.slingoCount >= 3)
                 {
-                    if (gridCheck.slingoCount > 10)
+                    if (gridCheck.slingoCount > 9)
                     {
                         collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
                         collectMessageText.transform.parent.GetChild(0).gameObject.SetActive(false);

@@ -34,11 +34,11 @@ public class SceneSwap : MonoBehaviour
         }
     }
 
+
     public void SceneSwitch(string sceneName)
     {
         StartCoroutine(TriggerSceneLoad(sceneName));
     }
-
 
 
     IEnumerator TriggerSceneLoad(string sceneName)

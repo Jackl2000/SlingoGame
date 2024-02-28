@@ -1509,7 +1509,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: JackScene
+          m_StringArgument: Scene_tai
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &720754222
@@ -2870,14 +2870,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 509815954}
         m_TargetAssemblyTypeName: CardGameManager, Scripts
-        m_MethodName: LoadMainScene
-        m_Mode: 1
+        m_MethodName: ExitWithReward
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ScrollOut
+          m_StringArgument: Scene_tai
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 516100995}
@@ -2987,7 +2987,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Modtag og forts\xE6t"
+  m_text: Tag gevints
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
   m_sharedMaterial: {fileID: -1750012989808577806, guid: 91d36d4633f7e24419f79779d6eacf4a, type: 2}
@@ -3586,6 +3586,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 971794525}
   - {fileID: 1189174155}
+  - {fileID: 7050469681534511675}
   - {fileID: 269673943}
   - {fileID: 1626483486}
-  - {fileID: 7050469681534511675}

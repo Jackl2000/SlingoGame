@@ -19,14 +19,10 @@ public class CollectReward : MonoBehaviour
  
     private GridCheck gridCheck;
 
-    private CollectMessage collectMessageScript;
-
-
     private void Awake()
     {
         gridCheck = GetComponent<GridCheck>();
 
-        collectMessageScript = collectBorderMessage.GetComponent<CollectMessage>();
     } 
 
     public void Collect()
@@ -35,65 +31,66 @@ public class CollectReward : MonoBehaviour
         {
             return;
         }
-        //Reset values in spin
-        spinsCounter.text = spinScript.spinLeft.ToString();
-        spinScript.textToGoEmpty.Clear();
-        spinScript.spinCountHeader.text = "SPINS";
-        spinScript.spinLeft = spinScript.startSpins;
-        spinScript.GetComponent<PanelEffects>().spinLeftText = null;
-        spinScript.indsatsChoosen = false;
-        spinScript.spinLeftText.color = Color.white;
-        spinScript.spinLeftText.text = spinScript.spinLeft.ToString();
-        spinScript.spentText.text = "Satsning: " + UIManager.Instance.DisplayMoney(0);
-        spinScript.stakes = 0;
-        spinScript.spinBuyLimit = 5;
-        spinScript.wildPicks = 0;
 
-        spinScript.spinButton.GetComponent<Image>().color = Color.black;
-        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-        spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Spil";
-
-        spinScript.resetButtonText.color = Color.gray;
-        spinScript.resetButtonText.GetComponentInParent<Button>().enabled = false;
-        spinScript.resetButtonText.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
-        
-        spinScript.MessageAnimator.SetBool("MinimizePlate", false);
-        spinScript.ColorReset();
-
-        foreach (var spinSlot in spinScript.slotsList)
-        {
-            spinSlot.GetComponentInChildren<Image>().color = Color.white;
-            spinSlot.GetComponentInChildren<Image>().enabled = false;
-            spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
-        }
-
-        if(gridCheck.slingoCount >= 3)
-        {
-            PlayerData.Instance.balance += gridCheck.rewards[gridCheck.slingoCount];
-            balanceBorder.GetComponent<Animator>().SetBool("BalanceIncreased", true);
-            
-
-        }
-        
-        ResetTime();
-        GetComponent<GridGeneration>().ReGenerateGrid();
 
         if (gridCheck.slingoCount >= 10)
         {
-            collectMessageScript.text.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
-            collectMessageScript.collectObject.SetActive(false);
-            collectMessageScript.bonusObject.SetActive(true);
-            collectMessageScript.closeObject.SetActive(false);
-
+            collectBorderMessage.SetActive(true);
             spinScript.collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
-            spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(0).gameObject.SetActive(false);
-            spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(1).gameObject.SetActive(true);
-            spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(2).gameObject.SetActive(false);
+            spinScript.collectMessageText.transform.parent.GetChild(0).gameObject.SetActive(false);
+            spinScript.collectMessageText.transform.parent.GetChild(1).gameObject.SetActive(true);
+            spinScript.collectMessageText.transform.parent.GetChild(2).gameObject.SetActive(false);
+
+            //spinScript.collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
+            //spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(0).gameObject.SetActive(false);
+            //spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(1).gameObject.SetActive(true);
+            //spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(2).gameObject.SetActive(false);
         }
         else
         {
             collectBorderMessage.SetActive(false);
+
+            //Reset values in spin
+            spinsCounter.text = spinScript.spinLeft.ToString();
+            spinScript.textToGoEmpty.Clear();
+            spinScript.spinCountHeader.text = "SPINS";
+            spinScript.spinLeft = spinScript.startSpins;
+            spinScript.GetComponent<PanelEffects>().spinLeftText = null;
+            spinScript.indsatsChoosen = false;
+            spinScript.spinLeftText.color = Color.white;
+            spinScript.spinLeftText.text = spinScript.spinLeft.ToString();
+            spinScript.spentText.text = "Satsning: " + UIManager.Instance.DisplayMoney(0);
+            spinScript.stakes = 0;
+            spinScript.spinBuyLimit = 5;
+            spinScript.wildPicks = 0;
+
+            spinScript.spinButton.GetComponent<Image>().color = Color.black;
+            spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
+            spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Spil";
+
+            spinScript.resetButtonText.color = Color.gray;
+            spinScript.resetButtonText.GetComponentInParent<Button>().enabled = false;
+            spinScript.resetButtonText.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
+
+            spinScript.MessageAnimator.SetBool("MinimizePlate", false);
+            spinScript.ColorReset();
+
+            foreach (var spinSlot in spinScript.slotsList)
+            {
+                spinSlot.GetComponentInChildren<Image>().color = Color.white;
+                spinSlot.GetComponentInChildren<Image>().enabled = false;
+                spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+            }
+
+            if (gridCheck.slingoCount >= 3)
+            {
+                PlayerData.Instance.balance += gridCheck.rewards[gridCheck.slingoCount];
+                balanceBorder.GetComponent<Animator>().SetBool("BalanceIncreased", true);
+            }
+
+            ResetTime();
+            GetComponent<GridGeneration>().ReGenerateGrid();
         }
     }
 
