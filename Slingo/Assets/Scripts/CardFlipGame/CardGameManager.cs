@@ -204,10 +204,13 @@ public class CardGameManager : MonoBehaviour
         foreach (GameObject go in cardGameObjects)
         {
             if (go.GetComponent<Image>().sprite == goodHit) continue;
-            go.GetComponent<Image>().sprite = goodHit;
+            //go.GetComponent<Image>().sprite = goodHit;
             TextMeshProUGUI cardNumberText = go.GetComponentInChildren<TextMeshProUGUI>();
             switch (Convert.ToInt32(cardNumberText.text))
             {
+                case 1:
+                    go.GetComponent<Image>().sprite = badHit;
+                    break;
                 case 2:
                     præmie = 0.5f * multiplier;
                     break;
@@ -233,8 +236,12 @@ public class CardGameManager : MonoBehaviour
                     præmie = 20 * multiplier;
                     break;
             }
-            cardNumberText.enabled = true;
-            cardNumberText.text = præmie.ToString();
+
+            if(præmie != 0)
+            {
+                cardNumberText.enabled = true;
+                cardNumberText.text = præmie.ToString();
+            }
         }
     }
 
