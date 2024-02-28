@@ -197,8 +197,8 @@ public class CombatUI : MonoBehaviour
         optionsParent.GetComponent<Animator>().enabled = true;
     }
 
-    public void Exit()
+    public void Exit(string sceneName)
     {
-        SceneManager.LoadSceneAsync("CharacterCreation");
+        SceneManager.LoadSceneAsync(sceneName);
     }
 }

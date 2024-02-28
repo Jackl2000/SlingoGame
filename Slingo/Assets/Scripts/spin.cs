@@ -131,7 +131,7 @@ public class spin : MonoBehaviour
         }
         if (gridCheck.slingoCount >= 10)
         {
-            resetButtonText.text = "JACKPOT FLASH";
+            resetButtonText.text = "JACKPOT FLASH + " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
         }
 
         if (spinLeft == 0)

@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void BonusGameHit()
     {
+        PlayerData.Instance.balance += gridCheck.rewards[gridCheck.slingoCount];
         if (gridCheck.slingoCount >= 10 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
         {
             SceneSwap.Instance.SceneSwitch("BonusSpil_CardFlip");

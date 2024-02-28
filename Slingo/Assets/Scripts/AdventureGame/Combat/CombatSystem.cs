@@ -206,12 +206,7 @@ public class CombatSystem : MonoBehaviour
                     playerCritt = PlayerStats.Instance.CritAttack = true;
 
                     messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb lykkedes \n Kritisktræffer";
-                    Debug.Log("kritisk");
-
-
                 }
-
-
             }
             else
             {
@@ -223,7 +218,7 @@ public class CombatSystem : MonoBehaviour
                 messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Forsvar mislykkedes";
 
                 int enemyCritChance = enemy.GetComponent<EnemyStats>().CritChance;
-                int random = Random.Range(1, 2);
+                int random = Random.Range(1, 101);
                 Debug.Log("this luck no "+ random);
                 Debug.Log("Ene critt chance" + enemyCritChance);
                 if (enemyCritChance >= random)

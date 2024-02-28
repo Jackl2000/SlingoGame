@@ -72,9 +72,9 @@ public class GridCheck : MonoBehaviour
         rewards.Add(7, 10 * multiplyere);
         rewards.Add(8, 12 * multiplyere);
         rewards.Add(9, 15 * multiplyere);
-        rewards.Add(10, 20 * multiplyere);
-        rewards.Add(11, 20 * multiplyere);
-        rewards.Add(12, 20 * multiplyere);
+        rewards.Add(10, 15 * multiplyere);
+        rewards.Add(11, 15 * multiplyere);
+        rewards.Add(12, 15 * multiplyere);
 
         if(slingoRewards != null)
         {
@@ -87,7 +87,8 @@ public class GridCheck : MonoBehaviour
             }
         }
 
-        slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[3]);
+        if(slingoCount == 0) slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[3]);
+        else if(slingoCount >= 9) slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[3]);
     }
 
     private IEnumerator TextColorAnimation(TextMeshProUGUI text, float speed, Color[] colors, int times, bool backWards = false)
@@ -329,15 +330,24 @@ public class GridCheck : MonoBehaviour
 
     private IEnumerator UpdateButton()
     {
-        if(slingoCount >= 10)
+        if(slingoCount >= 9)
         {
             StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>(), 0.04f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, Color.white, 2));
             StartCoroutine(UIManager.Instance.TextColorAnimation(this, slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>(), 0.02f, new Color[4] { Color.red, Color.green, Color.blue, Color.yellow }, Color.white, 2));
             slingoRewardButton.GetComponent<MoneyEffect>().playAnimation = true;
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", true);
             yield return new WaitForSeconds(0.3f);
-            slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "SUPER JACKPOT FLASH";
-            slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "BIGGEST PRICE!";
+            if(slingoCount == 9)
+            {
+                slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "JACKPOT FLASH";
+                slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "10 rækker";
+            }
+            else if(slingoCount == 10)
+            {
+                slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "SUPER JACKPOT FLASH";
+                slingoRewardButton.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "BIGGEST PRICE!";
+            }
+
             yield return new WaitForSeconds(0.7f);
             slingoRewardButton.GetComponent<Animator>().SetBool("Slingo", false);
         }
