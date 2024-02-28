@@ -21,6 +21,8 @@ public class CollectReward : MonoBehaviour
  
     private GridCheck gridCheck;
 
+    private CollectMessage collectMessageScript;
+
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class CollectReward : MonoBehaviour
         playerData = GameObject.Find("PlayerData").gameObject.gameObject.GetComponent<PlayerData>();
         //playerData = GetComponent<PlayerData>();
 
+        collectMessageScript = collectBorderMessage.GetComponent<CollectMessage>();
     } 
 
     public void Collect()
@@ -55,9 +58,9 @@ public class CollectReward : MonoBehaviour
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Spil";
 
-        spinScript.resetButton.color = Color.gray;
-        spinScript.resetButton.GetComponentInParent<Button>().enabled = false;
-        spinScript.resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
+        spinScript.resetButtonText.color = Color.gray;
+        spinScript.resetButtonText.GetComponentInParent<Button>().enabled = false;
+        spinScript.resetButtonText.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
         
         spinScript.MessageAnimator.SetBool("MinimizePlate", false);
         spinScript.ColorReset();
@@ -77,10 +80,25 @@ public class CollectReward : MonoBehaviour
 
         }
         
-        collectBorderMessage.SetActive(false);
         ResetTime();
         GetComponent<GridGeneration>().ReGenerateGrid();
-       
+
+        if (gridCheck.slingoCount >= 10)
+        {
+            collectMessageScript.text.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
+            collectMessageScript.collectObject.SetActive(false);
+            collectMessageScript.bonusObject.SetActive(true);
+            collectMessageScript.closeObject.SetActive(false);
+
+            spinScript.collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
+            spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(0).gameObject.SetActive(false);
+            spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(1).gameObject.SetActive(true);
+            spinScript.collectMessageText.transform.parent.GetChild(1).GetChild(2).gameObject.SetActive(false);
+        }
+        else
+        {
+            collectBorderMessage.SetActive(false);
+        }
     }
 
     public void ResetTime()
