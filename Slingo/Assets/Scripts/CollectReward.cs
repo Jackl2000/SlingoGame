@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,9 +13,6 @@ public class CollectReward : MonoBehaviour
     [SerializeField] private TextMeshProUGUI spinsCounter;
 
     [Header("Collect message settings")]
-    public GameObject collectBorderMessage;
-    public TextMeshProUGUI collectMessage;
-    public float invokeTime = 5;
     public GameObject balanceBorder;
  
     private GridCheck gridCheck;
@@ -35,7 +33,7 @@ public class CollectReward : MonoBehaviour
 
         if (gridCheck.slingoCount >= 10)
         {
-            collectBorderMessage.SetActive(true);
+            spinScript.collectMessageText.transform.parent.parent.gameObject.SetActive(true); //CollectMessage
             spinScript.collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
             spinScript.collectMessageText.transform.parent.GetChild(0).gameObject.SetActive(false);
             spinScript.collectMessageText.transform.parent.GetChild(1).gameObject.SetActive(true);
@@ -44,7 +42,7 @@ public class CollectReward : MonoBehaviour
         else
         {
             //Reset values in spin
-            spinsCounter.text = spinScript.spinLeft.ToString();
+            spinScript.spinLeftText.text = spinScript.spinLeft.ToString();
             spinScript.textToGoEmpty.Clear();
             spinScript.spinCountHeader.text = "SPINS";
             spinScript.spinLeft = spinScript.startSpins;
@@ -52,11 +50,12 @@ public class CollectReward : MonoBehaviour
             spinScript.indsatsChoosen = false;
             spinScript.spinLeftText.color = Color.white;
             spinScript.spinLeftText.text = spinScript.spinLeft.ToString();
-            spinScript.spentText.text = "Satsning: " + UIManager.Instance.DisplayMoney(0);
+            spinScript.spentText.text = "Indsat: " + UIManager.Instance.DisplayMoney(0);
             spinScript.stakes = 0;
             spinScript.spinBuyLimit = 5;
             spinScript.wildPicks = 0;
 
+            
             spinScript.spinButton.GetComponent<Image>().color = Color.black;
             spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
             spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
@@ -67,6 +66,7 @@ public class CollectReward : MonoBehaviour
             spinScript.resetButtonText.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
 
             spinScript.MessageAnimator.SetBool("MinimizePlate", false);
+            spinScript.collectMessageText.text = "SPIL SLUT";
             spinScript.ColorReset();
 
             foreach (var spinSlot in spinScript.slotsList)
@@ -82,15 +82,10 @@ public class CollectReward : MonoBehaviour
                 balanceBorder.GetComponent<Animator>().SetBool("BalanceIncreased", true);
             }
 
-            ResetTime();
             GetComponent<GridGeneration>().ReGenerateGrid();
         }
     }
 
-    public void ResetTime()
-    {
-        invokeTime = 0;
-    }
 
     public void stopAni()
     {
