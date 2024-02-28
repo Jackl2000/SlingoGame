@@ -181,13 +181,68 @@ public class CardGameManager : MonoBehaviour
 
         if(præmie == 0 || gevints == 50 * PlayerData.Instance.bet)
         {
-            GameFinishedPanel.SetActive(true);
             gameDone = true;
-            GameFinishedPanel.GetComponentInChildren<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevints);
+            StartCoroutine(ShowMessage());
         }
 
         gevinstButtonText.text = "Tag gevints: " + gevints + "kr";
         
+    }
+
+    private IEnumerator ShowMessage()
+    {
+        FlipAllCards();
+        yield return new WaitForSeconds(3);
+        GameFinishedPanel.SetActive(true);
+        GameFinishedPanel.GetComponentInChildren<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevints);
+    }
+
+    private void FlipAllCards()
+    {
+        float præmie = 0;
+        float multiplier = PlayerData.Instance.bet;
+        foreach (GameObject go in cardGameObjects)
+        {
+            if (go.GetComponent<Image>().sprite == goodHit) continue;
+            //go.GetComponent<Image>().sprite = goodHit;
+            TextMeshProUGUI cardNumberText = go.GetComponentInChildren<TextMeshProUGUI>();
+            switch (Convert.ToInt32(cardNumberText.text))
+            {
+                case 1:
+                    go.GetComponent<Image>().sprite = badHit;
+                    break;
+                case 2:
+                    præmie = 0.5f * multiplier;
+                    break;
+                case 3:
+                    præmie = multiplier;
+                    break;
+                case 4:
+                    præmie = 1.5f * multiplier;
+                    break;
+                case 5:
+                    præmie = 2 * multiplier;
+                    break;
+                case 6:
+                    præmie = 5 * multiplier;
+                    break;
+                case 7:
+                    præmie = 8 * multiplier;
+                    break;
+                case 8:
+                    præmie = 12 * multiplier;
+                    break;
+                case 9:
+                    præmie = 20 * multiplier;
+                    break;
+            }
+
+            if(præmie != 0)
+            {
+                cardNumberText.enabled = true;
+                cardNumberText.text = præmie.ToString();
+            }
+        }
     }
 
     public void ExitWithReward(string sceneName)

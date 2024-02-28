@@ -8264,7 +8264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridGeneration: {fileID: 1458205632472944407}
   gridCheck: {fileID: 4374248674525639591}
-  playerData: {fileID: 0}
   spinCountHeader: {fileID: 7787662666394665884}
   spinSpeed: 15
   spinWaitTime: 0.5
@@ -27968,7 +27967,6 @@ MonoBehaviour:
   collectMessage: {fileID: 3413761267369758757}
   invokeTime: 5
   balanceBorder: {fileID: 6023146232900017989}
-  playerData: {fileID: 0}
 --- !u!114 &1198515194112576019
 MonoBehaviour:
   m_ObjectHideFlags: 0
