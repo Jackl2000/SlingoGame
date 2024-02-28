@@ -554,6 +554,8 @@ public class spin : MonoBehaviour
             else if (spinBuyLimit == 0 || gridCheck.slingoCount >= 12)
             {
                 string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
+                resetButtonText.transform.parent.GetComponent<Button>().enabled = false;
+
                 if (gridCheck.slingoCount >= 3)
                 {
                     if (gridCheck.slingoCount > 9)
