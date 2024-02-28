@@ -12,7 +12,6 @@ public class spin : MonoBehaviour
     public GridCheck gridCheck;
     public TextMeshProUGUI spinCountHeader;
 
-
     [Space(7)]
     [Header("Spin settings")]
     public float spinSpeed = 5f;
@@ -22,6 +21,7 @@ public class spin : MonoBehaviour
     [SerializeField] private float spinWaitTime;
     [SerializeField] private int wildChance;
     [SerializeField] private int wildArrowChance;
+
     [Space(5)]
     public int startSpins = 10;
     [HideInInspector] public int spinLeft;
@@ -33,7 +33,7 @@ public class spin : MonoBehaviour
     [Header("Spin UI")]
     public TextMeshProUGUI spinLeftText;
     public Button spinButton;
-    public TextMeshProUGUI resetButtonText;
+
     [Space(10)]
     public List<GameObject> slotsList = new List<GameObject>();
     public Sprite[] wildsImages;
@@ -45,11 +45,14 @@ public class spin : MonoBehaviour
     public Queue<GameObject> wildsArrow = new Queue<GameObject>();
     [HideInInspector]public List<int> slotWildArrow = new List<int>();
 
-    [Space(5)]
+    //______________________________________________________________________________________________________
+    [Space(5)] 
+    public TextMeshProUGUI resetButtonText;
     public TextMeshProUGUI balanceText;
     public TextMeshProUGUI spentText;
 
     public Sprite[] BackgroundImages;
+    //______________________________________________________________________________________________________
 
     public TextMeshProUGUI collectMessageText;
     [SerializeField] private Button continueButton;
@@ -113,8 +116,14 @@ public class spin : MonoBehaviour
             slotTextList.Add(spinSlot.GetComponentInChildren<TextMeshProUGUI>());
             spinAnimations.Add(spinSlot.gameObject.GetComponent<Animator>());
         }
+
+        collectMessageText.transform.parent.GetChild(2).GetComponent<Button>().onClick.AddListener(() => ChangeTextColor(resetButtonText, Color.white));
     }
 
+    private void ChangeTextColor(TextMeshProUGUI text, Color color)
+    {
+        text.color = color;
+    }
 
     private void Update()
     {
@@ -335,7 +344,7 @@ public class spin : MonoBehaviour
         }
         if (spinBuyLimit >= 0 && spinLeft <= 0 && gridCheck.slingoAnimationFinished)
         {
-            resetButtonText.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+            resetButtonText.GetComponent<TextMeshProUGUI>().color = Color.gray;
             isMessageActive = false;
             
             PlayerData.Instance.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(6));

@@ -8411,7 +8411,6 @@ MonoBehaviour:
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
-  resetButtonText: {fileID: 107935079296888355}
   slotsList:
   - {fileID: 7798638019828884268}
   - {fileID: 3026685873912758083}
@@ -8423,6 +8422,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f7f73e9c77630cc4a940435ae85f72cb, type: 3}
   textToGoEmpty: []
   slotWildArrow: 
+  resetButtonText: {fileID: 107935079296888355}
   balanceText: {fileID: 4166002204279154401}
   spentText: {fileID: 7751221399858816658}
   BackgroundImages:
@@ -28522,9 +28522,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinScript: {fileID: 4055942201498400139}
   spinsCounter: {fileID: 7484134286775104099}
-  collectBorderMessage: {fileID: 4615568449392734210}
-  collectMessage: {fileID: 3413761267369758757}
-  invokeTime: 5
   balanceBorder: {fileID: 6023146232900017989}
 --- !u!114 &1198515194112576019
 MonoBehaviour:
