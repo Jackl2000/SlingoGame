@@ -5012,7 +5012,8 @@ MonoBehaviour:
   enemyStats: {fileID: 2510113517606504523}
   LoadingScene: {fileID: 0}
   combatSystem: {fileID: 0}
-  particlesystem: {fileID: 0}
+  chestChance: {fileID: 0}
+  enemyCritted: 0
 --- !u!1 &8622218584364689890
 GameObject:
   m_ObjectHideFlags: 0
