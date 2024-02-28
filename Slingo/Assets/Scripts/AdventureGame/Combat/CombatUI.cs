@@ -55,7 +55,7 @@ public class CombatUI : MonoBehaviour
             heartTransform.anchorMax = anchorMax;
             heartTransform.anchorMin = anchorMin;
             halfHeart.GetComponent<Image>().sprite = heartsSprite[1];
-            heartTransform.anchoredPosition = new Vector3(xStart, -400, 0);
+            heartTransform.anchoredPosition = new Vector3(xStart, -500, 0);
             hearts.Add(halfHeart);
         }
         else
@@ -66,7 +66,7 @@ public class CombatUI : MonoBehaviour
                 RectTransform heartTransform = heart.GetComponent<RectTransform>();
                 heartTransform.anchorMax = anchorMax;
                 heartTransform.anchorMin = anchorMin;
-                heartTransform.anchoredPosition = new Vector3(xStart + (xIndex * 120), -400 - yPosition, 0);
+                heartTransform.anchoredPosition = new Vector3(xStart + (xIndex * 120), -500 - yPosition, 0);
 
                 xIndex++;
                 yIndex++;
@@ -87,7 +87,7 @@ public class CombatUI : MonoBehaviour
                 halfHeart.GetComponent<Image>().sprite = heartsSprite[1];
                 int y = hearts.Count / 4;
                 int x = hearts.Count - (y * 4);
-                heartTransform.anchoredPosition = new Vector3(xStart + (x * 120), -400 - (y * 100), 0);
+                heartTransform.anchoredPosition = new Vector3(xStart + (x * 120), -500 - (y * 100), 0);
                 hearts.Add(halfHeart);
             }
         }
@@ -188,7 +188,6 @@ public class CombatUI : MonoBehaviour
         attack.transform.localScale = Vector3.one;
         attack.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
         attack.transform.localRotation = Quaternion.identity;
-        //attack.transform.GetChild(0).gameObject.transform.localRotation = Quaternion.identity;
         GameObject defend = optionsParent.transform.GetChild(1).gameObject;
         defend.GetComponent<Image>().fillAmount = 1;
         defend.transform.localPosition = new Vector3(150, 0, 0);

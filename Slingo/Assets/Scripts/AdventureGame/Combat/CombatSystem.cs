@@ -110,7 +110,7 @@ public class CombatSystem : MonoBehaviour
             messagePanel.GetComponent<Animator>().SetBool("Show", true);
             DrawMessageDisapear();
         }
-
+        
         //check for combat end
         if (enemy.GetComponent<EnemyStats>().Health <= 0)
         {
@@ -193,7 +193,6 @@ public class CombatSystem : MonoBehaviour
             }
             enemyDices.GetComponent<Animator>().enabled = true;
             enemyDices.GetComponent<Animator>().SetBool("Start", false);
-            Debug.Log("Check who wins");
             return;
             
         }
@@ -218,7 +217,6 @@ public class CombatSystem : MonoBehaviour
             }
             enemyDices.GetComponent<Animator>().enabled = true;
             enemyDices.GetComponent<Animator>().SetBool("Start", false);
-            Debug.Log("Check who wins");
             return;
         }
         messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Uafgjort";
@@ -238,6 +236,7 @@ public class CombatSystem : MonoBehaviour
         {
             PlayerStats.Instance.Level++;
             chest.GetComponent<ChestChance>().DropChest();
+            chest.GetComponent<ChestChance>().TotalRewards();
         }
         else
         {
@@ -256,7 +255,6 @@ public class CombatSystem : MonoBehaviour
         OptionsPanel.SetActive(false);
         if(movingCharacter == null)
         {
-            Debug.Log("No attacker");
             combatReset = true;
             return;
         }

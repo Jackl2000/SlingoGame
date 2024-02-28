@@ -102,14 +102,14 @@ public class GameManager : MonoBehaviour
     {
         if (gridCheck.slingoCount == 10 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
         {
-            SceneSwap.Instance.SceneSwitch(1);
+            SceneSwap.Instance.SceneSwitch("BonusSpil_CardFlip");
             SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().SetBool("IsLoading", true);
         }
     }
 
-    public void BonusGameSwitch(int sceneIndex)
+    public void BonusGameSwitch(string sceneName) //Change button onclick from int to string in parameter
     {
-        SceneSwap.Instance.SceneSwitch(sceneIndex);
+        SceneSwap.Instance.SceneSwitch(sceneName);
     }
 
     bool wHasBeenTipped = false;

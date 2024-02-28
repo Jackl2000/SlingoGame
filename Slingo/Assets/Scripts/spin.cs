@@ -10,7 +10,6 @@ public class spin : MonoBehaviour
     [Header("References")]
     public GridGeneration gridGeneration;
     public GridCheck gridCheck;
-    public PlayerData playerData;
     public TextMeshProUGUI spinCountHeader;
 
 
@@ -106,7 +105,6 @@ public class spin : MonoBehaviour
         AI = GetComponentInParent<AI>();
         blinkEffect = GetComponent<PanelEffects>();
         calculations = GetComponent<Calculations>();
-        playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
 
         
         if (spinButton != null) spinButtonAnimation = spinButton.GetComponent<Animator>();
@@ -137,7 +135,7 @@ public class spin : MonoBehaviour
             spinLeft = -1;
         }
 
-        balanceText.text = UIManager.Instance.DisplayMoney(playerData.balance);
+        balanceText.text = UIManager.Instance.DisplayMoney(PlayerData.Instance.balance);
 
         #region Enables to pick any number on plate if user got wildpicks
         if (wildPicked == wildPicks)
@@ -333,14 +331,14 @@ public class spin : MonoBehaviour
             isMessageActive = false;
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(false);
             spinButton.GetComponent<Image>().color = Color.white;
-            playerData.balance -= spinBets;
+            PlayerData.Instance.balance -= spinBets;
         }
         if (spinBuyLimit >= 0 && spinLeft <= 0 && gridCheck.slingoAnimationFinished)
         {
             resetButtonText.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
             isMessageActive = false;
             
-            playerData.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(6));
+            PlayerData.Instance.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(6));
 
             spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
             spinBuyLimit--;

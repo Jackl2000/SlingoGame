@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene_tai.unity
     guid: 445f9b319cedc5548a169f28bbcd29a6
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/CharacterCreation.unity
     guid: 4725db50ee1778d41808fc2f322bc963
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/AdventureGameLoadLevelScene.unity
     guid: d477617b58987414fbb9e13786f43859
   - enabled: 1

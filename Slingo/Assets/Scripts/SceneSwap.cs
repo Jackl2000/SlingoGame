@@ -29,32 +29,25 @@ public class SceneSwap : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            SceneSwitch(1);
+            SceneSwitch("BonusSpil_CardFlip");
             Debug.Log(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
-    public void SceneSwitch(int index)
+    public void SceneSwitch(string sceneName)
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            StartCoroutine(TriggerSceneLoad(index));
-        }
-        else
-        {
-            StartCoroutine(TriggerSceneLoad(0));
-        }
+        StartCoroutine(TriggerSceneLoad(sceneName));
     }
 
 
 
-    IEnumerator TriggerSceneLoad(int sceneIndex)
+    IEnumerator TriggerSceneLoad(string sceneName)
     {
         animator.SetTrigger("EnterScene");
 
         yield return new WaitForSeconds(transitionTime);
 
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneName);
 
         yield return new WaitForSeconds(5f);
         animator.SetBool("IsLoading", false);

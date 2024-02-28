@@ -10,7 +10,7 @@ public class CardGameManager : MonoBehaviour
     [Header("References")]
     private PlayerData playerData;
     public spin spinScript;
-
+    public GameObject GameFinishedPanel;
     private CardGameManager gameManager;
     private Animator animator;
 
@@ -21,10 +21,9 @@ public class CardGameManager : MonoBehaviour
 
     [Space(5)]
     [Header("Reward Setting")]
-    public float multiplier = 0.5f;
+    //public float multiplier = 0.5f;
     private int rndCard;
     private float gevints;
-    private float præmie;
     private GameObject LostGameObject;
     public TextMeshProUGUI gevinstButtonText;
 
@@ -40,6 +39,7 @@ public class CardGameManager : MonoBehaviour
     public Sprite badHit;
 
     private string gevintsString;
+    private bool gameDone = false;
 
     private void Awake()
     {
@@ -51,23 +51,21 @@ public class CardGameManager : MonoBehaviour
             cardImages.Add(goCard.GetComponent<Image>());
         }
         ShuffleCards();
-        if (GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>() == null)
-        {
-            playerData = new PlayerData();
-        }
-        else
-        {
-            playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
-        }
+        //if (GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>() == null)
+        //{
+        //    playerData = new PlayerData();
+        //}
+        //else
+        //{
+        //    playerData = GameObject.Find("PlayerData").gameObject.GetComponent<PlayerData>();
+        //}
     }
 
     private void Start()
     {
         gevintsString = "Bonus gevints: ";
-
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
-
-        
+        indsatsText.text = "Indsats: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.bet);
     }
 
     public void ShuffleCards()
@@ -95,7 +93,6 @@ public class CardGameManager : MonoBehaviour
                     }
                 }
             }
-
         }
         usedNumb.Clear();
     }
@@ -103,7 +100,7 @@ public class CardGameManager : MonoBehaviour
     public void NewGame()
     {
         PlayerData.Instance.balance += gevints;
-        balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
+        balanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.balance);
         gevints = 0;
         gevintsText.text = "Bonus gevints: " + gevints.ToString();
 
@@ -127,8 +124,11 @@ public class CardGameManager : MonoBehaviour
 
     public void FlipCard(GameObject cardObj)
     {
+        if (gameDone) return;
         TextMeshProUGUI cardNumberText = cardObj.GetComponentInChildren<TextMeshProUGUI>();
 
+        float multiplier = PlayerData.Instance.bet;
+        float præmie = 0;
         switch (Convert.ToInt32(cardNumberText.text))
         {
             case 1:
@@ -140,108 +140,63 @@ public class CardGameManager : MonoBehaviour
                 LostGameObject = cardObj.gameObject.transform.GetChild(1).gameObject;
                 LostGameObject.SetActive(true);
                 animator.SetBool("isBadFlip", true);
-
+                gameDone = true;
                 break;
             case 2:
-                præmie = 2 + (2 * multiplier);
-
-                cardObj.GetComponent<Image>().sprite = goodHit;
-                cardNumberText.enabled = true;
-                cardNumberText.text = "x" + præmie; 
-
-                gevints += præmie; 
-                gevintsText.text = gevintsString + gevints + "kr";
-                Debug.Log("reward added to 1: " + (præmie - 2));
+                præmie = 0.5f * multiplier;
                 break;
             case 3:
-                præmie = 5 + (5 * multiplier);
-
-                cardObj.GetComponent<Image>().sprite = goodHit;
-                cardNumberText.enabled = true;
-                cardNumberText.text = "x" + præmie;
-                
-                gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = gevintsString + gevints + "kr";
-                Debug.Log("reward added to 2: " + (præmie - 5));
+                præmie = multiplier;
                 break;
             case 4:
-                præmie = 5 + (5 * multiplier);
-
-                cardObj.GetComponent<Image>().sprite = goodHit;
-                cardNumberText.enabled = true;
-                cardNumberText.text = "x" + præmie;
-
-                gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = gevintsString + gevints + "kr";
-                Debug.Log("reward added to 3: " + (præmie - 5));
+                præmie = 1.5f * multiplier;
                 break;
             case 5:
-                præmie = 10 + (10 * multiplier);
-
-                cardObj.GetComponent<Image>().sprite = goodHit;
-                cardNumberText.enabled = true;
-                cardNumberText.text = "x" + præmie;
-                
-                gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = gevintsString + gevints + "kr";
-                Debug.Log("reward added to 4: " + (præmie - 10));
+                præmie = 2 * multiplier;
                 break;
             case 6:
-                præmie = 10 + (10 * multiplier);
-
-                cardObj.GetComponent<Image>().sprite = goodHit;
-                cardNumberText.enabled = true;
-                cardNumberText.text = "x" + præmie;
-                
-                gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = gevintsString + gevints + "kr";
-                Debug.Log("reward added to 5: " + (præmie - 10));
+                præmie = 5 * multiplier;
                 break;
             case 7:
-                præmie = 30 + (30 * multiplier);
-
-                cardObj.GetComponent<Image>().sprite = goodHit;
-                cardNumberText.enabled = true;
-                cardNumberText.text = "x" + præmie;
-                
-                gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = gevintsString + gevints + "kr";
-                Debug.Log("reward added to 6: " + (præmie - 30));
+                præmie = 8 * multiplier;
                 break;
             case 8:
-                præmie = 50 + (50 * multiplier);
-
-                cardObj.GetComponent<Image>().sprite = goodHit;
-                cardNumberText.enabled = true;
-                cardNumberText.text = "x" + præmie;
-                
-                gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = gevintsString + gevints + "kr";
-                Debug.Log("reward added to 7: " + (præmie - 50));
+                præmie = 12 * multiplier;
                 break;
             case 9:
-                præmie = 100 + (100 * multiplier);
-
-                cardObj.GetComponent<Image>().sprite = goodHit;
-                cardNumberText.enabled = true;
-                cardNumberText.text = "x" + præmie;
-                
-                gevints += float.Parse(cardNumberText.text.Substring(1));
-                gevintsText.text = gevintsString + gevints + "kr";
-                Debug.Log("reward added to 8: " + (præmie - 100));
+                præmie = 20 * multiplier;
                 break;
         }
+
+        if(præmie != 0)
+        {
+            cardObj.GetComponent<Image>().sprite = goodHit;
+            cardNumberText.enabled = true;
+            cardNumberText.text = præmie.ToString();
+
+            gevints += præmie;
+            gevintsText.text = gevintsString + gevints + "kr";
+            Debug.Log("reward added to 1: " + (præmie - 2));
+        }
+
+        if(præmie == 0 || gevints == 50 * PlayerData.Instance.bet)
+        {
+            GameFinishedPanel.SetActive(true);
+            gameDone = true;
+            GameFinishedPanel.GetComponentInChildren<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevints);
+        }
+
         gevinstButtonText.text = "Tag gevints: " + gevints + "kr";
         
     }
 
-    public void ExitWithReward()
+    public void ExitWithReward(string sceneName)
     {
         PlayerData.Instance.balance += gevints;
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
         gevints = 0;
         gevintsText.text = "Bonus gevints: " + gevints.ToString();
-        SceneSwap.Instance.SceneSwitch(0);
+        SceneSwap.Instance.SceneSwitch(sceneName);
     }
  
 }

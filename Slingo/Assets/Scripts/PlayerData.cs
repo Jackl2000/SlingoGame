@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class PlayerData
 {
     public float balance = 999;
-    public static PlayerData Instance { get; private set; }
-
-    private void Start()
+    public float bet = 1;
+    public float CombatBonusReward = 0;
+    private static PlayerData instance;
+    public static PlayerData Instance
     {
-        if (Instance != null && Instance != this)
+        get
         {
-            Destroy(this.gameObject);
+            if(instance == null)
+            {
+                instance = new PlayerData();
+            }
+            return instance;
         }
-        else
-        {
-            Instance = this;
-        }
-        DontDestroyOnLoad(Instance);
     }
-
 }

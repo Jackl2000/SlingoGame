@@ -1,7 +1,9 @@
 
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ChestChance : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class ChestChance : MonoBehaviour
     public string ChestType;
     [SerializeField] private Animator chestAni;
     public float Reward;
+    public GameObject MoneyBag;
+    public float totalReward;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +27,7 @@ public class ChestChance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
     }
 
 
@@ -33,12 +37,16 @@ public class ChestChance : MonoBehaviour
         //Gets random number between 0 and 1
         float chance = Random.Range(0f, 1f);
         Debug.Log(chance);
+        totalReward = PlayerData.Instance.CombatBonusReward;
+        Debug.Log("Player data: " + PlayerData.Instance.bet);
         //40 chance for silver Chest.
+        //40% chance for silver Chest.
         if (lastBoss != true)
         {
             if (chance <= 0.4f)
             {
-                Reward = Random.Range(150, 250 + 1);
+                //Silver chest
+                Reward = Random.Range(PlayerData.Instance.bet * 15, PlayerData.Instance.bet * 20 + 1);
                 chest.GetComponent<Image>().sprite = SilverChestSprite;
                 Debug.Log("Silver chest");
                 ChestType = "Silver";
@@ -47,7 +55,8 @@ public class ChestChance : MonoBehaviour
             }
             else
             {
-                Reward = Random.Range(50, 150 + 1);
+                //Iron chest
+                Reward = Random.Range(PlayerData.Instance.bet * 10, PlayerData.Instance.bet * 15 + 1);
                 chest.GetComponent<Image>().sprite = IronChestSprite;
                 Debug.Log("Iron chest");
                 ChestType = "Iron";
@@ -56,17 +65,20 @@ public class ChestChance : MonoBehaviour
         }
         else
         {
-            Reward = Random.Range(250, 500 + 1);
+            //Gold chest
+            Reward = Random.Range(PlayerData.Instance.bet * 20, PlayerData.Instance.bet * 25 + 1);
             chest.GetComponent<Image>().sprite = GoldChestSprite;
             Debug.Log("Gold Chest");
             ChestType = "Gold";
             Debug.Log(Reward);
         }
+        //Change and adjust panel text to current reward and chest type.
         string price = $"Tillykke! \n Du fandt {Reward} kr i kisten";
         chest.GetComponentInChildren<TextMeshProUGUI>().text = price;
+        MoneyBag.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(totalReward);
         Debug.Log("Text is component" + chest.GetComponentInChildren<TextMeshProUGUI>().text);
     }
-
+    //Method to drop chest
     public void DropChest()
     {
         if(ChestType == "Silver")
@@ -82,4 +94,13 @@ public class ChestChance : MonoBehaviour
             chestAni.SetBool("DropGoldChest", true);
         }
     }
+    //Gets total amount of money throughout the bonusgame
+    public void TotalRewards()
+    {
+        totalReward += Reward;
+        PlayerData.Instance.CombatBonusReward += Reward;
+        MoneyBag.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(totalReward);
+    }
+
+
 }
