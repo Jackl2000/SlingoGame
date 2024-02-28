@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        BonusGameHit();
+
     }
 
     int toReversCount;
@@ -98,9 +98,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void BonusGameHit()
+    public void BonusGameHit()
     {
-        if (gridCheck.slingoCount == 12 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
+        if (gridCheck.slingoCount == 10 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
         {
             SceneSwap.Instance.SceneSwitch("BonusSpil_CardFlip");
             SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().SetBool("IsLoading", true);

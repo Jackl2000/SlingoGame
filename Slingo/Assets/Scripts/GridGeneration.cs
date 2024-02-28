@@ -10,6 +10,12 @@ public class GridGeneration : MonoBehaviour
 {
     public Dictionary<int, GridNumbers> numberPositions = new Dictionary<int, GridNumbers>();
     private List<GameObject> columns = new List<GameObject>();
+    private spin spin;
+
+    private void Awake()
+    {
+        spin = GetComponentInChildren<spin>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +33,7 @@ public class GridGeneration : MonoBehaviour
             if(number.hasBeenHit)
             {
                 number.ResetData();
+                number.starBackgroundImg.sprite = spin.BackgroundImages[2];
             }
         }
         GetComponent<GridCheck>().ResetGrid();
@@ -130,11 +137,11 @@ public class GridGeneration : MonoBehaviour
             }
         }
     }
-    //private void Update()
-    //{
-    //    if(Application.isEditor)
-    //    {
-    //        FillPlate();
-    //    }
-    //}
+    private void Update()
+    {
+        if (Application.isEditor)
+        {
+            FillPlate();
+        }
+    }
 }
