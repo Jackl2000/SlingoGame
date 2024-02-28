@@ -580,10 +580,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1905424769863644655, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 155
-      objectReference: {fileID: 0}
     - target: {fileID: 1916797884397421194, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -952,10 +948,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4615568449392734210, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4766366891048097384, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1218,10 +1210,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7147844497562690630, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7241473776331659440, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7755105258777028721, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
@@ -1299,10 +1287,6 @@ PrefabInstance:
     - target: {fileID: 7929506682988506404, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_Name
       value: SlingoCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8009901190828321981, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8561205572640608658, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y

@@ -35,7 +35,7 @@ public class CollectReward : MonoBehaviour
 
         if (gridCheck.slingoCount >= 10)
         {
-            //collectBorderMessage.SetActive(true);
+            collectBorderMessage.SetActive(true);
             spinScript.collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
             spinScript.collectMessageText.transform.parent.GetChild(0).gameObject.SetActive(false);
             spinScript.collectMessageText.transform.parent.GetChild(1).gameObject.SetActive(true);
