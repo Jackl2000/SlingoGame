@@ -32,6 +32,7 @@ public class Dices : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerData.Instance.CombatBonusReward = 0;
         diceRenderers = new SpriteRenderer[3]; //3 dices, 3 renderers
         diceResults = new int[3];
 
