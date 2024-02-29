@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public bool BonusGameEnable = true;
+
     public static GameManager Instance { get; private set; }
 
     GridCheck gridCheck;

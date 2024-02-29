@@ -31,7 +31,7 @@ public class CollectReward : MonoBehaviour
         }
 
 
-        if (gridCheck.slingoCount >= 10)
+        if (gridCheck.slingoCount >= 10 && GameManager.Instance.BonusGameEnable)
         {
             spinScript.collectMessageText.transform.parent.parent.gameObject.SetActive(true); //CollectMessage
             spinScript.collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
@@ -54,8 +54,8 @@ public class CollectReward : MonoBehaviour
             spinScript.stakes = 0;
             spinScript.spinBuyLimit = 5;
             spinScript.wildPicks = 0;
+            spinScript.isSpinning = false;
 
-            
             spinScript.spinButton.GetComponent<Image>().color = Color.black;
             spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
             spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
@@ -84,6 +84,8 @@ public class CollectReward : MonoBehaviour
 
             GetComponent<GridGeneration>().ReGenerateGrid();
         }
+
+
     }
 
 

@@ -28764,7 +28764,6 @@ MonoBehaviour:
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}
   - {fileID: 21300000, guid: 56e38867de09c4342863b3989e01921c, type: 3}
-  jackpotMessage: {fileID: 4270101091029049216}
   jackpotSlingoBorderImages:
   - {fileID: 21300000, guid: 9601c6bf62db084499971930e7f89fcf, type: 3}
   - {fileID: 21300000, guid: de9fbcb825a788c4bb941546e011b078, type: 3}
@@ -28810,6 +28809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db594cbdc00e0a499a41072cc4b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BonusGameEnable: 1
   spinScript: {fileID: 4055942201498400139}
   gridGeneration: {fileID: 1458205632472944407}
   aiScript: {fileID: 1198515194112576019}

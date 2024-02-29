@@ -129,7 +129,7 @@ public class spin : MonoBehaviour
         {
             timePassedForMsg += Time.deltaTime;
         }
-        if (gridCheck.slingoCount >= 10)
+        if (gridCheck.slingoCount >= 10 && GameManager.Instance.BonusGameEnable)
         {
             resetButtonText.text = "JACKPOT FLASH + " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
         }
@@ -554,7 +554,7 @@ public class spin : MonoBehaviour
 
                 if (gridCheck.slingoCount >= 3)
                 {
-                    if (gridCheck.slingoCount > 9)
+                    if (gridCheck.slingoCount > 9 && GameManager.Instance.BonusGameEnable)
                     {
                         collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
                         collectMessageText.transform.parent.GetChild(0).gameObject.SetActive(false);
