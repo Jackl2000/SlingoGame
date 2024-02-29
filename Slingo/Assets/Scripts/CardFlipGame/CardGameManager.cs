@@ -192,7 +192,7 @@ public class CardGameManager : MonoBehaviour
     private IEnumerator ShowMessage()
     {
         FlipAllCards();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         GameFinishedPanel.SetActive(true);
         GameFinishedPanel.GetComponentInChildren<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevints);
     }
