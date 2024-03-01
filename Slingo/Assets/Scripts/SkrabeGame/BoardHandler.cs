@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class BoardHandler : MonoBehaviour
@@ -28,5 +29,11 @@ public class BoardHandler : MonoBehaviour
         else gevinst += reward;
 
         gevinstText.text = "Bonus gevinst: " + UIManager.Instance.DisplayMoney(gevinst);
+    }
+
+    public void ExitWithReward(string sceneName)
+    {
+        PlayerData.Instance.balance += gevinst;
+        SceneSwap.Instance.SceneSwitch(sceneName);
     }
 }
