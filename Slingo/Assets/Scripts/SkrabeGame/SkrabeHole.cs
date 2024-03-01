@@ -9,16 +9,16 @@ public class SkrabeHole : MonoBehaviour
 
     private GameObject selectedCard;
     private List<GameObject> holes = new List<GameObject>();
-    // Update is called once per frame
-    void Update()
+
+    private void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            if(holes.Count > 700)
+            if (holes.Count > 100)
             {
                 selector.ResetSelctedCard();
                 selectedCard = null;
-                foreach(GameObject go in holes)
+                foreach (GameObject go in holes)
                 {
                     Destroy(go);
                 }
@@ -33,10 +33,11 @@ public class SkrabeHole : MonoBehaviour
                     if (selectedCard != null) holes.Add(hole);
                     else Destroy(hole);
                 }
-                else if(Vector3.Distance(Input.mousePosition, selectedCard.transform.position) <= 60)
+                else
                 {
                     holes.Add(Instantiate(holePrefab, Input.mousePosition, Quaternion.identity, transform));
                 }
+
             }
         }
     }
