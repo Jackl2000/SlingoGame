@@ -14,7 +14,7 @@ public class SpinsValue : MonoBehaviour
 
     private spin spin;
     private SettingsMenu settingsMenu;
-    private List<float> spinValues = new List<float>() {0.5f, 1f, 2f, 5f, 10f, 25 };
+    private List<float> spinValues = new List<float>() {0.5f, 1f, 2f, 5f, 10f, 25f };
     private int currentIndex = 2;
     public TextMeshProUGUI valueText;
 
@@ -51,7 +51,7 @@ public class SpinsValue : MonoBehaviour
         currentIndex--;
         if(currentIndex < 0)
         {
-            currentIndex = 0;
+            currentIndex = spinValues.Count - 1;
         }
         UpdateValueText();
     }
@@ -59,8 +59,8 @@ public class SpinsValue : MonoBehaviour
     public void UpdateValueText()
     {
        if(valueText != null && currentIndex >= 0 && currentIndex < spinValues.Count) 
-       { 
-            valueText.text = spinValues[currentIndex].ToString("0.0") + " kr";
+       {
+            valueText.text = UIManager.Instance.DisplayMoney(spinValues[currentIndex]);
        }
     }
 

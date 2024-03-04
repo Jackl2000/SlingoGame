@@ -20,6 +20,7 @@ public class ChestChance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MoneyBag.GetComponent<RectTransform>().sizeDelta = new Vector2(PlayerData.Instance.moneyBagWidth, 120);
         ChangeChestRandomly();
         chestAni = chest.gameObject.GetComponent<Animator>();
     }
@@ -100,5 +101,12 @@ public class ChestChance : MonoBehaviour
         totalReward += Reward;
         PlayerData.Instance.CombatBonusReward += Reward;
         MoneyBag.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(totalReward);
+        PlayerData.Instance.CombatBonusIncrementReward += Reward;
+        if(PlayerData.Instance.CombatBonusIncrementReward >= 20 * PlayerData.Instance.bet)
+        {
+            PlayerData.Instance.moneyBagWidth += 20f;
+            MoneyBag.GetComponent<RectTransform>().sizeDelta = new Vector2(PlayerData.Instance.moneyBagWidth, 120);
+            PlayerData.Instance.CombatBonusIncrementReward -= 20 * PlayerData.Instance.bet;
+        }
     }
 }
