@@ -82,7 +82,6 @@ public class SpinsValue : MonoBehaviour
         spinsBetPanel.SetActive(false);
         settingsMenu.multiplier = PlayerData.Instance.bet;
         GetComponentInParent<GridCheck>().UpdateRewards(null, PlayerData.Instance.bet);
-        PrisButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Vælg pris";
         spin.StartSpin();
     }
 }
