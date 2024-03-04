@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class BoardHandler : MonoBehaviour
@@ -25,10 +24,17 @@ public class BoardHandler : MonoBehaviour
         {
             gameFinishedPanel.SetActive(true);
             gameFinishedPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevinst);
+            return;
         }
         else gevinst += reward;
 
         gevinstText.text = "Bonus gevinst: " + UIManager.Instance.DisplayMoney(gevinst);
+
+        if(gevinst == 50)
+        {
+            gameFinishedPanel.SetActive(true);
+            gameFinishedPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevinst);
+        }
     }
 
     public void ExitWithReward(string sceneName)
