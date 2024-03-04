@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,49 +14,71 @@ public class SpinsValue : MonoBehaviour
 
     private spin spin;
     private SettingsMenu settingsMenu;
-    private List<GameObject> spinValues = new List<GameObject>();
+    private List<float> spinValues = new List<float>() {0.5f, 1f, 2f, 5f, 10f, 25 };
+    private int currentIndex = 2;
+    public TextMeshProUGUI valueText;
+
+
+
 
     private void Awake()
     {
         spin = GetComponent<spin>();
         settingsMenu = FindAnyObjectByType<SettingsMenu>();
+        UpdateValueText();
+
     }
 
     public void ViewSpinsBets()
     {
         spinsBetPanel.SetActive(!spinsBetPanel.activeSelf);
         settingsPanel.SetActive(false);
-        foreach (Outline outline in PrisButton.GetComponentsInChildren<Outline>(true).ToArray())
-        {
-            spinValues.Add(outline.gameObject);
+       
+    }
+
+    public void IncreaseIndex()
+    {
+        currentIndex++;
+        if(currentIndex >= spinValues.Count) 
+        { 
+            currentIndex = 0; //Loop back
         }
+        UpdateValueText();
+    }
+
+    public void DecreaseIndex()
+    {
+        currentIndex--;
+        if(currentIndex < 0)
+        {
+            currentIndex = 0;
+        }
+        UpdateValueText();
+    }
+
+    public void UpdateValueText()
+    {
+       if(valueText != null && currentIndex >= 0 && currentIndex < spinValues.Count) 
+       { 
+            valueText.text = spinValues[currentIndex].ToString("0.0") + " kr";
+       }
     }
 
 
-    public void ViewSpinBetOptions()
+    public void SpinBetChosen()
     {
-        if(spin.spinLeft == spin.startSpins)
-        {
-            foreach(GameObject go in spinValues)
-            {
-                go.SetActive(true);
-            }
+       if(currentIndex >= 0 && currentIndex < spinValues.Count)
+       {
+            float selectedBet = spinValues[currentIndex];
+            spin.spinBets = selectedBet;
+            PlayerData.Instance.bet = selectedBet;
+            valueText.text = UIManager.Instance.DisplayMoney(selectedBet);
         }
-    }
-
-    public void SpinBetChosen(float bet)
-    {
-        spin.spinBets = bet;
-        PlayerData.Instance.bet = bet;
-        foreach (GameObject go in spinValues)
-        {
-            go.SetActive(false);
-        }
-        PrisButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(bet);
     }
 
     public void StartGame()
     {
+        SpinBetChosen();
         spinsBetPanel.SetActive(false);
         settingsMenu.multiplier = PlayerData.Instance.bet;
         GetComponentInParent<GridCheck>().UpdateRewards(null, PlayerData.Instance.bet);

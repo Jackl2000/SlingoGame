@@ -8402,6 +8402,7 @@ MonoBehaviour:
   spinsBetPanel: {fileID: 9722271863142664}
   settingsPanel: {fileID: 3178842476150303414}
   PrisButton: {fileID: 2392904488074029594}
+  valueText: {fileID: 0}
 --- !u!114 &3411623396790772654
 MonoBehaviour:
   m_ObjectHideFlags: 0
