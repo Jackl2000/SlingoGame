@@ -39,6 +39,14 @@ public class EventHandler : MonoBehaviour
     }
 
 
+    //Card flip game
+    public void CardFlippedEvent()
+    {
+        GetComponentInParent<CardGameManager>().FlipCard(gameObject);
+    }
+
+
+
     //Adventure game
     public void SceneTransitionEndEvent()
     {

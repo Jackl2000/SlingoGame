@@ -9500,17 +9500,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridGeneration: {fileID: 1458205632472944407}
   gridCheck: {fileID: 4374248674525639591}
-  playerData: {fileID: 5487674222419349512}
   spinCountHeader: {fileID: 7787662666394665884}
-  balanceText: {fileID: 4166002204279154401}
-  spentText: {fileID: 7751221399858816658}
-  BackgroundImages:
-  - {fileID: 21300000, guid: c12e746a10db3804da1c8c99dae31dfb, type: 3}
-  - {fileID: 21300000, guid: 19a3dcefdd4e201459a033de5753351d, type: 3}
-  - {fileID: 21300000, guid: f3add0266c0fec64bb1847d308cccfc6, type: 3}
   spinSpeed: 15
   spinWaitTime: 0.5
   wildChance: 12
+  wildArrowChance: 0
+  startSpins: 10
+  spinLeft: 10
+  spinBuyLimit: 8
+  spinTwoWild: 0
   isSpinning: 0
   spinLeftText: {fileID: 7484134286775104099}
   spinButton: {fileID: 8420042036595658971}
@@ -9520,14 +9518,29 @@ MonoBehaviour:
   - {fileID: 49765591730860136}
   - {fileID: 6443991277250788270}
   - {fileID: 7305154733994897045}
+  wildsImages: []
   textToGoEmpty: []
+  slotWildArrow: 
+  resetButtonText: {fileID: 0}
+  balanceText: {fileID: 4166002204279154401}
+  spentText: {fileID: 7751221399858816658}
+  BackgroundImages:
+  - {fileID: 21300000, guid: c12e746a10db3804da1c8c99dae31dfb, type: 3}
+  - {fileID: 21300000, guid: 19a3dcefdd4e201459a033de5753351d, type: 3}
+  - {fileID: 21300000, guid: f3add0266c0fec64bb1847d308cccfc6, type: 3}
+  collectMessageText: {fileID: 0}
+  continueButton: {fileID: 0}
+  stopSpinningButton: {fileID: 0}
   spinBets: 1
-  wildPicks: 0
-  spinLeft: 10
-  spinBuyLimit: 8
   stakes: 0
+  wildPicks: 0
+  numberPressed: 0
+  timePassedForMsg: 0
+  keepSpinningPanel: {fileID: 0}
   CostMessage: {fileID: 5492437303112480685}
-  subjectToObserve: {fileID: 0}
+  MessageAnimator: {fileID: 0}
+  CollectMessage: {fileID: 0}
+  indsatsChoosen: 0
 --- !u!114 &527621969584549633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9548,6 +9561,7 @@ MonoBehaviour:
   isBlinking: 0
   numbersPlateIsBlinking: 1
   blinkeffectStart: 0
+  spinLeftText: {fileID: 0}
 --- !u!114 &4979634215744832892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9562,6 +9576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinsBetPanel: {fileID: 3150828936742231700}
   settingsPanel: {fileID: 7987460182231669537}
+  PrisButton: {fileID: 0}
 --- !u!114 &3411623396790772654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14149,6 +14164,7 @@ MonoBehaviour:
   isBlinking: 1
   numbersPlateIsBlinking: 0
   blinkeffectStart: 0
+  spinLeftText: {fileID: 0}
 --- !u!1 &4654942495790390694
 GameObject:
   m_ObjectHideFlags: 0
@@ -15695,6 +15711,7 @@ MonoBehaviour:
   isBlinking: 1
   numbersPlateIsBlinking: 0
   blinkeffectStart: 0
+  spinLeftText: {fileID: 0}
 --- !u!1 &5146877452518167340
 GameObject:
   m_ObjectHideFlags: 0
@@ -21279,6 +21296,7 @@ MonoBehaviour:
   isBlinking: 1
   numbersPlateIsBlinking: 0
   blinkeffectStart: 0
+  spinLeftText: {fileID: 0}
 --- !u!1 &7124076825481523999
 GameObject:
   m_ObjectHideFlags: 0
@@ -24023,7 +24041,6 @@ GameObject:
   - component: {fileID: 1458205632472944407}
   - component: {fileID: 4374248674525639591}
   - component: {fileID: 2795408711446792720}
-  - component: {fileID: 5487674222419349512}
   - component: {fileID: 1198515194112576019}
   m_Layer: 5
   m_Name: SlingoCanvasBackup
@@ -24149,13 +24166,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff141709efcf4c04f883acde39447f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetButton: {fileID: 7678843588789484500}
   headerAnimator: {fileID: 1352978434706545151}
+  SlingoPanel: {fileID: 0}
+  slingoRewardButton: {fileID: 0}
   slingoAnimationFinished: 1
   slingoBorderImages:
   - {fileID: 21300000, guid: 2342eb0b59e5c7140b6a206fd687894e, type: 3}
   - {fileID: 21300000, guid: 56e38867de09c4342863b3989e01921c, type: 3}
-  jackpotMessage: {fileID: 4270101091029049216}
   jackpotSlingoBorderImages:
   - {fileID: 21300000, guid: 9601c6bf62db084499971930e7f89fcf, type: 3}
   - {fileID: 21300000, guid: de9fbcb825a788c4bb941546e011b078, type: 3}
@@ -24175,23 +24192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinScript: {fileID: 4055942201498400139}
   spinsCounter: {fileID: 7484134286775104099}
-  collectBorderMessage: {fileID: 4615568449392734210}
-  collectMessage: {fileID: 3413761267369758757}
-  invokeTime: 5
---- !u!114 &5487674222419349512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7929506682988506404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5564e04b8e9b042bda0789f560ad08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinScript: {fileID: 0}
-  balance: 999
+  balanceBorder: {fileID: 0}
 --- !u!114 &1198515194112576019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24204,6 +24205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e0d28583e8e804eb8b63aaeafd44cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentNumber: 0
 --- !u!1 &7937363851391973016
 GameObject:
   m_ObjectHideFlags: 0

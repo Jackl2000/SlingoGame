@@ -604,6 +604,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2340062006792121958, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: BonusGameEnable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2464607412469517037, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -795,10 +799,6 @@ PrefabInstance:
     - target: {fileID: 3699291982557018492, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4055942201498400139, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
-      propertyPath: wildChance
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4199956941912489919, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y

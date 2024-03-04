@@ -24,7 +24,7 @@ public class GridCheck : MonoBehaviour
     [SerializeField] private Sprite[] slingoBorderImages;
 
     [Space(5)]
-    [SerializeField] private GameObject jackpotMessage;
+    //[SerializeField] private GameObject jackpotMessage;
     [SerializeField] private Sprite[] jackpotSlingoBorderImages;
     [SerializeField] private Sprite slingoBackgroundImage;
 
@@ -72,11 +72,20 @@ public class GridCheck : MonoBehaviour
         rewards.Add(7, 10 * multiplyere);
         rewards.Add(8, 12 * multiplyere);
         rewards.Add(9, 15 * multiplyere);
-        rewards.Add(10, 15 * multiplyere);
-        rewards.Add(11, 15 * multiplyere);
-        rewards.Add(12, 15 * multiplyere);
+        if (!GameManager.Instance.BonusGameEnable)
+        {
+            rewards.Add(10, 20 * multiplyere);
+            rewards.Add(11, 20 * multiplyere);
+            rewards.Add(12, 30 * multiplyere);
+        }
+        else
+        {
+            rewards.Add(10, 15 * multiplyere);
+            rewards.Add(11, 15 * multiplyere);
+            rewards.Add(12, 15 * multiplyere);
+        }
 
-        if(slingoRewards != null)
+        if (slingoRewards != null)
         {
             for (int i = 0; i < slingoRewards.Count(); i++)
             {
@@ -406,10 +415,10 @@ public class GridCheck : MonoBehaviour
         //{
         //    resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Modtag " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
         //}
-        if(slingoCount >= 12 && slingoAnimationFinished && spinScript.timePassedForMsg > 3)
-        {
-            jackpotMessage.SetActive(true);
-        }
+        //if(slingoCount >= 12 && slingoAnimationFinished && spinScript.timePassedForMsg > 3)
+        //{
+        //    jackpotMessage.SetActive(true);
+        //}
     }
 
     /// <summary>

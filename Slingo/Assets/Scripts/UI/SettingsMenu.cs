@@ -38,11 +38,18 @@ public class SettingsMenu : MonoBehaviour
             PossibleRewards.SetActive(false);
         }
 
-
         settingsMenuPanel.SetActive(!settingsMenuPanel.activeSelf);
         if(spinsBetPanel != null)
         {
             spinsBetPanel.SetActive(false);
+        }
+
+        if(GameManager.Instance.BonusGameEnable)
+        {
+            int childCount = settingsMenuPanel.transform.childCount;
+            settingsMenuPanel.transform.GetChild(childCount - 1).gameObject.SetActive(true);
+            settingsMenuPanel.transform.GetChild(childCount - 2).gameObject.SetActive(true);
+
         }
 
     }

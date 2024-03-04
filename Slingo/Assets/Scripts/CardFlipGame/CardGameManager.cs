@@ -47,7 +47,7 @@ public class CardGameManager : MonoBehaviour
         animator = this.GetComponent<Animator>();
         foreach (GameObject goCard in cardGameObjects)
         {
-            cardTexts.Add(goCard.GetComponentInChildren<TextMeshProUGUI>());
+            cardTexts.Add(goCard.transform.GetChild(2).GetComponent<TextMeshProUGUI>());
             cardImages.Add(goCard.GetComponent<Image>());
         }
         ShuffleCards();
@@ -121,11 +121,16 @@ public class CardGameManager : MonoBehaviour
         ShuffleCards();
     }
 
+    public void PlayCardFlipAnimation(GameObject card)
+    {
+        if (!card.GetComponent<Animator>().enabled) card.GetComponent<Animator>().enabled = true;
+    }
+
 
     public void FlipCard(GameObject cardObj)
     {
         if (gameDone) return;
-        TextMeshProUGUI cardNumberText = cardObj.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI cardNumberText = cardObj.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
 
         float multiplier = PlayerData.Instance.bet;
         float præmie = 0;
@@ -171,8 +176,7 @@ public class CardGameManager : MonoBehaviour
         if(præmie != 0)
         {
             cardObj.GetComponent<Image>().sprite = goodHit;
-            cardNumberText.enabled = true;
-            cardNumberText.text = præmie.ToString();
+            cardObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(præmie);
 
             gevints += præmie;
             gevintsText.text = gevintsString + gevints + "kr";
@@ -186,7 +190,6 @@ public class CardGameManager : MonoBehaviour
         }
 
         gevinstButtonText.text = "Tag gevints: " + gevints + "kr";
-        
     }
 
     private IEnumerator ShowMessage()
@@ -204,11 +207,13 @@ public class CardGameManager : MonoBehaviour
         foreach (GameObject go in cardGameObjects)
         {
             if (go.GetComponent<Image>().sprite == goodHit) continue;
-            TextMeshProUGUI cardNumberText = go.GetComponentInChildren<TextMeshProUGUI>();
+            Debug.Log("Flip");
+            TextMeshProUGUI cardNumberText = go.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             switch (Convert.ToInt32(cardNumberText.text))
             {
                 case 1:
                     go.GetComponent<Image>().sprite = badHit;
+                    go.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
                     break;
                 case 2:
                     præmie = 0.5f * multiplier;
@@ -238,8 +243,7 @@ public class CardGameManager : MonoBehaviour
 
             if(præmie != 0)
             {
-                cardNumberText.enabled = true;
-                cardNumberText.text = præmie.ToString();
+                go.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(præmie);
             }
         }
     }
