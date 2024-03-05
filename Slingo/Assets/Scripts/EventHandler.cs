@@ -173,6 +173,7 @@ public class EventHandler : MonoBehaviour
 
     public void chestParticle()
     {
+        
         chestChance.chest.GetComponentInChildren<ParticleSystem>().Play();
        
     }
