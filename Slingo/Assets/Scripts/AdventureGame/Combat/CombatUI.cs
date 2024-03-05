@@ -199,6 +199,7 @@ public class CombatUI : MonoBehaviour
 
     public void Exit(string sceneName)
     {
+        PlayerData.Instance.balance += PlayerData.Instance.CombatBonusReward;
         SceneManager.LoadSceneAsync(sceneName);
     }
 }

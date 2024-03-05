@@ -86,14 +86,15 @@ public class ChestChance : MonoBehaviour
         {
             chestAni.SetBool("DropSilverChest", true);
         }
-        if (ChestType == "Iron")
+        else if (ChestType == "Iron")
         {
             chestAni.SetBool("DropIronChest", true);
         }
-        if (ChestType == "Gold")
+        else if (ChestType == "Gold")
         {
             chestAni.SetBool("DropGoldChest", true);
         }
+        transform.SetAsLastSibling();
     }
     //Gets total amount of money throughout the bonusgame
     public void TotalRewards()

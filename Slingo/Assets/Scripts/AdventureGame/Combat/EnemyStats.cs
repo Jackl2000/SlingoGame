@@ -14,6 +14,8 @@ public class EnemyStats : MonoBehaviour
     public int Health { get; set; }
     public int CritChance { get; set; }
 
+    public bool FinalBoss { get; set; } = false;
+
     private TextMeshProUGUI damageText;
 
     private void Start()
