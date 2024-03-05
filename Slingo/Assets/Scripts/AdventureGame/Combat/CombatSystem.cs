@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -183,6 +184,7 @@ public class CombatSystem : MonoBehaviour
         enemyObject = enemy;
         enemyObject.GetComponent<EventHandler>().combatSystem = this;
         enemyDices.GetComponent<Animator>().SetBool("PlayerHasChosen", true);
+        messagePanel.transform.SetAsLastSibling();
 
         if (playerRoll > enemyRoll)
         {
@@ -289,17 +291,34 @@ public class CombatSystem : MonoBehaviour
             PlayerStats.Instance.Level++;
             chest.GetComponent<ChestChance>().DropChest();
             chest.GetComponent<ChestChance>().TotalRewards();
+
+            if(enemyObject.GetComponent<EnemyStats>().FinalBoss)
+            {
+                GameFinishedPanel();
+            }
         }
         else
         {
-            GameOverPanel.SetActive(true);
+            GameFinishedPanel();
+            
         }
+    }
+
+    private void GameFinishedPanel()
+    {
+        GameOverPanel.SetActive(true);
+        GameOverPanel.transform.SetAsLastSibling();
+        GameOverPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(PlayerData.Instance.CombatBonusReward);
     }
 
     public void EnteringNewLevel()
     {
-        PlayerStats.Instance.Health = PlayerStats.Instance.MaxHealth;
-        SceneManager.LoadScene("AdventureGameLoadLevelScene");
+        if (PlayerStats.Instance.Level <= 5)
+        {
+            PlayerStats.Instance.Health = PlayerStats.Instance.MaxHealth;
+            SceneManager.LoadScene("AdventureGameLoadLevelScene");
+        }
+        else GameFinishedPanel();
     }
 
     public void CharacterAttack()

@@ -604,9 +604,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1936408833053533027, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_fontSize
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936408833053533027, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936408833053533027, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936408833053533027, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2340062006792121958, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: BonusGameEnable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2464607412469517037, guid: b8208ed134d2c0c4cb332d475c909839, type: 3}
       propertyPath: m_AnchorMax.y

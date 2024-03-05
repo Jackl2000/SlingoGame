@@ -33,6 +33,8 @@ public class Dices : MonoBehaviour
     void Start()
     {
         PlayerData.Instance.CombatBonusReward = 0;
+        PlayerData.Instance.CombatBonusIncrementReward = 0;
+        PlayerData.Instance.moneyBagWidth = 60f;
         diceRenderers = new SpriteRenderer[3]; //3 dices, 3 renderers
         diceResults = new int[3];
 

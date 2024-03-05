@@ -383,6 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holePrefab: {fileID: 6736090102393938910, guid: 311d37d4dcc2e8c4f95a6cc50b700f16, type: 3}
   selector: {fileID: 1872211324}
+  selectedCard: {fileID: 0}
 --- !u!1001 &268584422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2197,6 +2198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card1
       objectReference: {fileID: 0}
+    - target: {fileID: 4359518114120152243, guid: 92336ec00bdb4da4ab6303371ef57c61, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2918,14 +2923,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 50
     m_Right: 0
-    m_Top: 0
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 325, y: 325}
+  m_CellSize: {x: 300, y: 300}
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 3

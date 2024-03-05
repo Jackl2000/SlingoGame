@@ -24,11 +24,15 @@ public class CombatUI : MonoBehaviour
 
     private List<GameObject> playerHearts = new List<GameObject>();
     private List<GameObject> enemyHearts = new List<GameObject>();
+
+    [SerializeField] private TextMeshProUGUI levelText;
     private void Awake()
     {
         playerHealthText.text = PlayerStats.Instance.Health.ToString();
         playerDamageText.text = PlayerStats.Instance.Damage.ToString();
         playerCritchanceText.text = PlayerStats.Instance.Luck.ToString();
+        if(PlayerStats.Instance.Level != 5) levelText.text = "LEVEL " + PlayerStats.Instance.Level.ToString();
+        else levelText.text = "FINAL BOSS";
     }
 
     public List<GameObject> ShowHearts(int health, string type)
@@ -199,6 +203,8 @@ public class CombatUI : MonoBehaviour
 
     public void Exit(string sceneName)
     {
-        SceneManager.LoadSceneAsync(sceneName);
+        PlayerData.Instance.balance += PlayerData.Instance.CombatBonusReward;
+        SceneSwap.Instance.SceneSwitch(sceneName);
+        //SceneManager.LoadSceneAsync(sceneName);
     }
 }

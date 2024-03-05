@@ -20,6 +20,7 @@ public class ChestChance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MoneyBag.GetComponent<RectTransform>().sizeDelta = new Vector2(PlayerData.Instance.moneyBagWidth, 120);
         ChangeChestRandomly();
         chestAni = chest.gameObject.GetComponent<Animator>();
     }
@@ -33,7 +34,6 @@ public class ChestChance : MonoBehaviour
 
     public void ChangeChestRandomly()
     {
-        bool lastBoss = false;
         //Gets random number between 0 and 1
         float chance = Random.Range(0f, 1f);
         Debug.Log(chance);
@@ -41,7 +41,7 @@ public class ChestChance : MonoBehaviour
         Debug.Log("Player data: " + PlayerData.Instance.bet);
         //40 chance for silver Chest.
         //40% chance for silver Chest.
-        if (lastBoss != true)
+        if (PlayerStats.Instance.Level != 5)
         {
             if (chance <= 0.4f)
             {
@@ -85,14 +85,15 @@ public class ChestChance : MonoBehaviour
         {
             chestAni.SetBool("DropSilverChest", true);
         }
-        if (ChestType == "Iron")
+        else if (ChestType == "Iron")
         {
             chestAni.SetBool("DropIronChest", true);
         }
-        if (ChestType == "Gold")
+        else if (ChestType == "Gold")
         {
             chestAni.SetBool("DropGoldChest", true);
         }
+        transform.SetAsLastSibling();
     }
     //Gets total amount of money throughout the bonusgame
     public void TotalRewards()
@@ -100,5 +101,12 @@ public class ChestChance : MonoBehaviour
         totalReward += Reward;
         PlayerData.Instance.CombatBonusReward += Reward;
         MoneyBag.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(totalReward);
+        PlayerData.Instance.CombatBonusIncrementReward += Reward;
+        if(PlayerData.Instance.CombatBonusIncrementReward >= 20 * PlayerData.Instance.bet)
+        {
+            PlayerData.Instance.moneyBagWidth += 20f;
+            MoneyBag.GetComponent<RectTransform>().sizeDelta = new Vector2(PlayerData.Instance.moneyBagWidth, 120);
+            PlayerData.Instance.CombatBonusIncrementReward -= 20 * PlayerData.Instance.bet;
+        }
     }
 }

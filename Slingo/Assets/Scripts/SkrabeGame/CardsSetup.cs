@@ -38,7 +38,7 @@ public class CardsSetup : MonoBehaviour
             int randomIndex = 0;
             if (possibleRewards.Count >= 2) randomIndex = Random.Range(0, possibleRewards.Count);
             text.text = UIManager.Instance.DisplayMoney(possibleRewards[randomIndex] * PlayerData.Instance.bet);
-            if(text.text == UIManager.Instance.DisplayMoney(0))
+            if (text.text == UIManager.Instance.DisplayMoney(0))
             {
                 text.GetComponentInParent<Image>().sprite = lostSprite;
                 text.gameObject.SetActive(false);
