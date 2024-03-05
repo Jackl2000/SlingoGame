@@ -286,7 +286,6 @@ public class CombatSystem : MonoBehaviour
         {
             PlayerStats.Instance.Level++;
             chest.GetComponent<ChestChance>().DropChest();
-            chest.GetComponent<ChestChance>().TotalRewards();
 
             if(enemyObject.GetComponent<EnemyStats>().FinalBoss)
             {

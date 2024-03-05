@@ -15,6 +15,7 @@ public class ChestChance : MonoBehaviour
     [SerializeField] private Animator chestAni;
     public float Reward;
     public GameObject MoneyBag;
+    public TextMeshProUGUI rewardText;
     public float totalReward;
 
     // Start is called before the first frame update
@@ -75,7 +76,7 @@ public class ChestChance : MonoBehaviour
         //Change and adjust panel text to current reward and chest type.
         string price = $"Tillykke! \n Du fandt {UIManager.Instance.DisplayMoney(Reward)} kr i kisten";
         chest.GetComponentInChildren<TextMeshProUGUI>().text = price;
-        MoneyBag.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(totalReward);
+        rewardText.text = UIManager.Instance.DisplayMoney(totalReward);
         Debug.Log("Text is component" + chest.GetComponentInChildren<TextMeshProUGUI>().text);
     }
     //Method to drop chest
@@ -100,7 +101,7 @@ public class ChestChance : MonoBehaviour
     {
         totalReward += Reward;
         PlayerData.Instance.CombatBonusReward += Reward;
-        MoneyBag.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(totalReward);
+        rewardText.text = UIManager.Instance.DisplayMoney(totalReward);
         PlayerData.Instance.CombatBonusIncrementReward += Reward;
         if(PlayerData.Instance.CombatBonusIncrementReward >= 20 * PlayerData.Instance.bet)
         {
