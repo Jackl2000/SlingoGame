@@ -12,7 +12,8 @@ public class LoadingLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelText.text = "Level " + PlayerStats.Instance.Level;
+        if (PlayerStats.Instance.Level != 5) levelText.text = "LEVEL " + PlayerStats.Instance.Level;
+        else levelText.text = "FINAL BOSS";
         StartCoroutine(PlaySceneTransistion());
     }
 

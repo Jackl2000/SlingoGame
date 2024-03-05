@@ -313,8 +313,12 @@ public class CombatSystem : MonoBehaviour
 
     public void EnteringNewLevel()
     {
-        PlayerStats.Instance.Health = PlayerStats.Instance.MaxHealth;
-        SceneManager.LoadScene("AdventureGameLoadLevelScene");
+        if (PlayerStats.Instance.Level <= 5)
+        {
+            PlayerStats.Instance.Health = PlayerStats.Instance.MaxHealth;
+            SceneManager.LoadScene("AdventureGameLoadLevelScene");
+        }
+        else GameFinishedPanel();
     }
 
     public void CharacterAttack()

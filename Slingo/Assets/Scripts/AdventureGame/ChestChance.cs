@@ -34,7 +34,6 @@ public class ChestChance : MonoBehaviour
 
     public void ChangeChestRandomly()
     {
-        bool lastBoss = false;
         //Gets random number between 0 and 1
         float chance = Random.Range(0f, 1f);
         Debug.Log(chance);
@@ -42,7 +41,7 @@ public class ChestChance : MonoBehaviour
         Debug.Log("Player data: " + PlayerData.Instance.bet);
         //40 chance for silver Chest.
         //40% chance for silver Chest.
-        if (lastBoss != true)
+        if (PlayerStats.Instance.Level != 5)
         {
             if (chance <= 0.4f)
             {
