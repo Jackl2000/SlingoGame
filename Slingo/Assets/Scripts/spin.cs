@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -173,7 +175,7 @@ public class spin : MonoBehaviour
         if (wildPicks > 0)
         {
             gridButton.GetComponent<NumberManager>().StopHighlighting(gridGeneration.numberPositions[AI.currentNumber].gameObject.transform.parent.transform.parent.gameObject);
-            StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(true));
+            StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(true));          
         }
 
         StarDupping(wildNumberPicked, numberPressed);
@@ -196,8 +198,6 @@ public class spin : MonoBehaviour
         {
             GameManager.Instance.messageTipObject.GetComponent<Animator>().SetTrigger("MessageExit");
             GameManager.Instance.messageTipObject.GetComponent<Animator>().SetBool("TipMessage", false);
-
-            //GameManager.Instance.messageTipObject.SetActive(false);
         }
     }
 
@@ -227,6 +227,7 @@ public class spin : MonoBehaviour
                 gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
 
                 GameObject wild = wilds.Dequeue();
+                wild.GetComponent<Image>().enabled = false; // slot wild background image
                 wild.GetComponentInChildren<Image>().color = Color.green;
                 wild.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
 
@@ -242,13 +243,15 @@ public class spin : MonoBehaviour
         {
             foreach (int slot in slotWildArrow)
             {
-                 if (gridGeneration.numberPositions[numberPressed].h == slot && !gridGeneration.numberPositions[numberPressed].hasBeenHit)
+                if (gridGeneration.numberPositions[numberPressed].h == slot && !gridGeneration.numberPositions[numberPressed].hasBeenHit)
                 {
                     gridGeneration.numberPositions[numberPressed].Hit();
                     gridGeneration.numberPositions[numberPressed].gameObject.GetComponent<TextMeshProUGUI>().text = "";
                     wildPicked++;
                     GameObject wild = wildsArrow.Dequeue();
+                    wild.GetComponent<Image>().enabled = false; // slot wild background image
                     wild.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
+
                 }
             }
         }
@@ -275,6 +278,15 @@ public class spin : MonoBehaviour
             else bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[2];
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
             blinkEffect.FlashingEffect(true, gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
+            
+            if (wildsArrow.Count > 0)
+            {
+                wildsArrow.First().GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                wilds.First().GetComponent<Image>().enabled = true;
+            }
         }
     }
 
@@ -322,14 +334,7 @@ public class spin : MonoBehaviour
             textNumber.text = "";
         }
 
-        foreach (GameObject slot in slotsList)
-        {
-            if (slot.GetComponentInChildren<Image>().enabled)
-            {
-                slot.GetComponentInChildren<Image>().color = Color.white;
-                slot.GetComponentInChildren<Image>().enabled = false;
-            }
-        }
+        ClearSpinBorder();
 
         if (spinLeft == startSpins)
         {
@@ -368,16 +373,13 @@ public class spin : MonoBehaviour
         GetComponent<SpinsValue>().ViewSpinsBets();
     }
 
-    
-
-
     int wildArrow;
     int wildPick;
     public void Spin(GameObject slot, int index)
     {
         rnd = UnityEngine.Random.Range(min, max);
 
-        if (spinTwoWild)
+        if (spinTwoWild) // setbool for spinning two wild one of each
         {
             if (wildArrow == 2)
             {
@@ -402,8 +404,10 @@ public class spin : MonoBehaviour
         {
             slotWildArrow.Add(index);
             wildsArrow.Enqueue(slot);
-            slot.GetComponentInChildren<Image>().sprite = wildsImages[1];
-            slot.GetComponentInChildren<Image>().enabled = true;
+            slot.transform.GetChild(1).GetComponent<Image>().sprite = wildsImages[1];
+            slot.transform.GetChild(1).GetComponent<Image>().enabled = true;
+            
+            Debug.Log(slot.GetComponent<Image>().gameObject.name);
             slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
             slot.GetComponentInChildren<TextMeshProUGUI>().text = "";
             wildPicks++;
@@ -413,8 +417,8 @@ public class spin : MonoBehaviour
             if (wildPick == 5)
             {
                 wilds.Enqueue(slot);
-                slot.GetComponentInChildren<Image>().sprite = wildsImages[0];
-                slot.GetComponentInChildren<Image>().enabled = true;
+                slot.transform.GetChild(1).GetComponent<Image>().sprite = wildsImages[0];
+                slot.transform.GetChild(1).GetComponent<Image>().enabled = true;
 
                 slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
                 slot.GetComponentInChildren<TextMeshProUGUI>().text = ""; //Clears number behind the star when getting wild
@@ -509,13 +513,28 @@ public class spin : MonoBehaviour
             GridNumbers bestChoice = AI.BestChoice(wilds.Count, slotWildArrow);
             if (bestChoice != null)
             {
-                if (slotWildArrow.Count > 0) bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[1];
-                else bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[1];
+                if (slotWildArrow.Count > 0)
+                {
+                    bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[1];
+                    //slotsList[bestChoice.h -1].GetComponent<Image>().enabled = true;
+                }
+                else
+                {
+                    bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[1];
+                }
 
                 bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
                 blinkEffect.FlashingEffect(true, bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
             }
             StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(false));
+            if (wildsArrow.Count > 0)
+            {
+                wildsArrow.First().GetComponent<Image>().enabled = true;
+            }
+            else if (wilds.Count != 0)
+            {
+                wilds.First().GetComponent<Image>().enabled = true;
+            }
         }
 
         yield return new WaitForSeconds(0.4f);
@@ -708,7 +727,6 @@ public class spin : MonoBehaviour
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                         animatorObject.GetComponent<Image>().sprite = BackgroundImages[1]; 
                         animatorObject.GetComponent<Image>().enabled = false;
-
                     }
                 }
             }
@@ -721,16 +739,26 @@ public class spin : MonoBehaviour
             //Check for more wilds
             if (slotWildArrow.Count > 0)
             {
-
                 foreach (int slot in slotWildArrow.ToArray())
                 {
                     WildTransparency(false, null, slot);
+                    //slotsList[slot].GetComponent<Image>().enabled = true;
                 }
             }
             else if (wilds.Count > 0)
             {
                 WildTransparency(false);
             }
+        }
+    }
+
+    private void ClearSpinBorder()
+    {
+        foreach (GameObject slot in slotsList)
+        {
+            slot.transform.GetChild(1).GetComponent<Image>().color = Color.white;
+            slot.transform.GetChild(1).GetComponent<Image>().enabled = false;
+            slot.GetComponent<Image>().enabled = false;
         }
     }
 
