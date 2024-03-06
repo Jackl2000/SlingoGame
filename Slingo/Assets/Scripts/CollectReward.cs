@@ -73,7 +73,7 @@ public class CollectReward : MonoBehaviour
             foreach (var spinSlot in spinScript.slotsList)
             {
                 spinSlot.transform.GetChild(1).GetComponent<Image>().color = Color.white;
-                spinSlot.GetComponentInChildren<Image>().enabled = false;
+                spinSlot.transform.GetChild(1).GetComponent<Image>().enabled = false;
                 spinSlot.GetComponentInChildren<TextMeshProUGUI>().text = "?";
             }
 

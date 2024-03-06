@@ -63,6 +63,7 @@ public class GridCheck : MonoBehaviour
     public void UpdateRewards(List<GameObject> slingoRewards, float multiplyere)
     {
         rewards.Clear();
+        rewards.Add(0, 0);
         rewards.Add(1, 0);
         rewards.Add(2, 0);
         rewards.Add(3, 1 * multiplyere);

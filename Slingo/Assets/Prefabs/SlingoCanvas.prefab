@@ -8081,8 +8081,8 @@ MonoBehaviour:
   spinCountHeader: {fileID: 7787662666394665884}
   spinSpeed: 15
   spinWaitTime: 0.5
-  wildChance: 10
-  wildArrowChance: 6
+  wildChance: 20
+  wildArrowChance: 15
   startSpins: 10
   spinLeft: 10
   spinBuyLimit: 5
@@ -8116,6 +8116,7 @@ MonoBehaviour:
   stakes: 0
   wildPicks: 0
   numberPressed: 0
+  wildPicked: 0
   timePassedForMsg: 0
   keepSpinningPanel: {fileID: 2950752321684696061}
   CostMessage: {fileID: 5492437303112480685}

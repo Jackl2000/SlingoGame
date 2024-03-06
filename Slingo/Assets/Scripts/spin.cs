@@ -579,8 +579,11 @@ public class spin : MonoBehaviour
             }
             else if (spinBuyLimit == 0 || gridCheck.slingoCount >= 12)
             {
-                string messageText = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
-                resetButtonText.transform.parent.GetComponent<Button>().enabled = false;
+                if (!collectMessageText.gameObject.activeSelf)
+                {
+                    resetButtonText.transform.parent.GetComponent<Button>().enabled = true;
+                    resetButtonText.color = Color.white;
+                }
 
                 if (gridCheck.slingoCount >= 3)
                 {
@@ -593,12 +596,12 @@ public class spin : MonoBehaviour
                         return;
                     }
                     CollectMessage.SetActive(true);
-                    collectMessageText.text = messageText;
+                    collectMessageText.text = "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount]);
                     CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Tag Gevinst";
                 }
                 else
                 {
-                    StartCoroutine(MessageHandler(CollectMessage, 1f, messageText));
+                    StartCoroutine(MessageHandler(CollectMessage, 1f, "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount])));
                     CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                     Debug.Log("went else");
                 }
