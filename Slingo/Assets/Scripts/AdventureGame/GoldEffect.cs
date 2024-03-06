@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class GoldEffect : MonoBehaviour
 {
     public GameObject target;
+    public TextMeshProUGUI moneyText;
     private ParticleSystem ps;
     private bool playing = false;
     private float speed = 1500f;
@@ -27,10 +29,11 @@ public class GoldEffect : MonoBehaviour
             if (Vector3.Distance(ps.transform.position, target.transform.position) < 0.1f)
             {
                 ps.Stop();
-                playing=false;
+                playing = false;
                 target.GetComponent<Animator>().SetBool("MoneyInBag", true);
                 StopAnimation();
                 GetComponent<ChestChance>().TotalRewards();
+                StartCoroutine(UIManager.Instance.TextColorAnimation(this, moneyText, 0.05f, new Color[] { Color.yellow, Color.yellow, Color.red, Color.yellow }, Color.white, 3));
             }
             else ps.gameObject.transform.position = Vector3.MoveTowards(ps.transform.position, target.transform.position, speed * Time.deltaTime);
         }
