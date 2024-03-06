@@ -14,7 +14,7 @@ public class BoardHandler : MonoBehaviour
     private void Start()
     {
         balanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.balance);
-        indsatsText.text = "Indsats: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.bet);
+        indsatsText.text = "Indsats: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.totalIndsats);
         indsatsText.text = "Bonus gevinst: " + UIManager.Instance.DisplayMoney(gevinst);
     }
 

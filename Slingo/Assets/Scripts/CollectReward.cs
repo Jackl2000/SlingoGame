@@ -50,6 +50,7 @@ public class CollectReward : MonoBehaviour
             spinScript.indsatsChoosen = false;
             spinScript.spinLeftText.color = Color.white;
             spinScript.spinLeftText.text = spinScript.spinLeft.ToString();
+            PlayerData.Instance.totalIndsats = 0;
             spinScript.spentText.text = "Indsat: " + UIManager.Instance.DisplayMoney(0);
             spinScript.stakes = 0;
             spinScript.spinBuyLimit = 5;

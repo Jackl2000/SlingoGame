@@ -65,7 +65,7 @@ public class CardGameManager : MonoBehaviour
     {
         gevintsString = "Bonus gevints: ";
         balanceText.text = "Balance: " + PlayerData.Instance.balance.ToString();
-        indsatsText.text = "Indsats: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.bet);
+        indsatsText.text = "Indsats: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.totalIndsats);
     }
 
     public void ShuffleCards()

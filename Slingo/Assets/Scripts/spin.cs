@@ -94,7 +94,6 @@ public class spin : MonoBehaviour
     [SerializeField] private GameObject CollectMessage;
 
     private bool isMessageActive = false;
-    private bool warning = true;
     [HideInInspector] public bool indsatsChoosen = false;
 
     #endregion
@@ -292,8 +291,7 @@ public class spin : MonoBehaviour
 
     public void HideMessage(Toggle toggle) //This is called with toogle in KeepSpinningPanel
     {
-        if (toggle.isOn) warning = false;
-        else warning = true;
+        if (toggle.isOn) PlayerData.Instance.warning = false;
     }
 
     public void StartSpin()
@@ -309,7 +307,7 @@ public class spin : MonoBehaviour
 
         float costPrSpin = calculations.PriceCaculator();
 
-        if (spinLeft < 0 && costPrSpin > 0 && !isMessageActive && warning)
+        if (spinLeft < 0 && costPrSpin > 0 && !isMessageActive && PlayerData.Instance.warning)
         {
             isMessageActive = true;
             StartCoroutine(MessageHandler(keepSpinningPanel, 0, $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}"));
@@ -459,10 +457,12 @@ public class spin : MonoBehaviour
         if (spinLeft == startSpins)
         {
             stakes += spinBets;
+            PlayerData.Instance.totalIndsats += spinBets;
         }
         if (spinLeft < 0)
         {
             stakes += calculations.PriceCaculator();
+            PlayerData.Instance.totalIndsats = stakes;
         }
         spentText.text = "Indsats: " + "\n" + stakes.ToString("F2") + "kr";
 
