@@ -74,7 +74,7 @@ public class spin : MonoBehaviour
     int rnd;
     int min = 1;
     int max = 15;
-    int wildPicked = 0;
+    public int wildPicked = 0;
     [HideInInspector] public float timePassedForMsg;
     private List<Image> starImgs = new List<Image>();
 
@@ -226,7 +226,7 @@ public class spin : MonoBehaviour
 
                 GameObject wild = wilds.Dequeue();
                 wild.GetComponent<Image>().enabled = false; // slot wild background image
-                wild.GetComponentInChildren<Image>().color = Color.green;
+                wild.transform.GetChild(1).GetComponent<Image>().color = Color.green;
                 wild.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", false);
 
                 wildPicked++;
@@ -261,7 +261,7 @@ public class spin : MonoBehaviour
         blinkEffect.FlashingEffect(false, bestChoiceText);
         WildTransparency(true, wildNumberPicked, index);
 
-        if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished)
+        if (wildPicked == wildPicks && gridCheck.slingoAnimationFinished || gridCheck.slingoCount == 12)
         {
             SpinButtonReset();
         }
@@ -399,15 +399,27 @@ public class spin : MonoBehaviour
 
         if (wildArrow == 2)
         {
-            slotWildArrow.Add(index);
-            wildsArrow.Enqueue(slot);
+            bool notHit = false;
+            foreach(GridNumbers number in gridGeneration.numberPositions.Values)
+            {
+                if(number.h == index && !number.hasBeenHit)
+                {
+                    notHit = true;
+                }
+            }
+            if(notHit)
+            {
+                slotWildArrow.Add(index);
+                wildsArrow.Enqueue(slot);
+                slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
+                wildPicks++;
+            }
+            else Debug.Log("Slingo has been hit");
+
             slot.transform.GetChild(1).GetComponent<Image>().sprite = wildsImages[1];
             slot.transform.GetChild(1).GetComponent<Image>().enabled = true;
             
-            Debug.Log(slot.GetComponent<Image>().gameObject.name);
-            slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
             slot.GetComponentInChildren<TextMeshProUGUI>().text = "";
-            wildPicks++;
         }
         else
         {
@@ -543,14 +555,14 @@ public class spin : MonoBehaviour
 
     public void SpinButtonReset()
     {
-        if(spinLeft > 0)
+        if(spinLeft > 0 && gridCheck.slingoCount < 12)
         {
             spinButton.GetComponent<Image>().color = Color.white;
         }
         else
         {
             //Besked pop op efter de første 10 spins er brugt
-            if (spinBuyLimit == 5 && !isMessageActive)
+            if (spinBuyLimit == 5 && !isMessageActive && gridCheck.slingoCount != 12)
             {
                 spinCountHeader.text = "Max spin køb";
                 spinLeftText.text = spinBuyLimit.ToString();
