@@ -26681,6 +26681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1314182443}
+  moneyText: {fileID: 623933643}
 --- !u!1 &1912865603
 GameObject:
   m_ObjectHideFlags: 0
@@ -26951,6 +26952,7 @@ MonoBehaviour:
   messagePanel: {fileID: 41605085}
   enemyCrits: 0
   playerWin: 0
+  enemyDicesRestart: 1
   playerObject: {fileID: 1020670068}
   attackFinished: 0
   characterMoveBack: 0

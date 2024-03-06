@@ -826,7 +826,10 @@ public class spin : MonoBehaviour
     {
         if (starImg == null)
         {
-            foreach (Image star in starImgs.ToArray())
+            List<Image> starImages = new List<Image>(); 
+            starImages.AddRange(starImgs);
+            starImgs.Clear();
+            foreach (Image star in starImages)
             {
                 while (star.color.a < 1)
                 {
@@ -835,7 +838,6 @@ public class spin : MonoBehaviour
                 }
                 yield return new WaitForSeconds(0.05f);
             }
-            starImgs.Clear();
         }
         else
         {
