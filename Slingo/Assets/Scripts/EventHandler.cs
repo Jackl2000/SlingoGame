@@ -97,6 +97,22 @@ public class EventHandler : MonoBehaviour
         combatSystem.messagePanel.GetComponent<Animator>().SetBool("Show", true);
     }
 
+    public void EnemyCrittMessage()
+    {
+        if(combatSystem.enemyCrits == true)
+        {
+            combatSystem.messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Kritisktræffer";
+            combatSystem.messagePanel.GetComponent<Animator>().SetBool("Show", true);
+            StartCoroutine(EnemyCritMessageFadeaway());
+        }
+    }
+
+    private IEnumerator EnemyCritMessageFadeaway()
+    {
+        yield return new WaitForSeconds(1);
+        combatSystem.messagePanel.GetComponent<Animator>().SetBool("Show", false);
+    }
+
     public void SwordIconAttackEvent()
     {
         GetComponentInChildren<ParticleSystem>().Play();
@@ -120,12 +136,12 @@ public class EventHandler : MonoBehaviour
 
         Debug.Log("EV CRITTS " + temp);
 
-        if(combatSystem.enemyCrits == true)
+        if(temp == true)
         {
             int critDamage = enemyStats.Damage + Mathf.RoundToInt(enemyStats.Damage / 2);
             player.PlayerTakeDamage(critDamage);
             player.GetComponentInParent<CombatUI>().UpdateUI(critDamage, "player");
-            
+            combatSystem.enemyCrits = false;
         }
         else
         {

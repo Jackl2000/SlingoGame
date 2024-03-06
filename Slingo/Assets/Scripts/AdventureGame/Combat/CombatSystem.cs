@@ -216,15 +216,12 @@ public class CombatSystem : MonoBehaviour
                 messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Forsvar mislykkedes";
 
                 int enemyCritChance = enemy.GetComponent<EnemyStats>().CritChance;
+                //Calculates if enemy crits
                 int random = Random.Range(1, 101);
-                Debug.Log("this luck no "+ random);
-                Debug.Log("Ene critt chance" + enemyCritChance);
+                Debug.Log("Enemy crits " + enemyCritChance);
                 if (enemyCritChance >= random)
                 {
                     enemyCrits = true;
-                    Debug.Log("enemy crit on chance: " + enemyCritChance  + " selected number: " + random);
-                    Debug.Log(enemyCrits);
-                    messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Forsvar mislykkedes \n Kritisktræffer";
                 }
 
             }
@@ -244,17 +241,13 @@ public class CombatSystem : MonoBehaviour
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", true);
                 playerWin = false;
                 messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb mislykkedes";
-
+                //Calculates if enemy crits
                 int enemyCritChance = enemy.GetComponent<EnemyStats>().CritChance;
                 int random = Random.Range(1, 101);
-                Debug.Log("this luck no " + random);
-                Debug.Log("Ene critt chance" + enemyCritChance);
+                Debug.Log("Enemy crits " + enemyCritChance);
                 if (enemyCritChance >= random)
                 {
                     enemyCrits = true;
-                    Debug.Log("enemy crit on chance: " + enemyCritChance + " selected number: " + random);
-                    Debug.Log(enemyCrits);
-                    messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb mislykkedes \n Kritisktræffer";
                 }
 
             }
