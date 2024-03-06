@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerData
 {
     public float balance = 999;
-    public float bet = 1;
+    public float bet = 2;
     public bool warning = true;
     public float totalIndsats = 0;
 

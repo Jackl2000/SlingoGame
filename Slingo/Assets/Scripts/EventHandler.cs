@@ -114,6 +114,11 @@ public class EventHandler : MonoBehaviour
         combatSystem.messagePanel.GetComponent<Animator>().SetBool("Show", false);
     }
 
+    public void EnemyDicesResetEvent()
+    {
+        combatSystem.enemyDicesRestart = true;
+    }
+
     public void PlayerTakeDamageEvent()
     {
         bool temp = combatSystem.enemyCrits;

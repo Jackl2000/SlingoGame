@@ -24,7 +24,6 @@ public class GoldEffect : MonoBehaviour
     {
         if(playing)
         {
-            Debug.Log(Vector3.Distance(ps.transform.position, target.transform.position));
             if (Vector3.Distance(ps.transform.position, target.transform.position) < 0.1f)
             {
                 ps.Stop();

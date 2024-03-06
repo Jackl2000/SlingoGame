@@ -58,7 +58,11 @@ public class SpinsValue : MonoBehaviour
 
     public void UpdateValueText()
     {
-       if(valueText != null && currentIndex >= 0 && currentIndex < spinValues.Count) 
+        if (!spinsBetPanel.activeSelf)
+        {
+            currentIndex = spinValues.IndexOf(PlayerData.Instance.bet);
+        }
+        if (valueText != null && currentIndex >= 0 && currentIndex < spinValues.Count) 
        {
             valueText.text = UIManager.Instance.DisplayMoney(spinValues[currentIndex]);
        }

@@ -25,6 +25,7 @@ public class CombatSystem : MonoBehaviour
 
 
     [HideInInspector] public bool playerWin;
+    [HideInInspector] public bool enemyDicesRestart = true;
 
     private GameObject enemyDice;
     private GameObject enemyDice2;
@@ -82,6 +83,7 @@ public class CombatSystem : MonoBehaviour
         //enemy roll
         int enemyRoll = Roll();
         int enemyRoll2 = Roll();
+        while (!enemyDicesRestart) yield return new WaitForSeconds(0.1f);
         enemyDices.GetComponent<Animator>().enabled = false;
         yield return StartCoroutine(DiceRoll(enemyDice, enemyDice2, enemyRoll, enemyRoll2));
         enemyDices.GetComponent<Animator>().enabled = true;
@@ -272,6 +274,7 @@ public class CombatSystem : MonoBehaviour
         messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Uafgjort";
         OptionsPanel.SetActive(false);
         combatReset = true;
+        enemyDicesRestart = true;
     }
 
     private async void DrawMessageDisapear()
