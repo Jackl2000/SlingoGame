@@ -11697,7 +11697,7 @@ RectTransform:
   m_GameObject: {fileID: 4868011193969249288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7071386700314157629}
@@ -11747,7 +11747,7 @@ MonoBehaviour:
   m_GroupMaxId: 0
   m_PositionMode: 0
   m_AutoScaling: 0
-  m_AutoScalingMode: 2
+  m_AutoScalingMode: 1
   m_ResetScaleOnEnable: 0
 --- !u!198 &5717584663265216187
 ParticleSystem:
@@ -16493,7 +16493,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 311193f59ea2d3e47b759ecee8178185, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16537,7 +16537,7 @@ ParticleSystemRenderer:
   m_VertexStreams: 00010304
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
