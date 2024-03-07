@@ -384,6 +384,7 @@ MonoBehaviour:
   holePrefab: {fileID: 6736090102393938910, guid: 311d37d4dcc2e8c4f95a6cc50b700f16, type: 3}
   selector: {fileID: 1872211324}
   selectedCard: {fileID: 0}
+  positionPoints: []
 --- !u!1001 &268584422
 PrefabInstance:
   m_ObjectHideFlags: 0

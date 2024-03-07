@@ -15,7 +15,7 @@ public class BoardHandler : MonoBehaviour
     {
         balanceText.text = "Balance: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.balance);
         indsatsText.text = "Indsats: " + UIManager.Instance.DisplayMoney(PlayerData.Instance.totalIndsats);
-        indsatsText.text = "Bonus gevinst: " + UIManager.Instance.DisplayMoney(gevinst);
+        gevinstText.text = "Bonus gevinst: " + UIManager.Instance.DisplayMoney(gevinst);
     }
 
     public void CardEarned(float reward)
@@ -30,7 +30,7 @@ public class BoardHandler : MonoBehaviour
 
         gevinstText.text = "Bonus gevinst: " + UIManager.Instance.DisplayMoney(gevinst);
 
-        if(gevinst == 50)
+        if(gevinst == 50 * PlayerData.Instance.bet)
         {
             gameFinishedPanel.SetActive(true);
             gameFinishedPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevinst);

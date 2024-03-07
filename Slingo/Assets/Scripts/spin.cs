@@ -414,7 +414,6 @@ public class spin : MonoBehaviour
                 slot.GetComponentInChildren<Outline>().GetComponent<Animator>().SetBool("Wild", true);
                 wildPicks++;
             }
-            else Debug.Log("Slingo has been hit");
 
             slot.transform.GetChild(1).GetComponent<Image>().sprite = wildsImages[1];
             slot.transform.GetChild(1).GetComponent<Image>().enabled = true;
