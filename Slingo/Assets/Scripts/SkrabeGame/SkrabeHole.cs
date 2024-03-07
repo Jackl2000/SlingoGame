@@ -11,13 +11,14 @@ public class SkrabeHole : MonoBehaviour
     public GameObject selectedCard;
     private List<GameObject> holes = new List<GameObject>();
     [SerializeField] private List<Vector2> positionPoints = new List<Vector2>();
+    private bool canPlaceHoles = true;
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && canPlaceHoles)
         {
             if (CheckForVisibility() && selectedCard != null)
             {
-                selector.ResetSelctedCard();
+                canPlaceHoles = selector.ResetSelctedCard();
                 selectedCard = null;
                 foreach (GameObject go in holes)
                 {
@@ -51,12 +52,12 @@ public class SkrabeHole : MonoBehaviour
     {
         positionPoints.Clear();
         TextMeshProUGUI rewardText = selectedCard.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>(true);
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 4; i++)
         {
-            for (int j = 0; j < 6; j++)
+            for (int j = 0; j < 4; j++)
             {
-                float xCount = rewardText.transform.position.x + 40 + (25 * i);
-                float yCount = rewardText.transform.position.y + 40 + (25 * j);
+                float xCount = rewardText.transform.position.x + 40 + (30 * i);
+                float yCount = rewardText.transform.position.y + 40 + (30 * j);
                 positionPoints.Add(new Vector2(xCount, yCount));
             }
         }
@@ -75,12 +76,8 @@ public class SkrabeHole : MonoBehaviour
                 holeHit++;
             }
         }
-        Debug.Log("Hit raycasts: " + holeHit + " : hole count: " + holes.Count);
-        if ((holeHit >= 25 && holes.Count > 100) || (holeHit >= 20 && holes.Count > 250)) return true;
-        else
-        {
-            return false;
-        }
+        if ((holeHit >= 15 && holes.Count > 100) || (holeHit >= 10 && holes.Count > 200)) return true;
+        else return false;
     }
 
     private bool CheckForIntergration()

@@ -18,13 +18,12 @@ public class BoardHandler : MonoBehaviour
         gevinstText.text = "Bonus gevinst: " + UIManager.Instance.DisplayMoney(gevinst);
     }
 
-    public void CardEarned(float reward)
+    public bool CardEarned(float reward)
     {
         if (reward == 0)
         {
-            gameFinishedPanel.SetActive(true);
-            gameFinishedPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevinst);
-            return;
+            StartCoroutine(ShowMessage());
+            return false;
         }
         else gevinst += reward;
 
@@ -32,9 +31,17 @@ public class BoardHandler : MonoBehaviour
 
         if(gevinst == 50 * PlayerData.Instance.bet)
         {
-            gameFinishedPanel.SetActive(true);
-            gameFinishedPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevinst);
+            StartCoroutine(ShowMessage());
+            return false;
         }
+        return true;
+    }
+
+    private IEnumerator ShowMessage()
+    {
+        yield return new WaitForSeconds(2f);
+        gameFinishedPanel.SetActive(true);
+        gameFinishedPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevinst);
     }
 
     public void ExitWithReward(string sceneName)

@@ -33,13 +33,13 @@ public class SkrabeSelector : MonoBehaviour
         return selectedCard;
     }
 
-    public void ResetSelctedCard()
+    public bool ResetSelctedCard()
     {
         selectedCard.transform.GetChild(1).gameObject.SetActive(false);
         cards.Remove(selectedCard);
         TextMeshProUGUI rewardText = selectedCard.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
-        if (rewardText == null) GetComponentInParent<BoardHandler>().CardEarned(0);
-        else GetComponentInParent<BoardHandler>().CardEarned(UIManager.Instance.GetMoneyValue(rewardText.text));
         selectedCard = null;
+        if (rewardText == null) return GetComponentInParent<BoardHandler>().CardEarned(0);
+        else return GetComponentInParent<BoardHandler>().CardEarned(UIManager.Instance.GetMoneyValue(rewardText.text));
     }
 }
