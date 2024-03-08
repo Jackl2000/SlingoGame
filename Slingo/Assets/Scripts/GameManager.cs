@@ -89,12 +89,18 @@ public class GameManager : MonoBehaviour
 
         }
         //Stops animation
-        if (hasPicked && gridGeneration.numberPositions[aiScript.currentNumber].h == gridGeneration.numberPositions[spinScript.numberPressed].h)
+        if (hasPicked && gridGeneration.numberPositions[aiScript.currentNumber].h == gridGeneration.numberPositions[spinScript.numberPressed].h && isColumnAnimationFinished)
         {
-            foreach (Animator animator in reversedAnimatorList)
+            foreach(GridNumbers gridNumbers in gridGeneration.numberPositions.Values)
             {
-                animator.SetBool("HasPicked", hasPicked);
+                gridNumbers.gameObject.GetComponentInParent<NumberManager>().GetComponent<Animator>().SetBool("HasPicked", hasPicked);
             }
+
+
+            //foreach (Animator animator in reversedAnimatorList)
+            //{
+            //    animator.SetBool("HasPicked", hasPicked);
+            //}
         }
 
     }

@@ -170,11 +170,11 @@ public class spin : MonoBehaviour
         wildNumberPicked.GetComponentInChildren<Image>().enabled = false;
         numberPressed = Convert.ToInt32(gridButton.GetComponentInChildren<TextMeshProUGUI>().text);
         
-        if (wildPicks > 0)
+        if (wildPicks > 0 && AI.currentNumber != 0)
         {
             gridButton.GetComponent<NumberManager>().StopHighlighting(gridGeneration.numberPositions[AI.currentNumber].gameObject.transform.parent.transform.parent.gameObject);
-            StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(true));          
         }
+
 
         StarDupping(wildNumberPicked, numberPressed);
 
@@ -190,6 +190,11 @@ public class spin : MonoBehaviour
         else if (wilds.Count > 0)
         {
             SlotSuperWild(wildNumberPicked, numberPressed);
+        }
+
+        if (wildPicks == wildPicked)
+        {
+            StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(true));
         }
 
         if (GameManager.Instance.messageTipObject.activeSelf && wildPicks == wildPicked)
@@ -298,7 +303,6 @@ public class spin : MonoBehaviour
             SelectSpins();
             return;
         }
-        
 
         float costPrSpin = calculations.PriceCaculator();
 
@@ -522,7 +526,6 @@ public class spin : MonoBehaviour
                 if (slotWildArrow.Count > 0)
                 {
                     bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[1];
-                    //slotsList[bestChoice.h -1].GetComponent<Image>().enabled = true;
                 }
                 else
                 {
@@ -595,7 +598,6 @@ public class spin : MonoBehaviour
                 {
                     StartCoroutine(MessageHandler(CollectMessage, 1f, "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount])));
                     CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
-                    Debug.Log("went else");
                 }
             }
             else
@@ -670,7 +672,6 @@ public class spin : MonoBehaviour
                     {
                         Animator animatorObject = number.gameObject.GetComponentInParent<Animator>();
                         animatorObject.GetComponent<Image>().sprite = BackgroundImages[1];
-                        //animatorObject.GetComponent<Image>().enabled = true;
                         indexes[number.h - 1]++;
                     }
                 }
@@ -742,18 +743,12 @@ public class spin : MonoBehaviour
                 }
             }
 
-            if (wildNumberPicked != null)
-            {
-                //wildNumberPicked.GetComponent<Image>().enabled = false;
-            }
-
             //Check for more wilds
             if (slotWildArrow.Count > 0)
             {
                 foreach (int slot in slotWildArrow.ToArray())
                 {
                     WildTransparency(false, null, slot);
-                    //slotsList[slot].GetComponent<Image>().enabled = true;
                 }
             }
             else if (wilds.Count > 0)

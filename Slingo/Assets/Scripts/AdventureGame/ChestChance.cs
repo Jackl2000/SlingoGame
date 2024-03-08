@@ -74,7 +74,7 @@ public class ChestChance : MonoBehaviour
             Debug.Log(Reward);
         }
         //Change and adjust panel text to current reward and chest type.
-        string price = $"Tillykke! \n Du fandt {UIManager.Instance.DisplayMoney(Reward)} kr i kisten";
+        string price = $"Tillykke! \n Du fandt {UIManager.Instance.DisplayMoney(Reward)} i kisten";
         chest.GetComponentInChildren<TextMeshProUGUI>().text = price;
         rewardText.text = UIManager.Instance.DisplayMoney(totalReward);
         Debug.Log("Text is component" + chest.GetComponentInChildren<TextMeshProUGUI>().text);
