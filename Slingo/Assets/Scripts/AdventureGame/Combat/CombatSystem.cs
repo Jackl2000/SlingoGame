@@ -364,7 +364,6 @@ public class CombatSystem : MonoBehaviour
         }
     }
 
-
     private IEnumerator Attack(GameObject attacker)
     {
         attackFinished = true;
@@ -408,7 +407,6 @@ public class CombatSystem : MonoBehaviour
         playerDices.GetComponent<Animator>().SetBool("Start", true);
         playerDices.GetComponent<Animator>().SetBool("Attack", false);
     }
-    
 
     private void Turn(GameObject character)
     {

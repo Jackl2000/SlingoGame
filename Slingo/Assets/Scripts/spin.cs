@@ -277,11 +277,7 @@ public class spin : MonoBehaviour
             bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
             blinkEffect.FlashingEffect(true, gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>());
             
-            if (wildsArrow.Count > 0)
-            {
-                wildsArrow.First().GetComponent<Image>().enabled = true;
-            }
-            else
+            if (wilds.Count != 0 && wildsArrow.Count == 0)
             {
                 wilds.First().GetComponent<Image>().enabled = true;
             }
@@ -537,11 +533,8 @@ public class spin : MonoBehaviour
                 blinkEffect.FlashingEffect(true, bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
             }
             StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(false));
-            if (wildsArrow.Count > 0)
-            {
-                wildsArrow.First().GetComponent<Image>().enabled = true;
-            }
-            else if (wilds.Count != 0)
+
+            if (wilds.Count != 0 && wildsArrow.Count == 0)
             {
                 wilds.First().GetComponent<Image>().enabled = true;
             }
@@ -696,6 +689,7 @@ public class spin : MonoBehaviour
                         WildTransparency(true, null, indexh);
                     }
                 }
+                slotsList[slotWildArrow.First() - 1].GetComponent<Image>().enabled = true;
             }
             else
             {
@@ -727,6 +721,10 @@ public class spin : MonoBehaviour
                         animatorObject.GetComponent<Image>().enabled = false;
 
                     }
+                }
+                if(slotWildArrow.First() == hIndex)
+                {
+                    slotsList[slotWildArrow.First() - 1].GetComponent<Image>().enabled = false;
                 }
                 slotWildArrow.Remove(hIndex);
             }

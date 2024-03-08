@@ -101,67 +101,6 @@ public class GridCheck : MonoBehaviour
         else if(slingoCount >= 9) slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[3]);
     }
 
-    private IEnumerator TextColorAnimation(TextMeshProUGUI text, float speed, Color[] colors, int times, bool backWards = false)
-    {
-        if (backWards) text.textInfo.wordInfo = text.textInfo.wordInfo.Reverse().ToArray();
-
-        for (int i = 0; i < text.textInfo.wordInfo.Length; i++)
-        {
-            if (text.textInfo.wordInfo[i].characterCount == 0)
-            {
-                continue;
-            }
-            else
-            {
-                TMP_WordInfo wordInfo = text.textInfo.wordInfo[i];
-                for (int j = 0; j < wordInfo.characterCount; j++)
-                {
-                    int characterIndex = 0;
-                    if (!backWards)
-                    {
-                        characterIndex = wordInfo.firstCharacterIndex + j;
-                    }
-                    else
-                    {
-                        characterIndex = wordInfo.lastCharacterIndex - j;
-                    }
-
-                    int meshIndex = text.textInfo.characterInfo[characterIndex].materialReferenceIndex;
-                    int vertexIndex = text.textInfo.characterInfo[characterIndex].vertexIndex;
-
-                    Color32[] vertexColor = text.textInfo.meshInfo[meshIndex].colors32;
-
-                    if (backWards)
-                    {
-                        vertexColor[vertexIndex + 0] = Color.white;
-                        vertexColor[vertexIndex + 1] = Color.white;
-                        vertexColor[vertexIndex + 2] = Color.white;
-                        vertexColor[vertexIndex + 3] = Color.white;
-                    }
-                    else
-                    {
-                        vertexColor[vertexIndex + 0] = colors[0];
-                        vertexColor[vertexIndex + 1] = colors[1];
-                        vertexColor[vertexIndex + 2] = colors[2];
-                        vertexColor[vertexIndex + 3] = colors[3];
-                    }
-
-                    text.UpdateVertexData(TMP_VertexDataUpdateFlags.All);
-                    yield return new WaitForSeconds(speed);
-                }
-            }
-        }
-        if (!backWards)
-        {
-            StartCoroutine(TextColorAnimation(text, speed, colors, times, true));
-        }
-        else if (times != 0)
-        {
-            text.textInfo.wordInfo = text.textInfo.wordInfo.Reverse().ToArray();
-            StartCoroutine(TextColorAnimation(text, speed, colors, times - 1));
-        }
-    }
-
     /// <summary>
     /// Reset all the data about the grid like slingo count and etc.
     /// </summary>
@@ -381,7 +320,7 @@ public class GridCheck : MonoBehaviour
     {
         if(slingoBorders.Count > 0 && SlingoPanel.activeSelf)
         {
-            if (rewards.ContainsKey(slingoCount))
+            if (rewards.ContainsKey(slingoCount) && slingoCount != 0)
             {
                 foreach (Image item in slingoBorders)
                 {
@@ -411,15 +350,6 @@ public class GridCheck : MonoBehaviour
                 }
             }
         }
-
-        //if (slingoCount >= 3)
-        //{
-        //    resetButton.GetComponentInChildren<TextMeshProUGUI>().text = "Modtag " + UIManager.Instance.DisplayMoney(rewards[slingoCount]);
-        //}
-        //if(slingoCount >= 12 && slingoAnimationFinished && spinScript.timePassedForMsg > 3)
-        //{
-        //    jackpotMessage.SetActive(true);
-        //}
     }
 
     /// <summary>
