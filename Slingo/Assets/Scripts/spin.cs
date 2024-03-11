@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -221,18 +221,18 @@ public class spin : MonoBehaviour
         }
     }
 
-//    ???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
-//???????????????????????????
+//    ⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⡶⠾⠿⠿⠿⠶⣶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⣠⡾⠟⠉⠁⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣦⡀⠀⠀⠀⠀⠀
+//⠀⠀⠀⢠⣾⠋⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠈⠻⣦⠀⠀⠀⠀
+//⠀⠀⢠⡿⠁⢠⣾⠟⠛⠻⣦⠀⠀⠀⠀⢀⣾⡟⠛⠛⣧⡀⠹⣷⠀⠀⠀
+//⠀⠀⣿⠁⠀⢸⣿⣄⢀⣠⣿⠿⠿⠿⠿⢿⣿⣄⡀⣀⣾⠇⠀⢹⣇⠀⠀
+//⠀⢰⣿⠀⠀⠈⠛⠿⢿⡿⠁⢀⣤⣤⣄⡀⠙⣿⡿⠿⠋⠀⠀⠈⣿⠀⠀
+//⠀⠈⢿⣄⣶⡄⠀⠀⣿⡇⠀⢘⣿⢿⣿⠁⠀⣿⡆⠀⠀⢰⣦⣴⠟⠀⠀
+//⠀⠀⠀⣩⣿⡇⠀⠀⠸⣧⡀⣸⡏⠘⣿⣄⣠⣿⠀⠀⠀⢸⣯⡁⠀⠀⠀
+//⠀⣠⣾⠟⣿⡇⠀⠀⠀⠉⠛⠋⠀⠀⠈⠛⠛⠁⠀⠀⠀⢸⡟⠻⣦⡀⠀
+//⢰⡟⠁⣴⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡦⠉⣿⠄
+//⠈⢿⣦⡈⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡏⣠⣾⠟⠀
+//⠀⠀⠙⢿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠟⠁⠀⠀
 
     public void SlotSuperWild(GameObject wildNumberPicked, int numberPressed)
     {
@@ -323,7 +323,7 @@ public class spin : MonoBehaviour
         if (spinLeft < 0 && costPrSpin > 0 && !isMessageActive && PlayerData.Instance.warning)
         {
             isMessageActive = true;
-            StartCoroutine(MessageHandler(keepSpinningPanel, 0, $"Vil du fors�tte med at spinne, dit n�ste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}"));
+            StartCoroutine(MessageHandler(keepSpinningPanel, 0, $"Vil du forsætte med at spinne, dit næste spin koster {UIManager.Instance.DisplayMoney(calculations.PriceCaculator())}"));
             return;
         }
 
@@ -380,7 +380,6 @@ public class spin : MonoBehaviour
 
     private void SelectSpins()
     {
-        resetButtonText.color = Color.gray;
         indsatsChoosen = true;
         GetComponent<SpinsValue>().ViewSpinsBets();
     }
@@ -568,10 +567,10 @@ public class spin : MonoBehaviour
         }
         else
         {
-            //Besked pop op efter de f�rste 10 spins er brugt
+            //Besked pop op efter de første 10 spins er brugt
             if (spinBuyLimit == 5 && !isMessageActive && gridCheck.slingoCount != 12)
             {
-                spinCountHeader.text = "Max spin k�b";
+                spinCountHeader.text = "Max spin køb";
                 spinLeftText.text = spinBuyLimit.ToString();
                 
 
@@ -579,8 +578,8 @@ public class spin : MonoBehaviour
                 MessageAnimator.SetBool("MinimizePlate", true);
                 
                 //ChangeSpinButton();
-                StartCoroutine(MessageHandler(CostMessage, 0f, "Du har opbrugt all dine spins og kan k�be op til 5 spins. " +
-                                                                $"K�b et spin?"));
+                StartCoroutine(MessageHandler(CostMessage, 0f, "Du har opbrugt all dine spins og kan købe op til 5 spins. " +
+                                                                $"Køb et spin?"));
                 StartCoroutine(StartButtonCostAnimation());
                 return;
             }
@@ -596,7 +595,7 @@ public class spin : MonoBehaviour
                 {
                     if (gridCheck.slingoCount > 9 && GameManager.Instance.BonusGameEnable)
                     {
-                        collectMessageText.text = "BONUS SPIL OPN�ET !" + "\n" + "Spil videre for at vinde ekstra";
+                        collectMessageText.text = "BONUS SPIL OPNÅET !" + "\n" + "Spil videre for at vinde ekstra";
                         collectMessageText.transform.parent.GetChild(0).gameObject.SetActive(false);
                         collectMessageText.transform.parent.GetChild(1).gameObject.SetActive(true);
                         CollectMessage.gameObject.SetActive(true);
@@ -609,7 +608,7 @@ public class spin : MonoBehaviour
                 else
                 {
                     StartCoroutine(MessageHandler(CollectMessage, 1f, "SPIL SLUT" + "\n" + "Du har tjent " + UIManager.Instance.DisplayMoney(gridCheck.rewards[gridCheck.slingoCount])));
-                    CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "N�ste Spil";
+                    CollectMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text = "Næste Spil";
                 }
             }
             else
