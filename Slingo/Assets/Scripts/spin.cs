@@ -367,6 +367,7 @@ public class spin : MonoBehaviour
 
     private void SelectSpins()
     {
+        resetButtonText.color = Color.gray;
         indsatsChoosen = true;
         GetComponent<SpinsValue>().ViewSpinsBets();
     }

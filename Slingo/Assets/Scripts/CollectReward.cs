@@ -61,10 +61,8 @@ public class CollectReward : MonoBehaviour
             spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
             spinScript.spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Spil";
 
-            spinScript.resetButtonText.color = Color.gray;
             spinScript.resetButtonText.GetComponentInParent<Button>().enabled = false;
             spinScript.resetButtonText.text = "Nyt Spil";
-            StartCoroutine(ResetButtonToGray());
 
             spinScript.MessageAnimator.SetBool("MinimizePlate", false);
             spinScript.collectMessageText.text = "SPIL SLUT";
@@ -86,15 +84,6 @@ public class CollectReward : MonoBehaviour
             GetComponent<GridGeneration>().ReGenerateGrid();
         }
     }
-
-    private IEnumerator ResetButtonToGray()
-    {
-        yield return new WaitForSeconds(2.5f);
-        spinScript.resetButtonText.color = Color.gray;
-        spinScript.resetButtonText.text = "Nyt Spil2";
-        spinScript.resetButtonText.text = "Nyt Spil";
-    }
-
 
     public void stopAni()
     {
