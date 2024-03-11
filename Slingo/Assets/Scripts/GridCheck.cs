@@ -36,6 +36,7 @@ public class GridCheck : MonoBehaviour
     private Dictionary<string, int> slingoTypes = new Dictionary<string, int>();
 
     private float currentBet = 1;
+    private int slingoAnimations = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -271,6 +272,7 @@ public class GridCheck : MonoBehaviour
 
         if ((rightIndex == 5 || leftIndex == 5 || vertIndex == 5 || horIndex == 5) && !check)
         {
+            slingoAnimations++;
             StartCoroutine(SlingoAnimation(PlaySlingoAnimation(slingoTypes)));
             slingoTypes.Clear();
             StartCoroutine(UpdateButton());
@@ -482,7 +484,6 @@ public class GridCheck : MonoBehaviour
     /// </summary>
     private IEnumerator SlingoAnimation(List<GameObject> slingoNumbers)
     {
-        
         slingoAnimationFinished = false;
         headerAnimator.SetBool("isTwerking", true);
         yield return new WaitForSeconds(0.5f);
@@ -513,10 +514,14 @@ public class GridCheck : MonoBehaviour
         
 
         headerAnimator.SetBool("isTwerking", false);
-        slingoAnimationFinished = true;
-        if(spinScript.wildPicks == 0)
+        slingoAnimations--;
+        if (slingoAnimations == 0)
         {
-            spinScript.SpinButtonReset();
+            slingoAnimationFinished = true;
+            if (spinScript.wildPicks == 0 || spinScript.wildPicks == spinScript.wildPicked)
+            {
+                spinScript.SpinButtonReset();
+            }
         }
     }
 }

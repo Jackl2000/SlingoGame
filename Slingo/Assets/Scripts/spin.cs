@@ -75,6 +75,7 @@ public class spin : MonoBehaviour
     int min = 1;
     int max = 15;
     public int wildPicked = 0;
+    private bool wildsCanbePicked = false;
     [HideInInspector] public float timePassedForMsg;
     private List<Image> starImgs = new List<Image>();
 
@@ -154,7 +155,6 @@ public class spin : MonoBehaviour
 
     public void WildPick(Button gridButton)
     {
-
         if (gridButton.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             return;
@@ -178,7 +178,7 @@ public class spin : MonoBehaviour
 
         StarDupping(wildNumberPicked, numberPressed);
 
-        if (wildPicks == 0)
+        if (wildPicks == 0 || !wildsCanbePicked)
         {
             return;
         }
@@ -195,6 +195,7 @@ public class spin : MonoBehaviour
         if (wildPicks == wildPicked)
         {
             StartCoroutine(GameManager.Instance.WildArrowColumnAnimation(true));
+            wildsCanbePicked = false;
         }
 
         if (GameManager.Instance.messageTipObject.activeSelf && wildPicks == wildPicked)
@@ -342,7 +343,7 @@ public class spin : MonoBehaviour
         }
         if (spinBuyLimit >= 0 && spinLeft <= 0 && gridCheck.slingoAnimationFinished)
         {
-            resetButtonText.GetComponent<TextMeshProUGUI>().color = Color.gray;
+            resetButtonText.color = Color.gray;
             isMessageActive = false;
             
             PlayerData.Instance.balance -= UIManager.Instance.GetMoneyValue(spinButton.GetComponentInChildren<TextMeshProUGUI>().text.Substring(6));
@@ -469,7 +470,7 @@ public class spin : MonoBehaviour
             stakes += spinBets;
             PlayerData.Instance.totalIndsats += spinBets;
         }
-        if (spinLeft < 0)
+        else if (spinLeft < 0)
         {
             stakes += calculations.PriceCaculator();
             PlayerData.Instance.totalIndsats = stakes;
@@ -527,10 +528,6 @@ public class spin : MonoBehaviour
                 {
                     bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[1];
                 }
-                else
-                {
-                    bestChoice.gameObject.GetComponentInParent<Image>().sprite = BackgroundImages[1];
-                }
 
                 bestChoiceText = gridGeneration.numberPositions[bestChoice.number].gameObject.GetComponentInChildren<TextMeshProUGUI>();
                 blinkEffect.FlashingEffect(true, bestChoice.gameObject.GetComponent<TextMeshProUGUI>());
@@ -541,6 +538,7 @@ public class spin : MonoBehaviour
             {
                 wilds.First().GetComponent<Image>().enabled = true;
             }
+            wildsCanbePicked = true;
         }
 
         yield return new WaitForSeconds(0.4f);
@@ -606,16 +604,17 @@ public class spin : MonoBehaviour
                 spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
                 spinButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
                 spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
-                resetButtonText.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+                resetButtonText.color = Color.white;
             }
         }
 
         if (gridCheck.starsCount == 25)
         {
             spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
-            resetButtonText.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            resetButtonText.color = Color.white;
             spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "JACKPOT FLASH!!!";
         }
+        //Debug.Log("Spin button has been reset");
         isSpinning = false;
     }
 
@@ -636,8 +635,6 @@ public class spin : MonoBehaviour
         spinButton.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
         spinButton.GetComponentInChildren<TextMeshProUGUI>().text = "Pris: " + UIManager.Instance.DisplayMoney(calculations.PriceCaculator());
         yield return new WaitForSeconds(0.3f);
-        
-        SpinButtonReset();
     }
 
     public void ChangeSpinButton()
@@ -652,7 +649,7 @@ public class spin : MonoBehaviour
     {
         spinButton.GetComponentInChildren<ParticleSystem>().Play();
         SpinButtonReset();
-        resetButtonText.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+        resetButtonText.color = Color.white;
         resetButtonText.GetComponentInParent<Button>().enabled = true;
     }
 

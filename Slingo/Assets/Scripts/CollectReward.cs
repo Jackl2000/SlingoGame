@@ -16,7 +16,6 @@ public class CollectReward : MonoBehaviour
     public GameObject balanceBorder;
  
     private GridCheck gridCheck;
-
     private void Awake()
     {
         gridCheck = GetComponent<GridCheck>();
@@ -64,7 +63,8 @@ public class CollectReward : MonoBehaviour
 
             spinScript.resetButtonText.color = Color.gray;
             spinScript.resetButtonText.GetComponentInParent<Button>().enabled = false;
-            spinScript.resetButtonText.GetComponentInChildren<TextMeshProUGUI>().text = "Nyt Spil";
+            spinScript.resetButtonText.text = "Nyt Spil";
+            StartCoroutine(ResetButtonToGray());
 
             spinScript.MessageAnimator.SetBool("MinimizePlate", false);
             spinScript.collectMessageText.text = "SPIL SLUT";
@@ -85,6 +85,14 @@ public class CollectReward : MonoBehaviour
 
             GetComponent<GridGeneration>().ReGenerateGrid();
         }
+    }
+
+    private IEnumerator ResetButtonToGray()
+    {
+        yield return new WaitForSeconds(2.5f);
+        spinScript.resetButtonText.color = Color.gray;
+        spinScript.resetButtonText.text = "Nyt Spil2";
+        spinScript.resetButtonText.text = "Nyt Spil";
     }
 
 
