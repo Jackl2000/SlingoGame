@@ -98,8 +98,8 @@ public class GridCheck : MonoBehaviour
             }
         }
 
-        if(slingoCount == 0) slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[3]);
-        else if(slingoCount >= 9) slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[3]);
+        if(slingoCount < 3) slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[3]);
+        else slingoRewardButton.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = UIManager.Instance.DisplayMoney(rewards[slingoCount + 1]);
     }
 
     /// <summary>

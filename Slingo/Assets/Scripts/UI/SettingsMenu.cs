@@ -49,9 +49,7 @@ public class SettingsMenu : MonoBehaviour
             int childCount = settingsMenuPanel.transform.childCount;
             settingsMenuPanel.transform.GetChild(childCount - 1).gameObject.SetActive(true);
             settingsMenuPanel.transform.GetChild(childCount - 2).gameObject.SetActive(true);
-
         }
-
     }
 
     public void Sound()
