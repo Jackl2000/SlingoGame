@@ -26,24 +26,6 @@ public class PanelEffects : MonoBehaviour
 
     public void FlashingEffect(bool active, TextMeshProUGUI text)
     {
-        //Debug.Log("Flash running");
-        //foreach (GridNumbers number in gridGeneration.numberPositions.Values)
-        //{
-        //    if (spinScript.wildPicks > 0)
-        //    {
-        //        if (!number.hasBeenHit && number.gameObject.GetComponent<TextMeshProUGUI>().color != Color.yellow)
-        //        {
-        //            number.gameObject.GetComponent<TextMeshProUGUI>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
-        //        }
-        //    }
-        //    if (spinScript.wildPicks <= 0)
-        //    {
-        //        if (!number.hasBeenHit)
-        //        {
-        //            number.gameObject.GetComponent<TextMeshProUGUI>().color = startColor;
-        //        }
-        //    }
-        //}
         if (active)
         {
             bestChoiceText = text;
@@ -56,19 +38,8 @@ public class PanelEffects : MonoBehaviour
         }
     }
 
-    public void BlinkingEffect(TextMeshProUGUI text)
-    {
-        //text.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
-        //this.gameObject.GetComponent<Graphic>().color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time * blinkSpeed, 1));
-    }
-
     private void Update()
     {
-        //if (numbersPlateIsBlinking)
-        //{
-        //    FlashingEffect();
-        //}
-
         if (spinLeftText != null)
         {
             spinLeftText.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time * blinkSpeed, 1));
