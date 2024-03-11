@@ -180,7 +180,6 @@ public class CardGameManager : MonoBehaviour
 
             gevints += præmie;
             gevintsText.text = gevintsString + gevints + "kr";
-            Debug.Log("reward added to 1: " + (præmie - 2));
         }
 
         if(præmie == 0 || gevints == 50 * PlayerData.Instance.bet)

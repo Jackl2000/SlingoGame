@@ -10,8 +10,6 @@ public class NumberManager : MonoBehaviour
 
     private Animator numberAnimator;
 
-
-
     private ParticleSystem starParticle;
     private Image starImg;
     private Image starWildImg;
@@ -25,9 +23,9 @@ public class NumberManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            StartCoroutine(WildHighLighter());
+            StartCoroutine(WildAnimationHighLighter());
         }
     }
 
@@ -36,7 +34,7 @@ public class NumberManager : MonoBehaviour
         starParticle.Play();
     }
 
-    public void PlayHighlighter()
+    public void PlayHighlighterDot()
     {
         starBackgroundAnimator.SetBool("isBestChoice", true);
         this.gameObject.transform.GetChild(0).GetChild(4).gameObject.SetActive(true);
@@ -48,7 +46,7 @@ public class NumberManager : MonoBehaviour
         numberObj.gameObject.transform.GetChild(0).GetChild(4).gameObject.SetActive(false);
     }
 
-    IEnumerator WildHighLighter()
+    IEnumerator WildAnimationHighLighter()
     {
         string name = transform.parent.gameObject.name;
         if (name.Substring(5) == spinScript.slotsList[0].name.Substring(3) 
