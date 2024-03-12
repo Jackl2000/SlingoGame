@@ -38,6 +38,7 @@ public class SkrabeSelector : MonoBehaviour
         selectedCard.transform.GetChild(1).gameObject.SetActive(false);
         cards.Remove(selectedCard);
         TextMeshProUGUI rewardText = selectedCard.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
+        if(rewardText != null) selectedCard.transform.GetChild(0).GetComponent<Animator>().SetBool("CardScratched", true);
         selectedCard = null;
         if (rewardText == null) return GetComponentInParent<BoardHandler>().CardEarned(0);
         else return GetComponentInParent<BoardHandler>().CardEarned(UIManager.Instance.GetMoneyValue(rewardText.text));

@@ -367,7 +367,7 @@ public class spin : MonoBehaviour
         }
         else
         {
-            spinButton.GetComponent<Image>().color = Color.gray;
+            resetButtonText.color = Color.gray;
             spinLeft--;
             spinLeftText.text = spinLeft.ToString();
             if(spinLeft == 3)

@@ -40,7 +40,9 @@ public class CardsSetup : MonoBehaviour
             text.text = UIManager.Instance.DisplayMoney(possibleRewards[randomIndex] * PlayerData.Instance.bet);
             if (text.text == UIManager.Instance.DisplayMoney(0))
             {
-                text.GetComponentInParent<Image>().sprite = lostSprite;
+                GameObject parent = text.GetComponentInParent<Animator>().gameObject;
+                parent.GetComponent<Animator>().enabled = false;
+                parent.GetComponent<Image>().sprite = lostSprite;
                 text.gameObject.SetActive(false);
             }
             possibleRewards.RemoveAt(randomIndex);

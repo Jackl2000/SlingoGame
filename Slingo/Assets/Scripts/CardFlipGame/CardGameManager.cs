@@ -123,6 +123,7 @@ public class CardGameManager : MonoBehaviour
 
     public void PlayCardFlipAnimation(GameObject card)
     {
+        if(gameDone) return;
         if (!card.GetComponent<Animator>().enabled) card.GetComponent<Animator>().enabled = true;
     }
 

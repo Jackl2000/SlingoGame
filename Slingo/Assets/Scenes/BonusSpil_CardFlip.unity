@@ -499,6 +499,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 240825977151868615, guid: 136c0c1324ac5bb49854d9e3c940ff9e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 684593753157069752, guid: 136c0c1324ac5bb49854d9e3c940ff9e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -525,7 +529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1369985146963318260, guid: 136c0c1324ac5bb49854d9e3c940ff9e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Scene_tai
+      value: JackScene
       objectReference: {fileID: 0}
     - target: {fileID: 1904965469146199234, guid: 136c0c1324ac5bb49854d9e3c940ff9e, type: 3}
       propertyPath: m_AnchorMax.y
