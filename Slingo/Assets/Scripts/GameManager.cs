@@ -108,9 +108,14 @@ public class GameManager : MonoBehaviour
     public void BonusGameHit()
     {
         PlayerData.Instance.balance += gridCheck.rewards[gridCheck.slingoCount];
-        if (gridCheck.slingoCount >= 10 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
+        if (gridCheck.slingoCount == 10 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
         {
             SceneSwap.Instance.SceneSwitch("BonusSpil_CardFlip");
+            SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().SetBool("IsLoading", true);
+        }
+        else if (gridCheck.slingoCount == 12 && gridCheck.slingoAnimationFinished && !SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().GetBool("IsLoading"))
+        {
+            SceneSwap.Instance.SceneSwitch("BonusSpilSkrab");
             SceneSwap.Instance.gameObject.GetComponentInChildren<Animator>().SetBool("IsLoading", true);
         }
     }

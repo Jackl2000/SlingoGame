@@ -8,7 +8,7 @@ public class CardsSetup : MonoBehaviour
 {
     public Sprite lostSprite;
     private List<GameObject> cards = new List<GameObject>();
-    private float[] numbers = new float[] { 0, 0.5f, 1, 1.5f, 2, 5, 8, 12, 20 };
+    private float[] numbers = new float[] { 0, 0.5f, 2.5f, 5, 10, 12, 15, 20, 35 };
     private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)

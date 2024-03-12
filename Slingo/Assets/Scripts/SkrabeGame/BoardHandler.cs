@@ -29,7 +29,7 @@ public class BoardHandler : MonoBehaviour
 
         gevinstText.text = "Bonus gevinst: " + UIManager.Instance.DisplayMoney(gevinst);
 
-        if(gevinst == 50 * PlayerData.Instance.bet)
+        if(gevinst == 100 * PlayerData.Instance.bet)
         {
             StartCoroutine(ShowMessage());
             return false;
