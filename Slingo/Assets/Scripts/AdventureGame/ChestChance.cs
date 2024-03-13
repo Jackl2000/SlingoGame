@@ -1,9 +1,6 @@
-
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class ChestChance : MonoBehaviour
 {
@@ -51,7 +48,6 @@ public class ChestChance : MonoBehaviour
                 chest.GetComponent<Image>().sprite = SilverChestSprite;
                 Debug.Log("Silver chest");
                 ChestType = "Silver";
-                Debug.Log(Reward);
 
             }
             else
@@ -61,7 +57,6 @@ public class ChestChance : MonoBehaviour
                 chest.GetComponent<Image>().sprite = IronChestSprite;
                 Debug.Log("Iron chest");
                 ChestType = "Iron";
-                Debug.Log(Reward);
             }
         }
         else
@@ -71,13 +66,11 @@ public class ChestChance : MonoBehaviour
             chest.GetComponent<Image>().sprite = GoldChestSprite;
             Debug.Log("Gold Chest");
             ChestType = "Gold";
-            Debug.Log(Reward);
         }
         //Change and adjust panel text to current reward and chest type.
         string price = $"Tillykke! \n Du fandt {UIManager.Instance.DisplayMoney(Reward)} i kisten";
         chest.GetComponentInChildren<TextMeshProUGUI>().text = price;
         rewardText.text = UIManager.Instance.DisplayMoney(totalReward);
-        Debug.Log("Text is component" + chest.GetComponentInChildren<TextMeshProUGUI>().text);
     }
     //Method to drop chest
     public void DropChest()

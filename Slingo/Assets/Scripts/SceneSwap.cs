@@ -38,7 +38,6 @@ public class SceneSwap : MonoBehaviour
     public void SceneSwitch(string sceneName)
     {
         StartCoroutine(TriggerSceneLoad(sceneName));
-        Debug.Log("Scene: " + sceneName);
     }
 
 

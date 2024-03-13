@@ -123,6 +123,11 @@ public class EventHandler : MonoBehaviour
         combatSystem.enemyDices.GetComponent<Animator>().SetBool("LostAttack", true);
     }
 
+    public void EnemyDicesWasDefendedEvent()
+    {
+        GetComponent<Animator>().SetBool("Start", true);
+    }
+
     public void DiceAnimationIsFinishedEvent()
     {
         GetComponent<Animator>().SetBool("GoBackToDefault", true);

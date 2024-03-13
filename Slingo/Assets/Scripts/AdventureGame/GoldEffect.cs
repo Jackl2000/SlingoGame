@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -31,7 +30,7 @@ public class GoldEffect : MonoBehaviour
                 ps.Stop();
                 playing = false;
                 target.GetComponent<Animator>().SetBool("MoneyInBag", true);
-                StopAnimation();
+                StartCoroutine(StopAnimation());
                 GetComponent<ChestChance>().TotalRewards();
                 StartCoroutine(UIManager.Instance.TextColorAnimation(this, moneyText, 0.05f, new Color[] { Color.yellow, Color.yellow, Color.red, Color.yellow }, Color.white, 3));
             }
@@ -39,10 +38,9 @@ public class GoldEffect : MonoBehaviour
         }
     }
 
-    private async void StopAnimation()
+    private IEnumerator StopAnimation()
     {
-        await Task.Delay(1500);
+        yield return new WaitForSeconds(1.5f);
         if(target != null) target.GetComponent<Animator>().SetBool("MoneyInBag", false);
-
     }
 }

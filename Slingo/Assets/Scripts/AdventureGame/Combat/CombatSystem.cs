@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,9 +19,6 @@ public class CombatSystem : MonoBehaviour
     public GameObject chest;
     public GameObject messagePanel;
     public bool enemyCrits;
-   
-
-
 
     [HideInInspector] public bool playerWin;
     [HideInInspector] public bool enemyDicesRestart = true;
@@ -115,7 +111,7 @@ public class CombatSystem : MonoBehaviour
         if(messagePanel.GetComponentInChildren<TextMeshProUGUI>().text == "Uafgjort")
         {
             messagePanel.GetComponent<Animator>().SetBool("Show", true);
-            DrawMessageDisapear();
+            StartCoroutine(DrawMessageDisapear());
         }
         
         //check for combat end
@@ -195,7 +191,6 @@ public class CombatSystem : MonoBehaviour
                 enemyDices.GetComponent<Animator>().SetBool("PlayerAttack", true);
                 playerWin = true;
                 messagePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Angreb lykkedes";
-                Debug.Log("I attack" + playerCritt);
 
 
                 int random = Random.Range(1, 101);
@@ -270,9 +265,9 @@ public class CombatSystem : MonoBehaviour
         enemyDicesRestart = true;
     }
 
-    private async void DrawMessageDisapear()
+    private IEnumerator DrawMessageDisapear()
     {
-        await Task.Delay(500);
+        yield return new WaitForSeconds(0.5f);
         messagePanel.GetComponent<Animator>().SetBool("Show", false);
     }
 
@@ -326,6 +321,7 @@ public class CombatSystem : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Player chosen: " + enemyDices.GetComponent<Animator>().GetBool("PlayerHasChosen") + " : Start" + enemyDices.GetComponent<Animator>().GetBool("Start"));
         if (movingCharacter != null && !attackFinished && dicesDone)
         {
             MoveCharacter(target.transform.position);
@@ -379,9 +375,6 @@ public class CombatSystem : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
                 Turn(attacker);
                 characterMoveBack = true;
-
-                Debug.Log("I attack" + playerCritt);
-
             }
             else
             {

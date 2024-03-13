@@ -39,7 +39,8 @@ public class BoardHandler : MonoBehaviour
 
     private IEnumerator ShowMessage()
     {
-        yield return new WaitForSeconds(2f);
+        GetComponentInChildren<CardsSetup>().UnScratchAllCards();
+        yield return new WaitForSeconds(4f);
         gameFinishedPanel.SetActive(true);
         gameFinishedPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Tillykke du har vundet " + UIManager.Instance.DisplayMoney(gevinst);
     }

@@ -48,4 +48,15 @@ public class CardsSetup : MonoBehaviour
             possibleRewards.RemoveAt(randomIndex);
         }
     }
+
+    public void UnScratchAllCards()
+    {
+        foreach(GameObject card in cards)
+        {
+            if(card.transform.GetChild(1).gameObject.activeSelf)
+            {
+                card.transform.GetChild(1).GetComponent<Animator>().SetBool("GameFinished", true);
+            }
+        }
+    }
 }
