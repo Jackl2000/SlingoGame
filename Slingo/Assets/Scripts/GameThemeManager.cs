@@ -21,6 +21,7 @@ public class GameThemeManager : MonoBehaviour
     private void Awake()
     {
         currentTheme = themes[0];
+        SetGameTheme(PlayerData.Instance.currentThemeIndex);
     }
     public void ViewThemes()
     {
@@ -50,6 +51,7 @@ public class GameThemeManager : MonoBehaviour
         spin.BackgroundImages[3] = themes[index].GridBackgroundLineWildImage;
 
         currentTheme = themes[index];
+        PlayerData.Instance.currentThemeIndex = index;
 
         themesPanel.SetActive(false);
     }

@@ -9,6 +9,7 @@ public class PlayerData
     public float bet = 2;
     public bool warning = true;
     public float totalIndsats = 0;
+    public int currentThemeIndex = 0;
 
     //Combat values
     public float CombatBonusReward = 0;
