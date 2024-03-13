@@ -22,7 +22,7 @@ public class EnemyFactory : MonoBehaviour
                 if (level < 5)
                 {
                     goblinStats.Damage = RandomStatInRange(level * level + 1, level * 3 + 2);
-                    goblinStats.Health = RandomStatInRange(level, level * 4 - 2);
+                    goblinStats.Health = RandomStatInRange(level * 2, level * 4 - 2);
                     goblinStats.CritChance = RandomStatInRange(level, level + 4);
                 }
                 else BecomeFinalBoss(goblinStats);
@@ -75,13 +75,13 @@ public class EnemyFactory : MonoBehaviour
     {
         if (enemy.name == "Goblin")
         {
-            enemy.Damage = RandomStatInRange(16, 32);
-            enemy.Health = RandomStatInRange(10, 15);
+            enemy.Damage = RandomStatInRange(16, 30);
+            enemy.Health = RandomStatInRange(15, 20);
             enemy.CritChance = RandomStatInRange(8, 12);
         }
         else if (enemy.name == "Skeleton")
         {
-            enemy.Damage = RandomStatInRange(9, 14);
+            enemy.Damage = RandomStatInRange(10, 15);
             enemy.Health = RandomStatInRange(25, 40);
             enemy.CritChance = RandomStatInRange(6, 10);
         }
@@ -89,7 +89,7 @@ public class EnemyFactory : MonoBehaviour
         {
             enemy.Damage = RandomStatInRange(10, 18);
             enemy.Health = RandomStatInRange(15, 20);
-            enemy.CritChance = RandomStatInRange(20, 35);
+            enemy.CritChance = RandomStatInRange(25, 40);
         }
     }
 }

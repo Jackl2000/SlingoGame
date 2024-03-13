@@ -83,6 +83,7 @@ public class CombatSystem : MonoBehaviour
         enemyDices.GetComponent<Animator>().enabled = false;
         yield return StartCoroutine(DiceRoll(enemyDice, enemyDice2, enemyRoll, enemyRoll2));
         enemyDices.GetComponent<Animator>().enabled = true;
+        enemyDicesRestart = false;
 
         //player guess
         Description.SetActive(true);
