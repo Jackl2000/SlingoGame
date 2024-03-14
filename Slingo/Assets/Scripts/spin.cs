@@ -55,6 +55,7 @@ public class spin : MonoBehaviour
     public Sprite[] BackgroundImages;
     //______________________________________________________________________________________________________
 
+    public GameObject CollectMessage;
     public TextMeshProUGUI collectMessageText;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button stopSpinningButton;
@@ -91,7 +92,6 @@ public class spin : MonoBehaviour
     [SerializeField] private GameObject keepSpinningPanel;
     [SerializeField] private GameObject CostMessage;
     [SerializeField] public Animator MessageAnimator;
-    [SerializeField] private GameObject CollectMessage;
 
     private bool isMessageActive = false;
     [HideInInspector] public bool indsatsChoosen = false;

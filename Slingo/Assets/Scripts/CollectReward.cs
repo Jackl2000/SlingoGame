@@ -68,6 +68,8 @@ public class CollectReward : MonoBehaviour
             spinScript.collectMessageText.text = "SPIL SLUT";
             spinScript.ColorReset();
 
+            spinScript.CollectMessage.SetActive(false);
+
             foreach (var spinSlot in spinScript.slotsList)
             {
                 spinSlot.transform.GetChild(1).GetComponent<Image>().color = Color.white;
