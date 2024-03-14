@@ -481,7 +481,7 @@ public class spin : MonoBehaviour
         if (spinLeft == startSpins)
         {
             stakes += spinBets;
-            PlayerData.Instance.totalIndsats += spinBets;
+            PlayerData.Instance.totalIndsats = spinBets;
         }
         else if (spinLeft < 0)
         {
